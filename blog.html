@@ -261,6 +261,7 @@
       background: #fff;
       border-radius: 16px;
       border: 1px solid #e8e8e8;
+      border-top: 2px solid #1a1a1a;
       border-bottom: 2px solid #1a1a1a;
       padding: 28px;
       display: flex;
@@ -269,17 +270,15 @@
       animation: card-breathe 3s infinite alternate ease-in-out;
     }
 
-    /* quiet "breathing" — top/side border and shadow gently pulse toward soft
-       red; the solid black bottom border stays constant (not animated) */
+    /* quiet "breathing" — left/right border and shadow gently pulse toward soft
+       red; the solid black top and bottom borders stay constant (not animated) */
     @keyframes card-breathe {
       from {
-        border-top-color: #e8e8e8;
         border-left-color: #e8e8e8;
         border-right-color: #e8e8e8;
         box-shadow: none;
       }
       to {
-        border-top-color: #e31e2440;
         border-left-color: #e31e2440;
         border-right-color: #e31e2440;
         box-shadow: 0 4px 16px rgba(227, 30, 36, 0.08);
