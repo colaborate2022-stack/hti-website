@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | HTI Blog</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon"
+    href="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63872ebc11d181ed9d69d77d_HTI%20star%20logo%2032x32%20px.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+    rel="stylesheet" />
+  <!-- Quill rich text editor -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+  <style>
+    :root {
+      --hti-bg: #f3f2ef;
+      --hti-red: #e31e24;
+      --hti-text: #111;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', Arial, Helvetica, sans-serif;
+      background: var(--hti-bg);
+      color: var(--hti-text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* ============ LOGIN ============ */
+    .login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .login-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .12);
+      padding: 40px 34px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .login-card img {
+      width: 60px;
+      margin: 0 auto 18px;
+    }
+
+    .login-card h1 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .login-card p {
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 26px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      font-family: inherit;
+      font-size: 15px;
+      padding: 12px 14px;
+      border: 1px solid #dcdcdc;
+      border-radius: 9px;
+      background: #fff;
+      color: #111;
+      outline: none;
+      transition: border-color .15s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--hti-red);
+    }
+
+    textarea {
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      border-radius: 9px;
+      padding: 12px 22px;
+      cursor: pointer;
+      transition: transform .12s ease, background .15s ease, opacity .15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-red {
+      background: var(--hti-red);
+      color: #fff;
+    }
+
+    .btn-red:hover {
+      background: #c41419;
+    }
+
+    .btn-dark {
+      background: #111;
+      color: #fff;
+    }
+
+    .btn-dark:hover {
+      background: #000;
+    }
+
+    .btn-ghost {
+      background: #fff;
+      color: #333;
+      border: 1px solid #d5d5d5;
+    }
+
+    .btn-ghost:hover {
+      background: #f5f5f5;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    .login-error {
+      color: var(--hti-red);
+      font-size: 13.5px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      min-height: 18px;
+    }
+
+    /* ============ DASHBOARD ============ */
+    .dashboard {
+      display: none;
+    }
+
+    .admin-header {
+      background: #111;
+      color: #fff;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .admin-header .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .admin-header .brand img {
+      width: 40px;
+    }
+
+    .admin-header .brand h2 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .admin-header .brand span {
+      color: var(--hti-red);
+    }
+
+    .admin-header .header-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .admin-header a.view-site {
+      color: #ccc;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .admin-header a.view-site:hover {
+      color: #fff;
+    }
+
+    .admin-main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 34px 24px 70px;
+    }
+
+    .panel {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .05);
+      border: 1px solid #eee;
+      padding: 30px 28px;
+      margin-bottom: 34px;
+    }
+
+    .panel h3.section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .panel .section-sub {
+      color: #888;
+      font-size: 13.5px;
+      margin-bottom: 24px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-grid .full {
+      grid-column: 1 / -1;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      align-items: center;
+    }
+
+    .editing-badge {
+      display: none;
+      background: #fff4e5;
+      color: #a8600b;
+      border: 1px solid #f5d9a8;
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    .form-msg {
+      font-size: 14px;
+      font-weight: 600;
+      margin-left: auto;
+    }
+
+    .form-msg.ok {
+      color: #1a8a3c;
+    }
+
+    .form-msg.err {
+      color: var(--hti-red);
+    }
+
+    /* ---- cover image live preview ---- */
+    .cover-preview {
+      margin-top: 12px;
+      display: none;
+    }
+
+    .cover-preview img {
+      width: 100%;
+      max-height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #eee;
+    }
+
+    /* ---- Quill editor (Google-Docs-like white area) ---- */
+    .editor-shell {
+      border: 1px solid #dcdcdc;
+      border-radius: 9px;
+      overflow: hidden;
+      background: #fff;
+      transition: border-color .15s ease;
+    }
+
+    .editor-shell:focus-within {
+      border-color: var(--hti-red);
+    }
+
+    .ql-toolbar.ql-snow {
+      border: none;
+      border-bottom: 1px solid #eee;
+      background: #fafafa;
+      padding: 10px 12px;
+    }
+
+    .ql-container.ql-snow {
+      border: none;
+      font-family: 'Poppins', Arial, sans-serif;
+      font-size: 15px;
+    }
+
+    .ql-editor {
+      min-height: 300px;
+      line-height: 1.7;
+      color: #222;
+      background: #fff;
+    }
+
+    .ql-editor.ql-blank::before {
+      color: #aaa;
+      font-style: normal;
+    }
+
+    /* HTI red accent on active toolbar controls */
+    .ql-snow.ql-toolbar button:hover .ql-stroke,
+    .ql-snow.ql-toolbar button.ql-active .ql-stroke,
+    .ql-snow .ql-picker-label:hover,
+    .ql-snow .ql-picker-item:hover {
+      stroke: var(--hti-red);
+      color: var(--hti-red);
+    }
+
+    .ql-snow.ql-toolbar button:hover .ql-fill,
+    .ql-snow.ql-toolbar button.ql-active .ql-fill {
+      fill: var(--hti-red);
+    }
+
+    /* ---- table ---- */
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+    }
+
+    thead th {
+      text-align: left;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: #999;
+      font-weight: 700;
+      padding: 12px 14px;
+      border-bottom: 2px solid #eee;
+    }
+
+    tbody td {
+      padding: 14px;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 14px;
+      vertical-align: middle;
+    }
+
+    tbody tr:hover {
+      background: #fafafa;
+    }
+
+    .post-title-cell {
+      font-weight: 600;
+      color: #111;
+      max-width: 320px;
+    }
+
+    .title-with-thumb {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .post-thumb {
+      width: 40px;
+      height: 40px;
+      border-radius: 7px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid #eee;
+    }
+
+    .post-thumb-placeholder {
+      width: 40px;
+      height: 40px;
+      border-radius: 7px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #e31e24 0%, #7a0f13 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 11px;
+      border-radius: 20px;
+    }
+
+    .badge.pub {
+      background: #e5f7ec;
+      color: #1a8a3c;
+    }
+
+    .badge.draft {
+      background: #f0f0f0;
+      color: #777;
+    }
+
+    .row-actions {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .mini-btn {
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 7px;
+      border: 1px solid #ddd;
+      background: #fff;
+      color: #333;
+      cursor: pointer;
+      transition: all .12s ease;
+    }
+
+    .mini-btn:hover {
+      background: #f2f2f2;
+    }
+
+    .mini-btn.danger {
+      color: var(--hti-red);
+      border-color: #f2c2c4;
+    }
+
+    .mini-btn.danger:hover {
+      background: var(--hti-red);
+      color: #fff;
+    }
+
+    .table-status {
+      padding: 30px 14px;
+      text-align: center;
+      color: #999;
+      font-size: 15px;
+    }
+
+    @media(max-width:640px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ LOGIN SCREEN ============ -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <img
+        src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+        alt="HTI" />
+      <h1>Blog Admin</h1>
+      <p>Enter the team password to continue.</p>
+      <div class="login-error" id="loginError"></div>
+      <div class="field">
+        <label for="pwInput">Password</label>
+        <input type="password" id="pwInput" placeholder="••••••••" autocomplete="current-password" />
+      </div>
+      <button class="btn btn-red btn-block" id="loginBtn">Log In</button>
+    </div>
+  </div>
+
+  <!-- ============ DASHBOARD ============ -->
+  <div class="dashboard" id="dashboard">
+    <header class="admin-header">
+      <div class="brand">
+        <img
+          src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+          alt="HTI" />
+        <h2>Blog <span>Admin</span></h2>
+      </div>
+      <div class="header-actions">
+        <a href="blog.html" target="_blank" class="view-site">View Blog &#8599;</a>
+        <button class="btn btn-ghost" id="logoutBtn">Log Out</button>
+      </div>
+    </header>
+
+    <main class="admin-main">
+
+      <!-- SECTION A: Write / Edit -->
+      <section class="panel">
+        <h3 class="section-title" id="formHeading">Write New Post</h3>
+        <p class="section-sub">Just type your post below like a document. Use the toolbar to format text, add headings, lists, links and images.</p>
+
+        <input type="hidden" id="postId" />
+        <div class="form-grid">
+          <div class="field full">
+            <label for="titleInput">Title</label>
+            <input type="text" id="titleInput" placeholder="Blog post title" />
+          </div>
+          <div class="field">
+            <label for="categoryInput">Category</label>
+            <select id="categoryInput">
+              <option value="Hotel">Hotel</option>
+              <option value="Restaurant">Restaurant</option>
+              <option value="Office">Office</option>
+              <option value="General" selected>General</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="authorInput">Author</label>
+            <input type="text" id="authorInput" value="Team HTI" />
+          </div>
+          <div class="field full">
+            <label for="coverInput">Cover Image URL</label>
+            <input type="url" id="coverInput" placeholder="https://… (paste an image link)" />
+            <div class="cover-preview" id="coverPreview">
+              <img id="coverPreviewImg" src="" alt="Cover preview" />
+            </div>
+          </div>
+          <div class="field full">
+            <label>Body</label>
+            <div class="editor-shell">
+              <div id="editor"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-dark" id="saveDraftBtn">Save as Draft</button>
+          <button class="btn btn-red" id="publishBtn">Publish</button>
+          <button class="btn btn-ghost" id="cancelEditBtn" style="display:none;">Cancel Edit</button>
+          <span class="editing-badge" id="editingBadge">Editing existing post</span>
+          <span class="form-msg" id="formMsg"></span>
+        </div>
+      </section>
+
+      <!-- SECTION B: Manage -->
+      <section class="panel">
+        <h3 class="section-title">Manage Posts</h3>
+        <p class="section-sub">All posts, newest first. Edit, delete, publish or unpublish.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="postsBody">
+              <tr>
+                <td colspan="5" class="table-status">Loading…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Quill rich text editor -->
+  <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+  <script>
+    /* ============ CONFIG ============ */
+    const SUPABASE_URL = "https://ytthcgdsbfagvwcopoaj.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0dGhjZ2RzYmZhZ3Z3Y29wb2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzMjk5MTMsImV4cCI6MjA5ODkwNTkxM30.JIDahcRTu3VbFpZ55Ti5hHg_JrHobk0zh8PSaj9lWLc";
+    const ADMIN_PASSWORD = "HTI@2026";
+    const REST = `${SUPABASE_URL}/rest/v1/blogs`;
+
+    const HEADERS = {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json'
+    };
+
+    /* ============ HELPERS ============ */
+    function $(id) { return document.getElementById(id); }
+
+    /* ============ QUILL RICH TEXT EDITOR ============ */
+    let quill;
+    (function initQuill() {
+      const Size = Quill.import('attributors/style/size');
+      Size.whitelist = ['13px', '15px', '18px', '24px', '32px'];
+      Quill.register(Size, true);
+
+      quill = new Quill('#editor', {
+        theme: 'snow',
+        placeholder: 'Start writing your blog post here…',
+        modules: {
+          toolbar: {
+            container: [
+              [{ header: [1, 2, false] }],
+              [{ size: ['13px', '15px', '18px', '24px', '32px'] }],
+              ['bold', 'italic', 'underline'],
+              [{ list: 'ordered' }, { list: 'bullet' }],
+              ['blockquote'],
+              ['link', 'image'],
+              ['clean']
+            ],
+            handlers: {
+              // Insert image BY URL (prompt) instead of file upload
+              image: function () {
+                const url = prompt('Paste the image URL:');
+                if (url) {
+                  const range = this.quill.getSelection(true);
+                  this.quill.insertEmbed(range.index, 'image', url, 'user');
+                  this.quill.setSelection(range.index + 1);
+                }
+              }
+            }
+          }
+        }
+      });
+    })();
+
+    function escapeHtml(str) {
+      return (str || '').replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    function formatDate(d) {
+      if (!d) return '—';
+      const date = new Date(d);
+      if (isNaN(date)) return '—';
+      return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    function showMsg(text, kind) {
+      const el = $('formMsg');
+      el.textContent = text;
+      el.className = 'form-msg ' + (kind || '');
+      if (text) setTimeout(() => { if (el.textContent === text) { el.textContent = ''; el.className = 'form-msg'; } }, 4000);
+    }
+
+    /* ============ LOGIN ============ */
+    function doLogin() {
+      const val = $('pwInput').value;
+      if (val === ADMIN_PASSWORD) {
+        sessionStorage.setItem('hti_admin', '1');
+        openDashboard();
+      } else {
+        $('loginError').textContent = 'Incorrect password. Please try again.';
+        $('pwInput').value = '';
+      }
+    }
+
+    function openDashboard() {
+      $('loginScreen').style.display = 'none';
+      $('dashboard').style.display = 'block';
+      initDashboard();
+    }
+
+    function logout() {
+      sessionStorage.removeItem('hti_admin');
+      location.reload();
+    }
+
+    $('loginBtn').addEventListener('click', doLogin);
+    $('pwInput').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+    $('logoutBtn').addEventListener('click', logout);
+
+    /* ============ SEED DATA ============ */
+    const SEED_POSTS = [
+      {
+        title: "Hospitality Is Not Just Service: It's How People Feel After They Leave",
+        slug: "hospitality-is-about-how-guests-feel",
+        category: "General",
+        author: "Andrea Costabir",
+        cover_image: "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/6a3d16f434a1e63bbe0e9d46_Blog-28.avif",
+        body: `<p>Think about the last place you visited — a hotel, café or restaurant. Chances are, you don't remember every detail of the service. But you do remember how it made you feel. Welcomed or ignored. Comfortable or rushed. Valued or disregarded.</p><p>That feeling is hospitality.</p><h2>Hospitality Lives In Emotions, Not Tasks</h2><p>Many people assume hospitality is about doing things correctly: Greeting guests, taking orders, checking them in, serving on time. But great hospitality doesn't feel like a checklist.</p><p>Three employees can follow the exact same process — and still create completely different experiences. One feels mechanical. The other feels human. And the third feels magical.</p><p>The difference is not just skill. It's awareness, empathy, and attitude. And that is exactly what HTI's hospitality training is designed to shape.</p><img src='https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/6a3d16f5ffbe416cd3ac3fa5_1.avif' style='width:100%;border-radius:12px;margin:20px 0;'/><h2>Good Training Doesn't Just Teach Service — It Builds Sensitivity</h2><p>HTI's hospitality training goes beyond procedures. It teaches employees how to understand people. It focuses on: Reading guest mood and body language, communicating with warmth and clarity, staying calm under pressure, handling complaints without defensiveness, and noticing small details that matter.</p><p>Because in hospitality, the smallest things often create the biggest impact — a genuine smile, a patient response, or remembering a simple preference.</p><h2>The Magic Is In The Small Moments</h2><p>Guests rarely remember everything. But they always remember moments. A staff member who goes out of their way to help. A quick solution offered without hesitation. A simple interaction that feels personal instead of transactional. These moments don't require extra effort — just the right mindset. HTI's training helps build that instinct so it becomes natural, not forced.</p><h2>Why Training Matters More Than Ever</h2><p>In fast-paced environments, stress can easily turn service into routine. Employees focus on tasks instead of people. That's where HTI's hospitality training makes a difference. It builds confidence, consistency, and emotional control — especially during busy or difficult situations. Most importantly, it ensures that every guest receives the same level of care, not just on good days, but every day.</p><h2>Summing Up…</h2><p>Hospitality is not measured by systems, menus, or processes. It is measured by memory — what guests feel long after they leave. People may forget what they ordered or how long they waited. But they will never forget how they were treated. And that is the true power of HTI's hospitality training — it turns everyday service into meaningful human connection.</p>`,
+        is_published: true,
+        created_at: "2026-06-25"
+      },
+      {
+        title: "Why Customer Service Is the Heart Of Hospitality",
+        slug: "customer-service-heart-hospitality",
+        category: "General",
+        author: "Andrea Costabir",
+        cover_image: "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/6a3d16f434a1e63bbe0e9d46_Blog-28.avif",
+        body: `<p>Customer service is the backbone of every successful hospitality business. Without it, even the most luxurious hotel or finest restaurant fails to create a lasting impression.</p><h2>What Makes Customer Service Special in Hospitality?</h2><p>In hospitality, customer service goes beyond answering questions or solving problems. It is about creating an emotional connection with every guest. It means anticipating needs before they are expressed, responding with empathy, and making every interaction feel personal.</p><h2>The Impact of Great Service</h2><p>Great customer service builds loyalty. Guests who feel valued return again and again. They also recommend your establishment to friends and family. In today's digital world, they share their positive experiences online — reaching thousands of potential customers.</p><h2>Training Is the Foundation</h2><p>Exceptional customer service does not happen by accident. It is the result of consistent training, clear standards, and a team that genuinely cares about guests. HTI's programs are designed to build these qualities from the ground up — turning every team member into a confident, guest-focused professional.</p><h2>Conclusion</h2><p>Customer service is not just one part of hospitality — it is the heart of it. When done right, it transforms a simple stay or meal into a memory that guests carry with them forever.</p>`,
+        is_published: true,
+        created_at: "2026-05-23"
+      },
+      {
+        title: "5 Skills Every Hospitality Professional Must Learn",
+        slug: "skills-aspiring-hospitality-professionals",
+        category: "General",
+        author: "Andrea Costabir",
+        cover_image: "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/6a3d16f434a1e63bbe0e9d46_Blog-28.avif",
+        body: `<p>Whether you are just starting your career in hospitality or looking to grow professionally, certain skills are absolutely essential. These are the abilities that separate good hospitality workers from great ones.</p><h2>1. Communication Skills</h2><p>Clear, warm, and professional communication is the foundation of hospitality. Whether speaking to a guest, a colleague, or a manager, how you communicate defines how you are perceived.</p><h2>2. Customer Service Mindset</h2><p>A true hospitality professional always puts the guest first. This means going beyond the expected, anticipating needs, and responding to every situation with patience and care.</p><h2>3. Problem-Solving Ability</h2><p>Things go wrong in every hospitality setting. What matters is how quickly and calmly you find a solution. The best professionals resolve issues before guests even realize there was a problem.</p><h2>4. Teamwork</h2><p>No one succeeds alone in hospitality. Whether you work in a hotel, restaurant, or office, collaboration with your team is what creates seamless guest experiences.</p><h2>5. Adaptability</h2><p>Every day in hospitality is different. New guests, new challenges, new situations. The ability to stay flexible and positive — no matter what — is what defines a true hospitality professional.</p><h2>Conclusion</h2><p>These five skills can be learned and sharpened through the right training. HTI's programs are designed to develop each of these qualities, giving hospitality professionals the tools they need to excel in any environment.</p>`,
+        is_published: true,
+        created_at: "2026-05-14"
+      },
+      {
+        title: "If Hospitality Was Easy, Everyone Would Do It!",
+        slug: "if-hospitality-was-easy-everyone-would-do-it",
+        category: "General",
+        author: "Andrea Costabir",
+        cover_image: "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/6a3d16f434a1e63bbe0e9d46_Blog-28.avif",
+        body: `<p>People often underestimate hospitality. From the outside, it looks simple — smile, serve, repeat. But anyone who has worked a single shift in a hotel or restaurant knows the truth: hospitality is one of the most demanding professions in the world.</p><h2>The Invisible Work Behind Every Smile</h2><p>Behind every smooth check-in, every perfectly served meal, every spotless room — there are hours of preparation, coordination, and effort that guests never see. Hospitality professionals operate in high-pressure environments, often working long hours, managing difficult guests, and solving complex problems, all while maintaining a calm and welcoming demeanor.</p><h2>It Takes More Than a Smile</h2><p>Great hospitality requires a unique combination of skills: emotional intelligence, technical knowledge, physical stamina, and genuine care for others. It requires the ability to stay composed when things go wrong, to read a guest's mood, and to make every single person feel like they matter.</p><h2>Why Training Makes the Difference</h2><p>The best hospitality professionals are not born — they are trained. HTI's programs are built around the real challenges of the industry, preparing teams to handle pressure, deliver consistency, and create experiences that guests remember long after they leave.</p><h2>Conclusion</h2><p>Hospitality is hard. It is demanding, unpredictable, and relentless. But it is also deeply rewarding. When done well, it creates moments of joy, connection, and comfort for people when they need it most. That is why the best in the business never stop learning — and why training is everything.</p>`,
+        is_published: true,
+        created_at: "2026-03-23"
+      },
+      {
+        title: "What is Hospitality? Definition & Meaning of the term.",
+        slug: "what-is-hospitality",
+        category: "General",
+        author: "Storm CostaBir",
+        cover_image: "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/6a3d16f434a1e63bbe0e9d46_Blog-28.avif",
+        body: `<p>The word hospitality gets used a lot. But what does it actually mean? Today we will explain hospitality at 4 different levels — starting simple, getting more complex.</p><h2>Level 1: The Simple Definition</h2><p>Hospitality means making guests feel welcome and comfortable. It is the act of being friendly and generous to visitors.</p><h2>Level 2: The Industry Definition</h2><p>In the business world, hospitality refers to the industry that includes hotels, restaurants, travel, and tourism. These businesses exist to provide accommodation, food, and experiences to guests and travelers.</p><h2>Level 3: The Professional Definition</h2><p>At a professional level, hospitality is the art of anticipating and fulfilling the needs of guests, going beyond their expectations to create memorable experiences. It involves a combination of service, skill, empathy, and attention to detail.</p><h2>Level 4: The Deep Definition</h2><p>At its core, hospitality is a human connection. It is the relationship between a host and a guest, built on trust, respect, and genuine care. True hospitality creates moments that guests carry with them long after they leave — a feeling of being truly seen, valued, and welcomed.</p><h2>Why Does This Matter?</h2><p>Understanding what hospitality truly means helps professionals deliver it more effectively. When you understand that your role is to create connection — not just complete tasks — everything changes. That is the foundation of everything HTI teaches.</p>`,
+        is_published: true,
+        created_at: "2023-01-26"
+      }
+    ];
+
+    async function seedIfEmpty() {
+      try {
+        const res = await fetch(`${REST}?select=id&limit=1`, { headers: HEADERS });
+        if (!res.ok) throw new Error('seed check failed: ' + res.status);
+        const rows = await res.json();
+        if (rows.length === 0) {
+          const ins = await fetch(REST, {
+            method: 'POST',
+            headers: { ...HEADERS, Prefer: 'return=minimal' },
+            body: JSON.stringify(SEED_POSTS)
+          });
+          if (!ins.ok) {
+            console.warn('Seeding failed:', ins.status, await ins.text());
+          }
+        }
+      } catch (err) {
+        console.warn('Seed skipped:', err);
+      }
+    }
+
+    /* ============ LOAD / RENDER POSTS ============ */
+    async function loadPosts() {
+      const tbody = $('postsBody');
+      try {
+        const res = await fetch(`${REST}?select=*&order=created_at.desc`, { headers: HEADERS });
+        if (!res.ok) throw new Error('load failed: ' + res.status);
+        const posts = await res.json();
+
+        if (!posts.length) {
+          tbody.innerHTML = '<tr><td colspan="5" class="table-status">No posts yet. Write your first one above.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = posts.map(p => {
+          const pub = p.is_published;
+          const thumb = p.cover_image
+            ? `<img class="post-thumb" src="${escapeHtml(p.cover_image)}" alt="" loading="lazy" onerror="this.outerHTML='<div class=&quot;post-thumb-placeholder&quot;>HTI</div>'">`
+            : `<div class="post-thumb-placeholder">HTI</div>`;
+          return `
+          <tr>
+            <td class="post-title-cell">
+              <div class="title-with-thumb">
+                ${thumb}
+                <span>${escapeHtml(p.title || 'Untitled')}</span>
+              </div>
+            </td>
+            <td>${escapeHtml(p.author || '—')}</td>
+            <td>${formatDate(p.created_at)}</td>
+            <td><span class="badge ${pub ? 'pub' : 'draft'}">${pub ? 'Published' : 'Draft'}</span></td>
+            <td>
+              <div class="row-actions">
+                <button class="mini-btn" onclick="editPost('${p.id}')">Edit</button>
+                <button class="mini-btn" onclick="togglePublish('${p.id}', ${pub})">${pub ? 'Unpublish' : 'Publish'}</button>
+                <button class="mini-btn danger" onclick="deletePost('${p.id}', this)">Delete</button>
+              </div>
+            </td>
+          </tr>`;
+        }).join('');
+      } catch (err) {
+        console.error(err);
+        tbody.innerHTML = '<tr><td colspan="5" class="table-status">Could not load posts.</td></tr>';
+      }
+    }
+
+    /* ============ COVER IMAGE LIVE PREVIEW ============ */
+    function updateCoverPreview() {
+      const url = $('coverInput').value.trim();
+      const wrap = $('coverPreview');
+      const img = $('coverPreviewImg');
+      if (url) {
+        img.src = url;
+        wrap.style.display = 'block';
+      } else {
+        img.src = '';
+        wrap.style.display = 'none';
+      }
+    }
+    $('coverInput').addEventListener('input', updateCoverPreview);
+    // hide preview if the image fails to load
+    $('coverPreviewImg').addEventListener('error', () => {
+      if ($('coverPreviewImg').src) $('coverPreview').style.display = 'none';
+    });
+
+    /* ============ FORM: SAVE (create or update) ============ */
+    function isQuillEmpty() {
+      const text = quill.getText().replace(/\s+/g, '');
+      return text.length === 0;
+    }
+
+    function readForm() {
+      return {
+        title: $('titleInput').value.trim(),
+        category: $('categoryInput').value,
+        author: $('authorInput').value.trim() || 'Team HTI',
+        cover_image: $('coverInput').value.trim(),
+        // rich HTML straight from the editor
+        body: isQuillEmpty() ? '' : quill.root.innerHTML
+      };
+    }
+
+    function resetForm() {
+      $('postId').value = '';
+      $('titleInput').value = '';
+      $('categoryInput').value = 'General';
+      $('authorInput').value = 'Team HTI';
+      $('coverInput').value = '';
+      quill.setContents([]);
+      updateCoverPreview();
+      $('formHeading').textContent = 'Write New Post';
+      $('editingBadge').style.display = 'none';
+      $('cancelEditBtn').style.display = 'none';
+    }
+
+    async function savePost(publish) {
+      const data = readForm();
+      if (!data.title) { showMsg('Title is required.', 'err'); return; }
+      if (!data.body.trim()) { showMsg('Body is required.', 'err'); return; }
+
+      data.is_published = publish;
+      const id = $('postId').value;
+
+      try {
+        let res;
+        if (id) {
+          // update
+          res = await fetch(`${REST}?id=eq.${encodeURIComponent(id)}`, {
+            method: 'PATCH',
+            headers: { ...HEADERS, Prefer: 'return=minimal' },
+            body: JSON.stringify(data)
+          });
+        } else {
+          // create — stamp created_at for new posts
+          data.created_at = new Date().toISOString();
+          res = await fetch(REST, {
+            method: 'POST',
+            headers: { ...HEADERS, Prefer: 'return=minimal' },
+            body: JSON.stringify(data)
+          });
+        }
+        if (!res.ok) throw new Error(await res.text());
+
+        showMsg(id ? 'Post updated.' : (publish ? 'Post published.' : 'Draft saved.'), 'ok');
+        resetForm();
+        loadPosts();
+      } catch (err) {
+        console.error(err);
+        showMsg('Save failed. Check console for details.', 'err');
+      }
+    }
+
+    /* ============ EDIT ============ */
+    async function editPost(id) {
+      try {
+        const res = await fetch(`${REST}?id=eq.${encodeURIComponent(id)}&select=*`, { headers: HEADERS });
+        if (!res.ok) throw new Error('fetch failed');
+        const rows = await res.json();
+        if (!rows.length) { showMsg('Post not found.', 'err'); return; }
+        const p = rows[0];
+
+        $('postId').value = p.id;
+        $('titleInput').value = p.title || '';
+        $('categoryInput').value = ['Hotel', 'Restaurant', 'Office', 'General'].includes(p.category) ? p.category : 'General';
+        $('authorInput').value = p.author || 'Team HTI';
+        $('coverInput').value = p.cover_image || '';
+        updateCoverPreview();
+        // load existing HTML into the rich text editor
+        quill.setContents([]);
+        quill.clipboard.dangerouslyPasteHTML(0, p.body || '');
+
+        $('formHeading').textContent = 'Edit Post';
+        $('editingBadge').style.display = 'inline-block';
+        $('cancelEditBtn').style.display = 'inline-flex';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        console.error(err);
+        showMsg('Could not load post for editing.', 'err');
+      }
+    }
+
+    /* ============ DELETE ============ */
+    async function deletePost(id, btn) {
+      if (!confirm('Delete this post permanently? This cannot be undone.')) return;
+      try {
+        const res = await fetch(`${REST}?id=eq.${encodeURIComponent(id)}`, {
+          method: 'DELETE',
+          headers: { ...HEADERS, Prefer: 'return=minimal' }
+        });
+        if (!res.ok) throw new Error(await res.text());
+        // if we were editing this one, clear the form
+        if ($('postId').value === String(id)) resetForm();
+        loadPosts();
+      } catch (err) {
+        console.error(err);
+        alert('Delete failed. Check console for details.');
+      }
+    }
+
+    /* ============ TOGGLE PUBLISH ============ */
+    async function togglePublish(id, current) {
+      try {
+        const res = await fetch(`${REST}?id=eq.${encodeURIComponent(id)}`, {
+          method: 'PATCH',
+          headers: { ...HEADERS, Prefer: 'return=minimal' },
+          body: JSON.stringify({ is_published: !current })
+        });
+        if (!res.ok) throw new Error(await res.text());
+        loadPosts();
+      } catch (err) {
+        console.error(err);
+        alert('Could not change status. Check console for details.');
+      }
+    }
+
+    /* ============ WIRE UP ============ */
+    $('saveDraftBtn').addEventListener('click', () => savePost(false));
+    $('publishBtn').addEventListener('click', () => savePost(true));
+    $('cancelEditBtn').addEventListener('click', resetForm);
+
+    async function initDashboard() {
+      await seedIfEmpty();
+      await loadPosts();
+    }
+
+    /* ============ AUTO-LOGIN IF SESSION ============ */
+    if (sessionStorage.getItem('hti_admin') === '1') {
+      openDashboard();
+    } else {
+      $('pwInput').focus();
+    }
+  </script>
+</body>
+
+</html>
