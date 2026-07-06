@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.hti-india.com)",
+      "PowerShell(Get-Content *)",
+      "PowerShell($src = \"D:\\\\Claude\\\\claude-app-building\\\\hti-website\\\\icare.html\"; \"post.html\",\"top.html\",\"cup.html\" | ForEach-Object { Copy-Item $src -Destination \"D:\\\\Claude\\\\claude-app-building\\\\hti-website\\\\$_\" -Force }; \"Copied\")"
+    ]
+  }
+}

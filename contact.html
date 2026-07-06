@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | HTI India</title>
+  <meta name="description"
+    content="Get in touch with HTI India — reach us on WhatsApp, phone or email. We usually reply within a few hours." />
+  <link rel="icon"
+    href="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63872ebc11d181ed9d69d77d_HTI%20star%20logo%2032x32%20px.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --hti-bg: #ede9e3;
+      --hti-black: #000;
+      --hti-red: #e8191a;
+      --hti-red2: #e8191a;
+      --hti-text: #111;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', Arial, Helvetica, sans-serif;
+      background: var(--hti-bg);
+      color: var(--hti-text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    /* ============ NAVBAR ============ */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--hti-bg);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #000, transparent);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 72px;
+    }
+
+    .nav-logo img {
+      width: 52px;
+      height: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-item {
+      position: relative;
+      font-weight: 600;
+      font-size: 15px;
+      color: #111;
+      cursor: pointer;
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-item .caret {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #333;
+      border-bottom: 2px solid #333;
+      transform: rotate(45deg);
+      margin-top: -3px;
+      transition: transform .2s;
+    }
+
+    .nav-item:hover .caret {
+      transform: rotate(-135deg);
+      margin-top: 3px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .14);
+      padding: 10px;
+      min-width: 230px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all .2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 120;
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      padding: 9px 12px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #222;
+    }
+
+    .dropdown a:hover {
+      background: var(--hti-bg);
+      color: var(--hti-red);
+    }
+
+    .dropdown a.active-nav {
+      color: #e8191a;
+      font-weight: 700;
+    }
+
+    .dropdown a b {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .dropdown a span {
+      font-size: 12px;
+      color: #777;
+      font-weight: 400;
+    }
+
+    .nav-contact {
+      background: var(--hti-red);
+      color: #fff;
+      border-radius: 8px;
+      padding: 11px 22px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .nav-contact:hover {
+      background: #c40f10;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      width: 26px;
+      height: 2px;
+      background: #000;
+      display: block;
+    }
+
+    /* ============ MARQUEE ============ */
+    .marquee {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    .marquee-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      animation: scroll-left var(--dur, 40s) linear infinite;
+    }
+
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes scroll-left {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ============ HERO ============ */
+    .contact-hero {
+      padding: 70px 24px 30px;
+      text-align: center;
+    }
+
+    .contact-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 10px;
+    }
+
+    .contact-hero h2 {
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 16px;
+    }
+
+    .contact-hero p {
+      max-width: 680px;
+      margin: 0 auto;
+      color: #555;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ============ CONTACT CARDS ============ */
+    .contact-cards {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .contact-card {
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .c-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .c-icon img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+    }
+
+    .c-icon svg {
+      width: 46px;
+      height: 46px;
+      color: #e31e24;
+    }
+
+    .contact-card h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .contact-card p {
+      color: #666;
+      font-size: 14.5px;
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .c-detail {
+      font-size: 16px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 22px;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      background: #e31e24;
+      color: #fff;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 0.7rem 1.5rem;
+      margin-top: auto;
+      transition: all 0.2s ease;
+    }
+
+    .contact-btn:hover {
+      background: #c40f10;
+    }
+
+    /* ============ STATS BAND ============ */
+    .stats-band {
+      background: #1a1a1a;
+      padding: 60px 24px;
+    }
+
+    .stats-band-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px 0;
+    }
+
+    .stat-block {
+      text-align: center;
+      padding: 6px 16px;
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .stat-block:nth-child(4n) {
+      border-right: none;
+    }
+
+    .stat-num {
+      font-size: 34px;
+      font-weight: 800;
+      color: #e31e24;
+      line-height: 1;
+    }
+
+    .stat-text {
+      color: #fff;
+      font-size: 14px;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    /* ============ LOGOS ============ */
+    .logos {
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .logos h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #111;
+      max-width: 880px;
+      margin: 0 auto 40px;
+      padding: 0 24px;
+      line-height: 1.45;
+    }
+
+    .logos .marquee-track img {
+      height: 70px;
+      width: auto;
+      margin: 0 34px;
+      object-fit: contain;
+    }
+
+    .logo-scroll img, .logo-strip img, .logos img {
+      filter: brightness(0) saturate(100%);
+      opacity: 0.6;
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* ============ INFO (HOURS / OFFICE) ============ */
+    .info {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px 90px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .info-col {
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .info-col h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 18px;
+    }
+
+    .info-col p {
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+
+    .info-col .info-strong {
+      font-weight: 700;
+      color: #111;
+    }
+
+    .info-note {
+      color: #777;
+      font-size: 13.5px;
+      font-style: italic;
+      margin-top: 6px;
+    }
+
+    .info-btn {
+      display: inline-block;
+      background: #e31e24;
+      color: #fff;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 0.7rem 1.5rem;
+      margin-top: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .info-btn:hover {
+      background: #c40f10;
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+      background: #000;
+      color: #fff;
+      padding: 60px 30px 30px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .footer-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 17px;
+      color: #fff;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 14.5px;
+      color: #c7c7c7;
+      margin-bottom: 11px;
+      font-weight: 400;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-div {
+      height: 1px;
+      background: #2a2a2a;
+      margin: 40px 0 30px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 26px;
+      height: 26px;
+      color: #fff;
+      opacity: .85;
+    }
+
+    .footer-social a:hover {
+      opacity: 1;
+      color: var(--hti-red);
+    }
+
+    .footer-contact h3 {
+      font-size: 20px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .footer-contact span {
+      color: var(--hti-red);
+    }
+
+    .footer-brand img {
+      width: 70px;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: #8a8a8a;
+      font-size: 13px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media(max-width:960px) {
+      .nav-menu {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 16px 24px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+        display: none;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .nav-item {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: 4px 0 4px 14px;
+        min-width: auto;
+        width: 100%;
+        display: none;
+      }
+
+      .nav-item.open .dropdown {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .contact-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-band-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat-block:nth-child(4n) {
+        border-right: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .stat-block:nth-child(2n) {
+        border-right: none;
+      }
+
+      .info {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:600px) {
+      .stats-band-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-block {
+        border-right: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img
+          src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+          alt="HTI Logo" /></a>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+      <nav class="nav-menu" id="navMenu">
+        <div class="nav-item">Restaurants &amp; QSRs<span class="caret"></span>
+          <div class="dropdown">
+            <a href="super.html"><b>SUPER</b><span>Essential soft and job skills</span></a>
+            <a href="support.html"><b>SUPPORT</b><span>Skill upgradation pre-opening</span></a>
+            <a href="icedt.html"><b>ICEDT</b><span>Counter executives training</span></a>
+            <a href="icare.html"><b>iCARE</b><span>Teaching techniques</span></a>
+            <a href="vow.html"><b>Vow to Wow</b><span>Customer expectations</span></a>
+            <a href="ramp.html"><b>RAMP</b><span>Restaurant operations &amp; management</span></a>
+            <a href="restaurants.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Hotels<span class="caret"></span>
+          <div class="dropdown">
+            <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Staff skill upgrade</span></a>
+            <a href="hotcar.html"><b>HOT-CAR</b><span>Housekeeping operations</span></a>
+            <a href="fort.html"><b>FORT</b><span>Front desk operations</span></a>
+            <a href="kmt.html"><b>KMT</b><span>Kitchen management</span></a>
+            <a href="class.html"><b>CLASS</b><span>Grooming &amp; communication skills</span></a>
+            <a href="mdp.html"><b>MDP</b><span>Management development</span></a>
+            <a href="hotels.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Retail<span class="caret"></span>
+          <div class="dropdown">
+            <a href="post.html"><b>POST</b><span>Pantry operations</span></a>
+            <a href="cup.html"><b>CUP</b><span>Caretaker upgradation</span></a>
+            <a href="top.html"><b>TOP</b><span>Peons training</span></a>
+            <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">More<span class="caret"></span>
+          <div class="dropdown">
+            <a href="#">Team Building</a>
+            <a href="#">Leadership Development</a>
+            <a href="#">Sales Training</a>
+            <a href="#">Professional Etiquette</a>
+            <a href="#">Become A Trainer</a>
+            <a href="#">Develop SOPs &amp; How-To Videos</a>
+            <a href="#">Blogs</a>
+          </div>
+        </div>
+        <a href="contact.html" class="nav-contact">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ SECTION 1: HERO ============ -->
+  <section class="contact-hero">
+    <h1>Get In Touch</h1>
+    <h2>Let's talk about training your team.</h2>
+    <p>Have a question about our programs, pricing, or onboarding your staff? Reach us the way that's easiest for you
+      - we usually reply within a few hours.</p>
+  </section>
+
+  <!-- ============ SECTION 2: CONTACT CARDS ============ -->
+  <section class="contact-cards">
+    <div class="contact-card">
+      <div class="c-icon">
+        <img src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63ce96ddeb7e457828819873_Whatapp%20logo.png"
+          alt="WhatsApp" />
+      </div>
+      <h3>WhatsApp</h3>
+      <p>Fastest way to reach us - chat with our team directly.</p>
+      <div class="c-detail">+91 77380 60902</div>
+      <a href="https://wa.me/917738060902" target="_blank" class="contact-btn">Chat on WhatsApp</a>
+    </div>
+
+    <div class="contact-card">
+      <div class="c-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+          </path>
+        </svg>
+      </div>
+      <h3>Call us</h3>
+      <p>Prefer to talk? Call during business hours, Mon-Sat.</p>
+      <div class="c-detail">+91 77380 60902</div>
+      <a href="tel:+917738060902" class="contact-btn">Call now</a>
+    </div>
+
+    <div class="contact-card">
+      <div class="c-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+      </div>
+      <h3>Email</h3>
+      <p>For detailed enquiries, proposals, or partnerships.</p>
+      <div class="c-detail">kaushal@hti-india.com</div>
+      <a href="mailto:kaushal@hti-india.com" class="contact-btn">Send an email</a>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3: STATS BAND ============ -->
+  <section class="stats-band">
+    <div class="stats-band-inner">
+      <div class="stat-block">
+        <div class="stat-num">300K+</div>
+        <div class="stat-text">Total Students</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">60+</div>
+        <div class="stat-text">Brands</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">5</div>
+        <div class="stat-text">Countries</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">410+</div>
+        <div class="stat-text">Cities</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">13+</div>
+        <div class="stat-text">Languages</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">15+</div>
+        <div class="stat-text">Programs</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">350+</div>
+        <div class="stat-text">Local Language Trainers</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">400K+</div>
+        <div class="stat-text">Total Live Hours</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4: LOGO STRIP ============ -->
+  <section class="logos">
+    <h2>Leaders in the hospitality and service industries have trusted HTI's services to upskill their staff.</h2>
+    <div class="marquee">
+      <div class="marquee-track" id="logoTrack" style="--dur:60s"></div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 5: HOURS & OFFICE ============ -->
+  <section class="info">
+    <div class="info-col">
+      <h3>Business hours</h3>
+      <p><span class="info-strong">Monday - Saturday:</span> 10:00 AM - 6:00 PM</p>
+      <p><span class="info-strong">Sunday:</span> Closed</p>
+      <p class="info-note">WhatsApp messages are answered outside these hours too.</p>
+    </div>
+    <div class="info-col">
+      <h3>Office</h3>
+      <p class="info-strong">Hospitality Training Institute India Pvt Ltd</p>
+      <p>A433 Vashi Plaza, Sector 17, Sion Panvel Highway, Vashi, Navi Mumbai - 400703.</p>
+      <a href="https://wa.me/917738060902" target="_blank" class="info-btn">Message us to book a visit</a>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>HTI</h4>
+          <a href="#">About Us</a>
+          <a href="#">Case Studies</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <a href="#">Restaurants &amp; QSRs</a>
+          <a href="#">Hotels</a>
+          <a href="#">Offices</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="#">Team Building</a>
+          <a href="#">Leadership Development</a>
+          <a href="#">Sales Training</a>
+          <a href="#">Professional Etiquette</a>
+          <a href="#">Become A Trainer</a>
+          <a href="#">Develop SOPs &amp; How-To Videos</a>
+          <a href="#">Blogs</a>
+        </div>
+      </div>
+      <div class="footer-div"></div>
+      <div class="footer-bottom">
+        <div class="footer-social">
+          <a href="https://www.facebook.com/hti.india/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg></a>
+          <a href="https://www.instagram.com/hti.india/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M12 2c-2.716 0-3.056.012-4.123.06c-1.064.049-1.791.218-2.427.465a4.901 4.901 0 0 0-1.772 1.153A4.902 4.902 0 0 0 2.525 5.45c-.247.636-.416 1.363-.465 2.427C2.011 8.944 2 9.284 2 12s.011 3.056.06 4.123c.049 1.064.218 1.791.465 2.427a4.903 4.903 0 0 0 1.153 1.772a4.903 4.903 0 0 0 1.772 1.153c.636.247 1.363.416 2.427.465c1.067.048 1.407.06 4.123.06s3.056-.012 4.123-.06c1.064-.049 1.791-.218 2.427-.465a4.902 4.902 0 0 0 1.772-1.153a4.902 4.902 0 0 0 1.153-1.772c.247-.636.416-1.363.465-2.427c.048-1.067.06-1.407.06-4.123s-.012-3.056-.06-4.123c-.049-1.064-.218-1.791-.465-2.427a4.902 4.902 0 0 0-1.153-1.772a4.901 4.901 0 0 0-1.772-1.153c-.636-.247-1.363-.416-2.427-.465C15.056 2.012 14.716 2 12 2m0 1.802c2.67 0 2.986.01 4.04.058c.976.045 1.505.207 1.858.344c.466.182.8.399 1.15.748c.35.35.566.684.748 1.15c.136.353.3.882.344 1.857c.048 1.055.058 1.37.058 4.041c0 2.67-.01 2.986-.058 4.04c-.045.976-.208 1.505-.344 1.858a3.1 3.1 0 0 1-.748 1.15c-.35.35-.684.566-1.15.748c-.353.136-.882.3-1.857.344c-1.054.048-1.37.058-4.041.058c-2.67 0-2.987-.01-4.04-.058c-.976-.045-1.505-.208-1.858-.344a3.098 3.098 0 0 1-1.15-.748a3.098 3.098 0 0 1-.748-1.15c-.137-.353-.3-.882-.344-1.857c-.048-1.055-.058-1.37-.058-4.041c0-2.67.01-2.986.058-4.04c.045-.976.207-1.505.344-1.858c.182-.466.399-.8.748-1.15c.35-.35.684-.566 1.15-.748c.353-.137.882-.3 1.857-.344c1.055-.048 1.37-.058 4.041-.058m0 11.531a3.333 3.333 0 1 1 0-6.666a3.333 3.333 0 0 1 0 6.666m0-8.468a5.135 5.135 0 1 0 0 10.27a5.135 5.135 0 0 0 0-10.27m6.538-.203a1.2 1.2 0 1 1-2.4 0a1.2 1.2 0 0 1 2.4 0" />
+            </svg></a>
+          <a href="https://www.linkedin.com/company/hospitality-training-institute-india-pvt-ltd" target="_blank"
+            aria-label="LinkedIn"><svg viewBox="0 0 32 32" fill="currentColor">
+              <path
+                d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+            </svg></a>
+          <a href="https://www.youtube.com/c/Hti-india" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg></a>
+        </div>
+        <div class="footer-contact"><a href="tel:+917738060902">
+            <h3>Contact Us: <span>+91 77380 60902</span></h3>
+          </a></div>
+        <a href="#" class="footer-brand"><img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+            alt="HTI" /></a>
+      </div>
+      <div class="footer-copy">&#169;&#65039; HOSPITALITY TRAINING INSTITUTE INDIA PRIVATE. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    /* ---------- Logo marquee (duplicate for seamless loop) ---------- */
+    const logos = [
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088b77507a17995c23fcf_1.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088b69311828de3adb65e_2.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088b5bea6e5218a1d5f1d_3.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088b57d21753e2c4dda87_4.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088bb726dee6a64fcf07a_5.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088bc5b854c711d5c5362_6.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088bc81a51e4c70737bd9_7.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088bc81a51e709f737be4_8.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088c17d217555ec4ddab1_9.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088c0c2a607206223ab1f_10.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088c1c2a607a88923ab20_11.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088cf5fb6d15b1d5c5b07_12.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088d03e8c0ec3719db064_13.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088cf1279b3b35f0d0b08_14.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088c15b854c33b95c53c5_15.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088c597156e2ee6f2245c_16.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088c523b530468590235f_17.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088c5bea6e55ae61d6097_18.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088c4a2f3a248d80fd4bc_19.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088ca726dee489bfcf0b3_20.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088cb314a2e2cecad5610_21.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088caa2f3a2ad180fd4db_22.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088cb7507a14006c240c2_23.webp",
+      "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/639088cfc2a607807223abf5_24.webp"
+    ];
+    (function () {
+      const track = document.getElementById('logoTrack');
+      const html = logos.map(u => `<img src="${u}" alt="" loading="lazy">`).join('');
+      track.innerHTML = html + html;
+    })();
+
+    /* ---------- Mobile nav ---------- */
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const menu = document.getElementById('navMenu');
+      toggle.addEventListener('click', () => menu.classList.toggle('open'));
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          if (window.innerWidth <= 960 && e.target === item || (e.target.classList.contains('caret'))) {
+            item.classList.toggle('open');
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>

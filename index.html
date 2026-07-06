@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTI India | Hospitality Training Institute</title>
+  <meta name="description"
+    content="Hospitality businesses use HTI to train, monitor progress & certify their front-end personnel!" />
+  <link rel="icon"
+    href="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63872ebc11d181ed9d69d77d_HTI%20star%20logo%2032x32%20px.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --hti-bg: #f3f2ef;
+      --hti-black: #000;
+      --hti-red: #e32129;
+      --hti-red2: #ff0000;
+      --hti-text: #111;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', Arial, Helvetica, sans-serif;
+      background: var(--hti-bg);
+      color: var(--hti-text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .btn-red {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--hti-red2);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 12px 26px;
+      font-size: 17px;
+      line-height: 1;
+      transition: transform .15s ease, background .15s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-red:hover {
+      background: #d40f0f;
+      transform: translateY(-2px);
+    }
+
+    /* ============ NAVBAR ============ */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--hti-bg);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #000, transparent);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 72px;
+    }
+
+    .nav-logo img {
+      width: 52px;
+      height: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-item {
+      position: relative;
+      font-weight: 600;
+      font-size: 15px;
+      color: #111;
+      cursor: pointer;
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-item .caret {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #333;
+      border-bottom: 2px solid #333;
+      transform: rotate(45deg);
+      margin-top: -3px;
+      transition: transform .2s;
+    }
+
+    .nav-item:hover .caret {
+      transform: rotate(-135deg);
+      margin-top: 3px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .14);
+      padding: 10px;
+      min-width: 230px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all .2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 120;
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      padding: 9px 12px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #222;
+    }
+
+    .dropdown a:hover {
+      background: var(--hti-bg);
+      color: var(--hti-red);
+    }
+
+    .dropdown a b {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .dropdown a span {
+      font-size: 12px;
+      color: #777;
+      font-weight: 400;
+    }
+
+    .nav-contact {
+      background: var(--hti-red2);
+      color: #fff;
+      border-radius: 8px;
+      padding: 11px 22px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .nav-contact:hover {
+      background: #d40f0f;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      width: 26px;
+      height: 2px;
+      background: #000;
+      display: block;
+    }
+
+    /* ============ HERO + CLIENTS (split section) ============ */
+    .clients-hero {
+      display: flex;
+      align-items: flex-start;
+      min-height: 520px;
+      background: #ede9e3;
+      overflow: hidden;
+    }
+
+    .clients-left {
+      flex: 0 0 45%;
+      max-width: 45%;
+      padding: 80px 40px 60px 80px;
+    }
+
+    .clients-left h1 {
+      font-size: 50px;
+      line-height: 1.05;
+      color: #000;
+      font-weight: 800;
+    }
+
+    /* Red animated typing line: fixed height so text below never shifts */
+    .type-line {
+      font-size: 36px;
+      font-weight: 800;
+      width: 100%;
+      min-height: 60px;
+      height: 60px;
+      line-height: 60px;
+      overflow: hidden;
+      display: block;
+    }
+
+    .typer {
+      color: var(--hti-red2);
+    }
+
+    .cursor {
+      color: var(--hti-red2);
+      font-weight: 400;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .hero-sub {
+      margin-top: 34px;
+      max-width: 640px;
+    }
+
+    .hero-sub h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #111;
+      line-height: 1.4;
+    }
+
+    .hero-sub .lang {
+      font-size: 19px;
+      font-weight: 500;
+      color: #222;
+      margin-top: 18px;
+    }
+
+    .hero-sub .lang em {
+      color: #000;
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    /* ============ MARQUEE (generic) ============ */
+    .marquee {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    .marquee-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      animation: scroll-left var(--dur, 40s) linear infinite;
+    }
+
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes scroll-left {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ============ CLIENTS RIGHT (two vertical scrolling logo columns) ============ */
+    .clients-right {
+      flex: 0 0 60%;
+      max-width: 60%;
+      width: 100%;
+      height: 520px;
+      padding-top: 20px;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .logo-column {
+      width: 50%;
+      height: 520px;
+      overflow: hidden;
+    }
+
+    .logo-column-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: scroll-up 18s linear infinite;
+    }
+
+    .logo-column-inner.slow {
+      animation-duration: 25s;
+    }
+
+    .logo-column-inner img {
+      display: block;
+      width: auto;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 40px;
+    }
+
+    @keyframes scroll-up {
+      0% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(-50%);
+      }
+    }
+
+    /* ============ STATS + WHY (black) ============ */
+    .sec-dark {
+      background: #000;
+      color: #fff;
+    }
+
+    .stats-head {
+      text-align: left;
+      padding-top: 60px;
+    }
+
+    .stats-head h2 {
+      font-size: 34px;
+      font-weight: 700;
+      color: #fff;
+      max-width: 760px;
+      line-height: 1.25;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 34px 20px;
+      padding: 50px 0 60px;
+    }
+
+    .stat h3 {
+      font-size: 40px;
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .stat p {
+      font-size: 15px;
+      color: #cfcfcf;
+      font-weight: 400;
+      margin-top: 4px;
+    }
+
+    .why-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding-bottom: 70px;
+    }
+
+    .why-media {
+      border-radius: 14px;
+      overflow: hidden;
+      background: #111;
+      aspect-ratio: 1/1;
+    }
+
+    .why-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .why-list {
+      display: flex;
+      flex-direction: column;
+      gap: 34px;
+    }
+
+    .why-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .why-item img {
+      width: 58px;
+      height: 58px;
+      flex-shrink: 0;
+    }
+
+    .why-item h3 {
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .why-item p {
+      font-size: 15px;
+      color: #c7c7c7;
+      line-height: 1.55;
+      font-weight: 400;
+    }
+
+    /* ============ TRAINERS (black) ============ */
+    .trainers {
+      background: #000;
+      color: #fff;
+      padding: 20px 0 70px;
+      text-align: center;
+    }
+
+    .trainers h2 {
+      font-size: 40px;
+      color: #fff;
+      margin-bottom: 40px;
+      font-weight: 800;
+    }
+
+    .trainers-slider {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+
+    .trainers-track {
+      display: flex;
+      transition: transform .5s ease;
+    }
+
+    .trainers-track a {
+      min-width: 100%;
+    }
+
+    .trainers-track img {
+      width: 200px;
+      height: 220px;
+      border-radius: 0;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 12px auto;
+    }
+
+    .tr-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      box-shadow: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 0;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      color: #e8191a;
+    }
+
+    .tr-arrow.left {
+      left: 14px;
+    }
+
+    .tr-arrow.right {
+      right: 14px;
+    }
+
+    .tr-dots {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 22px;
+    }
+
+    .tr-dots span {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #555;
+      cursor: pointer;
+    }
+
+    .tr-dots span.active {
+      background: #fff;
+    }
+
+    /* ============ LEADERS scroll (black) ============ */
+    .leaders {
+      background: #000;
+      color: #fff;
+      padding: 20px 0 80px;
+    }
+
+    .leaders-head {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 40px;
+    }
+
+    .leaders-head h2 {
+      font-size: 44px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .leaders-head p {
+      font-size: 16px;
+      color: #c7c7c7;
+      margin-top: 10px;
+      font-weight: 400;
+    }
+
+    .leaders .marquee-track img {
+      height: 150px;
+      width: auto;
+      margin: 0 16px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    /* ============ TESTIMONIALS (light) ============ */
+    .testi {
+      padding: 80px 0 40px;
+    }
+
+    .testi-head {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 50px;
+    }
+
+    .testi-head h2 {
+      font-size: 40px;
+      font-weight: 800;
+      color: #111;
+    }
+
+    .testi-head p {
+      font-size: 16px;
+      color: #555;
+      margin-top: 12px;
+      font-weight: 400;
+    }
+
+    .testi-grid {
+      columns: 3;
+      column-gap: 26px;
+    }
+
+    .testi-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 26px;
+      margin-bottom: 26px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .06);
+      break-inside: avoid;
+      border: 1px solid #eee;
+    }
+
+    .testi-quote {
+      font-size: 48px;
+      color: var(--hti-red);
+      line-height: .6;
+      font-weight: 800;
+      font-family: Georgia, serif;
+    }
+
+    .testi-person {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 12px 0 16px;
+    }
+
+    .testi-person img {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .testi-person h4 {
+      font-size: 16px;
+      color: #111;
+    }
+
+    .testi-person .role {
+      font-size: 12.5px;
+      color: #666;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .testi-person .li {
+      margin-top: 6px;
+      color: #0a66c2;
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+    }
+
+    .testi-text {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    /* ============ CTA (black) ============ */
+    .cta {
+      background: #000;
+      color: #fff;
+      padding: 70px 0 40px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .cta h2 {
+      font-size: 40px;
+      color: #fff;
+      font-weight: 800;
+      max-width: 760px;
+      margin: 0 auto;
+      line-height: 1.3;
+    }
+
+    .cta .btn-red {
+      margin-top: 28px;
+    }
+
+    .cta-big {
+      font-size: 120px;
+      font-weight: 800;
+      color: var(--hti-red);
+      margin: 30px 0 10px;
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .cta-brands .marquee-track {
+      gap: 0;
+    }
+
+    .brand-card {
+      width: 180px;
+      margin: 0 12px;
+      background: #0f0f0f;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #222;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .brand-card img.person {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .brand-card .logo-bar {
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      padding: 6px;
+    }
+
+    .brand-card .logo-bar img {
+      max-height: 38px;
+      width: auto;
+    }
+
+    .cta-note {
+      margin-top: 30px;
+      font-size: 15px;
+      color: #bbb;
+      font-weight: 600;
+    }
+
+    /* ============ TRACK PROGRESS (light) ============ */
+    .track {
+      padding: 80px 0;
+    }
+
+    .track-head {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 50px;
+    }
+
+    .track-head h2 {
+      font-size: 40px;
+      font-weight: 800;
+      color: #111;
+    }
+
+    .track-head p {
+      font-size: 16px;
+      color: #555;
+      margin-top: 12px;
+      font-weight: 400;
+    }
+
+    .track-row {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .track-phone {
+      display: flex;
+      justify-content: center;
+    }
+
+    .track-phone img {
+      width: 270px;
+      height: auto;
+    }
+
+    .track-steps {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .track-step {
+      display: flex;
+      gap: 24px;
+      padding: 24px 0;
+    }
+
+    .track-step:not(:last-child) {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .track-step .num {
+      font-size: 44px;
+      font-weight: 800;
+      color: #111;
+      line-height: 1;
+      min-width: 44px;
+    }
+
+    .track-step h3 {
+      font-size: 20px;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .track-step p {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.55;
+      font-weight: 400;
+    }
+
+    /* ============ FEATURED (light) ============ */
+    .featured {
+      padding: 20px 0 70px;
+      text-align: center;
+    }
+
+    .featured h2 {
+      font-size: 38px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 40px;
+    }
+
+    .featured .marquee-track img {
+      height: 56px;
+      width: auto;
+      margin: 0 40px;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: .75;
+    }
+
+    /* ============ FOOTER (black) ============ */
+    .footer {
+      background: #000;
+      color: #fff;
+      padding: 60px 30px 30px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .footer-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 17px;
+      color: #fff;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 14.5px;
+      color: #c7c7c7;
+      margin-bottom: 11px;
+      font-weight: 400;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-div {
+      height: 1px;
+      background: #2a2a2a;
+      margin: 40px 0 30px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 26px;
+      height: 26px;
+      color: #fff;
+      opacity: .85;
+    }
+
+    .footer-social a:hover {
+      opacity: 1;
+      color: var(--hti-red);
+    }
+
+    .footer-contact h3 {
+      font-size: 20px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .footer-contact span {
+      color: var(--hti-red);
+    }
+
+    .footer-brand img {
+      width: 70px;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: #8a8a8a;
+      font-size: 13px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media(max-width:960px) {
+      .nav-menu {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 16px 24px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+        display: none;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .nav-item {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: 4px 0 4px 14px;
+        min-width: auto;
+        width: 100%;
+        display: none;
+      }
+
+      .nav-item.open .dropdown {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .why-row,
+      .track-row {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .testi-grid {
+        columns: 2;
+      }
+
+      .clients-left h1 {
+        font-size: 36px;
+      }
+
+      .clients-hero {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .clients-left {
+        flex: 1 1 auto;
+        max-width: 100%;
+        padding: 50px 24px 20px;
+      }
+
+      .clients-right {
+        flex: 1 1 auto;
+        max-width: 100%;
+        padding: 0 24px 40px;
+        height: 420px;
+        align-self: auto;
+      }
+
+      .cta-big {
+        font-size: 70px;
+      }
+
+      .footer-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:600px) {
+      .testi-grid {
+        columns: 1;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .clients-left h1 {
+        font-size: 30px;
+      }
+
+      .stats-head h2,
+      .cta h2,
+      .testi-head h2,
+      .track-head h2,
+      .trainers h2,
+      .leaders-head h2,
+      .featured h2 {
+        font-size: 26px;
+      }
+
+      .cta-big {
+        font-size: 52px;
+      }
+
+      .footer-cols {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo"><img
+          src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+          alt="HTI Logo" /></a>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+      <nav class="nav-menu" id="navMenu">
+        <div class="nav-item">Restaurants &amp; QSRs<span class="caret"></span>
+          <div class="dropdown">
+            <a href="super.html"><b>SUPER</b><span>Essential soft and job skills</span></a>
+            <a href="support.html"><b>SUPPORT</b><span>Skill upgradation pre-opening</span></a>
+            <a href="icedt.html"><b>ICEDT</b><span>Counter executives training</span></a>
+            <a href="icare.html"><b>iCARE</b><span>Teaching techniques</span></a>
+            <a href="vow.html"><b>Vow to Wow</b><span>Customer expectations</span></a>
+            <a href="ramp.html"><b>RAMP</b><span>Restaurant operations &amp; management</span></a>
+            <a href="restaurants.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Hotels<span class="caret"></span>
+          <div class="dropdown">
+            <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Staff skill upgrade</span></a>
+            <a href="hotcar.html"><b>HOT-CAR</b><span>Housekeeping operations</span></a>
+            <a href="fort.html"><b>FORT</b><span>Front desk operations</span></a>
+            <a href="kmt.html"><b>KMT</b><span>Kitchen management</span></a>
+            <a href="class.html"><b>CLASS</b><span>Grooming &amp; communication skills</span></a>
+            <a href="mdp.html"><b>MDP</b><span>Management development</span></a>
+            <a href="hotels.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Retail<span class="caret"></span>
+          <div class="dropdown">
+            <a href="post.html"><b>POST</b><span>Pantry operations</span></a>
+            <a href="cup.html"><b>CUP</b><span>Caretaker upgradation</span></a>
+            <a href="top.html"><b>TOP</b><span>Peons training</span></a>
+            <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">More<span class="caret"></span>
+          <div class="dropdown">
+            <a href="#">Team Building</a>
+            <a href="#">Leadership Development</a>
+            <a href="#">Sales Training</a>
+            <a href="#">Professional Etiquette</a>
+            <a href="#">Become A Trainer</a>
+            <a href="#">Develop SOPs &amp; How-To Videos</a>
+            <a href="#">Blogs</a>
+          </div>
+        </div>
+        <a href="contact.html" class="nav-contact">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ HERO + CLIENTS (split: text left, scrolling logo columns right) ============ -->
+  <section class="clients-hero">
+    <div class="clients-left">
+      <h1>Train your staff in ways to <span class="type-line"><span class="typer" id="typer"></span><span class="cursor">|</span></span></h1>
+      <div class="hero-sub">
+        <h2>Hospitality businesses use HTI to train, monitor progress &amp; certify their front-end personnel!</h2>
+        <p class="lang">And oh, we have conducted trainings in <em>13 different languages.</em></p>
+        <a href="https://wa.me/917738060902" target="_blank" class="btn-red" style="margin-top:24px;">Speak with our
+          team</a>
+      </div>
+    </div>
+    <div class="clients-right">
+      <div class="logo-column">
+        <div class="logo-column-inner" id="logoCol1"></div>
+      </div>
+      <div class="logo-column">
+        <div class="logo-column-inner slow" id="logoCol2"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS + WHY (dark) ============ -->
+  <section class="sec-dark">
+    <div class="wrap">
+      <div class="stats-head">
+        <h2>We work closely with our partner brands to co-create training programs that perfect operations.</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat">
+          <h3>300K+</h3>
+          <p>Total Students</p>
+        </div>
+        <div class="stat">
+          <h3>60+</h3>
+          <p>Brands</p>
+        </div>
+        <div class="stat">
+          <h3>5</h3>
+          <p>Countries</p>
+        </div>
+        <div class="stat">
+          <h3>410+</h3>
+          <p>Cities</p>
+        </div>
+        <div class="stat">
+          <h3>13+</h3>
+          <p>Languages</p>
+        </div>
+        <div class="stat">
+          <h3>15+</h3>
+          <p>Programs</p>
+        </div>
+        <div class="stat">
+          <h3>350+</h3>
+          <p>Local Language Trainers</p>
+        </div>
+        <div class="stat">
+          <h3>400K+</h3>
+          <p>Total Live Hours</p>
+        </div>
+      </div>
+      <div class="why-row">
+        <div class="why-media">
+          <video autoplay muted loop playsinline
+            poster="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/6385fc0243ba9fb1f85eeeb8_for%20website-poster-00001.jpg">
+            <source
+              src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/6385fc0243ba9fb1f85eeeb8_for%20website-transcode.mp4"
+              type="video/mp4" />
+          </video>
+        </div>
+        <div class="why-list">
+          <div class="why-item">
+            <img src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63763da80135e8049cdfa59c_Interact.svg"
+              alt="" />
+            <div>
+              <h3>Learn by doing</h3>
+              <p>Training is generally boring, but not with HTI! Our sessions have Activities that simulate Frequently
+                Faced Situations by the participants.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <img
+              src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63763fd2a452850797ef42c8_The%20Community.svg"
+              alt="" />
+            <div>
+              <h3>In-person sessions</h3>
+              <p>Live, in-person, brand specific training sessions that will help your team deep dive into the
+                fundamentals of service.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <img
+              src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637640064d835b976a718615_Learn%20by%20Doing.svg"
+              alt="" />
+            <div>
+              <h3>We make training tangible</h3>
+              <p>The Training Tsunami is an app we've built that helps track and monitor participants' progress
+                "ANALYTICALLY!"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRAINERS ============ -->
+  <section class="trainers">
+    <div class="wrap">
+      <h2>Our Trainers</h2>
+      <div class="trainers-slider">
+        <div class="trainers-track" id="trainersTrack">
+          <a href="#"><img
+              src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63972e3b75e66c7f6c540805_1.webp"
+              alt="Dominic CostaBir" /></a>
+          <a href="#"><img
+              src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63972e3b1e93d524e890b8e0_2.webp"
+              alt="Kaushal Dutta" /></a>
+          <a href="#"><img
+              src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63972e3a57cbd6a92d540ecb_3.webp"
+              alt="Rajan Kale" /></a>
+        </div>
+        <button class="tr-arrow left" id="trPrev">&#10094;</button>
+        <button class="tr-arrow right" id="trNext">&#10095;</button>
+      </div>
+      <div class="tr-dots" id="trDots"></div>
+    </div>
+  </section>
+
+  <!-- ============ LEADERS SCROLL ============ -->
+  <section class="leaders">
+    <div class="leaders-head">
+      <h2>Leaders</h2>
+      <p>In the hospitality and service industries have trusted HTI's services to upskill their staff.</p>
+    </div>
+    <div class="marquee">
+      <div class="marquee-track" id="leadersTrack" style="--dur:50s"></div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="testi">
+    <div class="wrap">
+      <div class="testi-head">
+        <h2>Here's what they said &#10084;&#65039;</h2>
+        <p>Students, professionals and budding entrepreneurs inspire us! Here's what they have to say…</p>
+      </div>
+      <div class="testi-grid" id="testiGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta">
+    <div class="wrap">
+      <h2>Let's find the right training plan for your team!</h2>
+      <a href="https://wa.me/917738060902" target="_blank" class="btn-red">Let's chat</a>
+      <div class="cta-big">3,00,000+</div>
+    </div>
+    <div class="cta-brands">
+      <div class="marquee">
+        <div class="marquee-track" id="ctaTrack" style="--dur:60s"></div>
+      </div>
+    </div>
+    <p class="cta-note">People from top brands &amp; companies have experienced HTI</p>
+  </section>
+
+  <!-- ============ TRACK PROGRESS ============ -->
+  <section class="track">
+    <div class="wrap">
+      <div class="track-head">
+        <h2>Track participant progress&#9889;&#65039;</h2>
+        <p>At HTI, we have built an application that allows you to track and monitor your staff's progress.</p>
+      </div>
+      <div class="track-row">
+        <div class="track-phone">
+          <img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/6464d006a1d8c5faf0065ba1_STAR_mobile%20view.svg"
+            alt="Training Tsunami App" />
+        </div>
+        <div class="track-steps">
+          <div class="track-step">
+            <div class="num">1</div>
+            <div>
+              <h3>Identify Your Star Performers</h3>
+              <p>Hard work beats talent, often only the talented ones make a good first impression. But with our app, we
+                can help you identify those hungry to learn!</p>
+            </div>
+          </div>
+          <div class="track-step">
+            <div class="num">2</div>
+            <div>
+              <h3>Participation Reports</h3>
+              <p>Previously, training was intangible; but we make training "tangible" with our reports.</p>
+            </div>
+          </div>
+          <div class="track-step">
+            <div class="num">3</div>
+            <div>
+              <h3>In-App Audit &amp; Tests</h3>
+              <p>Our app reinforces learning at the end of every session, helping the trainers better understand "how
+                much" the participants have understood.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED IN ============ -->
+  <section class="featured">
+    <div class="wrap">
+      <h2>Featured in</h2>
+    </div>
+    <div class="marquee">
+      <div class="marquee-track" id="featTrack" style="--dur:45s"></div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>HTI</h4>
+          <a href="#">About Us</a>
+          <a href="#">Case Studies</a>
+          <a href="#">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <a href="#">Restaurants &amp; QSRs</a>
+          <a href="#">Hotels</a>
+          <a href="#">Offices</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="#">Team Building</a>
+          <a href="#">Leadership Development</a>
+          <a href="#">Sales Training</a>
+          <a href="#">Professional Etiquette</a>
+          <a href="#">Become A Trainer</a>
+          <a href="#">Develop SOPs &amp; How-To Videos</a>
+          <a href="#">Blogs</a>
+        </div>
+      </div>
+      <div class="footer-div"></div>
+      <div class="footer-bottom">
+        <div class="footer-social">
+          <a href="https://www.facebook.com/hti.india/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg></a>
+          <a href="https://www.instagram.com/hti.india/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M12 2c-2.716 0-3.056.012-4.123.06c-1.064.049-1.791.218-2.427.465a4.901 4.901 0 0 0-1.772 1.153A4.902 4.902 0 0 0 2.525 5.45c-.247.636-.416 1.363-.465 2.427C2.011 8.944 2 9.284 2 12s.011 3.056.06 4.123c.049 1.064.218 1.791.465 2.427a4.903 4.903 0 0 0 1.153 1.772a4.903 4.903 0 0 0 1.772 1.153c.636.247 1.363.416 2.427.465c1.067.048 1.407.06 4.123.06s3.056-.012 4.123-.06c1.064-.049 1.791-.218 2.427-.465a4.902 4.902 0 0 0 1.772-1.153a4.902 4.902 0 0 0 1.153-1.772c.247-.636.416-1.363.465-2.427c.048-1.067.06-1.407.06-4.123s-.012-3.056-.06-4.123c-.049-1.064-.218-1.791-.465-2.427a4.902 4.902 0 0 0-1.153-1.772a4.901 4.901 0 0 0-1.772-1.153c-.636-.247-1.363-.416-2.427-.465C15.056 2.012 14.716 2 12 2m0 1.802c2.67 0 2.986.01 4.04.058c.976.045 1.505.207 1.858.344c.466.182.8.399 1.15.748c.35.35.566.684.748 1.15c.136.353.3.882.344 1.857c.048 1.055.058 1.37.058 4.041c0 2.67-.01 2.986-.058 4.04c-.045.976-.208 1.505-.344 1.858a3.1 3.1 0 0 1-.748 1.15c-.35.35-.684.566-1.15.748c-.353.136-.882.3-1.857.344c-1.054.048-1.37.058-4.041.058c-2.67 0-2.987-.01-4.04-.058c-.976-.045-1.505-.208-1.858-.344a3.098 3.098 0 0 1-1.15-.748a3.098 3.098 0 0 1-.748-1.15c-.137-.353-.3-.882-.344-1.857c-.048-1.055-.058-1.37-.058-4.041c0-2.67.01-2.986.058-4.04c.045-.976.207-1.505.344-1.858c.182-.466.399-.8.748-1.15c.35-.35.684-.566 1.15-.748c.353-.137.882-.3 1.857-.344c1.055-.048 1.37-.058 4.041-.058m0 11.531a3.333 3.333 0 1 1 0-6.666a3.333 3.333 0 0 1 0 6.666m0-8.468a5.135 5.135 0 1 0 0 10.27a5.135 5.135 0 0 0 0-10.27m6.538-.203a1.2 1.2 0 1 1-2.4 0a1.2 1.2 0 0 1 2.4 0" />
+            </svg></a>
+          <a href="https://www.linkedin.com/company/hospitality-training-institute-india-pvt-ltd" target="_blank"
+            aria-label="LinkedIn"><svg viewBox="0 0 32 32" fill="currentColor">
+              <path
+                d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+            </svg></a>
+          <a href="https://www.youtube.com/c/Hti-india" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg></a>
+        </div>
+        <div class="footer-contact"><a href="tel:+917738060902">
+            <h3>Contact Us: <span>+91 77380 60902</span></h3>
+          </a></div>
+        <a href="#" class="footer-brand"><img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+            alt="HTI" /></a>
+      </div>
+      <div class="footer-copy">&#169;&#65039; HOSPITALITY TRAINING INSTITUTE INDIA PRIVATE. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    const CDN = "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/";
+
+    /* ---------- Hero typing effect ---------- */
+    (function () {
+      const words = ["increase customer retention!", "handle guest complaints!", "serve with style!"];
+      const el = document.getElementById('typer');
+      let wi = 0, ci = 0, deleting = false;
+      function tick() {
+        const word = words[wi];
+        if (!deleting) {
+          el.textContent = word.slice(0, ++ci);
+          if (ci === word.length) { deleting = true; return setTimeout(tick, 1400); }
+        } else {
+          el.textContent = word.slice(0, --ci);
+          if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; return setTimeout(tick, 300); }
+        }
+        setTimeout(tick, deleting ? 45 : 80);
+      }
+      tick();
+    })();
+
+    /* ---------- Build marquees (duplicate for seamless loop) ---------- */
+    function fillMarquee(id, imgs, cls) {
+      const track = document.getElementById(id);
+      const html = imgs.map(u => `<img src="${CDN}${u}" alt="" loading="lazy" class="${cls || ''}">`).join('');
+      track.innerHTML = html + html;
+    }
+
+    const brandLogos = [
+      "63870bde02482e0c96394b54_1.svg", "691b1172f54b3af51b0f77bf_BBT%20-%20update%20logo.avif",
+      "63870bdecd1c057fdc2d920c_3.svg", "63870bde0d5ad130c5e80efe_4.svg", "63870c3840978c92aa319a86_5.svg",
+      "63870f2ccd1c05341a2ddabd_6.svg", "63870be15e7b1827c7d4dc9d_7.svg", "63870f7cd6797e85af5b925e_8.svg",
+      "63870be2ac142fcdb485af2f_9.svg", "63870be408495cf0522128ee_10.svg", "63870f2fc6141924ea812e2e_11.svg",
+      "63870f30497f3b732b7f7cfb_12.svg", "638b33326a8a27188f8cc2bd_13.svg", "638b333295fb43af622d0ce4_15.svg",
+      "691b11105e66179ee0787586_Imagicaa%20-%20add%20New%20logo.avif", "638f2cca99226a6bdd9fade9_16.svg",
+      "638f2ccca0a3537a95530b16_17.svg", "638f2ccb0cb0550675aae1b0_18.svg", "638f2ccc1993bde3c89e9f87_19.svg",
+      "638f36a1c236a810bf74d911_48.svg", "638f2ccf43bb2e86e398efa7_21.svg", "638f2ccf14b0f4667eaa03e6_22.svg",
+      "638f2cd0329ae904b448bda7_23.svg", "638f2cd1af44d476cb17fe4f_24.svg", "638f2cd26fb4b3108487444d_25.svg",
+      "638f35aa81a8e6359aa410c6_26.svg", "67b47b8a4e9a3d1b3a08f20e_53.%20Birla%20Opus.png",
+      "691b110f337c64780abcf43f_Zomato%20-%20add%20new%20logo.avif", "691b110fe40cf75511bf55a3_Wet%27n%20Joy%20-%20add%20New%20logo.avif",
+      "67b44a9575b50e969d18f237_61e9cd5fc8676cdfb20ffdf362373a68_54.%20BPCL.png",
+      "638f2cd3eb1a4d1c3dd74d90_27.svg", "638f2cd5fd8379596c7ce62f_29.svg", "638f2cd6c236a860ac742cd7_30.svg",
+      "638f2cd68cc1394a40bddfcf_31.svg", "638f2cd7d12d6bb09c4383bd_32.svg", "638f3758af44d4361a18ac26_33.svg",
+      "638f368e3df79802c5da2763_34.svg", "638f3690eb1a4d26a3d7f2e2_35.svg", "638f369243bb2e7bd599ac02_36.svg",
+      "638f3692e8eba91169dffe7b_37.svg", "638f3694a3de915135c56e6e_38.svg", "638f3695c236a850b374d81c_39.svg",
+      "638f3697c236a816bf74d81d_40.svg", "638f3699612ada11d4792335_42.svg", "638f369bd48c9f2590f0ff45_43.svg",
+      "638f369cb86eac6b45423167_44.svg", "638f369d8cc13970e3be7339_45.svg", "638f369f99226a00f9a027a8_46.svg",
+      "638f36a1f386b76a43efb24b_47.svg", "638f36a2823d9a29d4761b60_49.svg", "638f36a4a0a353a59053a1af_50.svg",
+      "638f36a6a63fa683dcd90a58_51.svg", "638f36a7d12d6b13b74432b0_52.svg"
+    ];
+    /* ---------- Vertical scrolling logo columns (duplicate list for seamless loop) ---------- */
+    const colLogos1 = [
+      "691b1172f54b3af51b0f77bf_BBT%20-%20update%20logo.avif",
+      "63870bdecd1c057fdc2d920c_3.svg", "63870c3840978c92aa319a86_5.svg",
+      "63870be15e7b1827c7d4dc9d_7.svg", "63870be2ac142fcdb485af2f_9.svg",
+      "63870f2ccd1c05341a2ddabd_6.svg", "638f2cca99226a6bdd9fade9_16.svg",
+      "638f2ccf43bb2e86e398efa7_21.svg", "638f2cd0329ae904b448bda7_23.svg"
+    ];
+    const colLogos2 = [
+      "63870bde0d5ad130c5e80efe_4.svg", "63870f7cd6797e85af5b925e_8.svg",
+      "63870be408495cf0522128ee_10.svg", "63870f2fc6141924ea812e2e_11.svg",
+      "63870f30497f3b732b7f7cfb_12.svg", "638b33326a8a27188f8cc2bd_13.svg",
+      "638f2ccca0a3537a95530b16_17.svg", "638f2ccb0cb0550675aae1b0_18.svg",
+      "638f2ccc1993bde3c89e9f87_19.svg", "638f2ccf14b0f4667eaa03e6_22.svg"
+    ];
+    function fillColumn(id, imgs) {
+      const col = document.getElementById(id);
+      const html = imgs.map(u => `<img src="${CDN}${u}" alt="" loading="lazy">`).join('');
+      col.innerHTML = html + html; // duplicate stacked copies for seamless infinite loop
+    }
+    fillColumn('logoCol1', colLogos1);
+    fillColumn('logoCol2', colLogos2);
+
+    const leaderImgs = [
+      "639088b77507a17995c23fcf_1.webp", "639088b69311828de3adb65e_2.webp", "639088b5bea6e5218a1d5f1d_3.webp",
+      "639088b57d21753e2c4dda87_4.webp", "639088bb726dee6a64fcf07a_5.webp", "639088bc5b854c711d5c5362_6.webp",
+      "639088bc81a51e4c70737bd9_7.webp", "639088bc81a51e709f737be4_8.webp", "639088c17d217555ec4ddab1_9.webp",
+      "639088c0c2a607206223ab1f_10.webp", "639088c1c2a607a88923ab20_11.webp", "639088cf5fb6d15b1d5c5b07_12.webp",
+      "639088d03e8c0ec3719db064_13.webp", "639088cf1279b3b35f0d0b08_14.webp", "639088c15b854c33b95c53c5_15.webp",
+      "639088c597156e2ee6f2245c_16.webp", "639088c523b530468590235f_17.webp", "639088c5bea6e55ae61d6097_18.webp",
+      "639088c4a2f3a248d80fd4bc_19.webp", "639088ca726dee489bfcf0b3_20.webp", "639088cb314a2e2cecad5610_21.webp",
+      "639088caa2f3a2ad180fd4db_22.webp", "639088cb7507a14006c240c2_23.webp", "639088cfc2a607807223abf5_24.webp"
+    ];
+    fillMarquee('leadersTrack', leaderImgs);
+
+    const featLogos = [
+      "637dee03ff345bc066f08988_Business_Standard_Logo.webp",
+      "637ded5c8f6e3be4c5363aae_times-of-india-newspaper-logo-hd-png-download.webp",
+      "637dedf2a514494fd3257e07_Daily_News__Analysis_Logo.webp",
+      "637deddb0c998d797d7b278d_et-hospitality.webp",
+      "637ded9a99feef15076838e8_the-financial-express-vector-logo.webp",
+      "637dedab99feefaed8683a64_THE_WEEK_logo1.webp",
+      "637dedcf60297304d23d6f22_Free%20Press.webp",
+      "637dedb9645a6dd9b9c4ec4d_The%20Print.webp"
+    ];
+    fillMarquee('featTrack', featLogos);
+
+    /* ---------- CTA participant brand cards ---------- */
+    (function () {
+      const people = [
+        "638d82ee10a6cea4016ffacf_1.webp", "638d82ee0787c7124cf3a047_2.webp", "638d82ef483f8955856837f3_3.webp",
+        "638d82ee9bf1383c6ff2c2ac_4.webp", "638d82f1fbd74d3d6e8e5bcc_5.webp", "638d82f10e9946179122bc50_6.webp",
+        "638d82f095fb43f702526959_7.webp", "638d82f244a03f5b00bda2cf_8.webp", "638d82f5815876328af23e6c_9.webp",
+        "638d82f66a8a277e9bb34a36_10.webp", "638d82f62a2fb83f411a071d_11.webp", "638d82f7fbd74d6bd48e5c24_12.webp",
+        "638dd40aee1edfd050523196_13.webp", "638f0ba1a0a353717e511701_14.webp", "638f0ba1a63fa6438bd64e41_15.webp",
+        "638f0ba1a3de9121ccc282dd_16.webp", "638f0ba16afc76499a1ae139_17.webp", "638f0ba2a63fa6bd23d64e42_18.webp"
+      ];
+      const logos = [
+        "638f0d4096916dca3a5547ca_62.svg", "638f0de86fb4b3bfe6854c5c_63.svg", "638f35aa81a8e6359aa410c6_26.svg",
+        "638f2cc2a63fa63305d85497_9.svg", "6380913342b30183eac9a5d5_B%20Bhagat%20Tarachand%20logo.png",
+        "638f2cca99226a6bdd9fade9_16.svg", "638f2ccb0cb0550675aae1b0_18.svg", "638f2cd0329ae904b448bda7_23.svg"
+      ];
+      const track = document.getElementById('ctaTrack');
+      const html = people.map((p, i) => `
+    <div class="brand-card">
+      <img class="person" src="${CDN}${p}" alt="" loading="lazy">
+      <div class="logo-bar"><img src="${CDN}${logos[i % logos.length]}" alt="" loading="lazy"></div>
+    </div>`).join('');
+      track.innerHTML = html + html;
+    })();
+
+    /* ---------- Testimonials ---------- */
+    (function () {
+      const LI = '<svg class="li" viewBox="0 0 32 32" fill="currentColor"><path d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z"/></svg>';
+      const data = [
+        { img: "6384ac98b014adefdb5e86fe_2.%20Karyna_Bajaj.jpg", name: "Karyna Bajaj", role: "Executive Director, KA Hospitality Pvt Ltd", text: "We got Dominic and HTI to come do a session with us for team building and leadership during our annual budget meet. The session was engaging, motivational and a great learning experience for everyone involved! Since then, we have got HTI on board to train all levels within our company, and are looking forward to working collaboratively with them to deliver a great dining experience and make our internal and external guests happy." },
+        { img: "6384a8481a64317c81866455_1.%20Rukshana.jpg", name: "Rukshana Billimoria", role: "Principal, Anjuman-I-Islam's Institute Of Hotel Management", text: "Dominic CostaBir is one of his kind, one of the best Trainers that we have ever come across. With a mission for improving Hospitality through Training, he started HTI in 2002. He wears his heart on his sleeve and is someone who would never hesitate to call a spade a spade, leads by example, and can get the best out of even the most introverted students. His style of delivering the training program is not just unique, but effective." },
+        { img: "6384b13353712bda591fae43_3.%20Rahul_Khanna.jpg", name: "Rahul Khanna", role: "Co-Founder, Azure Hospitality Pvt Ltd", text: "HTI curated off-sites with Azure Hospitality have always been memorable and genuinely effective for team morale, camaraderie and bonding. We have had over 200 people over the years benefit from a mix of analytical, playful and team activities. I have always found Team HTI led by Dominic to be filled with ideas, energy, patience and selfless care for our team and company objectives." },
+        { img: "6384b1bae9242177cb5f32db_4.%20Sanjeev%20Tripathi.jpg", name: "Sanjeev Tripathi", role: "Head - Field Marketing, Pidilite Industries Ltd", text: "A professional approach with a personal touch gave them an edge over other training agencies retained in the past. The services they offer matched our requirement of training external and internal teams on Soft Skill Development. Overall, engaging with HTI was a superb experience. Our team loved the program and we would give HTI a very high rating over various parameters!" },
+        { img: "6384b3e8e157e47f824c83ec_6.%20Maria%20Chandwani.jpg", name: "Maria Chandwani", role: "Head-HR, Training & Administration, GINGER, A TATA Enterprise", text: "HTI's training is effective, boosting staff morale and skills; moreover, they have partnered with GINGER to improve guest satisfaction scores." },
+        { img: "6384b3681a64315a14874f4f_5.%20Ashutosh%20Ahluwalia.jpg", name: "Ashutosh Ahluwalia", role: "Director, QED Productions Pvt Ltd", text: "The sessions are interactive, and have involved role play and skits. We have got positive responses from the participants. It has indeed been a pleasure working with HTI on this program. The Team is a highly motivated, professional, cooperative and skilled group, who believe in the mantra “Client is King”. They have accommodated our last minute changes with aplomb!" },
+        { img: "6384b4c6952881f271760ac7_7.%20Amit%20Mehta.jpg", name: "Amit Mehta", role: "AVP, Kamat Hotels (India) Limited", text: "The training delivered by HTI has been consistent and whenever we have raised any concerns, they have promptly rectified the issues. We have found improvement and change in the staff attitude and behaviour – especially in their grooming, hygiene, customer service and morale. HTI is completely reliable and has never failed in fulfilling our demands." }
+      ];
+      const grid = document.getElementById('testiGrid');
+      grid.innerHTML = data.map(d => `
+    <div class="testi-card">
+      <div class="testi-quote">&ldquo;</div>
+      <div class="testi-person">
+        <img src="${CDN}${d.img}" alt="${d.name}">
+        <div>
+          <h4>${d.name}</h4>
+          <div class="role">${d.role}</div>
+          <a href="https://www.linkedin.com/company/hospitality-training-institute-india-pvt-ltd" target="_blank">${LI}</a>
+        </div>
+      </div>
+      <p class="testi-text">${d.text}</p>
+    </div>`).join('');
+    })();
+
+    /* ---------- Trainers slider ---------- */
+    (function () {
+      const track = document.getElementById('trainersTrack');
+      const slides = track.children.length;
+      const dotsWrap = document.getElementById('trDots');
+      let idx = 0;
+      for (let i = 0; i < slides; i++) {
+        const s = document.createElement('span');
+        if (i === 0) s.className = 'active';
+        s.addEventListener('click', () => go(i));
+        dotsWrap.appendChild(s);
+      }
+      function go(i) {
+        idx = (i + slides) % slides;
+        track.style.transform = `translateX(-${idx * 100}%)`;
+        [...dotsWrap.children].forEach((d, j) => d.className = j === idx ? 'active' : '');
+      }
+      document.getElementById('trPrev').addEventListener('click', () => go(idx - 1));
+      document.getElementById('trNext').addEventListener('click', () => go(idx + 1));
+      setInterval(() => go(idx + 1), 5000);
+    })();
+
+    /* ---------- Mobile nav ---------- */
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const menu = document.getElementById('navMenu');
+      toggle.addEventListener('click', () => menu.classList.toggle('open'));
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          if (window.innerWidth <= 960 && e.target === item || (e.target.classList.contains('caret'))) {
+            item.classList.toggle('open');
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>
