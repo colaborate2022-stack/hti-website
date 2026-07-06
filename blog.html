@@ -225,17 +225,14 @@
       background: linear-gradient(to right, transparent, #e31e24, transparent);
     }
 
-    .hero-line.top {
-      margin-bottom: 16px;
-    }
-
     .hero-line.bottom {
+      width: 500px;
       margin-top: 16px;
     }
 
     .blog-hero h1 {
       font-size: 52px;
-      font-weight: 800;
+      font-weight: 600;
       color: #1a1a1a;
       line-height: 1;
       margin: 0;
@@ -264,16 +261,29 @@
       background: #fff;
       border-radius: 16px;
       border: 1px solid #e8e8e8;
+      border-bottom: 2px solid #1a1a1a;
       padding: 28px;
       display: flex;
       flex-direction: column;
       cursor: pointer;
-      transition: transform .18s ease, box-shadow .18s ease;
+      animation: card-breathe 3s infinite alternate ease-in-out;
     }
 
-    .blog-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, .10);
+    /* quiet "breathing" — top/side border and shadow gently pulse toward soft
+       red; the solid black bottom border stays constant (not animated) */
+    @keyframes card-breathe {
+      from {
+        border-top-color: #e8e8e8;
+        border-left-color: #e8e8e8;
+        border-right-color: #e8e8e8;
+        box-shadow: none;
+      }
+      to {
+        border-top-color: #e31e2440;
+        border-left-color: #e31e2440;
+        border-right-color: #e31e2440;
+        box-shadow: 0 4px 16px rgba(227, 30, 36, 0.08);
+      }
     }
 
     .blog-tag {
@@ -554,7 +564,6 @@
   <!-- ============ HERO ============ -->
   <section class="blog-hero">
     <div class="blog-hero-inner">
-      <div class="hero-line top"></div>
       <h1>Blogs</h1>
       <div class="hero-line bottom"></div>
     </div>
