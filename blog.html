@@ -16,7 +16,7 @@
     rel="stylesheet" />
   <style>
     :root {
-      --hti-bg: #f8f8f8;
+      --hti-bg: #F3F2EF;
       --hti-black: #000;
       --hti-red: #e31e24;
       --hti-red2: #e31e24;
@@ -258,11 +258,9 @@
     }
 
     .blog-card {
-      background: #fff;
-      border-radius: 16px;
-      border: 1px solid #e8e8e8;
-      border-top: 2px solid #1a1a1a;
-      border-bottom: 2px solid #1a1a1a;
+      background: transparent;
+      border-radius: 10px;
+      border: 1px solid #E32129;
       padding: 28px;
       display: flex;
       flex-direction: column;
@@ -270,17 +268,13 @@
       animation: card-breathe 3s infinite alternate ease-in-out;
     }
 
-    /* quiet "breathing" — left/right border and shadow gently pulse toward soft
-       red; the solid black top and bottom borders stay constant (not animated) */
+    /* quiet "breathing" — shadow gently pulses toward soft red; the solid red
+       border stays constant on all sides (not animated) */
     @keyframes card-breathe {
       from {
-        border-left-color: #e8e8e8;
-        border-right-color: #e8e8e8;
         box-shadow: none;
       }
       to {
-        border-left-color: #e31e2440;
-        border-right-color: #e31e2440;
         box-shadow: 0 4px 16px rgba(227, 30, 36, 0.08);
       }
     }
