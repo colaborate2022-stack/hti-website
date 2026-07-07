@@ -250,90 +250,70 @@
     .blog-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 24px;
     }
 
-    /* compact card: image on the LEFT, content on the RIGHT */
+    /* card: full-width cover image on top, content below */
     .blog-card {
       background: #fff;
       border: 1px solid #E32129;
-      border-radius: 10px;
-      padding: 0;
-      display: flex;
-      flex-direction: row;
+      border-radius: 12px;
       overflow: hidden;
-      height: auto;
+      display: flex;
+      flex-direction: column;
       cursor: pointer;
     }
 
-    /* LEFT: cover image, fixed width, stretches to card height */
+    /* TOP: cover image, edge to edge */
     .blog-cover {
-      width: 140px;
-      min-width: 140px;
-      max-width: 140px;
-      height: 100%;
+      width: 100%;
+      height: 200px;
       object-fit: cover;
       border-radius: 0;
       display: block;
-      align-self: stretch;
     }
 
-    /* RIGHT: content column */
+    /* BOTTOM: content area */
     .blog-card-body {
-      flex: 1;
-      min-width: 0;
       padding: 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
     }
 
-    .blog-tag {
-      display: inline-block;
-      align-self: flex-start;
-      background: #E32129;
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 20px;
-    }
-
-    /* title — clamped to 2 lines */
-    .blog-card h3 {
-      font-size: 16px;
+    /* fallback title (only shown when there is no cover image) */
+    .blog-card-title {
+      font-size: 18px;
       font-weight: 700;
       color: #000000;
       line-height: 1.3;
-      margin: 8px 0 6px;
+      margin-bottom: 8px;
+    }
+
+    /* excerpt — clamped to 3 lines */
+    .blog-excerpt {
+      font-size: 14px;
+      color: #333333;
+      line-height: 1.6;
+      font-weight: 400;
       display: -webkit-box;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
 
-    /* excerpt — clamped to 2 lines */
-    .blog-excerpt {
+    .blog-author {
       font-size: 13px;
-      color: #555555;
-      line-height: 1.5;
-      font-weight: 400;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      font-weight: 700;
+      color: #000000;
+      margin-top: 12px;
     }
 
     .blog-meta {
       font-size: 12px;
-      color: #888888;
-      margin-top: 10px;
+      color: #666666;
+      margin-top: 4px;
     }
 
     .blog-meta .dot {
-      color: #888888;
+      color: #666666;
       margin: 0 5px;
     }
 
@@ -700,16 +680,18 @@
           const cover = b.cover_image
             ? `<img class="blog-cover" src="${escapeHtml(b.cover_image)}" alt="${escapeHtml(b.title || '')}" loading="lazy">`
             : '';
+          // title is baked into the thumbnail — only show it as text when there's no cover image
+          const titleFallback = b.cover_image
+            ? ''
+            : `<h3 class="blog-card-title">${escapeHtml(b.title || 'Untitled')}</h3>`;
           return `
           <article class="blog-card" onclick="location.href='blog-post.html?id=${encodeURIComponent(b.id)}'">
             ${cover}
             <div class="blog-card-body">
-              <div>
-                <span class="blog-tag">${escapeHtml(b.category || 'General')}</span>
-                <h3>${escapeHtml(b.title || 'Untitled')}</h3>
-                <p class="blog-excerpt">${escapeHtml(excerpt(b.body, 120))}</p>
-              </div>
-              <div class="blog-meta">${escapeHtml(b.author || 'Team HTI')}<span class="dot">&bull;</span>${formatDate(b.created_at)}<span class="dot">&bull;</span>${readTime(b.body)}</div>
+              ${titleFallback}
+              <p class="blog-excerpt">${escapeHtml(excerpt(b.body, 200))}</p>
+              <div class="blog-author">${escapeHtml(b.author || 'Team HTI')}</div>
+              <div class="blog-meta">${formatDate(b.created_at)}<span class="dot">&bull;</span>${readTime(b.body)}</div>
             </div>
           </article>`;
         }).join('');
