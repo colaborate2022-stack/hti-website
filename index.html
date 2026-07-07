@@ -249,17 +249,26 @@
       padding: 70px 24px 50px 48px;
     }
 
-    /* Single-line hero headline (Gilroy/Montserrat Bold, never wraps) */
+    /* Large two-line hero headline (Montserrat Bold) */
     .clients-left h1 {
-      font-size: clamp(13px, 1.4vw, 30px);
-      line-height: 1.1;
-      color: #000;
+      font-size: 56px;
       font-weight: 700;
+      line-height: 1.2;
+      color: #000;
+      text-align: left;
+    }
+
+    /* line 1: black, kept on a single line */
+    .clients-left h1 .hero-line-1 {
+      display: block;
+      color: #000000;
       white-space: nowrap;
     }
 
+    /* line 2: red text on its own line (animation left untouched) */
     .clients-left h1 .hero-red {
-      color: #e32129;
+      display: block;
+      color: #E32129;
     }
 
     .hero-sub {
@@ -1006,6 +1015,10 @@
         padding: 50px 24px 20px;
       }
 
+      .clients-left h1 {
+        font-size: 38px;
+      }
+
       .clients-right {
         flex: 1 1 auto;
         max-width: 100%;
@@ -1030,6 +1043,14 @@
 
       .stats-grid {
         grid-template-columns: 1fr 1fr;
+      }
+
+      .clients-left h1 {
+        font-size: 28px;
+      }
+
+      .clients-left h1 .hero-line-1 {
+        white-space: normal;
       }
 
       .stats-head h2,
@@ -1113,7 +1134,7 @@
   <!-- ============ HERO + CLIENTS (split: text left, scrolling logo columns right) ============ -->
   <section class="clients-hero">
     <div class="clients-left">
-      <h1>Train your staff in ways to <span class="hero-red">serve with style!</span></h1>
+      <h1><span class="hero-line-1">Train your staff in ways to</span><span class="hero-red">serve with style!</span></h1>
       <div class="hero-sub">
         <h2>Hospitality businesses use HTI to train, monitor progress &amp; certify their front-end personnel!</h2>
         <p class="lang">And oh, we have conducted trainings in <em>13 different languages.</em></p>
