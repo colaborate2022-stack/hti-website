@@ -15,7 +15,7 @@
     rel="stylesheet" />
   <style>
     :root {
-      --hti-bg: #f3f2ef;
+      --hti-bg: #F3F2EF;
       --hti-black: #000;
       --hti-red: #e31e24;
       --hti-red2: #e31e24;
@@ -239,36 +239,42 @@
     }
 
     .article h1 {
-      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+      font-size: 25px;
       font-weight: 800;
-      color: #111;
+      color: #000000;
       line-height: 1.2;
       margin-bottom: 20px;
     }
 
     .article-meta {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       flex-wrap: wrap;
-      gap: 6px 10px;
-      font-size: 14px;
-      color: #666;
-      font-weight: 500;
+      gap: 20px 40px;
       margin-bottom: 30px;
     }
 
-    .article-meta .author {
-      color: #111;
-      font-weight: 600;
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
-    .article-meta .dot {
-      color: #ccc;
+    .meta-label {
+      font-size: 16px;
+      font-weight: 700;
+      color: #E32129;
+    }
+
+    .meta-value {
+      font-size: 16px;
+      font-weight: 500;
+      color: #000000;
     }
 
     .cover-image {
       width: 100%;
-      border-radius: 16px;
+      border-radius: 10px;
       margin-bottom: 34px;
       max-height: 460px;
       object-fit: cover;
@@ -276,34 +282,36 @@
 
     /* ---- rendered blog body ---- */
     .article-body {
-      font-size: 17px;
+      font-size: 18px;
       line-height: 1.75;
-      color: #333;
+      color: #333333;
       font-weight: 400;
     }
 
     .article-body p {
+      font-size: 18px;
+      color: #333333;
       margin-bottom: 22px;
     }
 
     .article-body h2 {
-      font-size: 26px;
+      font-size: 38px;
       font-weight: 700;
-      color: #111;
+      color: #000000;
       margin: 36px 0 16px;
       line-height: 1.25;
     }
 
     .article-body h3 {
-      font-size: 21px;
+      font-size: 24px;
       font-weight: 700;
-      color: #111;
+      color: #000000;
       margin: 28px 0 14px;
     }
 
     .article-body img {
       width: 100%;
-      border-radius: 12px;
+      border-radius: 10px;
       margin: 24px 0;
     }
 
@@ -313,6 +321,8 @@
     }
 
     .article-body li {
+      font-size: 16px;
+      color: #000000;
       margin-bottom: 10px;
     }
 
@@ -720,11 +730,18 @@
           <span class="article-tag">${escapeHtml(b.category || 'General')}</span>
           <h1>${escapeHtml(b.title || 'Untitled')}</h1>
           <div class="article-meta">
-            <span class="author">${escapeHtml(b.author || 'Team HTI')}</span>
-            <span class="dot">&bull;</span>
-            <span>${formatDate(b.created_at)}</span>
-            <span class="dot">&bull;</span>
-            <span>${readTime(b.body)}</span>
+            <div class="meta-item">
+              <span class="meta-label">Words by</span>
+              <span class="meta-value">${escapeHtml(b.author || 'Team HTI')}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Date</span>
+              <span class="meta-value">${formatDate(b.created_at)}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Reading Time</span>
+              <span class="meta-value">${readTime(b.body)}</span>
+            </div>
           </div>
           ${cover}
           <div class="article-body">${b.body || ''}</div>

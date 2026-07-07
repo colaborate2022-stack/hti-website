@@ -231,17 +231,11 @@
     }
 
     .blog-hero h1 {
-      font-size: 52px;
-      font-weight: 600;
-      color: #1a1a1a;
+      font-size: 38px;
+      font-weight: 700;
+      color: #000000;
       line-height: 1;
       margin: 0;
-    }
-
-    @media(max-width:600px) {
-      .blog-hero h1 {
-        font-size: 40px;
-      }
     }
 
     /* ============ BLOG GRID ============ */
@@ -265,25 +259,13 @@
       display: flex;
       flex-direction: column;
       cursor: pointer;
-      animation: card-breathe 3s infinite alternate ease-in-out;
-    }
-
-    /* quiet "breathing" — shadow gently pulses toward soft red; the solid red
-       border stays constant on all sides (not animated) */
-    @keyframes card-breathe {
-      from {
-        box-shadow: none;
-      }
-      to {
-        box-shadow: 0 4px 16px rgba(227, 30, 36, 0.08);
-      }
     }
 
     .blog-tag {
       align-self: flex-start;
-      background: #e31e24;
+      background: #E32129;
       color: #fff;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: .04em;
       text-transform: uppercase;
@@ -292,16 +274,16 @@
     }
 
     .blog-card h3 {
-      font-size: 18px;
-      font-weight: 700;
-      color: #1a1a1a;
+      font-size: 25px;
+      font-weight: 800;
+      color: #000000;
       line-height: 1.4;
       margin: 12px 0;
     }
 
     .blog-excerpt {
-      font-size: 14px;
-      color: #666;
+      font-size: 16px;
+      color: #333333;
       line-height: 1.6;
       font-weight: 400;
       flex-grow: 1;
@@ -316,17 +298,17 @@
     .blog-author {
       font-size: 14px;
       font-weight: 700;
-      color: #1a1a1a;
+      color: #333333;
     }
 
     .blog-meta {
-      font-size: 13px;
-      color: #888;
+      font-size: 14px;
+      color: #333333;
       margin-top: 4px;
     }
 
     .blog-meta .dot {
-      color: #888;
+      color: #333333;
       margin: 0 4px;
     }
 
@@ -477,7 +459,7 @@
       }
 
       .blog-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
       }
 
       .footer-cols {
