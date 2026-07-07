@@ -246,29 +246,42 @@
     .clients-left {
       flex: 0 0 45%;
       max-width: 45%;
-      padding: 70px 24px 50px 48px;
+      padding: 80px 40px 60px 80px;
     }
 
-    /* Large two-line hero headline (Montserrat Bold) */
     .clients-left h1 {
-      font-size: 56px;
-      font-weight: 700;
-      line-height: 1.2;
+      font-size: 50px;
+      line-height: 1.05;
       color: #000;
-      text-align: left;
+      font-weight: 800;
     }
 
-    /* line 1: black, kept on a single line */
-    .clients-left h1 .hero-line-1 {
+    /* Red animated typing line: fixed height so text below never shifts */
+    .type-line {
+      font-size: 36px;
+      font-weight: 800;
+      width: 100%;
+      min-height: 60px;
+      height: 60px;
+      line-height: 60px;
+      overflow: hidden;
       display: block;
-      color: #000000;
-      white-space: nowrap;
     }
 
-    /* line 2: red text on its own line (animation left untouched) */
-    .clients-left h1 .hero-red {
-      display: block;
-      color: #E32129;
+    .typer {
+      color: var(--hti-red2);
+    }
+
+    .cursor {
+      color: var(--hti-red2);
+      font-weight: 400;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
     }
 
     .hero-sub {
@@ -1016,7 +1029,7 @@
       }
 
       .clients-left h1 {
-        font-size: 38px;
+        font-size: 36px;
       }
 
       .clients-right {
@@ -1046,11 +1059,7 @@
       }
 
       .clients-left h1 {
-        font-size: 28px;
-      }
-
-      .clients-left h1 .hero-line-1 {
-        white-space: normal;
+        font-size: 30px;
       }
 
       .stats-head h2,
@@ -1134,7 +1143,7 @@
   <!-- ============ HERO + CLIENTS (split: text left, scrolling logo columns right) ============ -->
   <section class="clients-hero">
     <div class="clients-left">
-      <h1><span class="hero-line-1">Train your staff in ways to</span><span class="hero-red">serve with style!</span></h1>
+      <h1>Train your staff in ways to <span class="type-line"><span class="typer" id="typer"></span><span class="cursor">|</span></span></h1>
       <div class="hero-sub">
         <h2>Hospitality businesses use HTI to train, monitor progress &amp; certify their front-end personnel!</h2>
         <p class="lang">And oh, we have conducted trainings in <em>13 different languages.</em></p>
@@ -1412,6 +1421,25 @@
 
   <script>
     const CDN = "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/";
+
+    /* ---------- Hero typing effect ---------- */
+    (function () {
+      const words = ["increase customer retention!", "handle guest complaints!", "serve with style!"];
+      const el = document.getElementById('typer');
+      let wi = 0, ci = 0, deleting = false;
+      function tick() {
+        const word = words[wi];
+        if (!deleting) {
+          el.textContent = word.slice(0, ++ci);
+          if (ci === word.length) { deleting = true; return setTimeout(tick, 1400); }
+        } else {
+          el.textContent = word.slice(0, --ci);
+          if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; return setTimeout(tick, 300); }
+        }
+        setTimeout(tick, deleting ? 45 : 80);
+      }
+      tick();
+    })();
 
     /* ---------- Build marquees (duplicate for seamless loop) ---------- */
     function fillMarquee(id, imgs, cls) {
