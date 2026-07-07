@@ -23,7 +23,11 @@
       "Bash(curl -s 'https://ytthcgdsbfagvwcopoaj.supabase.co/rest/v1/blogs?select=id&cover_image=is.null' -H 'apikey: __TRACKED_VAR__' -H 'Authorization: Bearer __TRACKED_VAR__')",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "PowerShell(node --version; node update-images.js)",
+      "PowerShell(Get-Command *)",
+      "Bash(curl *)",
+      "Bash(bash \"C:\\\\Users\\\\ATUL\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--Claude-claude-app-building-hti-website\\\\c9d6e642-f712-4adc-9f83-bb78bcd8d444\\\\scratchpad\\\\update-images.sh\")"
     ]
   }
 }

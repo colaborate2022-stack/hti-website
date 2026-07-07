@@ -252,13 +252,30 @@
     }
 
     .blog-card {
-      background: transparent;
+      background: #fff;
       border-radius: 10px;
       border: 1px solid #E32129;
-      padding: 28px;
       display: flex;
       flex-direction: column;
       cursor: pointer;
+      overflow: hidden;
+    }
+
+    /* cover image sits flush at the top of the card, edge to edge */
+    .blog-cover {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px 10px 0 0;
+      display: block;
+    }
+
+    /* padded content area (image is outside this, so it goes edge to edge) */
+    .blog-card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
     }
 
     .blog-tag {
@@ -274,16 +291,16 @@
     }
 
     .blog-card h3 {
-      font-size: 25px;
-      font-weight: 800;
+      font-size: 20px;
+      font-weight: 700;
       color: #000000;
       line-height: 1.4;
       margin: 12px 0;
     }
 
     .blog-excerpt {
-      font-size: 16px;
-      color: #333333;
+      font-size: 15px;
+      color: #555555;
       line-height: 1.6;
       font-weight: 400;
       flex-grow: 1;
@@ -296,19 +313,19 @@
     }
 
     .blog-author {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      color: #333333;
+      color: #888888;
     }
 
     .blog-meta {
-      font-size: 14px;
-      color: #333333;
+      font-size: 13px;
+      color: #888888;
       margin-top: 4px;
     }
 
     .blog-meta .dot {
-      color: #333333;
+      color: #888888;
       margin: 0 4px;
     }
 
@@ -672,14 +689,20 @@
 
         statusEl.style.display = 'none';
         gridEl.innerHTML = blogs.map(b => {
+          const cover = b.cover_image
+            ? `<img class="blog-cover" src="${escapeHtml(b.cover_image)}" alt="${escapeHtml(b.title || '')}" loading="lazy">`
+            : '';
           return `
           <article class="blog-card" onclick="location.href='blog-post.html?id=${encodeURIComponent(b.id)}'">
-            <span class="blog-tag">${escapeHtml(b.category || 'General')}</span>
-            <h3>${escapeHtml(b.title || 'Untitled')}</h3>
-            <p class="blog-excerpt">${escapeHtml(excerpt(b.body, 120))}</p>
-            <div class="blog-divider"></div>
-            <div class="blog-author">${escapeHtml(b.author || 'Team HTI')}</div>
-            <div class="blog-meta">${formatDate(b.created_at)}<span class="dot">&bull;</span>${readTime(b.body)}</div>
+            ${cover}
+            <div class="blog-card-body">
+              <span class="blog-tag">${escapeHtml(b.category || 'General')}</span>
+              <h3>${escapeHtml(b.title || 'Untitled')}</h3>
+              <p class="blog-excerpt">${escapeHtml(excerpt(b.body, 120))}</p>
+              <div class="blog-divider"></div>
+              <div class="blog-author">${escapeHtml(b.author || 'Team HTI')}</div>
+              <div class="blog-meta">${formatDate(b.created_at)}<span class="dot">&bull;</span>${readTime(b.body)}</div>
+            </div>
           </article>`;
         }).join('');
       } catch (err) {
