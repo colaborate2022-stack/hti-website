@@ -697,6 +697,11 @@
       const params = new URLSearchParams(location.search);
       const id = params.get('id');
 
+      if (id === '32') {
+        window.location.replace('sanjay-vazirani.html');
+        return;
+      }
+
       if (!id) {
         container.innerHTML = '<div class="article-status">No blog specified.</div>';
         return;
