@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog | HTI India</title>
-  <meta name="description" content="Read the latest from HTI India." />
+  <title>The Key Ingredients of Success: Agnibh Mudi | HTI India</title>
+  <meta name="description"
+    content="Corporate Chef Agnibh Mudi of one8 Commune shares his grueling journey in the F&B industry, including working 52 hours without rest." />
   <link rel="icon"
     href="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63872ebc11d181ed9d69d77d_HTI%20star%20logo%2032x32%20px.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,7 +14,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
     rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --hti-bg: #F3F2EF;
@@ -21,6 +23,15 @@
       --hti-red: #e31e24;
       --hti-red2: #e31e24;
       --hti-text: #111;
+
+      --red: #E32129;
+      --cream: #F3F2EF;
+      --black: #000000;
+      --grey-800: #3D3D3D;
+      --grey-500: #8D8D8D;
+      --white: #FFFFFF;
+      --maxw: 1120px;
+      --gutter: 24px;
     }
 
     * {
@@ -35,9 +46,8 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      font-weight: 400;
-      background: var(--hti-bg);
-      color: var(--hti-text);
+      background: var(--cream);
+      color: #111;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
@@ -206,181 +216,211 @@
       display: block;
     }
 
-    /* ============ ARTICLE ============ */
-    .article {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
+    /* ============ SECTION 1 — HERO ============ */
+    .hero {
+      background: #F3F2EF;
+      padding: 60px 24px;
     }
 
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--hti-red);
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .hero-back {
+      color: #E32129;
       font-weight: 600;
       font-size: 15px;
+      display: inline-block;
       margin-bottom: 28px;
     }
 
-    .back-link:hover {
+    .hero-back:hover {
       text-decoration: underline;
     }
 
-    .article-tag {
-      display: inline-block;
-      background: var(--hti-red);
+    .hero-tag {
+      background: #E32129;
       color: #fff;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: .04em;
       text-transform: uppercase;
       padding: 5px 12px;
       border-radius: 20px;
-      margin-bottom: 18px;
-    }
-
-    .article h1 {
-      font-size: 25px;
-      font-weight: 800;
-      color: #000000;
-      line-height: 1.2;
+      display: inline-block;
       margin-bottom: 20px;
     }
 
-    .article-meta {
-      display: flex;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 20px 40px;
-      margin-bottom: 30px;
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.55;
+      color: #000;
+      margin-bottom: 24px;
     }
 
-    .meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+    .hero-intro {
+      font-size: 17px;
+      line-height: 1.6;
+      color: #222;
+      margin-bottom: 14px;
     }
 
-    .meta-label {
+    .hero-note {
       font-size: 16px;
+      color: #555;
+      font-style: italic;
+      margin-bottom: 32px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 10px 16px;
+      min-width: 110px;
+      text-align: center;
+    }
+
+    .hero-card .hc-label {
+      font-size: 14px;
       font-weight: 700;
       color: #E32129;
+      display: block;
     }
 
-    .meta-value {
-      font-size: 16px;
-      font-weight: 500;
-      color: #000000;
+    .hero-card .hc-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: #E32129;
+      display: block;
     }
 
-    .cover-image {
+    /* ============ SECTION 2 — STORY BODY ============ */
+    .story {
+      background: #000;
+      padding: 80px 0;
+    }
+
+    .story-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .ch-chapter {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      padding: 60px 0;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    .ch-chapter:last-child {
+      border-bottom: none;
+    }
+
+    /* Odd = image left, text right */
+    .ch-chapter:nth-child(odd) {
+      flex-direction: row;
+    }
+
+    /* Even = text left, image right */
+    .ch-chapter:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .ch-img-half {
+      flex: 0 0 48%;
+    }
+
+    .ch-img-half img {
       width: 100%;
       border-radius: 10px;
-      margin-bottom: 34px;
-      max-height: 460px;
       object-fit: cover;
     }
 
-    /* ---- rendered blog body ---- */
-    .article-body {
-      font-size: 18px;
+    .ch-text-half {
+      flex: 1;
+    }
+
+    .ch-quote {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.35;
+      margin-bottom: 20px;
+    }
+
+    .ch-text-half p {
+      font-size: 17px;
       line-height: 1.75;
-      color: #333333;
-      font-weight: 400;
+      color: #ffffff;
+      margin-bottom: 16px;
     }
 
-    .article-body p {
-      font-size: 18px;
-      color: #333333;
-      margin-bottom: 22px;
+    .ch-text-half p:last-child {
+      margin-bottom: 0;
     }
 
-    .article-body h2 {
-      font-size: 38px;
-      font-weight: 700;
-      color: #000000;
-      margin: 36px 0 16px;
-      line-height: 1.25;
+    /* ============ SECTION 3 — SHARE BAR ============ */
+    .share-section {
+      background: #F3F2EF;
+      padding: 48px 24px;
+      text-align: center;
     }
 
-    .article-body h3 {
-      font-size: 24px;
-      font-weight: 700;
-      color: #000000;
-      margin: 28px 0 14px;
-    }
-
-    .article-body img {
-      width: 100%;
-      border-radius: 10px;
-      margin: 24px 0;
-    }
-
-    .article-body ul,
-    .article-body ol {
-      margin: 0 0 22px 22px;
-    }
-
-    .article-body li {
+    .share-section .share-heading {
       font-size: 16px;
-      color: #000000;
-      margin-bottom: 10px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 24px;
     }
 
-    .article-body a {
-      color: var(--hti-red);
-      text-decoration: underline;
+    .share-row {
+      display: inline-flex;
+      gap: 16px;
+      justify-content: center;
     }
 
-    /* ---- share bar ---- */
-    .share-bar {
-      margin-top: 50px;
-      padding-top: 30px;
-      border-top: 1px solid #ddd;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .share-bar span.label {
-      font-weight: 700;
-      font-size: 15px;
-      color: #111;
-    }
-
-    .share-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #fff;
-      border: 1px solid #e2e2e2;
-      display: flex;
+    .share-sq {
+      width: 50px;
+      height: 50px;
+      border-radius: 0;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: #111;
-      transition: transform .15s ease, background .15s ease, color .15s ease;
-    }
-
-    .share-btn:hover {
-      transform: translateY(-2px);
-      background: var(--hti-red);
       color: #fff;
-      border-color: var(--hti-red);
     }
 
-    .share-btn svg {
-      width: 20px;
-      height: 20px;
+    .share-sq svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
     }
 
-    .article-status {
-      text-align: center;
-      padding: 80px 24px;
-      color: #777;
-      font-size: 18px;
-      font-weight: 500;
+    .share-fb {
+      background: #0B85EE;
+    }
+
+    .share-tw {
+      background: #1DA1F2;
+    }
+
+    .share-li {
+      background: #0A66C2;
+    }
+
+    .share-divider {
+      max-width: 480px;
+      margin: 32px auto 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #E32129, transparent);
     }
 
     /* ============ FOOTER ============ */
@@ -526,6 +566,41 @@
       }
     }
 
+    @media (max-width: 768px) {
+      .hero {
+        padding: 40px 16px;
+      }
+
+      .hero h1 {
+        font-size: 22px;
+      }
+
+      .ch-chapter,
+      .ch-chapter:nth-child(odd),
+      .ch-chapter:nth-child(even) {
+        flex-direction: column;
+        gap: 24px;
+        padding: 40px 0;
+      }
+
+      .ch-img-half {
+        flex: none;
+        width: 100%;
+      }
+
+      .ch-text-half {
+        width: 100%;
+      }
+
+      .ch-quote {
+        font-size: 19px;
+      }
+
+      .ch-text-half p {
+        font-size: 15px;
+      }
+    }
+
     @media(max-width:600px) {
       .footer-cols {
         grid-template-columns: 1fr;
@@ -591,13 +666,136 @@
     </div>
   </header>
 
-  <!-- ============ ARTICLE ============ -->
-  <main class="article">
-    <a href="blog.html" class="back-link">&#8592; Back to Blogs</a>
-    <div id="articleContent">
-      <div class="article-status">Loading…</div>
+  <!-- ============ SECTION 1 — HERO ============ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <a href="blog.html" class="hero-back">&#8592; Back to Blogs</a>
+      <br>
+      <span class="hero-tag">Interview</span>
+      <h1>&#8220;I endured a grueling work stretch of 52 hours without rest&hellip; and it strengthened me!&#8221;</h1>
+      <p class="hero-intro">We asked Corporate Chef Agnibh Mudi of one8 Commune, Mumbai, to define hospitality. He
+        responded: &#8220;Hospitality is the Art of Creating Moments despite the challenges&hellip;&#8221; We couldn't
+        agree more!</p>
+      <p class="hero-intro">Go ahead and read his blog to know about his challenging and exciting experiences of working
+        in the hospitality industry. Packed with emotion and learning, his sharings are sure to put a lesson in your
+        heart and a smile on your face!</p>
+      <p class="hero-note"><em>Excerpts from what he shared in our interaction&hellip;</em></p>
+      <div class="hero-meta">
+        <div class="hero-card">
+          <span class="hc-label">Words by</span>
+          <span class="hc-value">Agnibh Mudi</span>
+        </div>
+        <div class="hero-card">
+          <span class="hc-label">Date</span>
+          <span class="hc-value">07-07-2023</span>
+        </div>
+        <div class="hero-card">
+          <span class="hc-label">Reading Time</span>
+          <span class="hc-value">04 min read</span>
+        </div>
+      </div>
     </div>
-  </main>
+  </section>
+
+  <!-- ============ SECTION 2 — STORY BODY ============ -->
+  <section class="story">
+    <div class="story-inner">
+
+      <!-- Chapter 1 — image left, text right -->
+      <div class="ch-chapter">
+        <div class="ch-img-half">
+          <img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/64b6997413958db38deee0c3_2.png"
+            alt="Agnibh Mudi - hospitality challenges" />
+        </div>
+        <div class="ch-text-half">
+          <p class="ch-quote">&#8220;The industry operates at a fast pace, requiring quick adaptation to unpredictable
+            circumstances and the ability to handle pressure&hellip;&#8221;</p>
+          <p>"Hospitality professionals face numerous challenges in their line of work. The industry operates at a fast
+            pace, requiring quick adaptation to unpredictable circumstances and the ability to handle pressure. Moreover,
+            working in hospitality often involves irregular hours, including shifts, evenings, weekends, and holidays,
+            adding to the demands of the job."</p>
+          <p>"The key ingredients of success – making sacrifices, working dedicatedly, and adding value to every place
+            you work at…"</p>
+          <p>"During my early days at Olive in New Delhi, I sometimes found it disheartening to work on Sundays. While we
+            were hard at work, we would witness guests enjoying a lavish Sunday brunch. Families and groups of youngsters
+            would revel in their leisurely afternoon while we, the chefs, waiters, and managers, dedicated ourselves
+            since early morning to ensure that their restaurant experience was exceptional. Although sacrificing family
+            time was challenging, in retrospect, we take pride in the progress we have made and the valuable experiences
+            we have gained."</p>
+        </div>
+      </div>
+
+      <!-- Chapter 2 — image right, text left -->
+      <div class="ch-chapter">
+        <div class="ch-img-half">
+          <img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/64b698c699e3c4ba82ff0b4f_3.svg"
+            alt="Agnibh Mudi - 52 hours without rest" />
+        </div>
+        <div class="ch-text-half">
+          <p class="ch-quote">&#8220;I approach the kitchen with confidence, ready to tackle any challenge, whether it
+            involves cooking for long hours or multitasking my way through my various responsibilities!&#8221;</p>
+          <p>"One particular memory from working in the hospitality industry stands out for me: When I had to work
+            extensively, juggling a national-level competition alongside my regular duties, I endured a grueling work
+            stretch of 52 hours without rest. Initially, I felt it was a bit harsh for my senior chefs to place me in
+            such a situation. However, they encouraged me to focus on the competition after my shifts were over."</p>
+          <p>"Consequently, I spent two sleepless nights, passionately preparing for the competition while fulfilling my
+            work responsibilities during the day. This experience taught me invaluable lessons about managing mental
+            pressure alongside physical demands. It strengthened me, and now I approach the kitchen with confidence,
+            ready to tackle any challenge, whether it involves cooking for long hours or multitasking my way through my
+            various responsibilities."</p>
+        </div>
+      </div>
+
+      <!-- Chapter 3 — image left, text right -->
+      <div class="ch-chapter">
+        <div class="ch-img-half">
+          <img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/64b698c7ad558e5a92fa85d4_4.svg"
+            alt="Agnibh Mudi - dedication to hospitality" />
+        </div>
+        <div class="ch-text-half">
+          <p class="ch-quote">&#8220;Your dedication to making every guest feel valued is what sets you apart in the
+            hospitality industry!&#8221;</p>
+          <p>"Hospitality is not just a job, it's the art of creating moments despite the challenges, be it in front of
+            the house or kitchen. With every interaction, you have the opportunity to create magic and make someone's day
+            a little brighter. Your dedication to making every guest feel valued is what sets you apart in the
+            hospitality industry!"</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3 — SHARE BAR ============ -->
+  <section class="share-section">
+    <p class="share-heading">Share Mr. Agnibh's story to your favorite platform:</p>
+    <div class="share-row">
+      <a class="share-sq share-fb" target="_blank" rel="noopener" aria-label="Share on Facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=https://regal-cocada-f29d14.netlify.app/agnibh-mudi.html">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+        </svg>
+      </a>
+      <a class="share-sq share-tw" target="_blank" rel="noopener" aria-label="Share on Twitter"
+        href="https://twitter.com/intent/tweet?url=https://regal-cocada-f29d14.netlify.app/agnibh-mudi.html&text=The Key Ingredients of Success: Agnibh Mudi">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      </a>
+      <a class="share-sq share-li" target="_blank" rel="noopener" aria-label="Share on LinkedIn"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=https://regal-cocada-f29d14.netlify.app/agnibh-mudi.html&title=The Key Ingredients of Success: Agnibh Mudi">
+        <svg viewBox="0 0 32 32">
+          <path
+            d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+        </svg>
+      </a>
+    </div>
+    <div class="share-divider"></div>
+  </section>
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
@@ -662,146 +860,20 @@
   </footer>
 
   <script>
-    /* ---------- Supabase config ---------- */
-    const SUPABASE_URL = "https://ytthcgdsbfagvwcopoaj.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0dGhjZ2RzYmZhZ3Z3Y29wb2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzMjk5MTMsImV4cCI6MjA5ODkwNTkxM30.JIDahcRTu3VbFpZ55Ti5hHg_JrHobk0zh8PSaj9lWLc";
-
-    /* ---------- Helpers ---------- */
-    function stripHtml(html) {
-      const tmp = document.createElement('div');
-      tmp.innerHTML = html || '';
-      return (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
-    }
-
-    function readTime(html) {
-      const words = stripHtml(html).split(/\s+/).filter(Boolean).length;
-      return Math.max(1, Math.round(words / 200)) + ' min read';
-    }
-
-    function formatDate(d) {
-      if (!d) return '';
-      const date = new Date(d);
-      if (isNaN(date)) return '';
-      return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
-    }
-
-    function escapeHtml(str) {
-      return (str || '').replace(/[&<>"']/g, c => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-      }[c]));
-    }
-
-    /* ---------- Load single post ---------- */
-    async function loadPost() {
-      const container = document.getElementById('articleContent');
-      const params = new URLSearchParams(location.search);
-      const id = params.get('id');
-
-      if (id === '32') {
-        window.location.replace('sanjay-vazirani.html');
-        return;
-      }
-
-      if (id === '34') {
-        window.location.replace('hospitality-hindi.html');
-        return;
-      }
-
-      if (id === '33') {
-        window.location.replace('what-is-hospitality.html');
-        return;
-      }
-
-      if (id === '31') {
-        window.location.replace('agnibh-mudi.html');
-        return;
-      }
-
-      if (!id) {
-        container.innerHTML = '<div class="article-status">No blog specified.</div>';
-        return;
-      }
-
-      try {
-        const res = await fetch(
-          `${SUPABASE_URL}/rest/v1/blogs?id=eq.${encodeURIComponent(id)}&select=*`, {
-          headers: {
-            apikey: SUPABASE_ANON_KEY,
-            Authorization: `Bearer ${SUPABASE_ANON_KEY}`
-          }
-        });
-        if (!res.ok) throw new Error('Request failed: ' + res.status);
-        const rows = await res.json();
-
-        if (!rows.length) {
-          container.innerHTML = '<div class="article-status">Blog not found.</div>';
-          return;
-        }
-
-        const b = rows[0];
-        document.title = (b.title || 'Blog') + ' | HTI India';
-
-        const cover = b.cover_image
-          ? `<img class="cover-image" src="${escapeHtml(b.cover_image)}" alt="${escapeHtml(b.title || '')}">`
-          : '';
-
-        const shareUrl = encodeURIComponent(location.href);
-        const shareText = encodeURIComponent(b.title || '');
-
-        container.innerHTML = `
-          <span class="article-tag">${escapeHtml(b.category || 'General')}</span>
-          <h1>${escapeHtml(b.title || 'Untitled')}</h1>
-          <div class="article-meta">
-            <div class="meta-item">
-              <span class="meta-label">Words by</span>
-              <span class="meta-value">${escapeHtml(b.author || 'Team HTI')}</span>
-            </div>
-            <div class="meta-item">
-              <span class="meta-label">Date</span>
-              <span class="meta-value">${formatDate(b.created_at)}</span>
-            </div>
-            <div class="meta-item">
-              <span class="meta-label">Reading Time</span>
-              <span class="meta-value">${readTime(b.body)}</span>
-            </div>
-          </div>
-          ${cover}
-          <div class="article-body">${b.body || ''}</div>
-          <div class="share-bar">
-            <span class="label">Share:</span>
-            <a class="share-btn" target="_blank" aria-label="Share on Facebook"
-               href="https://www.facebook.com/sharer/sharer.php?u=${shareUrl}">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            </a>
-            <a class="share-btn" target="_blank" aria-label="Share on Instagram"
-               href="https://www.instagram.com/hti.india/">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2c-2.716 0-3.056.012-4.123.06c-1.064.049-1.791.218-2.427.465a4.901 4.901 0 0 0-1.772 1.153A4.902 4.902 0 0 0 2.525 5.45c-.247.636-.416 1.363-.465 2.427C2.011 8.944 2 9.284 2 12s.011 3.056.06 4.123c.049 1.064.218 1.791.465 2.427a4.903 4.903 0 0 0 1.153 1.772a4.903 4.903 0 0 0 1.772 1.153c.636.247 1.363.416 2.427.465c1.067.048 1.407.06 4.123.06s3.056-.012 4.123-.06c1.064-.049 1.791-.218 2.427-.465a4.902 4.902 0 0 0 1.772-1.153a4.902 4.902 0 0 0 1.153-1.772c.247-.636.416-1.363.465-2.427c.048-1.067.06-1.407.06-4.123s-.012-3.056-.06-4.123c-.049-1.064-.218-1.791-.465-2.427a4.902 4.902 0 0 0-1.153-1.772a4.901 4.901 0 0 0-1.772-1.153c-.636-.247-1.363-.416-2.427-.465C15.056 2.012 14.716 2 12 2m0 1.802c2.67 0 2.986.01 4.04.058c.976.045 1.505.207 1.858.344c.466.182.8.399 1.15.748c.35.35.566.684.748 1.15c.136.353.3.882.344 1.857c.048 1.055.058 1.37.058 4.041c0 2.67-.01 2.986-.058 4.04c-.045.976-.208 1.505-.344 1.858a3.1 3.1 0 0 1-.748 1.15c-.35.35-.684.566-1.15.748c-.353.136-.882.3-1.857.344c-1.054.048-1.37.058-4.041.058c-2.67 0-2.987-.01-4.04-.058c-.976-.045-1.505-.208-1.858-.344a3.098 3.098 0 0 1-1.15-.748a3.098 3.098 0 0 1-.748-1.15c-.137-.353-.3-.882-.344-1.857c-.048-1.055-.058-1.37-.058-4.041c0-2.67.01-2.986.058-4.04c.045-.976.207-1.505.344-1.858c.182-.466.399-.8.748-1.15c.35-.35.684-.566 1.15-.748c.353-.137.882-.3 1.857-.344c1.055-.048 1.37-.058 4.041-.058m0 11.531a3.333 3.333 0 1 1 0-6.666a3.333 3.333 0 0 1 0 6.666m0-8.468a5.135 5.135 0 1 0 0 10.27a5.135 5.135 0 0 0 0-10.27m6.538-.203a1.2 1.2 0 1 1-2.4 0a1.2 1.2 0 0 1 2.4 0"/></svg>
-            </a>
-            <a class="share-btn" target="_blank" aria-label="Share on LinkedIn"
-               href="https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}">
-              <svg viewBox="0 0 32 32" fill="currentColor"><path d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z"/></svg>
-            </a>
-          </div>
-        `;
-      } catch (err) {
-        console.error(err);
-        container.innerHTML = '<div class="article-status">Could not load this blog. Please try again later.</div>';
-      }
-    }
-    loadPost();
-
-    /* ---------- Mobile nav ---------- */
+    // Mobile nav toggle — copy exactly from blog-post.html
     (function () {
       const toggle = document.getElementById('navToggle');
       const menu = document.getElementById('navMenu');
-      toggle.addEventListener('click', () => menu.classList.toggle('open'));
-      document.querySelectorAll('.nav-item').forEach(item => {
-        item.addEventListener('click', (e) => {
-          if (window.innerWidth <= 960 && e.target === item || (e.target.classList.contains('caret'))) {
-            item.classList.toggle('open');
-          }
+      if (toggle && menu) {
+        toggle.addEventListener('click', () => menu.classList.toggle('open'));
+        document.querySelectorAll('.nav-item').forEach(item => {
+          item.addEventListener('click', (e) => {
+            if (window.innerWidth <= 960 && (e.target === item || e.target.classList.contains('caret'))) {
+              item.classList.toggle('open');
+            }
+          });
         });
-      });
+      }
     })();
   </script>
 </body>
