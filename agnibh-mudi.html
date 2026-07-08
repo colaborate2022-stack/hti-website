@@ -303,36 +303,50 @@
 
     /* ============ SECTION 2 — STORY BODY ============ */
     .story {
-      background: #000;
-      padding: 80px 0;
+      background: transparent;
+      padding: 0;
     }
 
     .story-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 24px;
+      max-width: none;
+      margin: 0;
+      padding: 0;
     }
 
     .ch-chapter {
       display: flex;
       align-items: center;
       gap: 48px;
-      padding: 60px 0;
-      border-bottom: 1px solid #1a1a1a;
+      /* Full-bleed band: content stays centered at max-width 1120px */
+      padding: 80px max(24px, calc((100% - 1120px) / 2));
     }
 
-    .ch-chapter:last-child {
-      border-bottom: none;
-    }
-
-    /* Odd = image left, text right */
+    /* Odd = image left, text right — black background, white text */
     .ch-chapter:nth-child(odd) {
       flex-direction: row;
+      background: #000000;
     }
 
-    /* Even = text left, image right */
+    .ch-chapter:nth-child(odd) .ch-quote {
+      color: #ffffff;
+    }
+
+    .ch-chapter:nth-child(odd) p {
+      color: #ffffff;
+    }
+
+    /* Even = text left, image right — cream background, dark text */
     .ch-chapter:nth-child(even) {
       flex-direction: row-reverse;
+      background: #F3F2EF;
+    }
+
+    .ch-chapter:nth-child(even) .ch-quote {
+      color: #000000;
+    }
+
+    .ch-chapter:nth-child(even) p {
+      color: #222222;
     }
 
     .ch-img-half {
@@ -580,7 +594,7 @@
       .ch-chapter:nth-child(even) {
         flex-direction: column;
         gap: 24px;
-        padding: 40px 0;
+        padding: 40px 20px;
       }
 
       .ch-img-half {
