@@ -697,20 +697,6 @@
       const params = new URLSearchParams(location.search);
       const id = params.get('id');
 
-      // Legacy fallback: hardcoded redirects for existing story pages.
-      // Remove this map once every post's `redirect_url` is populated in Supabase.
-      const STATIC_REDIRECTS = {
-        '30': 'what-is-kpis.html',
-        '31': 'agnibh-mudi.html',
-        '32': 'sanjay-vazirani.html',
-        '33': 'what-is-hospitality.html',
-        '34': 'hospitality-hindi.html'
-      };
-      if (id && STATIC_REDIRECTS[id]) {
-        window.location.replace(STATIC_REDIRECTS[id]);
-        return;
-      }
-
       if (!id) {
         container.innerHTML = '<div class="article-status">No blog specified.</div>';
         return;
