@@ -452,6 +452,24 @@
       color: #777;
     }
 
+    .badge.layout-timeline {
+      background: #1a1a1a;
+      color: #fff;
+      font-size: 11px;
+    }
+
+    .badge.layout-story {
+      background: #2c3e50;
+      color: #fff;
+      font-size: 11px;
+    }
+
+    .badge.layout-standard {
+      background: #eee;
+      color: #555;
+      font-size: 11px;
+    }
+
     .row-actions {
       display: flex;
       gap: 7px;
@@ -550,11 +568,34 @@
           <div class="field">
             <label for="categoryInput">Category</label>
             <select id="categoryInput">
+              <option value="General">General</option>
               <option value="Hotel">Hotel</option>
               <option value="Restaurant">Restaurant</option>
               <option value="Office">Office</option>
-              <option value="General" selected>General</option>
+              <option value="Hindi Blog">Hindi Blog</option>
+              <option value="Interview">Interview</option>
             </select>
+          </div>
+          <!-- Layout selector -->
+          <div class="field">
+            <label for="layoutInput">Page Layout</label>
+            <select id="layoutInput">
+              <option value="standard">Standard Blog (default)</option>
+              <option value="timeline">Timeline (e.g. Sanjay Vazirani)</option>
+              <option value="story-interview">Story Interview (e.g. Agnibh Mudi)</option>
+            </select>
+            <p style="font-size:12px; color:#888; margin-top:6px;">
+              Choose <b>Standard Blog</b> for regular posts. Choose <b>Timeline</b> or <b>Story Interview</b> for special story pages — then fill in the Redirect URL below.
+            </p>
+          </div>
+
+          <!-- Redirect URL (only relevant for Timeline / Story Interview) -->
+          <div class="field" id="redirectUrlField" style="display:none;">
+            <label for="redirectUrlInput">Redirect URL <span style="color:#888; font-weight:400;">(filename only, e.g. sanjay-vazirani.html)</span></label>
+            <input type="text" id="redirectUrlInput" placeholder="e.g. sanjay-vazirani.html" />
+            <p style="font-size:12px; color:#888; margin-top:6px;">
+              When a visitor opens this blog post, they will be redirected to this page instead of the standard blog layout.
+            </p>
           </div>
           <div class="field">
             <label for="authorInput">Author</label>
@@ -596,12 +637,13 @@
                 <th>Author</th>
                 <th>Date</th>
                 <th>Status</th>
+                <th>Layout</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody id="postsBody">
               <tr>
-                <td colspan="5" class="table-status">Loading…</td>
+                <td colspan="6" class="table-status">Loading…</td>
               </tr>
             </tbody>
           </table>
@@ -796,7 +838,7 @@
         const posts = await res.json();
 
         if (!posts.length) {
-          tbody.innerHTML = '<tr><td colspan="5" class="table-status">No posts yet. Write your first one above.</td></tr>';
+          tbody.innerHTML = '<tr><td colspan="6" class="table-status">No posts yet. Write your first one above.</td></tr>';
           return;
         }
 
@@ -817,6 +859,13 @@
             <td>${formatDate(p.created_at)}</td>
             <td><span class="badge ${pub ? 'pub' : 'draft'}">${pub ? 'Published' : 'Draft'}</span></td>
             <td>
+              ${p.layout === 'timeline'
+                ? '<span class="badge layout-timeline">Timeline</span>'
+                : p.layout === 'story-interview'
+                ? '<span class="badge layout-story">Story Interview</span>'
+                : '<span class="badge layout-standard">Standard</span>'}
+            </td>
+            <td>
               <div class="row-actions">
                 <button class="mini-btn" onclick="editPost('${p.id}')">Edit</button>
                 <button class="mini-btn" onclick="togglePublish('${p.id}', ${pub})">${pub ? 'Unpublish' : 'Publish'}</button>
@@ -827,7 +876,7 @@
         }).join('');
       } catch (err) {
         console.error(err);
-        tbody.innerHTML = '<tr><td colspan="5" class="table-status">Could not load posts.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" class="table-status">Could not load posts.</td></tr>';
       }
     }
 
@@ -845,6 +894,12 @@
       }
     }
     $('coverInput').addEventListener('input', updateCoverPreview);
+    // Show redirect URL field only when a special layout is chosen
+    $('layoutInput').addEventListener('change', function() {
+      const isSpecial = this.value !== 'standard';
+      $('redirectUrlField').style.display = isSpecial ? 'block' : 'none';
+      if (!isSpecial) $('redirectUrlInput').value = '';
+    });
     // hide preview if the image fails to load
     $('coverPreviewImg').addEventListener('error', () => {
       if ($('coverPreviewImg').src) $('coverPreview').style.display = 'none';
@@ -862,6 +917,8 @@
         category: $('categoryInput').value,
         author: $('authorInput').value.trim() || 'Team HTI',
         cover_image: $('coverInput').value.trim(),
+        layout: $('layoutInput').value || 'standard',
+        redirect_url: $('redirectUrlInput').value.trim() || '',
         // rich HTML straight from the editor
         body: isQuillEmpty() ? '' : quill.root.innerHTML
       };
@@ -873,6 +930,9 @@
       $('categoryInput').value = 'General';
       $('authorInput').value = 'Team HTI';
       $('coverInput').value = '';
+      $('layoutInput').value = 'standard';
+      $('redirectUrlInput').value = '';
+      $('redirectUrlField').style.display = 'none';
       quill.setContents([]);
       updateCoverPreview();
       $('formHeading').textContent = 'Write New Post';
@@ -928,9 +988,13 @@
 
         $('postId').value = p.id;
         $('titleInput').value = p.title || '';
-        $('categoryInput').value = ['Hotel', 'Restaurant', 'Office', 'General'].includes(p.category) ? p.category : 'General';
+        const validCats = ['General', 'Hotel', 'Restaurant', 'Office', 'Hindi Blog', 'Interview'];
+        $('categoryInput').value = validCats.includes(p.category) ? p.category : 'General';
         $('authorInput').value = p.author || 'Team HTI';
         $('coverInput').value = p.cover_image || '';
+        $('layoutInput').value = p.layout || 'standard';
+        $('redirectUrlInput').value = p.redirect_url || '';
+        $('redirectUrlField').style.display = (p.layout && p.layout !== 'standard') ? 'block' : 'none';
         updateCoverPreview();
         // load existing HTML into the rich text editor
         quill.setContents([]);
