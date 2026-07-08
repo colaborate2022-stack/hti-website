@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What is Hospitality? Definition & Meaning | HTI India</title>
+  <meta name="description" content="What is Hospitality? Definition and meaning of the term - learn with HTI India." />
+  <link rel="icon"
+    href="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63872ebc11d181ed9d69d77d_HTI%20star%20logo%2032x32%20px.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --hti-bg: #F3F2EF;
+      --hti-black: #000;
+      --hti-red: #e31e24;
+      --hti-red2: #e31e24;
+      --hti-text: #111;
+
+      --red: #E32129;
+      --cream: #F3F2EF;
+      --black: #000000;
+      --grey-800: #3D3D3D;
+      --white: #FFFFFF;
+      --maxw: 1120px;
+      --gutter: 24px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      background: var(--hti-bg);
+      color: var(--hti-text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    /* ============ NAVBAR ============ */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--hti-bg);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #000, transparent);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 72px;
+    }
+
+    .nav-logo img {
+      width: 52px;
+      height: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-item {
+      position: relative;
+      font-weight: 600;
+      font-size: 15px;
+      color: #111;
+      cursor: pointer;
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-item .caret {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #333;
+      border-bottom: 2px solid #333;
+      transform: rotate(45deg);
+      margin-top: -3px;
+      transition: transform .2s;
+    }
+
+    .nav-item:hover .caret {
+      transform: rotate(-135deg);
+      margin-top: 3px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .14);
+      padding: 10px;
+      min-width: 230px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all .2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 120;
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      padding: 9px 12px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #222;
+    }
+
+    .dropdown a:hover {
+      background: var(--hti-bg);
+      color: var(--hti-red);
+    }
+
+    .dropdown a b {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .dropdown a span {
+      font-size: 12px;
+      color: #777;
+      font-weight: 400;
+    }
+
+    .nav-contact {
+      background: var(--hti-red2);
+      color: #fff;
+      border-radius: 8px;
+      padding: 11px 22px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .nav-contact:hover {
+      background: #d40f0f;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      width: 26px;
+      height: 2px;
+      background: #000;
+      display: block;
+    }
+
+    /* ============ SECTION 1 — HERO ============ */
+    .hero {
+      background: #F3F2EF;
+      padding: 60px 24px;
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero-left {
+      flex: 0 0 48%;
+    }
+
+    .hero-right {
+      flex: 1;
+    }
+
+    .hero-back {
+      color: #E32129;
+      font-weight: 600;
+      font-size: 15px;
+      display: inline-block;
+      margin-bottom: 28px;
+    }
+
+    .hero-back:hover {
+      text-decoration: underline;
+    }
+
+    .hero-tag {
+      background: #E32129;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.4;
+      color: #000;
+      margin-bottom: 16px;
+    }
+
+    .hero-intro {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 28px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .hero-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 10px 16px;
+      min-width: 110px;
+      text-align: center;
+    }
+
+    .hero-card .hc-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #E32129;
+      display: block;
+    }
+
+    .hero-card .hc-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: #E32129;
+      display: block;
+    }
+
+    .hero-video {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .hero-video iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* ============ SECTION 2 — TIMELINE ============ */
+    .timeline {
+      background: #000;
+      padding: 80px 0;
+    }
+
+    .tl-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      position: relative;
+      padding: 0 24px;
+    }
+
+    .tl-spine-track {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #2a2a2a;
+      z-index: 0;
+    }
+
+    .tl-spine-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: #E32129;
+      transition: height 0.3s ease;
+    }
+
+    .tl-chapter {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 60px 0;
+      min-height: 400px;
+      flex-direction: row;
+    }
+
+    .tl-chapter.even {
+      flex-direction: row-reverse;
+    }
+
+    .tl-img-half {
+      width: calc(50% - 32px);
+      padding: 0 40px;
+    }
+
+    .tl-img-half img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      max-height: 320px;
+      display: block;
+    }
+
+    .tl-node {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border-radius: 50%;
+      border: 2px solid #E32129;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .tl-card-half {
+      width: calc(50% - 32px);
+      padding: 0 40px;
+    }
+
+    .tl-card {
+      border: 1px solid #3D3D3D;
+      border-radius: 5px;
+      padding: 24px;
+      background: transparent;
+    }
+
+    .tl-pill {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: #3D3D3D;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      transition: background 0.3s ease;
+    }
+
+    .tl-chapter.active .tl-pill {
+      background: #E32129;
+    }
+
+    .tl-body {
+      color: #fff;
+      font-size: 16px;
+      line-height: 1.7;
+      max-height: 160px;
+      overflow: hidden;
+    }
+
+    .tl-body.expanded {
+      max-height: none;
+      overflow: visible;
+    }
+
+    .tl-body p {
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .tl-body strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .tl-readmore {
+      display: block;
+      margin: 16px auto 0;
+      background: #E32129;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+
+    .tl-readmore:hover {
+      background: #c0151b;
+    }
+
+    /* ============ CLOSING NOTE ============ */
+    .closing {
+      background: #000;
+      padding: 0 24px 80px;
+    }
+
+    .closing-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .closing-box {
+      background: #111;
+      border-left: 4px solid #E32129;
+      border-radius: 6px;
+      padding: 24px;
+    }
+
+    .closing-box p {
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    /* ============ SECTION 3 — SHARE BAR ============ */
+    .share-section {
+      background: #F3F2EF;
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    .share-section .share-heading {
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 24px;
+    }
+
+    .share-row {
+      display: inline-flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .share-sq {
+      width: 50px;
+      height: 50px;
+      border-radius: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .share-sq svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
+    }
+
+    .share-fb {
+      background: #0B85EE;
+    }
+
+    .share-tw {
+      background: #1DA1F2;
+    }
+
+    .share-li {
+      background: #0A66C2;
+    }
+
+    .share-divider {
+      max-width: 480px;
+      margin: 32px auto 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #E32129, transparent);
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+      background: #000;
+      color: #fff;
+      padding: 60px 30px 30px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .footer-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 17px;
+      color: #fff;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 14.5px;
+      color: #c7c7c7;
+      margin-bottom: 11px;
+      font-weight: 400;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-div {
+      height: 1px;
+      background: #2a2a2a;
+      margin: 40px 0 30px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 26px;
+      height: 26px;
+      color: #fff;
+      opacity: .85;
+    }
+
+    .footer-social a:hover {
+      opacity: 1;
+      color: var(--hti-red);
+    }
+
+    .footer-contact h3 {
+      font-size: 20px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .footer-contact span {
+      color: var(--hti-red);
+    }
+
+    .footer-brand img {
+      width: 70px;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: #8a8a8a;
+      font-size: 13px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media(max-width:960px) {
+      .nav-menu {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 16px 24px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+        display: none;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .nav-item {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: 4px 0 4px 14px;
+        min-width: auto;
+        width: 100%;
+        display: none;
+      }
+
+      .nav-item.open .dropdown {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .footer-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:768px) {
+      .hero {
+        padding: 40px 16px;
+      }
+
+      .hero-inner {
+        flex-direction: column;
+      }
+
+      .hero-left,
+      .hero-right {
+        width: 100%;
+        flex: none;
+      }
+
+      .hero h1 {
+        font-size: 22px;
+      }
+
+      .tl-spine-track {
+        display: none;
+      }
+
+      .tl-node {
+        display: none;
+      }
+
+      .tl-chapter,
+      .tl-chapter.even {
+        flex-direction: column;
+        padding: 30px 0;
+      }
+
+      .tl-img-half,
+      .tl-card-half {
+        width: 100%;
+        padding: 0;
+      }
+
+      .tl-img-half {
+        margin-bottom: 20px;
+      }
+
+      .tl-body {
+        max-height: none;
+        overflow: visible;
+      }
+
+      .tl-readmore {
+        display: none;
+      }
+    }
+
+    @media(max-width:600px) {
+      .footer-cols {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img
+          src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+          alt="HTI Logo" /></a>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+      <nav class="nav-menu" id="navMenu">
+        <div class="nav-item">Restaurants &amp; QSRs<span class="caret"></span>
+          <div class="dropdown">
+            <a href="super.html"><b>SUPER</b><span>Essential soft and job skills</span></a>
+            <a href="support.html"><b>SUPPORT</b><span>Skill upgradation pre-opening</span></a>
+            <a href="icedt.html"><b>ICEDT</b><span>Counter executives training</span></a>
+            <a href="icare.html"><b>iCARE</b><span>Teaching techniques</span></a>
+            <a href="vow.html"><b>Vow to Wow</b><span>Customer expectations</span></a>
+            <a href="ramp.html"><b>RAMP</b><span>Restaurant operations &amp; management</span></a>
+            <a href="restaurants.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Hotels<span class="caret"></span>
+          <div class="dropdown">
+            <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Staff skill upgrade</span></a>
+            <a href="hotcar.html"><b>HOT-CAR</b><span>Housekeeping operations</span></a>
+            <a href="fort.html"><b>FORT</b><span>Front desk operations</span></a>
+            <a href="kmt.html"><b>KMT</b><span>Kitchen management</span></a>
+            <a href="class.html"><b>CLASS</b><span>Grooming &amp; communication skills</span></a>
+            <a href="mdp.html"><b>MDP</b><span>Management development</span></a>
+            <a href="hotels.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Retail<span class="caret"></span>
+          <div class="dropdown">
+            <a href="post.html"><b>POST</b><span>Pantry operations</span></a>
+            <a href="cup.html"><b>CUP</b><span>Caretaker upgradation</span></a>
+            <a href="top.html"><b>TOP</b><span>Peons training</span></a>
+            <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item" style="display:none;">More<span class="caret"></span>
+          <div class="dropdown">
+            <a href="#">Team Building</a>
+            <a href="#">Leadership Development</a>
+            <a href="#">Sales Training</a>
+            <a href="#">Professional Etiquette</a>
+            <a href="#">Become A Trainer</a>
+            <a href="#">Develop SOPs &amp; How-To Videos</a>
+            <a href="blog.html">Blogs</a>
+          </div>
+        </div>
+        <a href="blog.html" class="nav-item">Blog</a>
+        <a href="contact.html" class="nav-contact">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ SECTION 1 — HERO ============ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <a href="blog.html" class="hero-back">&#8592; Back to Blogs</a>
+        <br>
+        <span class="hero-tag">English Blog</span>
+        <h1>What is Hospitality? Definition &amp; Meaning of the term.</h1>
+        <p class="hero-intro">Today we'll explain "Hospitality" to you at 4 different levels of increasing complexity!
+          Starting with an extremely simple definition, eventually moving to an extremely complex definition.</p>
+        <div class="hero-meta">
+          <div class="hero-card">
+            <span class="hc-label">Words by</span>
+            <span class="hc-value">Storm CostaBir</span>
+          </div>
+          <div class="hero-card">
+            <span class="hc-label">Date</span>
+            <span class="hc-value">26-01-23</span>
+          </div>
+          <div class="hero-card">
+            <span class="hc-label">Reading Time</span>
+            <span class="hc-value">4 min read</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-video">
+          <iframe src="https://www.youtube.com/embed/u0bqEeCVI_A?rel=0&controls=1&autoplay=0&mute=0&start=5"
+            allowfullscreen title="What is Hospitality Video"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2 — TIMELINE ============ -->
+  <section class="timeline">
+    <div class="tl-container">
+      <div class="tl-spine-track">
+        <div class="tl-spine-fill"></div>
+      </div>
+
+      <!-- Chapter 1 — odd -->
+      <div class="tl-chapter">
+        <div class="tl-img-half">
+          <img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63d369d9645d6b468471f9e6_Blog%202_Level%201.png"
+            alt="Level 1 - Hospitality" />
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <span class="tl-pill">Level 1</span>
+            <div class="tl-body">
+              <p><strong>Hospitality is when people take care of you and make you feel comfortable. Like when you stay at
+                  a hotel or a friend's house, they make sure you have a good time and have everything you
+                  need.</strong></p>
+              <p>It's about being nice to people who come to visit.</p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 2 — even -->
+      <div class="tl-chapter even">
+        <div class="tl-img-half">
+          <img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63d369d98607116cffdf8da9_Blog%202_Level%202.png"
+            alt="Level 2 - Hospitality" />
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <span class="tl-pill">Level 2</span>
+            <div class="tl-body">
+              <p><strong>Hospitality is when people are nice to guests and make them feel comfortable. Like in a hotel or
+                  a restaurant, where they give you a place to stay or something to eat.</strong></p>
+              <p>It can also be in someone's house, where they take care of you and make sure you have a good time.</p>
+              <p><strong>It's about being friendly and welcoming, and making sure people who come to visit feel at
+                  home.</strong></p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 3 — odd -->
+      <div class="tl-chapter">
+        <div class="tl-img-half">
+          <img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63d39f9387b46f58407aefe8_Blog%202_Level%203.png"
+            alt="Level 3 - Hospitality" />
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <span class="tl-pill">Level 3</span>
+            <div class="tl-body">
+              <p><strong>Hospitality is the act of being friendly and welcoming to people who are visiting or staying
+                  somewhere.</strong></p>
+              <p>It is often associated with places like hotels, motels and resorts, where people go to relax and enjoy
+                their stay. It can also be found in restaurants and other places where people go to eat and socialize.
+              </p>
+              <p><strong>It's about making people feel comfortable and taken care of when they are away from home. It's
+                  about being nice to guests and making sure they have a good experience.</strong></p>
+              <p>It can also be found in personal settings, like a friend's house, where you make them feel comfortable
+                and welcome. It's a way of showing kindness and generosity.</p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 4 — even -->
+      <div class="tl-chapter even">
+        <div class="tl-img-half">
+          <img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63d369d95330994262b85606_Blog%202_Level%204.png"
+            alt="Level 4 - Hospitality" />
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <span class="tl-pill">Level 4</span>
+            <div class="tl-body">
+              <p><strong>Hospitality is the act of being welcoming, generous and gracious to guests or strangers.</strong>
+                It is often associated with the lodging, tourism and food service industries, but can also be applied to
+                other settings such as private homes and events.</p>
+              <p>The hospitality industry is vast and encompasses hotels, resorts, cruise ships, restaurants and more. It
+                is focused on providing a comfortable and enjoyable experience for guests and customers.</p>
+              <p>Hospitality also includes the management of these services, and the coordination of resources and
+                personnel to ensure that guests receive the best possible experience.</p>
+              <p><strong>Hospitality can also refer to the act of being hospitable in a personal sense, which means
+                  showing kindness and generosity to guests and strangers. In the broader sense, hospitality is a key
+                  aspect of human society, and it has played a significant role throughout history. It is often seen as a
+                  way to establish trust and build relationships, and it is considered an important part of many cultures
+                  and religions. Good customer service can be seen as a form of hospitality, and it is critical for
+                  success in the hospitality industry.</strong></p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ CLOSING NOTE ============ -->
+  <section class="closing">
+    <div class="closing-inner">
+      <div class="closing-box">
+        <p>We hope you understood the meaning of hospitality! We personally enjoyed putting this blog together and oh, by
+          the way, the term Hospitality has been derived from a French word "Hospice" which means "Taking care of the
+          travelers." In earlier times, locals used to let the travelers rest on kitchen floors or other extra spaces
+          during their journey.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3 — SHARE BAR ============ -->
+  <section class="share-section">
+    <p class="share-heading">Share this blog to your favorite platform:</p>
+    <div class="share-row">
+      <a class="share-sq share-fb" target="_blank" rel="noopener" aria-label="Share on Facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=https://regal-cocada-f29d14.netlify.app/what-is-hospitality.html">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+        </svg>
+      </a>
+      <a class="share-sq share-tw" target="_blank" rel="noopener" aria-label="Share on Twitter"
+        href="https://twitter.com/intent/tweet?url=https://regal-cocada-f29d14.netlify.app/what-is-hospitality.html&text=What is Hospitality? Definition & Meaning of the term.">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      </a>
+      <a class="share-sq share-li" target="_blank" rel="noopener" aria-label="Share on LinkedIn"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=https://regal-cocada-f29d14.netlify.app/what-is-hospitality.html&title=What is Hospitality?">
+        <svg viewBox="0 0 32 32">
+          <path
+            d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+        </svg>
+      </a>
+    </div>
+    <div class="share-divider"></div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>HTI</h4>
+          <a href="#">About Us</a>
+          <a href="#">Case Studies</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <a href="restaurants.html">Restaurants &amp; QSRs</a>
+          <a href="hotels.html">Hotels</a>
+          <a href="offices.html">Offices</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="#">Team Building</a>
+          <a href="#">Leadership Development</a>
+          <a href="#">Sales Training</a>
+          <a href="#">Professional Etiquette</a>
+          <a href="#">Become A Trainer</a>
+          <a href="#">Develop SOPs &amp; How-To Videos</a>
+          <a href="blog.html">Blogs</a>
+        </div>
+      </div>
+      <div class="footer-div"></div>
+      <div class="footer-bottom">
+        <div class="footer-social">
+          <a href="https://www.facebook.com/hti.india/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg></a>
+          <a href="https://www.instagram.com/hti.india/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M12 2c-2.716 0-3.056.012-4.123.06c-1.064.049-1.791.218-2.427.465a4.901 4.901 0 0 0-1.772 1.153A4.902 4.902 0 0 0 2.525 5.45c-.247.636-.416 1.363-.465 2.427C2.011 8.944 2 9.284 2 12s.011 3.056.06 4.123c.049 1.064.218 1.791.465 2.427a4.903 4.903 0 0 0 1.153 1.772a4.903 4.903 0 0 0 1.772 1.153c.636.247 1.363.416 2.427.465c1.067.048 1.407.06 4.123.06s3.056-.012 4.123-.06c1.064-.049 1.791-.218 2.427-.465a4.902 4.902 0 0 0 1.772-1.153a4.902 4.902 0 0 0 1.153-1.772c.247-.636.416-1.363.465-2.427c.048-1.067.06-1.407.06-4.123s-.012-3.056-.06-4.123c-.049-1.064-.218-1.791-.465-2.427a4.902 4.902 0 0 0-1.153-1.772a4.901 4.901 0 0 0-1.772-1.153c-.636-.247-1.363-.416-2.427-.465C15.056 2.012 14.716 2 12 2m0 1.802c2.67 0 2.986.01 4.04.058c.976.045 1.505.207 1.858.344c.466.182.8.399 1.15.748c.35.35.566.684.748 1.15c.136.353.3.882.344 1.857c.048 1.055.058 1.37.058 4.041c0 2.67-.01 2.986-.058 4.04c-.045.976-.208 1.505-.344 1.858a3.1 3.1 0 0 1-.748 1.15c-.35.35-.684.566-1.15.748c-.353.136-.882.3-1.857.344c-1.054.048-1.37.058-4.041.058c-2.67 0-2.987-.01-4.04-.058c-.976-.045-1.505-.208-1.858-.344a3.098 3.098 0 0 1-1.15-.748a3.098 3.098 0 0 1-.748-1.15c-.137-.353-.3-.882-.344-1.857c-.048-1.055-.058-1.37-.058-4.041c0-2.67.01-2.986.058-4.04c.045-.976.207-1.505.344-1.858c.182-.466.399-.8.748-1.15c.35-.35.684-.566 1.15-.748c.353-.137.882-.3 1.857-.344c1.055-.048 1.37-.058 4.041-.058m0 11.531a3.333 3.333 0 1 1 0-6.666a3.333 3.333 0 0 1 0 6.666m0-8.468a5.135 5.135 0 1 0 0 10.27a5.135 5.135 0 0 0 0-10.27m6.538-.203a1.2 1.2 0 1 1-2.4 0a1.2 1.2 0 0 1 2.4 0" />
+            </svg></a>
+          <a href="https://www.linkedin.com/company/hospitality-training-institute-india-pvt-ltd" target="_blank"
+            aria-label="LinkedIn"><svg viewBox="0 0 32 32" fill="currentColor">
+              <path
+                d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+            </svg></a>
+          <a href="https://www.youtube.com/c/Hti-india" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg></a>
+        </div>
+        <div class="footer-contact"><a href="tel:+917738060902">
+            <h3>Contact Us: <span>+91 77380 60902</span></h3>
+          </a></div>
+        <a href="index.html" class="footer-brand"><img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+            alt="HTI" /></a>
+      </div>
+      <div class="footer-copy">&#169;&#65039; HOSPITALITY TRAINING INSTITUTE INDIA PRIVATE. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // 1. Read More toggle
+    document.querySelectorAll('.tl-readmore').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const body = btn.previousElementSibling;
+        const expanded = body.classList.toggle('expanded');
+        btn.textContent = expanded ? 'Read Less' : 'Read More';
+        btn.setAttribute('aria-expanded', expanded);
+      });
+    });
+
+    // 2. Timeline scroll observer — active pill + spine fill
+    const chapters = document.querySelectorAll('.tl-chapter');
+    const spineFill = document.querySelector('.tl-spine-fill');
+    const track = document.querySelector('.tl-spine-track');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          chapters.forEach(c => c.classList.remove('active'));
+          entry.target.classList.add('active');
+          if (spineFill && track) {
+            const trackTop = track.getBoundingClientRect().top + window.scrollY;
+            const nodeTop = entry.target.querySelector('.tl-node').getBoundingClientRect().top + window.scrollY;
+            const pct = ((nodeTop - trackTop) / track.offsetHeight) * 100;
+            spineFill.style.height = Math.min(pct + 10, 100) + '%';
+          }
+        }
+      });
+    }, { threshold: 0.4 });
+
+    chapters.forEach(c => observer.observe(c));
+
+    // 3. Mobile nav toggle — copy exactly from blog-post.html
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const menu = document.getElementById('navMenu');
+      if (toggle && menu) {
+        toggle.addEventListener('click', () => menu.classList.toggle('open'));
+        document.querySelectorAll('.nav-item').forEach(item => {
+          item.addEventListener('click', (e) => {
+            if (window.innerWidth <= 960 && (e.target === item || e.target.classList.contains('caret'))) {
+              item.classList.toggle('open');
+            }
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+
+</html>
