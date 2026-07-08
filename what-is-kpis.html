@@ -427,6 +427,7 @@
       border-radius: 5px;
       padding: 20px;
       background: transparent;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
     }
 
     .tl-pill {
@@ -437,6 +438,7 @@
       font-weight: 700;
       color: #fff;
       margin-bottom: 12px;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     .tl-pill.red {
@@ -445,6 +447,11 @@
 
     .tl-pill.grey {
       background: #3D3D3D;
+    }
+
+    .tl-chapter.active .tl-pill {
+      background: #E32129 !important;
+      color: #ffffff !important;
     }
 
     .tl-card p {
@@ -1068,28 +1075,58 @@
   </footer>
 
   <script>
-    // Timeline scroll observer
     const chapters = document.querySelectorAll('.tl-chapter');
     const spineFill = document.querySelector('.tl-spine-fill');
     const track = document.querySelector('.tl-spine-track');
 
+    // Reset everything on load — all grey
+    function resetChapter(chapter) {
+      chapter.classList.remove('active');
+      const card = chapter.querySelector('.tl-card');
+      if (card) {
+        card.style.border = '1px solid #3D3D3D';
+        card.style.boxShadow = 'none';
+      }
+    }
+
+    chapters.forEach(c => resetChapter(c));
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        const card = entry.target.querySelector('.tl-card');
+        const rect = entry.target.getBoundingClientRect();
+
         if (entry.isIntersecting) {
-          if (spineFill && track) {
-            const trackTop = track.getBoundingClientRect().top + window.scrollY;
-            const nodeEl = entry.target.querySelector('.tl-node');
-            if (nodeEl) {
-              const nodeTop = nodeEl.getBoundingClientRect().top + window.scrollY;
-              const pct = ((nodeTop - trackTop) / track.offsetHeight) * 100;
-              spineFill.style.height = Math.min(pct + 8, 100) + '%';
-            }
+          // Currently in middle of viewport — make active (red)
+          entry.target.classList.add('active');
+          if (card) {
+            card.style.border = '1px solid #E32129';
+            card.style.boxShadow = '0 0 0 1px #E32129';
+          }
+        } else {
+          entry.target.classList.remove('active');
+          // Always reset to grey — whether above OR below viewport
+          if (card) {
+            card.style.border = '1px solid #3D3D3D';
+            card.style.boxShadow = 'none';
           }
         }
       });
-    }, { threshold: 0.5 });
+    }, {
+      threshold: 0.3,
+      rootMargin: '-35% 0px -35% 0px'
+    });
 
     chapters.forEach(c => observer.observe(c));
+
+    // Spine fill on scroll
+    window.addEventListener('scroll', () => {
+      if (!track || !spineFill) return;
+      const trackTop = track.getBoundingClientRect().top + window.scrollY;
+      const viewMiddle = window.scrollY + window.innerHeight * 0.5;
+      const pct = ((viewMiddle - trackTop) / track.offsetHeight) * 100;
+      spineFill.style.height = Math.min(Math.max(pct, 0), 100) + '%';
+    }, { passive: true });
 
     // Mobile nav toggle
     (function () {

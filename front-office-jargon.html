@@ -1532,43 +1532,36 @@
     const spineFill = document.querySelector('.tl-spine-fill');
     const track = document.querySelector('.tl-spine-track');
 
-    // Reset all on load
-    chapters.forEach(c => {
-      c.classList.remove('active');
-      const card = c.querySelector('.tl-card');
+    // Reset everything on load — all grey
+    function resetChapter(chapter) {
+      chapter.classList.remove('active');
+      const card = chapter.querySelector('.tl-card');
       if (card) {
         card.style.border = '1px solid #3D3D3D';
         card.style.boxShadow = 'none';
       }
-    });
+    }
 
-    // IntersectionObserver triggered at middle of viewport
+    chapters.forEach(c => resetChapter(c));
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const card = entry.target.querySelector('.tl-card');
+        const rect = entry.target.getBoundingClientRect();
+
         if (entry.isIntersecting) {
-          // Mark as active
+          // Currently in middle of viewport — make active (red)
           entry.target.classList.add('active');
           if (card) {
             card.style.border = '1px solid #E32129';
             card.style.boxShadow = '0 0 0 1px #E32129';
           }
         } else {
-          const rect = entry.target.getBoundingClientRect();
-          if (rect.bottom < 0) {
-            // Already scrolled past — keep red border
-            entry.target.classList.remove('active');
-            if (card) {
-              card.style.border = '1px solid #E32129';
-              card.style.boxShadow = 'none';
-            }
-          } else {
-            // Below viewport — reset
-            entry.target.classList.remove('active');
-            if (card) {
-              card.style.border = '1px solid #3D3D3D';
-              card.style.boxShadow = 'none';
-            }
+          entry.target.classList.remove('active');
+          // Always reset to grey — whether above OR below viewport
+          if (card) {
+            card.style.border = '1px solid #3D3D3D';
+            card.style.boxShadow = 'none';
           }
         }
       });
@@ -1579,7 +1572,7 @@
 
     chapters.forEach(c => observer.observe(c));
 
-    // Smooth spine fill on scroll
+    // Spine fill on scroll
     window.addEventListener('scroll', () => {
       if (!track || !spineFill) return;
       const trackTop = track.getBoundingClientRect().top + window.scrollY;
