@@ -384,21 +384,33 @@
 
     .obj-row.reverse {
       flex-direction: row-reverse;
-      background: #000000;
-      padding: 40px;
-      border-radius: 10px;
-    }
-
-    .obj-row.reverse .obj-text h3 {
-      color: #ffffff;
-    }
-
-    .obj-row.reverse .obj-text p {
-      color: #ffffff;
     }
 
     .obj-row:last-child {
       margin-bottom: 0;
+    }
+
+    /* Supervisors — full-width black band, inner content centered at 1120px */
+    .supervisors {
+      background: #000000;
+      padding: 60px 24px;
+    }
+
+    .supervisors-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .supervisors .obj-text h3 {
+      color: #ffffff;
+    }
+
+    .supervisors .obj-text p {
+      color: #ffffff;
     }
 
     .obj-img {
@@ -513,7 +525,7 @@
 
     /* ============ SECTION 5 — CTA ============ */
     .cta {
-      background: #E32129;
+      background: #F3F2EF;
       padding: 60px 24px;
       text-align: center;
     }
@@ -521,13 +533,14 @@
     .cta h2 {
       font-size: 26px;
       font-weight: 800;
-      color: #fff;
+      color: #000000;
       margin-bottom: 24px;
     }
 
     .cta-btn {
-      background: #fff;
-      color: #E32129;
+      background: #E32129;
+      color: #fff;
+      border: none;
       font-weight: 700;
       font-size: 16px;
       padding: 14px 36px;
@@ -763,7 +776,8 @@
       }
 
       .obj-row,
-      .obj-row.reverse {
+      .obj-row.reverse,
+      .supervisors-inner {
         flex-direction: column;
       }
 
@@ -911,16 +925,20 @@
           <p>To create an improved environment of self-compliance to food safety and standards.</p>
         </div>
       </div>
-      <div class="obj-row reverse">
-        <div class="obj-img">
-          <img src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/64254402a0534b6afd3682b5_2.svg"
-            alt="Food Safety Supervisors" />
-        </div>
-        <div class="obj-text">
-          <h3>How many Food Safety Supervisors should be part of an organization?</h3>
-          <p>All food businesses having central licenses or state licenses should have at least one trained and certified
-            food safety supervisor for every 25 food-handlers or part thereof on all their premises.</p>
-        </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3B — SUPERVISORS (full-width black) ============ -->
+  <section class="supervisors">
+    <div class="supervisors-inner">
+      <div class="obj-img">
+        <img src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/64254402a0534b6afd3682b5_2.svg"
+          alt="Food Safety Supervisors" />
+      </div>
+      <div class="obj-text">
+        <h3>How many Food Safety Supervisors should be part of an organization?</h3>
+        <p>All food businesses having central licenses or state licenses should have at least one trained and certified
+          food safety supervisor for every 25 food-handlers or part thereof on all their premises.</p>
       </div>
     </div>
   </section>
@@ -989,6 +1007,7 @@
   <section class="cta">
     <h2>Conduct a FosTac Training program for your team!</h2>
     <a class="cta-btn" href="https://wa.me/917738060902" target="_blank" rel="noopener">Contact Us!</a>
+    <div style="max-width:480px; margin:32px auto 0; height:2px; background:linear-gradient(90deg, transparent, #E32129, transparent);"></div>
   </section>
 
   <!-- ============ FOOTER ============ -->
