@@ -381,7 +381,7 @@
       transform: translateX(-50%);
       top: 0;
       bottom: 0;
-      width: 2px;
+      width: 4px;
       background: #2a2a2a;
       z-index: 0;
     }
@@ -413,14 +413,13 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      width: 14px;
-      height: 14px;
-      background: #fff;
+      width: 18px;
+      height: 18px;
+      background: #ffffff;
       border-radius: 50%;
-      border: 2px solid #E32129;
+      border: 3px solid #ffffff;
       z-index: 2;
       flex-shrink: 0;
-      transition: background 0.3s ease, border-color 0.3s ease;
     }
 
     .tl-card {
@@ -439,6 +438,7 @@
       font-weight: 700;
       color: #fff;
       margin-bottom: 12px;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     .tl-pill.red {
@@ -447,6 +447,11 @@
 
     .tl-pill.grey {
       background: #3D3D3D;
+    }
+
+    .tl-chapter.active .tl-pill {
+      background: #E32129 !important;
+      color: #ffffff !important;
     }
 
     .tl-card p {
@@ -1523,82 +1528,64 @@
   </footer>
 
   <script>
-    // Timeline scroll animation
     const chapters = document.querySelectorAll('.tl-chapter');
     const spineFill = document.querySelector('.tl-spine-fill');
     const track = document.querySelector('.tl-spine-track');
 
-    // Remove any existing active states on load
+    // Reset all on load
     chapters.forEach(c => {
+      c.classList.remove('active');
       const card = c.querySelector('.tl-card');
-      if (card) card.style.border = '1px solid #3D3D3D';
+      if (card) {
+        card.style.border = '1px solid #3D3D3D';
+        card.style.boxShadow = 'none';
+      }
     });
 
+    // IntersectionObserver triggered at middle of viewport
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const card = entry.target.querySelector('.tl-card');
-        const node = entry.target.querySelector('.tl-node');
-
         if (entry.isIntersecting) {
-          // Add red border to active card
+          // Mark as active
+          entry.target.classList.add('active');
           if (card) {
             card.style.border = '1px solid #E32129';
             card.style.boxShadow = '0 0 0 1px #E32129';
           }
-          // Turn node red
-          if (node) {
-            node.style.background = '#E32129';
-            node.style.borderColor = '#E32129';
-          }
-          // Update spine fill height
-          if (spineFill && track) {
-            const trackRect = track.getBoundingClientRect();
-            const trackTop = trackRect.top + window.scrollY;
-            const nodeTop = entry.target.getBoundingClientRect().top + window.scrollY;
-            const pct = ((nodeTop - trackTop) / track.offsetHeight) * 100;
-            spineFill.style.height = Math.min(Math.max(pct, 0), 100) + '%';
-          }
         } else {
-          // Check if this chapter is above the viewport (already passed)
           const rect = entry.target.getBoundingClientRect();
-          if (rect.top < 0) {
+          if (rect.bottom < 0) {
             // Already scrolled past — keep red border
+            entry.target.classList.remove('active');
             if (card) {
               card.style.border = '1px solid #E32129';
               card.style.boxShadow = 'none';
             }
-            if (node) {
-              node.style.background = '#E32129';
-              node.style.borderColor = '#E32129';
-            }
           } else {
-            // Below viewport — reset to grey
+            // Below viewport — reset
+            entry.target.classList.remove('active');
             if (card) {
               card.style.border = '1px solid #3D3D3D';
               card.style.boxShadow = 'none';
-            }
-            if (node) {
-              node.style.background = '#ffffff';
-              node.style.borderColor = '#E32129';
             }
           }
         }
       });
     }, {
-      threshold: 0.2,
-      rootMargin: '-10% 0px -10% 0px'
+      threshold: 0.3,
+      rootMargin: '-35% 0px -35% 0px'
     });
 
     chapters.forEach(c => observer.observe(c));
 
-    // Also update spine fill on scroll for smoother animation
+    // Smooth spine fill on scroll
     window.addEventListener('scroll', () => {
       if (!track || !spineFill) return;
-      const trackRect = track.getBoundingClientRect();
-      const trackTop = trackRect.top + window.scrollY;
-      const scrolled = window.scrollY + window.innerHeight * 0.5;
-      const pct = ((scrolled - trackTop) / track.offsetHeight) * 100;
-      spineFill.style.height = Math.min(Math.max(pct - 10, 0), 100) + '%';
+      const trackTop = track.getBoundingClientRect().top + window.scrollY;
+      const viewMiddle = window.scrollY + window.innerHeight * 0.5;
+      const pct = ((viewMiddle - trackTop) / track.offsetHeight) * 100;
+      spineFill.style.height = Math.min(Math.max(pct, 0), 100) + '%';
     }, { passive: true });
 
     // Mobile nav toggle
