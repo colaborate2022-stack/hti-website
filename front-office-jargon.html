@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>50 Jargon Terms Used in the Front Office Department | HTI India</title>
+  <meta name="description"
+    content="A straightforward dictionary of 50 essential front office department jargon terms, explained in simple, non-technical language." />
+  <link rel="icon"
+    href="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63872ebc11d181ed9d69d77d_HTI%20star%20logo%2032x32%20px.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --hti-bg: #F3F2EF;
+      --hti-black: #000;
+      --hti-red: #e31e24;
+      --hti-red2: #e31e24;
+      --hti-text: #111;
+
+      --red: #E32129;
+      --cream: #F3F2EF;
+      --black: #000000;
+      --grey-800: #3D3D3D;
+      --white: #FFFFFF;
+      --maxw: 1120px;
+      --gutter: 24px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--cream);
+      color: #111;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    /* ============ NAVBAR ============ */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--hti-bg);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #000, transparent);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 72px;
+    }
+
+    .nav-logo img {
+      width: 52px;
+      height: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-item {
+      position: relative;
+      font-weight: 600;
+      font-size: 15px;
+      color: #111;
+      cursor: pointer;
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-item .caret {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #333;
+      border-bottom: 2px solid #333;
+      transform: rotate(45deg);
+      margin-top: -3px;
+      transition: transform .2s;
+    }
+
+    .nav-item:hover .caret {
+      transform: rotate(-135deg);
+      margin-top: 3px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .14);
+      padding: 10px;
+      min-width: 230px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all .2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 120;
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      padding: 9px 12px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #222;
+    }
+
+    .dropdown a:hover {
+      background: var(--hti-bg);
+      color: var(--hti-red);
+    }
+
+    .dropdown a b {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .dropdown a span {
+      font-size: 12px;
+      color: #777;
+      font-weight: 400;
+    }
+
+    .nav-contact {
+      background: var(--hti-red2);
+      color: #fff;
+      border-radius: 8px;
+      padding: 11px 22px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .nav-contact:hover {
+      background: #d40f0f;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      width: 26px;
+      height: 2px;
+      background: #000;
+      display: block;
+    }
+
+    /* ============ SECTION 1 — HERO ============ */
+    .hero {
+      background: #F3F2EF;
+      padding: 60px 24px;
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero-left {
+      flex: 0 0 48%;
+    }
+
+    .hero-right {
+      flex: 1;
+    }
+
+    .hero-right img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    .hero-back {
+      color: #E32129;
+      font-weight: 600;
+      font-size: 15px;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .hero-back:hover {
+      text-decoration: underline;
+    }
+
+    .hero-tag {
+      background: #E32129;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.4;
+      color: #000;
+      margin-bottom: 16px;
+    }
+
+    .hero-intro {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 24px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .meta-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 10px 16px;
+      min-width: 110px;
+      text-align: center;
+    }
+
+    .meta-card .mc-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #E32129;
+      display: block;
+    }
+
+    .meta-card .mc-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: #E32129;
+      display: block;
+    }
+
+    /* ============ SECTION 2 — OBJECTIVES ============ */
+    .objectives {
+      background: #F3F2EF;
+      padding: 60px 24px;
+    }
+
+    .objectives-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .objectives-left {
+      flex: 0 0 48%;
+    }
+
+    .objectives-left h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #000;
+      margin-bottom: 20px;
+    }
+
+    .objectives-left p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #333;
+      margin-bottom: 16px;
+    }
+
+    .objectives-left p:last-child {
+      margin-bottom: 0;
+    }
+
+    .objectives-right {
+      flex: 1;
+    }
+
+    .objectives-right img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    .objectives-caption {
+      font-size: 13px;
+      color: #888;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* ============ SECTION 3 — JARGON TIMELINE ============ */
+    .timeline {
+      background: #000;
+      padding: 80px 0;
+    }
+
+    .tl-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      position: relative;
+      padding: 0 24px;
+    }
+
+    .tl-spine-track {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #2a2a2a;
+      z-index: 0;
+    }
+
+    .tl-spine-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: #E32129;
+      transition: height 0.3s ease;
+    }
+
+    .tl-chapter {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-height: 160px;
+      padding: 30px 0;
+    }
+
+    .tl-half {
+      width: calc(50% - 24px);
+      padding: 0 32px;
+    }
+
+    .tl-node {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 14px;
+      background: #fff;
+      border-radius: 50%;
+      border: 2px solid #E32129;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .tl-card {
+      border: 1px solid #3D3D3D;
+      border-radius: 5px;
+      padding: 20px;
+      background: transparent;
+    }
+
+    .tl-pill {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .tl-pill.red {
+      background: #E32129;
+    }
+
+    .tl-pill.grey {
+      background: #3D3D3D;
+    }
+
+    .tl-card p {
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ============ SECTION 4 — SHARE BAR ============ */
+    .share-section {
+      background: #F3F2EF;
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    .share-section .share-heading {
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 24px;
+    }
+
+    .share-row {
+      display: inline-flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .share-sq {
+      width: 50px;
+      height: 50px;
+      border-radius: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .share-sq svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
+    }
+
+    .share-fb {
+      background: #0B85EE;
+    }
+
+    .share-tw {
+      background: #1DA1F2;
+    }
+
+    .share-li {
+      background: #0A66C2;
+    }
+
+    .share-divider {
+      max-width: 480px;
+      margin: 32px auto 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #E32129, transparent);
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+      background: #000;
+      color: #fff;
+      padding: 60px 30px 30px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .footer-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 17px;
+      color: #fff;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 14.5px;
+      color: #c7c7c7;
+      margin-bottom: 11px;
+      font-weight: 400;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-div {
+      height: 1px;
+      background: #2a2a2a;
+      margin: 40px 0 30px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 26px;
+      height: 26px;
+      color: #fff;
+      opacity: .85;
+    }
+
+    .footer-social a:hover {
+      opacity: 1;
+      color: var(--hti-red);
+    }
+
+    .footer-contact h3 {
+      font-size: 20px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .footer-contact span {
+      color: var(--hti-red);
+    }
+
+    .footer-brand img {
+      width: 70px;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: #8a8a8a;
+      font-size: 13px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media(max-width:960px) {
+      .nav-menu {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 16px 24px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+        display: none;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .nav-item {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: 4px 0 4px 14px;
+        min-width: auto;
+        width: 100%;
+        display: none;
+      }
+
+      .nav-item.open .dropdown {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .footer-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 40px 16px;
+      }
+
+      .hero-inner {
+        flex-direction: column;
+      }
+
+      .hero-left,
+      .hero-right {
+        width: 100%;
+        flex: none;
+      }
+
+      .hero h1 {
+        font-size: 22px;
+      }
+
+      .objectives-inner {
+        flex-direction: column;
+      }
+
+      .objectives-left,
+      .objectives-right {
+        width: 100%;
+        flex: none;
+      }
+
+      .tl-spine-track {
+        display: none;
+      }
+
+      .tl-node {
+        display: none;
+      }
+
+      .tl-chapter {
+        flex-direction: column;
+        padding: 20px 0;
+      }
+
+      .tl-half {
+        width: 100%;
+        padding: 0;
+      }
+
+      .tl-half:empty {
+        display: none;
+      }
+
+      .tl-card {
+        display: block;
+        width: 100%;
+      }
+    }
+
+    @media(max-width:600px) {
+      .footer-cols {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img
+          src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+          alt="HTI Logo" /></a>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+      <nav class="nav-menu" id="navMenu">
+        <div class="nav-item">Restaurants &amp; QSRs<span class="caret"></span>
+          <div class="dropdown">
+            <a href="super.html"><b>SUPER</b><span>Essential soft and job skills</span></a>
+            <a href="support.html"><b>SUPPORT</b><span>Skill upgradation pre-opening</span></a>
+            <a href="icedt.html"><b>ICEDT</b><span>Counter executives training</span></a>
+            <a href="icare.html"><b>iCARE</b><span>Teaching techniques</span></a>
+            <a href="vow.html"><b>Vow to Wow</b><span>Customer expectations</span></a>
+            <a href="ramp.html"><b>RAMP</b><span>Restaurant operations &amp; management</span></a>
+            <a href="restaurants.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Hotels<span class="caret"></span>
+          <div class="dropdown">
+            <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Staff skill upgrade</span></a>
+            <a href="hotcar.html"><b>HOT-CAR</b><span>Housekeeping operations</span></a>
+            <a href="fort.html"><b>FORT</b><span>Front desk operations</span></a>
+            <a href="kmt.html"><b>KMT</b><span>Kitchen management</span></a>
+            <a href="class.html"><b>CLASS</b><span>Grooming &amp; communication skills</span></a>
+            <a href="mdp.html"><b>MDP</b><span>Management development</span></a>
+            <a href="hotels.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Retail<span class="caret"></span>
+          <div class="dropdown">
+            <a href="post.html"><b>POST</b><span>Pantry operations</span></a>
+            <a href="cup.html"><b>CUP</b><span>Caretaker upgradation</span></a>
+            <a href="top.html"><b>TOP</b><span>Peons training</span></a>
+            <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item" style="display:none;">More<span class="caret"></span>
+          <div class="dropdown">
+            <a href="#">Team Building</a>
+            <a href="#">Leadership Development</a>
+            <a href="#">Sales Training</a>
+            <a href="#">Professional Etiquette</a>
+            <a href="#">Become A Trainer</a>
+            <a href="#">Develop SOPs &amp; How-To Videos</a>
+            <a href="blog.html">Blogs</a>
+          </div>
+        </div>
+        <a href="blog.html" class="nav-item">Blog</a>
+        <a href="contact.html" class="nav-contact">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ SECTION 1 — HERO ============ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <a href="blog.html" class="hero-back">&#8592; Back to Blogs</a>
+        <span class="hero-tag">General</span>
+        <h1>50 Jargon Terms Used in the Front Office Department</h1>
+        <p class="hero-intro">Stressed by the terms used in the front office department? Stop worrying and start learning
+          these 50 easy-to-understand explanations. In the hospitality industry, it can be overwhelming when everyone
+          seems to be familiar with the jargon, except you. Even as you gain experience, you often encounter new terms
+          and acronyms that could confuse you. Instead of constantly searching online for definitions, we have a solution
+          for you. Here, we offer a straightforward dictionary with 50 essential terms, explained in simple,
+          non-technical language.</p>
+        <div class="hero-meta">
+          <div class="meta-card">
+            <span class="mc-label">Words by</span>
+            <span class="mc-value">Storm CostaBir</span>
+          </div>
+          <div class="meta-card">
+            <span class="mc-label">Date</span>
+            <span class="mc-value">24-07-2023</span>
+          </div>
+          <div class="meta-card">
+            <span class="mc-label">Reading Time</span>
+            <span class="mc-value">04 min read</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img
+          src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/64affc9ae1662951f25ca73a_3.%20Front%20Office%20Department.svg"
+          alt="Front Office Department" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3 — JARGON TIMELINE ============ -->
+  <section class="timeline">
+    <div class="tl-container">
+      <div class="tl-spine-track">
+        <div class="tl-spine-fill"></div>
+      </div>
+
+      <!-- Term 1 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Allotment</span>
+            <p>A predetermined number of rooms reserved by a travel agency or company for a specific period, usually at a discounted rate</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 2 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Bellhop</span>
+            <p>A hotel staff member responsible for assisting guests with their luggage, both upon arrival and departure</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 3 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">C Form</span>
+            <p>Foreigner registration form which is to be uploaded on Govt site within 24 hrs of check-in</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 4 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Cancellation Policy</span>
+            <p>The guidelines and rules governing the cancellation of a reservation, including any applicable fees or deadlines</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 5 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill red">Cash Float</span>
+            <p>The amount of cash provided to the cashier at the start of his/her shift for making change and handling transactions</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 6 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Cashier</span>
+            <p>The staff member responsible for handling monetary transactions, such as collecting payment for rooms, services, and other charges</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 7 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Check-In</span>
+            <p>The process of officially arriving and registering at the hotel, where guests receive their room keys and necessary information</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 8 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Check-Out</span>
+            <p>The process of departing from the hotel, settling any outstanding charges, and returning the room keys</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 9 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Complimentary</span>
+            <p>Provided free of charge to guests, often as a gesture of goodwill or for special occasions</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 10 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill red">Concierge</span>
+            <p>The hotel staff member who assists guests with various requests, including travel arrangements, restaurant reservations, and local attractions</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 11 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Do Not Disturb (DND)</span>
+            <p>A guest's request for privacy and to refrain from housekeeping or any other interruptions in their room</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 12 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Early Check-In</span>
+            <p>Allowing a guest to check-in before the standard designated time, subject to room availability</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 13 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Early Departure Fee</span>
+            <p>A fee charged to a guest who checks out earlier than the originally booked departure date, typically to compensate for lost revenue</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 14 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Early Departure</span>
+            <p>The guest's decision to check-out before their scheduled departure date, maybe subject to penalty or adjustment in charges</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 15 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill red">Folio</span>
+            <p>An itemized statement of charges incurred by a guest during their stay, including room rates, additional services, and taxes</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 16 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Front Desk</span>
+            <p>The central area in a hotel's lobby where guests check-in, check-out, and receive assistance during their stay</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 17 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Front Office Attendant</span>
+            <p>A staff member responsible for assisting guests with check-in, check-out, and general inquiries at the front desk</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 18 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Front Office Manager</span>
+            <p>The staff member responsible for overseeing the operations of the front office department and ensuring smooth guest interactions</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 19 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Front Office SOPs</span>
+            <p>Standard Operating Procedures - established guidelines and protocol for front office operations; ensuring consistency and efficiency in guest interactions</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 20 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill red">Group Booking</span>
+            <p>A reservation for a large number of rooms or multiple guests traveling together, often for conferences, weddings, or group events</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 21 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Group Check-In</span>
+            <p>The process of efficiently checking in multiple guests traveling together as part of a group reservation</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 22 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Guest Feedback</span>
+            <p>The comments, reviews, or opinions provided by guests regarding their stay, often valuable for improving service and addressing any concerns</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 23 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Guest Folio Settlement</span>
+            <p>The process of finalizing and settling the charges on a guest's folio before their departure</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 24 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Guest Profile</span>
+            <p>A database or record containing information about a guest's preferences, previous stays, special requests, and loyalty program status</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 25 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill red">Guest Satisfaction</span>
+            <p>The measurement of a guest's overall contentment and experience during their stay, often assessed through surveys or feedback</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 26 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">House Account</span>
+            <p>Arrangement where charges for services are billed to the guest's account, typically used by corporate clients or long-staying guests</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 27 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Housekeeping Coordination</span>
+            <p>Collaboration between the front office and housekeeping departments to ensure rooms are ready for guest arrivals and timely cleaning requests are fulfilled</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 28 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">In-House Guest</span>
+            <p>A guest who is currently staying at the hotel and has not yet checked out</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 29 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Key Card</span>
+            <p>A plastic card issued to guests as a room key, typically used to access the guest's assigned room and other restricted areas</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 30 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill red">Key Drop</span>
+            <p>A secure box or designated area where guests can leave their room keys when checking out outside of regular front desk hours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 31 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Late Arrival</span>
+            <p>The arrival of a guest after the hotel's designated check-in time, often requiring special arrangements or communication</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 32 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Late Check-Out</span>
+            <p>Granting a guest permission to check-out after the standard designated time, based on room availability and hotel policies</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 33 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Late Night Service</span>
+            <p>Providing front office services and assistance to guests during the late night hours when staffing levels may be reduced</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 34 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Night Audit</span>
+            <p>The process of reconciling and balancing the day's transactions and financial records, typically performed during the late night hours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 35 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill red">No-Show</span>
+            <p>A guest who fails to arrive for a confirmed reservation without canceling it in advance</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 36 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Overbooking</span>
+            <p>Accepting more reservations than the actual number of available rooms, relying on cancellations or no-shows to accommodate all guests</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 37 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Pre-Authorization</span>
+            <p>A temporary hold or verification of funds on a guest's credit card to ensure their ability to cover any potential charges or incidental expenses</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 38 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Rack Rate</span>
+            <p>The standard published rate of a hotel room before any discounts or promotions are applied</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 39 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Rate Parity</span>
+            <p>The practice of maintaining consistent pricing for a hotel's rooms across all distribution channels, including the hotel's website, third-party websites, and travel agencies</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 40 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill red">Registration Card</span>
+            <p>A form filled out by guests upon arrival, providing their personal information, contact details, and any special requests</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 41 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Reservation Confirmation</span>
+            <p>A written or electronic acknowledgment provided to guests confirming the details of their reservation</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 42 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Reservation</span>
+            <p>The process of securing a guest's room or service in advance, typically done through a booking system or by contacting the hotel directly</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 43 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Room Blocking</span>
+            <p>The practice of reserving a specific number of rooms for a particular group, event, or high-demand period</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 44 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Room Inventory</span>
+            <p>The total number of available rooms in a hotel, categorized by room types and occupancy status</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 45 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill red">Room Rate</span>
+            <p>The cost or price charged for the rental of a hotel room, varying based on factors such as room type, occupancy and season</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 46 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Room Service</span>
+            <p>The provision of food, beverages, and other services delivered directly to the guest's room</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 47 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Room Upgrade</span>
+            <p>The act of providing a guest with a higher category or better view room than originally booked, often as a gesture of goodwill or for loyalty program members</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 48 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">VIP Guest</span>
+            <p>A distinguished or high-profile guest, often receiving special attention, privileges, and personalized services</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term 49 -->
+      <div class="tl-chapter">
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill grey">Wake-Up Call</span>
+            <p>A pre-arranged phone call requested by guests to be awakened at a specific time</p>
+          </div>
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-half"></div>
+      </div>
+
+      <!-- Term 50 -->
+      <div class="tl-chapter">
+        <div class="tl-half"></div>
+        <div class="tl-node"></div>
+        <div class="tl-half">
+          <div class="tl-card">
+            <span class="tl-pill red">Walk-In</span>
+            <p>A guest who arrives at the hotel without a prior reservation, requesting a room on the spot</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ CLOSING NOTE ============ -->
+  <section style="background:#F3F2EF; padding:0 24px 20px;">
+    <div style="max-width:800px; margin:0 auto; padding:40px 24px; background:#F3F2EF;">
+      <p style="font-size:16px; line-height:1.8; color:#444; font-style:italic; text-align:center;">To summarize, by
+        familiarizing yourself with the 50 jargon terms we've discussed in this blog, you've gained a valuable set of
+        tools for navigating the front office department. We hope this knowledge will boost your confidence and improve
+        your communication with colleagues, clients and customers.</p>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4 — SHARE BAR ============ -->
+  <section class="share-section">
+    <p class="share-heading">Share this blog to your favorite platform:</p>
+    <div class="share-row">
+      <a class="share-sq share-fb" target="_blank" rel="noopener" aria-label="Share on Facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=https://colaborate2022-stack.github.io/hti-website/front-office-jargon.html">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+        </svg>
+      </a>
+      <a class="share-sq share-tw" target="_blank" rel="noopener" aria-label="Share on Twitter"
+        href="https://twitter.com/intent/tweet?url=https://colaborate2022-stack.github.io/hti-website/front-office-jargon.html&text=50 Jargon Terms Used in the Front Office Department">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      </a>
+      <a class="share-sq share-li" target="_blank" rel="noopener" aria-label="Share on LinkedIn"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=https://colaborate2022-stack.github.io/hti-website/front-office-jargon.html">
+        <svg viewBox="0 0 32 32">
+          <path
+            d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+        </svg>
+      </a>
+    </div>
+    <div class="share-divider"></div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>HTI</h4>
+          <a href="#">About Us</a>
+          <a href="#">Case Studies</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <a href="restaurants.html">Restaurants &amp; QSRs</a>
+          <a href="hotels.html">Hotels</a>
+          <a href="offices.html">Offices</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="#">Team Building</a>
+          <a href="#">Leadership Development</a>
+          <a href="#">Sales Training</a>
+          <a href="#">Professional Etiquette</a>
+          <a href="#">Become A Trainer</a>
+          <a href="#">Develop SOPs &amp; How-To Videos</a>
+          <a href="blog.html">Blogs</a>
+        </div>
+      </div>
+      <div class="footer-div"></div>
+      <div class="footer-bottom">
+        <div class="footer-social">
+          <a href="https://www.facebook.com/hti.india/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg></a>
+          <a href="https://www.instagram.com/hti.india/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M12 2c-2.716 0-3.056.012-4.123.06c-1.064.049-1.791.218-2.427.465a4.901 4.901 0 0 0-1.772 1.153A4.902 4.902 0 0 0 2.525 5.45c-.247.636-.416 1.363-.465 2.427C2.011 8.944 2 9.284 2 12s.011 3.056.06 4.123c.049 1.064.218 1.791.465 2.427a4.903 4.903 0 0 0 1.153 1.772a4.903 4.903 0 0 0 1.772 1.153c.636.247 1.363.416 2.427.465c1.067.048 1.407.06 4.123.06s3.056-.012 4.123-.06c1.064-.049 1.791-.218 2.427-.465a4.902 4.902 0 0 0 1.772-1.153a4.902 4.902 0 0 0 1.153-1.772c.247-.636.416-1.363.465-2.427c.048-1.067.06-1.407.06-4.123s-.012-3.056-.06-4.123c-.049-1.064-.218-1.791-.465-2.427a4.902 4.902 0 0 0-1.153-1.772a4.901 4.901 0 0 0-1.772-1.153c-.636-.247-1.363-.416-2.427-.465C15.056 2.012 14.716 2 12 2m0 1.802c2.67 0 2.986.01 4.04.058c.976.045 1.505.207 1.858.344c.466.182.8.399 1.15.748c.35.35.566.684.748 1.15c.136.353.3.882.344 1.857c.048 1.055.058 1.37.058 4.041c0 2.67-.01 2.986-.058 4.04c-.045.976-.208 1.505-.344 1.858a3.1 3.1 0 0 1-.748 1.15c-.35.35-.684.566-1.15.748c-.353.136-.882.3-1.857.344c-1.054.048-1.37.058-4.041.058c-2.67 0-2.987-.01-4.04-.058c-.976-.045-1.505-.208-1.858-.344a3.098 3.098 0 0 1-1.15-.748a3.098 3.098 0 0 1-.748-1.15c-.137-.353-.3-.882-.344-1.857c-.048-1.055-.058-1.37-.058-4.041c0-2.67.01-2.986.058-4.04c.045-.976.207-1.505.344-1.858c.182-.466.399-.8.748-1.15c.35-.35.684-.566 1.15-.748c.353-.137.882-.3 1.857-.344c1.055-.048 1.37-.058 4.041-.058m0 11.531a3.333 3.333 0 1 1 0-6.666a3.333 3.333 0 0 1 0 6.666m0-8.468a5.135 5.135 0 1 0 0 10.27a5.135 5.135 0 0 0 0-10.27m6.538-.203a1.2 1.2 0 1 1-2.4 0a1.2 1.2 0 0 1 2.4 0" />
+            </svg></a>
+          <a href="https://www.linkedin.com/company/hospitality-training-institute-india-pvt-ltd" target="_blank"
+            aria-label="LinkedIn"><svg viewBox="0 0 32 32" fill="currentColor">
+              <path
+                d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+            </svg></a>
+          <a href="https://www.youtube.com/c/Hti-india" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg></a>
+        </div>
+        <div class="footer-contact"><a href="tel:+917738060902">
+            <h3>Contact Us: <span>+91 77380 60902</span></h3>
+          </a></div>
+        <a href="index.html" class="footer-brand"><img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+            alt="HTI" /></a>
+      </div>
+      <div class="footer-copy">&#169;&#65039; HOSPITALITY TRAINING INSTITUTE INDIA PRIVATE. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Timeline scroll observer
+    const chapters = document.querySelectorAll('.tl-chapter');
+    const spineFill = document.querySelector('.tl-spine-fill');
+    const track = document.querySelector('.tl-spine-track');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (spineFill && track) {
+            const trackTop = track.getBoundingClientRect().top + window.scrollY;
+            const nodeEl = entry.target.querySelector('.tl-node');
+            if (nodeEl) {
+              const nodeTop = nodeEl.getBoundingClientRect().top + window.scrollY;
+              const pct = ((nodeTop - trackTop) / track.offsetHeight) * 100;
+              spineFill.style.height = Math.min(pct + 8, 100) + '%';
+            }
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+
+    chapters.forEach(c => observer.observe(c));
+
+    // Mobile nav toggle
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const menu = document.getElementById('navMenu');
+      if (toggle && menu) {
+        toggle.addEventListener('click', () => menu.classList.toggle('open'));
+        document.querySelectorAll('.nav-item').forEach(item => {
+          item.addEventListener('click', (e) => {
+            if (window.innerWidth <= 960 && (e.target === item || e.target.classList.contains('caret'))) {
+              item.classList.toggle('open');
+            }
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+
+</html>
