@@ -224,6 +224,18 @@
     .hero-inner {
       max-width: 1120px;
       margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero-left {
+      flex: 0 0 48%;
+    }
+
+    .hero-right {
+      flex: 1;
     }
 
     .hero-back {
@@ -683,6 +695,16 @@
         padding: 40px 16px;
       }
 
+      .hero-inner {
+        flex-direction: column;
+      }
+
+      .hero-left,
+      .hero-right {
+        width: 100%;
+        flex: none;
+      }
+
       .hero h1 {
         font-size: 22px;
       }
@@ -789,29 +811,33 @@
   <!-- ============ SECTION 1 — HERO ============ -->
   <section class="hero">
     <div class="hero-inner">
-      <a href="blog.html" class="hero-back">&#8592; Back to Blogs</a>
-      <br>
-      <span class="hero-tag">Hindi Blog</span>
-      <h1>आतिथ्य (हॉस्पिटैलिटी) क्या है? 'आतिथ्य' का अर्थ और परिभाषा।</h1>
-      <p class="hero-intro">आज हम आपको 'आतिथ्य' (हॉस्पिटैलिटी) के बारे में समझाएंगे कि किस तरह विभिन्न 4 स्तरों में 'आतिथ्य'
-        का स्तर कठिन होता जाता है!</p>
-      <div class="hero-meta">
-        <div class="hero-card">
-          <span class="hc-label">Words by</span>
-          <span class="hc-value">Storm CostaBir</span>
-        </div>
-        <div class="hero-card">
-          <span class="hc-label">Date</span>
-          <span class="hc-value">26-01-23</span>
-        </div>
-        <div class="hero-card">
-          <span class="hc-label">Reading Time</span>
-          <span class="hc-value">4 min read</span>
+      <div class="hero-left">
+        <a href="blog.html" class="hero-back">&#8592; Back to Blogs</a>
+        <br>
+        <span class="hero-tag">Hindi Blog</span>
+        <h1>आतिथ्य (हॉस्पिटैलिटी) क्या है? 'आतिथ्य' का अर्थ और परिभाषा।</h1>
+        <p class="hero-intro">आज हम आपको 'आतिथ्य' (हॉस्पिटैलिटी) के बारे में समझाएंगे कि किस तरह विभिन्न 4 स्तरों में 'आतिथ्य'
+          का स्तर कठिन होता जाता है!</p>
+        <div class="hero-meta">
+          <div class="hero-card">
+            <span class="hc-label">Words by</span>
+            <span class="hc-value">Storm CostaBir</span>
+          </div>
+          <div class="hero-card">
+            <span class="hc-label">Date</span>
+            <span class="hc-value">26-01-23</span>
+          </div>
+          <div class="hero-card">
+            <span class="hc-label">Reading Time</span>
+            <span class="hc-value">4 min read</span>
+          </div>
         </div>
       </div>
-      <div class="hero-video">
-        <iframe src="https://www.youtube.com/embed/u0bqEeCVI_A?rel=0&controls=1&autoplay=0&mute=0&start=5"
-          allowfullscreen title="Hospitality Hindi Video"></iframe>
+      <div class="hero-right">
+        <div class="hero-video">
+          <iframe src="https://www.youtube.com/embed/u0bqEeCVI_A?rel=0&controls=1&autoplay=0&mute=0&start=5"
+            allowfullscreen title="Hospitality Hindi Video"></iframe>
+        </div>
       </div>
     </div>
   </section>
