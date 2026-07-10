@@ -318,7 +318,7 @@
       left: 0;
       width: 100%;
       height: 0%;
-      background: #E32129;
+      background: #ffffff;
       transition: height 0.3s ease;
     }
 
@@ -338,11 +338,11 @@
 
     .tl-img-half {
       width: calc(50% - 32px);
-      padding: 0 40px 0 0;
+      padding: 0 40px;
     }
 
     .tl-chapter.even .tl-img-half {
-      padding: 0 0 0 40px;
+      padding: 0 40px;
     }
 
     .tl-img-half img {
@@ -368,11 +368,11 @@
 
     .tl-card-half {
       width: calc(50% - 32px);
-      padding: 0 0 0 40px;
+      padding: 0 40px;
     }
 
     .tl-chapter.even .tl-card-half {
-      padding: 0 40px 0 0;
+      padding: 0 40px;
     }
 
     .tl-card {
@@ -1092,38 +1092,79 @@
     });
 
     /* ---------- Timeline scroll observer ---------- */
-    (function () {
-      const chapters = document.querySelectorAll('.tl-chapter');
-      const spineFill = document.getElementById('spineFill');
-      const track = document.querySelector('.tl-spine-track');
+    const chapters = document.querySelectorAll('.tl-chapter');
+    const spineFill = document.querySelector('.tl-spine-fill');
+    const track = document.querySelector('.tl-spine-track');
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-          } else {
-            entry.target.classList.remove('active');
-          }
-        });
-      }, { threshold: 0.4 });
-
-      chapters.forEach(ch => observer.observe(ch));
-
-      function updateSpine() {
-        if (!track) return;
-        const rect = track.getBoundingClientRect();
-        const vh = window.innerHeight;
-        const total = rect.height;
-        // how far the viewport midpoint has travelled past the track top
-        let progress = (vh / 2 - rect.top) / total;
-        progress = Math.max(0, Math.min(1, progress));
-        spineFill.style.height = (progress * 100) + '%';
+    function setRed(chapter) {
+      chapter.classList.add('visited');
+      chapter.classList.remove('active');
+      const card = chapter.querySelector('.tl-card');
+      if (card) {
+        card.style.border = '1px solid #E32129';
+        card.style.boxShadow = 'none';
       }
+      const pill = chapter.querySelector('.tl-pill');
+      if (pill) pill.style.background = '#E32129';
+    }
 
-      window.addEventListener('scroll', updateSpine, { passive: true });
-      window.addEventListener('resize', updateSpine);
-      updateSpine();
-    })();
+    function setActive(chapter) {
+      chapter.classList.add('active');
+      chapter.classList.remove('visited');
+      const card = chapter.querySelector('.tl-card');
+      if (card) {
+        card.style.border = '1px solid #E32129';
+        card.style.boxShadow = '0 0 0 1px #E32129';
+      }
+      const pill = chapter.querySelector('.tl-pill');
+      if (pill) pill.style.background = '#E32129';
+    }
+
+    function setGrey(chapter) {
+      chapter.classList.remove('active');
+      chapter.classList.remove('visited');
+      const card = chapter.querySelector('.tl-card');
+      if (card) {
+        card.style.border = '1px solid #3D3D3D';
+        card.style.boxShadow = 'none';
+      }
+      const pill = chapter.querySelector('.tl-pill');
+      if (pill) pill.style.background = '#3D3D3D';
+    }
+
+    // Reset all to grey on load
+    chapters.forEach(c => setGrey(c));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const rect = entry.target.getBoundingClientRect();
+        if (entry.isIntersecting) {
+          setActive(entry.target);
+        } else {
+          if (rect.bottom < window.innerHeight * 0.5) {
+            // Already scrolled past - set red (visited)
+            setRed(entry.target);
+          } else {
+            // Below viewport - set grey
+            setGrey(entry.target);
+          }
+        }
+      });
+    }, {
+      threshold: 0.3,
+      rootMargin: '-35% 0px -35% 0px'
+    });
+
+    chapters.forEach(c => observer.observe(c));
+
+    // Spine fill on scroll
+    window.addEventListener('scroll', () => {
+      if (!track || !spineFill) return;
+      const trackTop = track.getBoundingClientRect().top + window.scrollY;
+      const viewMiddle = window.scrollY + window.innerHeight * 0.5;
+      const pct = ((viewMiddle - trackTop) / track.offsetHeight) * 100;
+      spineFill.style.height = Math.min(Math.max(pct, 0), 100) + '%';
+    }, { passive: true });
 
     /* ---------- Mobile nav ---------- */
     (function () {
