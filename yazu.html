@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yazu: Fine Dining &amp; The Entrepreneur Behind It | HTI India</title>
   <meta name="description"
-    content="The story of Yazu and Ranbir Nagpal — fine dining and the entrepreneur behind it, told chapter by chapter." />
+    content="Ranbir Nagpal, the restaurateur behind Yazu Fine Dining, takes us through his journey of building a legacy in India's fine dining scene." />
   <link rel="icon"
     href="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63872ebc11d181ed9d69d77d_HTI%20star%20logo%2032x32%20px.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,14 +17,61 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <style>
-    /* ---- Vars needed by copied navbar/footer ---- */
     :root {
       --hti-bg: #F3F2EF;
+      --hti-black: #000;
       --hti-red: #e31e24;
       --hti-red2: #e31e24;
+      --hti-text: #111;
+
+      --red: #E32129;
+      --cream: #F3F2EF;
+      --black: #000000;
+      --grey-800: #3D3D3D;
+      --grey-500: #8D8D8D;
+      --white: #FFFFFF;
+      --maxw: 1120px;
+      --gutter: 24px;
     }
 
-    /* ============ NAVBAR (copied from sanjay-vazirani.html) ============ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      background: var(--hti-bg);
+      color: var(--hti-text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    /* ============ NAVBAR ============ */
     .navbar {
       position: sticky;
       top: 0;
@@ -170,7 +217,294 @@
       display: block;
     }
 
-    /* ============ FOOTER (copied from sanjay-vazirani.html) ============ */
+    /* ============ SECTION 1 — HERO ============ */
+    .hero {
+      background: #F3F2EF;
+      padding: 60px 24px;
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero-left {
+      flex: 0 0 48%;
+    }
+
+    .hero-left h1 {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 44px;
+      color: #000;
+      margin-bottom: 16px;
+    }
+
+    .hero-left .hero-lead {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #444;
+      margin-bottom: 28px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 10px 16px;
+      min-width: 110px;
+      text-align: center;
+    }
+
+    .hero-card .hc-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #E32129;
+      display: block;
+    }
+
+    .hero-card .hc-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: #E32129;
+      display: block;
+    }
+
+    .hero-right {
+      flex: 1;
+    }
+
+    .hero-right img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      max-height: 420px;
+    }
+
+    /* ============ SECTION 2 — TIMELINE ============ */
+    .timeline {
+      background: #000;
+      padding: 80px 0;
+    }
+
+    .tl-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .tl-spine-track {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #2a2a2a;
+      z-index: 0;
+    }
+
+    .tl-spine-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: #ffffff;
+      transition: height 0.3s ease;
+    }
+
+    .tl-chapter {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-height: 420px;
+      margin-bottom: 0;
+      padding: 60px 0;
+      flex-direction: row;
+    }
+
+    .tl-chapter.even {
+      flex-direction: row-reverse;
+    }
+
+    .tl-img-half {
+      width: calc(50% - 32px);
+      padding: 0 48px;
+    }
+
+    .tl-chapter.even .tl-img-half {
+      padding: 0 48px;
+    }
+
+    .tl-img-half img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      max-height: 340px;
+      display: block;
+    }
+
+    .tl-node {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border-radius: 50%;
+      border: 2px solid #E32129;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .tl-card-half {
+      width: calc(50% - 32px);
+      padding: 0 48px;
+    }
+
+    .tl-chapter.even .tl-card-half {
+      padding: 0 48px;
+    }
+
+    .tl-card {
+      border: 1px solid #3D3D3D;
+      border-radius: 5px;
+      padding: 24px;
+      background: transparent;
+    }
+
+    .tl-pill {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: #3D3D3D;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      transition: background 0.3s ease;
+    }
+
+    .tl-chapter.active .tl-pill {
+      background: #E32129 !important;
+      color: #ffffff !important;
+    }
+
+    .tl-body {
+      color: #fff;
+      font-size: 18px;
+      line-height: 1.6;
+      max-height: 180px;
+      overflow: hidden;
+    }
+
+    .tl-body.expanded {
+      max-height: none;
+      overflow: visible;
+    }
+
+    .tl-body p {
+      color: #fff;
+      margin-bottom: 14px;
+      font-size: 16px;
+    }
+
+    .tl-body strong {
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .tl-body ol,
+    .tl-body ul {
+      color: #fff;
+      margin-left: 20px;
+      margin-bottom: 14px;
+    }
+
+    .tl-body li {
+      color: #fff;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .tl-readmore {
+      display: block;
+      margin: 16px auto 0;
+      background: #E32129;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* ============ SECTION 3 — SHARE BAR ============ */
+    .share-section {
+      background: #F3F2EF;
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    .share-section .share-heading {
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 24px;
+    }
+
+    .share-row {
+      display: inline-flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .share-sq {
+      width: 50px;
+      height: 50px;
+      border-radius: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .share-sq svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
+    }
+
+    .share-fb {
+      background: #0B85EE;
+    }
+
+    .share-tw {
+      background: #1DA1F2;
+    }
+
+    .share-li {
+      background: #0A66C2;
+    }
+
+    .share-divider {
+      margin: 32px auto 0;
+      max-width: 480px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #E32129, transparent);
+    }
+
+    /* ============ FOOTER ============ */
     .footer {
       background: #000;
       color: #fff;
@@ -261,7 +595,7 @@
       border-top: 1px solid #2a2a2a;
     }
 
-    /* ============ NAV + FOOTER RESPONSIVE (copied) ============ */
+    /* ============ RESPONSIVE ============ */
     @media(max-width:960px) {
       .nav-menu {
         position: fixed;
@@ -313,232 +647,64 @@
       }
     }
 
+    @media(max-width:768px) {
+      .hero-inner {
+        flex-direction: column;
+      }
+
+      .hero-left {
+        flex: 1 1 auto;
+        width: 100%;
+        order: 1;
+      }
+
+      .hero-right {
+        width: 100%;
+        order: 2;
+      }
+
+      .hero-left h1 {
+        font-size: 22px;
+        line-height: 1.3;
+      }
+
+      .tl-spine-track {
+        display: none;
+      }
+
+      .tl-chapter,
+      .tl-chapter.even {
+        flex-direction: column;
+        min-height: auto;
+        padding: 30px 24px;
+      }
+
+      .tl-img-half,
+      .tl-chapter.even .tl-img-half,
+      .tl-card-half,
+      .tl-chapter.even .tl-card-half {
+        width: 100%;
+        padding: 0;
+      }
+
+      .tl-img-half {
+        margin-bottom: 20px;
+        order: 1;
+      }
+
+      .tl-card-half {
+        order: 2;
+      }
+
+      .tl-node {
+        display: none;
+      }
+    }
+
     @media(max-width:600px) {
       .footer-cols {
         grid-template-columns: 1fr;
       }
-    }
-
-    /* ============ PAGE STYLES ============ */
-    :root {
-      --red: #e31e24;
-      --black: #000;
-      --cream: #F3F2EF;
-      --white: #fff;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Montserrat', sans-serif; background: var(--cream); color: #111; overflow-x: hidden; }
-    a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
-
-    /* HERO */
-    .hero {
-      background: var(--black);
-      padding: 80px 24px 60px;
-      text-align: center;
-    }
-    .hero-category {
-      display: inline-block;
-      background: var(--red);
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border-radius: 20px;
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: clamp(28px, 5vw, 52px);
-      color: #fff;
-      line-height: 1.2;
-      max-width: 820px;
-      margin: 0 auto 20px;
-    }
-    .hero h1 span { color: var(--red); }
-    .hero-meta {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      flex-wrap: wrap;
-      margin-top: 24px;
-    }
-    .hero-meta-card {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 10px;
-      padding: 10px 20px;
-      text-align: center;
-    }
-    .hero-meta-card .label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 4px;
-    }
-    .hero-meta-card .value {
-      font-size: 13px;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    /* HERO COVER IMAGE */
-    .hero-cover {
-      width: 100%;
-      max-width: 860px;
-      margin: 40px auto 0;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-    }
-    .hero-cover img {
-      width: 100%;
-      height: 420px;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-    }
-
-    /* TIMELINE WRAPPER */
-    .timeline-wrap {
-      background: var(--black);
-      padding: 80px 24px;
-      position: relative;
-    }
-    .timeline-inner {
-      max-width: 860px;
-      margin: 0 auto;
-      position: relative;
-    }
-    /* Vertical spine line */
-    .timeline-inner::before {
-      content: '';
-      position: absolute;
-      left: 20px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--red), rgba(227,30,36,0.2));
-    }
-
-    /* Each chapter */
-    .tl-chapter {
-      position: relative;
-      padding-left: 60px;
-      margin-bottom: 72px;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .tl-chapter.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .tl-chapter:last-child { margin-bottom: 0; }
-
-    /* Dot on spine */
-    .tl-dot {
-      position: absolute;
-      left: 12px;
-      top: 6px;
-      width: 18px;
-      height: 18px;
-      background: var(--red);
-      border-radius: 50%;
-      border: 3px solid var(--black);
-      box-shadow: 0 0 0 2px var(--red);
-      z-index: 2;
-    }
-
-    /* Chapter title pill */
-    .tl-pill {
-      display: inline-block;
-      background: var(--red);
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border-radius: 20px;
-      margin-bottom: 14px;
-    }
-
-    /* Chapter heading */
-    .tl-chapter h2 {
-      font-size: clamp(20px, 3vw, 28px);
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 18px;
-      line-height: 1.25;
-    }
-
-    /* Chapter image */
-    .tl-img {
-      width: 100%;
-      border-radius: 14px;
-      overflow: hidden;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-    }
-    .tl-img img {
-      width: 100%;
-      height: 320px;
-      object-fit: contain;
-      background: #111;
-      display: block;
-    }
-
-    /* Chapter body text */
-    .tl-chapter p {
-      font-size: 15px;
-      line-height: 1.85;
-      color: #ccc;
-      font-weight: 400;
-    }
-
-    /* SHARE BAR */
-    .share-bar {
-      background: var(--black);
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 32px 24px;
-      text-align: center;
-    }
-    .share-bar p {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #888;
-      margin-bottom: 16px;
-    }
-    .share-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
-    .share-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 10px 20px;
-      border-radius: 30px;
-      transition: background 0.2s;
-    }
-    .share-links a:hover { background: var(--red); border-color: var(--red); }
-
-    @media (max-width: 600px) {
-      .hero-cover img { height: 240px; }
-      .tl-img img { height: 200px; }
-      .timeline-inner::before { left: 14px; }
-      .tl-dot { left: 6px; }
-      .tl-chapter { padding-left: 44px; }
     }
   </style>
 </head>
@@ -600,142 +766,225 @@
     </div>
   </header>
 
-  <!-- HERO -->
+  <!-- ============ SECTION 1 — HERO ============ -->
   <section class="hero">
-    <span class="hero-category">Entrepreneur Series</span>
-    <h1>Yazu: Fine Dining &amp; The <span>Entrepreneur</span> Behind It</h1>
-    <div class="hero-meta">
-      <div class="hero-meta-card">
-        <div class="label">Words By</div>
-        <div class="value">HTI India</div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <h1>Yazu: Fine Dining &amp; The Entrepreneur Behind It</h1>
+        <p class="hero-lead">Ranbir Nagpal, the restaurateur behind Yazu Fine Dining, takes us through his journey of building a world-class fine dining legacy in India &mdash; and shares what it truly takes to run a restaurant that guests keep coming back to.</p>
+        <div class="hero-meta">
+          <div class="hero-card">
+            <span class="hc-label">Words by</span>
+            <span class="hc-value">Ranbir Nagpal</span>
+          </div>
+          <div class="hero-card">
+            <span class="hc-label">Date</span>
+            <span class="hc-value">2023</span>
+          </div>
+          <div class="hero-card">
+            <span class="hc-label">Reading Time</span>
+            <span class="hc-value">6 min read</span>
+          </div>
+        </div>
       </div>
-      <div class="hero-meta-card">
-        <div class="label">Published</div>
-        <div class="value">2023</div>
+      <div class="hero-right">
+        <img
+          src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfad887519806dd62ae46f_1.%20legancy.jpg"
+          alt="Ranbir Nagpal - Yazu Fine Dining" />
       </div>
-      <div class="hero-meta-card">
-        <div class="label">Read Time</div>
-        <div class="value">6 Min</div>
-      </div>
-    </div>
-    <div class="hero-cover">
-      <img src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfad887519806dd62ae46f_1.%20legancy.jpg" alt="Ranbir Nagpal - Yazu Fine Dining" loading="lazy" />
     </div>
   </section>
 
-  <!-- TIMELINE -->
-  <section class="timeline-wrap">
-    <div class="timeline-inner">
+  <!-- ============ SECTION 2 — TIMELINE ============ -->
+  <section class="timeline">
+    <div class="tl-container">
+      <div class="tl-spine-track">
+        <div class="tl-spine-fill" id="spineFill"></div>
+      </div>
 
       <!-- Chapter 1 -->
       <div class="tl-chapter">
-        <div class="tl-dot"></div>
-        <span class="tl-pill">Chapter 1</span>
-        <h2>A Legacy In The Making</h2>
-        <div class="tl-img">
-          <img src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfd2db401987373ab0e4c9_7.jpg" alt="A Legacy In The Making" loading="lazy" />
+        <div class="tl-img-half">
+          <img
+            src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfd2db401987373ab0e4c9_7.jpg"
+            alt="A Legacy In The Making" />
         </div>
-        <p>Ranbir Nagpal's journey into the world of fine dining began long before Yazu opened its doors. Growing up with a deep curiosity about food, culture, and the art of hosting, he developed an instinct for what truly makes a dining experience memorable. The seeds of Yazu were planted in those early years — a vision of a restaurant that would honour Japanese culinary tradition while making it feel intimate and personal to every guest who walked in.</p>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <span class="tl-pill">A Legacy In The Making</span>
+            <div class="tl-body">
+              <p>Ranbir Nagpal's journey into the world of fine dining began long before Yazu opened its doors. Growing up with a deep curiosity about food, culture, and the art of hosting, he developed an instinct for what truly makes a dining experience memorable. The seeds of Yazu were planted in those early years &mdash; a vision of a restaurant that would honour Japanese culinary tradition while making it feel intimate and personal to every guest who walked in.</p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
       </div>
 
       <!-- Chapter 2 -->
-      <div class="tl-chapter">
-        <div class="tl-dot"></div>
-        <span class="tl-pill">Chapter 2</span>
-        <h2>Finding His Footing</h2>
-        <div class="tl-img">
-          <img src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfd2daeec6228116ffe1de_2.jpg" alt="Finding His Footing" loading="lazy" />
+      <div class="tl-chapter even">
+        <div class="tl-img-half">
+          <img
+            src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfd2daeec6228116ffe1de_2.jpg"
+            alt="Finding His Footing" />
         </div>
-        <p>Before founding Yazu, Ranbir spent years learning the nuances of restaurant operations from the ground up. He understood that running a fine dining establishment is not just about great food — it is about creating a world that the guest steps into. Every detail, from the lighting to the way a server presents a dish, contributes to that world. This period of learning shaped his belief that excellence is a discipline, not an accident.</p>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <span class="tl-pill">Finding His Footing</span>
+            <div class="tl-body">
+              <p>Before founding Yazu, Ranbir spent years learning the nuances of restaurant operations from the ground up. He understood that running a fine dining establishment is not just about great food &mdash; it is about creating a world that the guest steps into. Every detail, from the lighting to the way a server presents a dish, contributes to that world. This period of learning shaped his belief that excellence is a discipline, not an accident.</p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
       </div>
 
       <!-- Chapter 3 -->
       <div class="tl-chapter">
-        <div class="tl-dot"></div>
-        <span class="tl-pill">Chapter 3</span>
-        <h2>The Moat Of Excellence</h2>
-        <div class="tl-img">
-          <img src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfd2db93431e44769bb167_3.jpg" alt="The Moat Of Excellence" loading="lazy" />
+        <div class="tl-img-half">
+          <img
+            src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfd2db93431e44769bb167_3.jpg"
+            alt="The Moat Of Excellence" />
         </div>
-        <p>What sets Yazu apart is its unwavering commitment to quality — what Ranbir describes as building a "moat of excellence" around the brand. This means sourcing the finest ingredients, training the team relentlessly, and never compromising on the guest experience even when it is inconvenient or costly. He believes that the standards you maintain in the hardest moments are the ones that define your reputation in the long run.</p>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <span class="tl-pill">The Moat Of Excellence</span>
+            <div class="tl-body">
+              <p>What sets Yazu apart is its unwavering commitment to quality &mdash; what Ranbir describes as building a "moat of excellence" around the brand. This means sourcing the finest ingredients, training the team relentlessly, and never compromising on the guest experience even when it is inconvenient or costly. He believes that the standards you maintain in the hardest moments are the ones that define your reputation in the long run.</p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
       </div>
 
       <!-- Chapter 4 -->
-      <div class="tl-chapter">
-        <div class="tl-dot"></div>
-        <span class="tl-pill">Chapter 4</span>
-        <h2>Personalization</h2>
-        <div class="tl-img">
-          <img src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfd2dac2f4948a787cc526_4.jpg" alt="Personalization" loading="lazy" />
+      <div class="tl-chapter even">
+        <div class="tl-img-half">
+          <img
+            src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfd2dac2f4948a787cc526_4.jpg"
+            alt="Personalization" />
         </div>
-        <p>At Yazu, personalization is not a feature — it is the philosophy. Ranbir built systems to remember guest preferences, celebrate milestones, and tailor experiences to individual tastes. A regular guest should never feel like a stranger. This level of attention to the individual is what transforms a restaurant from a place people visit into a place people return to, again and again, because it makes them feel seen and valued.</p>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <span class="tl-pill">Personalization</span>
+            <div class="tl-body">
+              <p>At Yazu, personalization is not a feature &mdash; it is the philosophy. Ranbir built systems to remember guest preferences, celebrate milestones, and tailor experiences to individual tastes. A regular guest should never feel like a stranger. This level of attention to the individual is what transforms a restaurant from a place people visit into a place people return to, again and again, because it makes them feel seen and valued.</p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
       </div>
 
       <!-- Chapter 5 -->
       <div class="tl-chapter">
-        <div class="tl-dot"></div>
-        <span class="tl-pill">Chapter 5</span>
-        <h2>Leaving No Room For Disappointment</h2>
-        <div class="tl-img">
-          <img src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfd2dbaeaccb53bcc3eff2_5.jpg" alt="Leaving No Room For Disappointment" loading="lazy" />
+        <div class="tl-img-half">
+          <img
+            src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfd2dbaeaccb53bcc3eff2_5.jpg"
+            alt="Leaving No Room For Disappointment" />
         </div>
-        <p>Ranbir is ruthless about failure points. He maps every step of the guest journey — from reservation to departure — and identifies where things can go wrong. Then he fixes them before they do. This proactive mindset means that Yazu has a reputation for consistency that is rare in the restaurant industry. Guests know they can trust the experience, and that trust is one of the most powerful things a brand can earn.</p>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <span class="tl-pill">Leaving No Room For Disappointment</span>
+            <div class="tl-body">
+              <p>Ranbir is ruthless about failure points. He maps every step of the guest journey &mdash; from reservation to departure &mdash; and identifies where things can go wrong. Then he fixes them before they do. This proactive mindset means that Yazu has earned a reputation for consistency that is rare in the restaurant industry. Guests know they can trust the experience, and that trust is one of the most powerful things a brand can earn.</p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
       </div>
 
       <!-- Chapter 6 -->
-      <div class="tl-chapter">
-        <div class="tl-dot"></div>
-        <span class="tl-pill">Chapter 6</span>
-        <h2>A Culture Of Empathy</h2>
-        <div class="tl-img">
-          <img src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfd2db363259218e9d7272_6.jpg" alt="A Culture Of Empathy" loading="lazy" />
+      <div class="tl-chapter even">
+        <div class="tl-img-half">
+          <img
+            src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfd2db363259218e9d7272_6.jpg"
+            alt="A Culture Of Empathy" />
         </div>
-        <p>Behind every great restaurant is a team that cares — and Ranbir has worked hard to build exactly that at Yazu. He leads with empathy, creating an environment where staff feel respected, heard, and invested in the success of the restaurant. He believes that the way you treat your team is directly reflected in the way they treat guests. A culture of empathy inside the kitchen and dining room creates warmth that guests can feel from the moment they arrive.</p>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <span class="tl-pill">A Culture Of Empathy</span>
+            <div class="tl-body">
+              <p>Behind every great restaurant is a team that cares &mdash; and Ranbir has worked hard to build exactly that at Yazu. He leads with empathy, creating an environment where staff feel respected, heard, and invested in the success of the restaurant. He believes that the way you treat your team is directly reflected in the way they treat guests. A culture of empathy inside the kitchen and dining room creates warmth that guests can feel from the moment they arrive.</p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
       </div>
 
       <!-- Chapter 7 -->
       <div class="tl-chapter">
-        <div class="tl-dot"></div>
-        <span class="tl-pill">Chapter 7</span>
-        <h2>Nurturing A Phenomenal Team</h2>
-        <div class="tl-img">
-          <img src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfad887519806dd62ae46f_1.%20legancy.jpg" alt="Nurturing A Phenomenal Team" loading="lazy" />
+        <div class="tl-img-half">
+          <img
+            src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfad887519806dd62ae46f_1.%20legancy.jpg"
+            alt="Nurturing A Phenomenal Team" />
         </div>
-        <p>Building a team at Yazu means investing in people for the long term. Ranbir does not just hire talent — he develops it. Regular training, open feedback, and a clear path for growth mean that the best people stay, grow, and carry the Yazu standard forward. He often says that a restaurant is only as good as its worst-performing team member on any given night — so the goal is to raise everyone's floor, not just celebrate the stars.</p>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <span class="tl-pill">Nurturing A Phenomenal Team</span>
+            <div class="tl-body">
+              <p>Building a team at Yazu means investing in people for the long term. Ranbir does not just hire talent &mdash; he develops it. Regular training, open feedback, and a clear path for growth mean that the best people stay, grow, and carry the Yazu standard forward. He often says that a restaurant is only as good as its worst-performing team member on any given night &mdash; so the goal is to raise everyone's floor, not just celebrate the stars.</p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
       </div>
 
       <!-- Chapter 8 -->
-      <div class="tl-chapter">
-        <div class="tl-dot"></div>
-        <span class="tl-pill">Chapter 8</span>
-        <h2>Building A Legacy</h2>
-        <div class="tl-img">
-          <img src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfd2db6defc0a475803268_8.jpg" alt="Building A Legacy" loading="lazy" />
+      <div class="tl-chapter even">
+        <div class="tl-img-half">
+          <img
+            src="https://cdn.prod.website-files.com/6391b55e06bf39f47f37f00a/64bfd2db6defc0a475803268_8.jpg"
+            alt="Building A Legacy" />
         </div>
-        <p>Yazu is not just a restaurant to Ranbir — it is a legacy project. He thinks in decades, not quarters. Every decision he makes today is filtered through the question: will this still make sense in twenty years? That long-term thinking drives him to invest in quality over shortcuts, in people over processes, and in reputation over short-term revenue. The result is a fine dining institution that has become a benchmark for what hospitality in India can look and feel like at its very best.</p>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <span class="tl-pill">Building A Legacy</span>
+            <div class="tl-body">
+              <p>Yazu is not just a restaurant to Ranbir &mdash; it is a legacy project. He thinks in decades, not quarters. Every decision he makes today is filtered through the question: will this still make sense in twenty years? That long-term thinking drives him to invest in quality over shortcuts, in people over processes, and in reputation over short-term revenue. The result is a fine dining institution that has become a benchmark for what hospitality in India can look and feel like at its very best.</p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
       </div>
 
     </div>
   </section>
 
-  <!-- SHARE BAR -->
-  <div class="share-bar">
-    <p>Share This Story</p>
-    <div class="share-links">
-      <a href="https://wa.me/?text=https://colaborate2022-stack.github.io/hti-website/yazu.html" target="_blank">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp
+  <!-- ============ SECTION 3 — SHARE BAR ============ -->
+  <section class="share-section">
+    <p class="share-heading">Share Ranbir's story to your favorite platform:</p>
+    <div class="share-row">
+      <a class="share-sq share-fb" target="_blank" rel="noopener" aria-label="Share on Facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=https://colaborate2022-stack.github.io/hti-website/yazu.html">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+        </svg>
       </a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://colaborate2022-stack.github.io/hti-website/yazu.html" target="_blank">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        LinkedIn
+      <a class="share-sq share-tw" target="_blank" rel="noopener" aria-label="Share on Twitter"
+        href="https://twitter.com/intent/tweet?url=https://colaborate2022-stack.github.io/hti-website/yazu.html&text=Yazu: Fine Dining & The Entrepreneur Behind It">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
       </a>
-      <a href="https://twitter.com/intent/tweet?url=https://colaborate2022-stack.github.io/hti-website/yazu.html" target="_blank">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.258 5.63 5.907-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        Twitter / X
+      <a class="share-sq share-li" target="_blank" rel="noopener" aria-label="Share on LinkedIn"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=https://colaborate2022-stack.github.io/hti-website/yazu.html&title=Yazu: Fine Dining & The Entrepreneur Behind It">
+        <svg viewBox="0 0 32 32">
+          <path
+            d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+        </svg>
       </a>
     </div>
-  </div>
+    <div class="share-divider"></div>
+  </section>
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
@@ -800,32 +1049,103 @@
   </footer>
 
   <script>
-    // Timeline scroll reveal
+    /* ---------- Read More toggle ---------- */
+    document.querySelectorAll('.tl-readmore').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const body = btn.parentElement.querySelector('.tl-body');
+        const expanded = body.classList.toggle('expanded');
+        btn.textContent = expanded ? 'Read Less' : 'Read More';
+        btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      });
+    });
+
+    /* ---------- Timeline scroll observer ---------- */
     const chapters = document.querySelectorAll('.tl-chapter');
+    const spineFill = document.querySelector('.tl-spine-fill');
+    const track = document.querySelector('.tl-spine-track');
+
+    function setRed(chapter) {
+      chapter.classList.add('visited');
+      chapter.classList.remove('active');
+      const card = chapter.querySelector('.tl-card');
+      if (card) {
+        card.style.border = '1px solid #E32129';
+        card.style.boxShadow = 'none';
+      }
+      const pill = chapter.querySelector('.tl-pill');
+      if (pill) pill.style.background = '#E32129';
+    }
+
+    function setActive(chapter) {
+      chapter.classList.add('active');
+      chapter.classList.remove('visited');
+      const card = chapter.querySelector('.tl-card');
+      if (card) {
+        card.style.border = '1px solid #E32129';
+        card.style.boxShadow = '0 0 0 1px #E32129';
+      }
+      const pill = chapter.querySelector('.tl-pill');
+      if (pill) pill.style.background = '#E32129';
+    }
+
+    function setGrey(chapter) {
+      chapter.classList.remove('active');
+      chapter.classList.remove('visited');
+      const card = chapter.querySelector('.tl-card');
+      if (card) {
+        card.style.border = '1px solid #3D3D3D';
+        card.style.boxShadow = 'none';
+      }
+      const pill = chapter.querySelector('.tl-pill');
+      if (pill) pill.style.background = '#3D3D3D';
+    }
+
+    // Reset all to grey on load
+    chapters.forEach(c => setGrey(c));
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        const rect = entry.target.getBoundingClientRect();
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+          setActive(entry.target);
+        } else {
+          if (rect.bottom < window.innerHeight * 0.5) {
+            // Already scrolled past - set red (visited)
+            setRed(entry.target);
+          } else {
+            // Below viewport - set grey
+            setGrey(entry.target);
+          }
         }
       });
-    }, { threshold: 0.15 });
-    chapters.forEach(ch => observer.observe(ch));
+    }, {
+      threshold: 0.3,
+      rootMargin: '-35% 0px -35% 0px'
+    });
 
-    // Mobile nav toggle (copied from sanjay-vazirani.html)
+    chapters.forEach(c => observer.observe(c));
+
+    // Spine fill on scroll
+    window.addEventListener('scroll', () => {
+      if (!track || !spineFill) return;
+      const trackTop = track.getBoundingClientRect().top + window.scrollY;
+      const viewMiddle = window.scrollY + window.innerHeight * 0.5;
+      const pct = ((viewMiddle - trackTop) / track.offsetHeight) * 100;
+      spineFill.style.height = Math.min(Math.max(pct, 0), 100) + '%';
+    }, { passive: true });
+
+    /* ---------- Mobile nav ---------- */
     (function () {
       const toggle = document.getElementById('navToggle');
       const menu = document.getElementById('navMenu');
-      if (toggle && menu) {
-        toggle.addEventListener('click', () => menu.classList.toggle('open'));
-        document.querySelectorAll('.nav-item').forEach(item => {
-          item.addEventListener('click', (e) => {
-            if (window.innerWidth <= 960 && (e.target === item || e.target.classList.contains('caret'))) {
-              item.classList.toggle('open');
-            }
-          });
+      toggle.addEventListener('click', () => menu.classList.toggle('open'));
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          if (window.innerWidth <= 960 && e.target === item || (e.target.classList.contains('caret'))) {
+            item.classList.toggle('open');
+          }
         });
-      }
+      });
     })();
   </script>
 </body>
