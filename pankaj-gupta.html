@@ -386,17 +386,12 @@
       display: inline-block;
       padding: 6px 14px;
       border-radius: 8px;
-      background: #3D3D3D;
+      background: #E32129;
       color: #fff;
       font-size: 14px;
       font-weight: 600;
       margin-bottom: 16px;
       transition: background 0.3s ease;
-    }
-
-    .tl-chapter.active .tl-pill {
-      background: #E32129 !important;
-      color: #ffffff !important;
     }
 
     .tl-body {
@@ -1041,70 +1036,8 @@
     });
 
     /* ---------- Timeline scroll observer ---------- */
-    const chapters = document.querySelectorAll('.tl-chapter');
     const spineFill = document.querySelector('.tl-spine-fill');
     const track = document.querySelector('.tl-spine-track');
-
-    function setRed(chapter) {
-      chapter.classList.add('visited');
-      chapter.classList.remove('active');
-      const card = chapter.querySelector('.tl-card');
-      if (card) {
-        card.style.border = '1px solid #E32129';
-        card.style.boxShadow = 'none';
-      }
-      const pill = chapter.querySelector('.tl-pill');
-      if (pill) pill.style.background = '#E32129';
-    }
-
-    function setActive(chapter) {
-      chapter.classList.add('active');
-      chapter.classList.remove('visited');
-      const card = chapter.querySelector('.tl-card');
-      if (card) {
-        card.style.border = '1px solid #E32129';
-        card.style.boxShadow = '0 0 0 1px #E32129';
-      }
-      const pill = chapter.querySelector('.tl-pill');
-      if (pill) pill.style.background = '#E32129';
-    }
-
-    function setGrey(chapter) {
-      chapter.classList.remove('active');
-      chapter.classList.remove('visited');
-      const card = chapter.querySelector('.tl-card');
-      if (card) {
-        card.style.border = '1px solid #3D3D3D';
-        card.style.boxShadow = 'none';
-      }
-      const pill = chapter.querySelector('.tl-pill');
-      if (pill) pill.style.background = '#3D3D3D';
-    }
-
-    // Reset all to grey on load
-    chapters.forEach(c => setGrey(c));
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const rect = entry.target.getBoundingClientRect();
-        if (entry.isIntersecting) {
-          setActive(entry.target);
-        } else {
-          if (rect.bottom < window.innerHeight * 0.5) {
-            // Already scrolled past - set red (visited)
-            setRed(entry.target);
-          } else {
-            // Below viewport - set grey
-            setGrey(entry.target);
-          }
-        }
-      });
-    }, {
-      threshold: 0.3,
-      rootMargin: '-35% 0px -35% 0px'
-    });
-
-    chapters.forEach(c => observer.observe(c));
 
     // Spine fill on scroll
     window.addEventListener('scroll', () => {

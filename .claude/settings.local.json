@@ -43,7 +43,8 @@
       "PowerShell(& \"C:\\\\Users\\\\ATUL\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--Claude-claude-app-building-hti-website\\\\3c6cc1e5-d82e-40b2-b3b2-722747cd1527\\\\scratchpad\\\\fix_timeline.ps1\")",
       "PowerShell(& \"C:\\\\Users\\\\ATUL\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--Claude-claude-app-building-hti-website\\\\3c6cc1e5-d82e-40b2-b3b2-722747cd1527\\\\scratchpad\\\\build_two.ps1\")",
       "Bash(curl -s -X PATCH https://ytthcgdsbfagvwcopoaj.supabase.co/rest/v1/blogs?id=eq.26 -H 'apikey: __TRACKED_VAR__' -H 'Authorization: Bearer __TRACKED_VAR__' -H 'Content-Type: application/json' -H 'Prefer: return=representation' -d '{\"layout\":\"timeline\",\"redirect_url\":\"housekeeping-jargon.html\"}')",
-      "PowerShell(& \"C:\\\\Users\\\\ATUL\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--Claude-claude-app-building-hti-website\\\\3c6cc1e5-d82e-40b2-b3b2-722747cd1527\\\\scratchpad\\\\build_vishal.ps1\")"
+      "PowerShell(& \"C:\\\\Users\\\\ATUL\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--Claude-claude-app-building-hti-website\\\\3c6cc1e5-d82e-40b2-b3b2-722747cd1527\\\\scratchpad\\\\build_vishal.ps1\")",
+      "PowerShell(& \"C:\\\\Users\\\\ATUL\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--Claude-claude-app-building-hti-website\\\\3c6cc1e5-d82e-40b2-b3b2-722747cd1527\\\\scratchpad\\\\fix_dim.ps1\")"
     ]
   }
 }
