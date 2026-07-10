@@ -330,10 +330,15 @@
       margin-bottom: 0;
       padding: 60px 0;
       flex-direction: row;
+      border: 2px solid #444;
     }
 
     .tl-chapter.even {
       flex-direction: row-reverse;
+    }
+
+    .tl-chapter.active {
+      border: 2px solid #e31e24;
     }
 
     .tl-img-half {
@@ -1098,6 +1103,33 @@
       const pct = ((viewMiddle - trackTop) / track.offsetHeight) * 100;
       spineFill.style.height = Math.min(Math.max(pct, 0), 100) + '%';
     }, { passive: true });
+
+    function setActiveChapter() {
+      const chapters = document.querySelectorAll('.tl-chapter');
+      let activeSet = false;
+      chapters.forEach(ch => {
+        const rect = ch.getBoundingClientRect();
+        const inView = rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.4;
+        if (inView && !activeSet) {
+          ch.classList.add('active');
+          activeSet = true;
+        } else {
+          ch.classList.remove('active');
+        }
+      });
+      // fallback: if none active, activate first visible
+      if (!activeSet) {
+        chapters.forEach(ch => {
+          const rect = ch.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0 && !activeSet) {
+            ch.classList.add('active');
+            activeSet = true;
+          }
+        });
+      }
+    }
+    window.addEventListener('scroll', setActiveChapter);
+    window.addEventListener('load', setActiveChapter);
 
     /* ---------- Mobile nav ---------- */
     (function () {
