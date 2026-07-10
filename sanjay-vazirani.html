@@ -383,18 +383,15 @@
       background: transparent;
     }
 
-    .tl-chapter.active .tl-card,
-    .tl-chapter.visited .tl-card {
+    .tl-chapter.active .tl-card {
       border: 2px solid #e31e24;
     }
 
-    .tl-chapter.active .tl-img-half img,
-    .tl-chapter.visited .tl-img-half img {
+    .tl-chapter.active .tl-img-half img {
       border: 2px solid #e31e24;
     }
 
-    .tl-chapter.active .tl-pill,
-    .tl-chapter.visited .tl-pill {
+    .tl-chapter.active .tl-pill {
       background: #e31e24;
     }
 
@@ -461,8 +458,7 @@
       font-family: inherit;
     }
 
-    .tl-chapter.active .tl-readmore,
-    .tl-chapter.visited .tl-readmore {
+    .tl-chapter.active .tl-readmore {
       background: #e31e24;
     }
 
@@ -1122,22 +1118,25 @@
 
     function setActiveChapter() {
       const chapters = document.querySelectorAll('.tl-chapter');
+      chapters.forEach(ch => ch.classList.remove('active', 'visited'));
       let activeSet = false;
       chapters.forEach(ch => {
         const rect = ch.getBoundingClientRect();
         const inView = rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.4;
         if (inView && !activeSet) {
           ch.classList.add('active');
-          ch.classList.add('visited');
           activeSet = true;
-        } else if (ch.classList.contains('visited')) {
-          ch.classList.remove('active');
-          // keep visited class — stays red
-        } else {
-          ch.classList.remove('active');
-          // no visited class — stays grey
         }
       });
+      if (!activeSet) {
+        chapters.forEach(ch => {
+          const rect = ch.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0 && !activeSet) {
+            ch.classList.add('active');
+            activeSet = true;
+          }
+        });
+      }
     }
     window.addEventListener('scroll', setActiveChapter);
     window.addEventListener('load', setActiveChapter);
