@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5 Skills Every Hospitality Professional Must Learn | HTI India</title>
+  <meta name="description"
+    content="Discover the 5 essential skills every hospitality professional must learn — communication, customer service mindset, problem-solving, teamwork and adaptability." />
+  <link rel="icon"
+    href="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63872ebc11d181ed9d69d77d_HTI%20star%20logo%2032x32%20px.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --hti-bg: #F3F2EF;
+      --hti-black: #000;
+      --hti-red: #e31e24;
+      --hti-red2: #e31e24;
+      --hti-text: #111;
+
+      --red: #E32129;
+      --cream: #F3F2EF;
+      --black: #000000;
+      --grey-800: #3D3D3D;
+      --white: #FFFFFF;
+      --maxw: 1120px;
+      --gutter: 24px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--cream);
+      color: #111;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    /* ============ NAVBAR ============ */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--hti-bg);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #000, transparent);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 72px;
+    }
+
+    .nav-logo img {
+      width: 52px;
+      height: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-item {
+      position: relative;
+      font-weight: 600;
+      font-size: 15px;
+      color: #111;
+      cursor: pointer;
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-item .caret {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #333;
+      border-bottom: 2px solid #333;
+      transform: rotate(45deg);
+      margin-top: -3px;
+      transition: transform .2s;
+    }
+
+    .nav-item:hover .caret {
+      transform: rotate(-135deg);
+      margin-top: 3px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .14);
+      padding: 10px;
+      min-width: 230px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all .2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 120;
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      padding: 9px 12px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #222;
+    }
+
+    .dropdown a:hover {
+      background: var(--hti-bg);
+      color: var(--hti-red);
+    }
+
+    .dropdown a b {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .dropdown a span {
+      font-size: 12px;
+      color: #777;
+      font-weight: 400;
+    }
+
+    .nav-contact {
+      background: var(--hti-red2);
+      color: #fff;
+      border-radius: 8px;
+      padding: 11px 22px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .nav-contact:hover {
+      background: #d40f0f;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      width: 26px;
+      height: 2px;
+      background: #000;
+      display: block;
+    }
+
+    /* ============ SECTION 1 — HERO ============ */
+    .hero {
+      background: #F3F2EF;
+      padding: 60px 24px;
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero-left {
+      flex: 0 0 48%;
+    }
+
+    .hero-right {
+      flex: 1;
+    }
+
+    .hero-back {
+      color: #E32129;
+      font-weight: 600;
+      font-size: 15px;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .hero-back:hover {
+      text-decoration: underline;
+    }
+
+    .hero-tag {
+      background: #E32129;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.4;
+      color: #000;
+      margin-bottom: 16px;
+    }
+
+    .hero-intro {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 24px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .meta-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 10px 16px;
+      min-width: 110px;
+      text-align: center;
+    }
+
+    .meta-card .mc-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #E32129;
+      display: block;
+    }
+
+    .meta-card .mc-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: #E32129;
+      display: block;
+    }
+
+    .hero-video {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .hero-video iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .hero-cover img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    /* ============ SECTION 2 — WHAT IS FOSTAC ============ */
+    .whatis {
+      background: #000000;
+      padding: 60px 24px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .whatis-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-start;
+      gap: 48px;
+    }
+
+    .whatis-col {
+      flex: 1;
+    }
+
+    .whatis-col.left {
+      flex: 0 0 48%;
+    }
+
+    .whatis-col h2 {
+      font-size: 24px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .whatis-col p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+
+    .whatis-col p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ============ SECTION 3 — OBJECTIVES ============ */
+    .objectives {
+      background: #F3F2EF;
+      padding: 60px 24px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .objectives-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .obj-row {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      margin-bottom: 60px;
+    }
+
+    .obj-row.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .obj-row:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Supervisors — full-width black band, inner content centered at 1120px */
+    .supervisors {
+      background: #000000;
+      padding: 60px 24px;
+    }
+
+    .supervisors-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .supervisors .obj-text h3 {
+      color: #ffffff;
+    }
+
+    .supervisors .obj-text p {
+      color: #ffffff;
+    }
+
+    .obj-img {
+      flex: 0 0 42%;
+    }
+
+    .obj-img img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .obj-text {
+      flex: 1;
+    }
+
+    .obj-text h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #000;
+      margin-bottom: 16px;
+    }
+
+    .obj-text p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #333;
+      margin-bottom: 12px;
+    }
+
+    .obj-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ============ SECTION 4 — FAQ ACCORDION ============ */
+    .faq {
+      background: #F3F2EF;
+      padding: 60px 24px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .faq-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-inner h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #000;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .faq-item {
+      border: 1px solid #E32129;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      background: white;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: 18px 24px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+      background: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: inherit;
+    }
+
+    .faq-question::after {
+      content: '+';
+      font-size: 22px;
+      color: #E32129;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-question::after {
+      content: '−';
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 24px;
+      font-size: 15px;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 600px;
+      padding: 0 24px 18px;
+    }
+
+    .faq-answer ul {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .faq-answer li {
+      margin-bottom: 8px;
+    }
+
+    /* ============ SECTION 5 — CTA ============ */
+    .cta {
+      background: #F3F2EF;
+      padding: 60px 24px;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #000000;
+      margin-bottom: 24px;
+    }
+
+    .cta-btn {
+      background: #E32129;
+      color: #fff;
+      border: none;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 14px 36px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+
+    /* ============ SECTION 6 — SHARE BAR ============ */
+    .share-section {
+      background: #F3F2EF;
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    .share-section .share-heading {
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 24px;
+    }
+
+    .share-row {
+      display: inline-flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .share-sq {
+      width: 50px;
+      height: 50px;
+      border-radius: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .share-sq svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
+    }
+
+    .share-fb {
+      background: #0B85EE;
+    }
+
+    .share-tw {
+      background: #1DA1F2;
+    }
+
+    .share-li {
+      background: #0A66C2;
+    }
+
+    .share-divider {
+      max-width: 480px;
+      margin: 32px auto 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #E32129, transparent);
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+      background: #000;
+      color: #fff;
+      padding: 60px 30px 30px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .footer-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 17px;
+      color: #fff;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 14.5px;
+      color: #c7c7c7;
+      margin-bottom: 11px;
+      font-weight: 400;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-div {
+      height: 1px;
+      background: #2a2a2a;
+      margin: 40px 0 30px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 26px;
+      height: 26px;
+      color: #fff;
+      opacity: .85;
+    }
+
+    .footer-social a:hover {
+      opacity: 1;
+      color: var(--hti-red);
+    }
+
+    .footer-contact h3 {
+      font-size: 20px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .footer-contact span {
+      color: var(--hti-red);
+    }
+
+    .footer-brand img {
+      width: 70px;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: #8a8a8a;
+      font-size: 13px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media(max-width:960px) {
+      .nav-menu {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 16px 24px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+        display: none;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .nav-item {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: 4px 0 4px 14px;
+        min-width: auto;
+        width: 100%;
+        display: none;
+      }
+
+      .nav-item.open .dropdown {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .footer-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 40px 16px;
+      }
+
+      .hero-inner {
+        flex-direction: column;
+      }
+
+      .hero-left,
+      .hero-right {
+        width: 100%;
+        flex: none;
+      }
+
+      .hero h1 {
+        font-size: 22px;
+      }
+
+      .whatis-inner {
+        flex-direction: column;
+      }
+
+      .whatis-col,
+      .whatis-col.left {
+        width: 100%;
+        flex: none;
+      }
+
+      .obj-row,
+      .obj-row.reverse,
+      .supervisors-inner {
+        flex-direction: column;
+      }
+
+      .obj-img,
+      .obj-text {
+        width: 100%;
+        flex: none;
+      }
+    }
+
+    @media(max-width:600px) {
+      .footer-cols {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img
+          src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+          alt="HTI Logo" /></a>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+      <nav class="nav-menu" id="navMenu">
+        <div class="nav-item">Restaurants &amp; QSRs<span class="caret"></span>
+          <div class="dropdown">
+            <a href="super.html"><b>SUPER</b><span>Essential soft and job skills</span></a>
+            <a href="support.html"><b>SUPPORT</b><span>Skill upgradation pre-opening</span></a>
+            <a href="icedt.html"><b>ICEDT</b><span>Counter executives training</span></a>
+            <a href="icare.html"><b>iCARE</b><span>Teaching techniques</span></a>
+            <a href="vow.html"><b>Vow to Wow</b><span>Customer expectations</span></a>
+            <a href="ramp.html"><b>RAMP</b><span>Restaurant operations &amp; management</span></a>
+            <a href="restaurants.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Hotels<span class="caret"></span>
+          <div class="dropdown">
+            <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Staff skill upgrade</span></a>
+            <a href="hotcar.html"><b>HOT-CAR</b><span>Housekeeping operations</span></a>
+            <a href="fort.html"><b>FORT</b><span>Front desk operations</span></a>
+            <a href="kmt.html"><b>KMT</b><span>Kitchen management</span></a>
+            <a href="class.html"><b>CLASS</b><span>Grooming &amp; communication skills</span></a>
+            <a href="mdp.html"><b>MDP</b><span>Management development</span></a>
+            <a href="hotels.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Retail<span class="caret"></span>
+          <div class="dropdown">
+            <a href="post.html"><b>POST</b><span>Pantry operations</span></a>
+            <a href="cup.html"><b>CUP</b><span>Caretaker upgradation</span></a>
+            <a href="top.html"><b>TOP</b><span>Peons training</span></a>
+            <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item" style="display:none;">More<span class="caret"></span>
+          <div class="dropdown">
+            <a href="#">Team Building</a>
+            <a href="#">Leadership Development</a>
+            <a href="#">Sales Training</a>
+            <a href="#">Professional Etiquette</a>
+            <a href="#">Become A Trainer</a>
+            <a href="#">Develop SOPs &amp; How-To Videos</a>
+            <a href="blog.html">Blogs</a>
+          </div>
+        </div>
+        <a href="blog.html" class="nav-item">Blog</a>
+        <a href="contact.html" class="nav-contact">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ SECTION 1 — HERO ============ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <a href="blog.html" class="hero-back">&#8592; Back to Blogs</a>
+        <span class="hero-tag">Career Tips</span>
+        <h1>5 Skills Every Hospitality Professional Must Learn</h1>
+        <p class="hero-intro">Communication, customer service mindset, problem-solving, teamwork and adaptability — the
+          five core skills that help every hospitality professional build a strong, long-lasting career.</p>
+        <div class="hero-meta">
+          <div class="meta-card">
+            <span class="mc-label">Words by</span>
+            <span class="mc-value">Andrea Costabir</span>
+          </div>
+          <div class="meta-card">
+            <span class="mc-label">Date</span>
+            <span class="mc-value">14-5-2026</span>
+          </div>
+          <div class="meta-card">
+            <span class="mc-label">Reading Time</span>
+            <span class="mc-value">03 min read</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-cover">
+          <img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/6a0576a94de86899cb64554d_Blog-25%20Thumbnail.avif"
+            alt="5 Skills Every Hospitality Professional Must Learn" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTENT SECTIONS ============ -->
+  <section class="objectives">
+    <div class="objectives-inner">
+
+      <!-- SECTION 1 -->
+      <div class="obj-row">
+        <div class="obj-img">
+          <img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/6a057b7bba0d6862316ff301_1.%20Communication%20Skills.avif"
+            alt="Communication Skills" />
+        </div>
+        <div class="obj-text">
+          <h3>1. &#128172; Communication Skills</h3>
+          <p>In hospitality, communication is everything. From greeting guests to coordinating with team members, clear
+            and polite communication ensures smooth operations and great guest experiences.</p>
+          <p>It's not just about speaking well — it's also about listening carefully, understanding guest needs, and
+            responding with confidence and respect.</p>
+          <p>Strong communication instantly builds trust and leaves a lasting impression.</p>
+        </div>
+      </div>
+
+      <!-- SECTION 2 -->
+      <div class="obj-row reverse">
+        <div class="obj-img">
+          <img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/6a0576aa923e7515b0c50cdd_2.%20Customer%20Service%20Mindset.avif"
+            alt="Customer Service Mindset" />
+        </div>
+        <div class="obj-text">
+          <h3>2. &#129309; Customer Service Mindset</h3>
+          <p>Hospitality is built on service. A true professional always puts the guest first.</p>
+          <p>This means being patient, approachable, and ready to help — even in challenging situations. A positive
+            attitude can turn an average experience into a memorable one for guests.</p>
+          <p>Developing a service-first mindset early helps professionals stand out in any hospitality role.</p>
+        </div>
+      </div>
+
+      <!-- SECTION 3 -->
+      <div class="obj-row">
+        <div class="obj-img">
+          <img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/6a0576aa461fdced2c1a2f19_3.%20Problem-Solving%20Ability.avif"
+            alt="Problem-Solving Ability" />
+        </div>
+        <div class="obj-text">
+          <h3>3. &#129504; Problem-Solving Ability</h3>
+          <p>No two days in hospitality are the same. Unexpected situations like guest complaints, delays, or last-minute
+            changes are common.</p>
+          <p>That's why quick thinking and calm decision-making are essential. The ability to find practical solutions
+            under pressure is what separates a good professional from a great one.</p>
+          <p>Problem-solving builds confidence and earns trust from both guests and teams.</p>
+        </div>
+      </div>
+
+      <!-- SECTION 4 -->
+      <div class="obj-row reverse">
+        <div class="obj-img">
+          <img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/6a0576aa77b07a7d93dc1c29_4.%20Teamwork.avif"
+            alt="Teamwork" />
+        </div>
+        <div class="obj-text">
+          <h3>4. &#129309; Teamwork</h3>
+          <p>Hospitality is never a one-person job. Every department — Front Office, Housekeeping, Food &amp; Beverage,
+            and Management — works together to deliver a seamless guest experience.</p>
+          <p>Learning how to collaborate, support colleagues, and respect roles within a team is crucial for smooth
+            operations.</p>
+          <p>Strong teamwork ensures efficiency and creates a positive work environment.</p>
+        </div>
+      </div>
+
+      <!-- SECTION 5 -->
+      <div class="obj-row">
+        <div class="obj-img">
+          <img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/6a05bc7c05e0138e3bd73bd8_5.%20Adaptability.png"
+            alt="Adaptability" />
+        </div>
+        <div class="obj-text">
+          <h3>5. &#127793; Adaptability</h3>
+          <p>In hospitality, change is constant. Schedules shift, guest needs vary, and situations evolve quickly.</p>
+          <p>Being adaptable means staying flexible, open to learning, and ready to adjust when needed. Professionals who
+            adapt easily grow faster and handle real-world challenges more effectively.</p>
+          <p>Adaptability is one of the most valuable traits in this ever-changing industry.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ SUMMARY SECTION ============ -->
+  <section class="whatis">
+    <div class="whatis-inner">
+      <div class="whatis-col">
+        <h2>&#127775; Summing Up&#8230;</h2>
+        <p>A successful hospitality career begins with the right foundation. These five skills — communication, customer
+          service mindset, problem-solving, teamwork, and adaptability — are essential for anyone aspiring to grow in the
+          industry. With the right training and guidance, these skills can be developed and refined over time, helping
+          hospitality professionals build strong, long-lasting careers. HTI plays an important role in shaping these
+          abilities through structured learning and practical exposure.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta">
+    <h2>Build your hospitality career with HTI!</h2>
+    <a class="cta-btn" href="https://wa.me/917738060902" target="_blank" rel="noopener">Contact Us!</a>
+    <div style="max-width:480px; margin:32px auto 0; height:2px; background:linear-gradient(90deg, transparent, #E32129, transparent);"></div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>HTI</h4>
+          <a href="#">About Us</a>
+          <a href="#">Case Studies</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <a href="restaurants.html">Restaurants &amp; QSRs</a>
+          <a href="hotels.html">Hotels</a>
+          <a href="offices.html">Offices</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="#">Team Building</a>
+          <a href="#">Leadership Development</a>
+          <a href="#">Sales Training</a>
+          <a href="#">Professional Etiquette</a>
+          <a href="#">Become A Trainer</a>
+          <a href="#">Develop SOPs &amp; How-To Videos</a>
+          <a href="blog.html">Blogs</a>
+        </div>
+      </div>
+      <div class="footer-div"></div>
+      <div class="footer-bottom">
+        <div class="footer-social">
+          <a href="https://www.facebook.com/hti.india/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg></a>
+          <a href="https://www.instagram.com/hti.india/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M12 2c-2.716 0-3.056.012-4.123.06c-1.064.049-1.791.218-2.427.465a4.901 4.901 0 0 0-1.772 1.153A4.902 4.902 0 0 0 2.525 5.45c-.247.636-.416 1.363-.465 2.427C2.011 8.944 2 9.284 2 12s.011 3.056.06 4.123c.049 1.064.218 1.791.465 2.427a4.903 4.903 0 0 0 1.153 1.772a4.903 4.903 0 0 0 1.772 1.153c.636.247 1.363.416 2.427.465c1.067.048 1.407.06 4.123.06s3.056-.012 4.123-.06c1.064-.049 1.791-.218 2.427-.465a4.902 4.902 0 0 0 1.772-1.153a4.902 4.902 0 0 0 1.153-1.772c.247-.636.416-1.363.465-2.427c.048-1.067.06-1.407.06-4.123s-.012-3.056-.06-4.123c-.049-1.064-.218-1.791-.465-2.427a4.902 4.902 0 0 0-1.153-1.772a4.901 4.901 0 0 0-1.772-1.153c-.636-.247-1.363-.416-2.427-.465C15.056 2.012 14.716 2 12 2m0 1.802c2.67 0 2.986.01 4.04.058c.976.045 1.505.207 1.858.344c.466.182.8.399 1.15.748c.35.35.566.684.748 1.15c.136.353.3.882.344 1.857c.048 1.055.058 1.37.058 4.041c0 2.67-.01 2.986-.058 4.04c-.045.976-.208 1.505-.344 1.858a3.1 3.1 0 0 1-.748 1.15c-.35.35-.684.566-1.15.748c-.353.136-.882.3-1.857.344c-1.054.048-1.37.058-4.041.058c-2.67 0-2.987-.01-4.04-.058c-.976-.045-1.505-.208-1.858-.344a3.098 3.098 0 0 1-1.15-.748a3.098 3.098 0 0 1-.748-1.15c-.137-.353-.3-.882-.344-1.857c-.048-1.055-.058-1.37-.058-4.041c0-2.67.01-2.986.058-4.04c.045-.976.207-1.505.344-1.858c.182-.466.399-.8.748-1.15c.35-.35.684-.566 1.15-.748c.353-.137.882-.3 1.857-.344c1.055-.048 1.37-.058 4.041-.058m0 11.531a3.333 3.333 0 1 1 0-6.666a3.333 3.333 0 0 1 0 6.666m0-8.468a5.135 5.135 0 1 0 0 10.27a5.135 5.135 0 0 0 0-10.27m6.538-.203a1.2 1.2 0 1 1-2.4 0a1.2 1.2 0 0 1 2.4 0" />
+            </svg></a>
+          <a href="https://www.linkedin.com/company/hospitality-training-institute-india-pvt-ltd" target="_blank"
+            aria-label="LinkedIn"><svg viewBox="0 0 32 32" fill="currentColor">
+              <path
+                d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+            </svg></a>
+          <a href="https://www.youtube.com/c/Hti-india" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg></a>
+        </div>
+        <div class="footer-contact"><a href="tel:+917738060902">
+            <h3>Contact Us: <span>+91 77380 60902</span></h3>
+          </a></div>
+        <a href="index.html" class="footer-brand"><img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+            alt="HTI" /></a>
+      </div>
+      <div class="footer-copy">&#169;&#65039; HOSPITALITY TRAINING INSTITUTE INDIA PRIVATE. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // Mobile nav toggle — copy from blog-post.html
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const menu = document.getElementById('navMenu');
+      if (toggle && menu) {
+        toggle.addEventListener('click', () => menu.classList.toggle('open'));
+        document.querySelectorAll('.nav-item').forEach(item => {
+          item.addEventListener('click', (e) => {
+            if (window.innerWidth <= 960 && (e.target === item || e.target.classList.contains('caret'))) {
+              item.classList.toggle('open');
+            }
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+
+</html>
