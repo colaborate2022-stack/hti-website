@@ -32,7 +32,9 @@
       "PowerShell(node \"D:\\\\Claude\\\\claude-app-building\\\\hti-website\\\\update-post-34.js\")",
       "PowerShell(& \"C:\\\\Users\\\\ATUL\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--Claude-claude-app-building-hti-website\\\\7797ad5c-e359-44ca-81e1-d467ab0d7cce\\\\scratchpad\\\\run-update-34.ps1\")",
       "PowerShell(& \"C:\\\\Users\\\\ATUL\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--Claude-claude-app-building-hti-website\\\\7797ad5c-e359-44ca-81e1-d467ab0d7cce\\\\scratchpad\\\\run-update-34-bom.ps1\")",
-      "mcp__claude_ai_Supabase__apply_migration"
+      "mcp__claude_ai_Supabase__apply_migration",
+      "Bash(awk '/Term 50/{f=1} f{print NR\": \"$0} /SECTION 4|share-section|closing/{if\\(f\\)exit}' front-office-jargon.html)",
+      "Bash(python -)"
     ]
   }
 }
