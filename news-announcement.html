@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News &amp; Announcements | HTI India</title>
+  <link rel="icon"
+    href="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63872ebc11d181ed9d69d77d_HTI%20star%20logo%2032x32%20px.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --hti-bg: #F3F2EF;
+      --hti-black: #000;
+      --hti-red: #e31e24;
+      --hti-red2: #e31e24;
+      --hti-text: #111;
+
+      --red: #E32129;
+      --cream: #F3F2EF;
+      --black: #000000;
+      --grey-800: #3D3D3D;
+      --white: #FFFFFF;
+      --maxw: 1120px;
+      --gutter: 24px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #fff;
+      color: #111;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    /* ============ NAVBAR ============ */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--hti-bg);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #000, transparent);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 72px;
+    }
+
+    .nav-logo img {
+      width: 52px;
+      height: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-item {
+      position: relative;
+      font-weight: 600;
+      font-size: 15px;
+      color: #111;
+      cursor: pointer;
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-item .caret {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #333;
+      border-bottom: 2px solid #333;
+      transform: rotate(45deg);
+      margin-top: -3px;
+      transition: transform .2s;
+    }
+
+    .nav-item:hover .caret {
+      transform: rotate(-135deg);
+      margin-top: 3px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .14);
+      padding: 10px;
+      min-width: 230px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all .2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 120;
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      padding: 9px 12px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #222;
+    }
+
+    .dropdown a:hover {
+      background: var(--hti-bg);
+      color: var(--hti-red);
+    }
+
+    .dropdown a b {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .dropdown a span {
+      font-size: 12px;
+      color: #777;
+      font-weight: 400;
+    }
+
+    .nav-contact {
+      background: var(--hti-red2);
+      color: #fff;
+      border-radius: 8px;
+      padding: 11px 22px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .nav-contact:hover {
+      background: #d40f0f;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      width: 26px;
+      height: 2px;
+      background: #000;
+      display: block;
+    }
+
+    /* ============ HERO ============ */
+    .na-hero {
+      position: relative;
+      background: #000;
+      overflow: hidden;
+      padding: 60px 0 50px;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .na-hero::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(227, 30, 36, 0.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .na-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .na-back {
+      color: #e31e24;
+      font-size: 14px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .na-back:hover {
+      text-decoration: underline;
+    }
+
+    .na-badge {
+      display: inline-block;
+      background: #e31e24;
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: 20px;
+      padding: 5px 16px;
+      margin-bottom: 18px;
+    }
+
+    .na-hero h1 {
+      color: #fff;
+      font-size: 36px;
+      font-weight: 800;
+      max-width: 640px;
+      margin-bottom: 16px;
+      line-height: 1.25;
+    }
+
+    .na-hero h1 span {
+      color: #e31e24;
+    }
+
+    .na-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.45);
+      margin-bottom: 30px;
+    }
+
+    .na-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .na-meta-item svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* 3D info card */
+    .na-info-card {
+      background: #111;
+      border: 1px solid #333;
+      border-top: 1px solid #444;
+      border-radius: 14px;
+      padding: 20px 24px;
+      transform: rotateX(5deg) rotateY(-2deg);
+      box-shadow: 8px 18px 40px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      max-width: 720px;
+    }
+
+    .na-info-icon {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: #e31e24;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(227, 30, 36, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .na-info-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .na-info-divider {
+      width: 1px;
+      height: 42px;
+      background: #333;
+      flex-shrink: 0;
+    }
+
+    .na-info-group .na-info-label {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.35);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .na-info-group .na-info-value {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      display: block;
+    }
+
+    /* ============ CONTENT BLOCKS ============ */
+    .na-blocks {
+      background: #fff;
+      padding: 60px 0;
+    }
+
+    .na-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .na-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .na-card {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .na-redbar {
+      width: 28px;
+      height: 3px;
+      background: #e31e24;
+      border-radius: 2px;
+      margin-bottom: 12px;
+    }
+
+    .na-card-label {
+      font-size: 11px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .na-card-text {
+      font-size: 15px;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    /* ============ QUOTE ============ */
+    .na-quote-section {
+      background: #fff;
+    }
+
+    .na-quote {
+      border-left: 4px solid #e31e24;
+      background: #000;
+      border-radius: 0 12px 12px 0;
+      padding: 20px 28px;
+    }
+
+    .na-quote-text {
+      font-style: italic;
+      color: #fff;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .na-quote-attr {
+      font-style: normal;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 10px;
+    }
+
+    /* ============ BOTTOM ROW ============ */
+    .na-bottom {
+      background: #fff;
+      padding: 0 0 60px;
+    }
+
+    .na-image-block {
+      background: #f5f5f5;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .na-image-block svg {
+      width: 40px;
+      height: 40px;
+    }
+
+    .na-image-block span {
+      color: #bbb;
+      font-size: 13px;
+    }
+
+    .na-cta {
+      background: #e31e24;
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 4px 8px 28px rgba(227, 30, 36, 0.35);
+    }
+
+    .na-cta h3 {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .na-cta p {
+      color: #fff;
+      opacity: 0.9;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .na-wa-btn {
+      background: #fff;
+      color: #e31e24;
+      border-radius: 8px;
+      padding: 12px 22px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .na-wa-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+      background: #000;
+      color: #fff;
+      padding: 60px 30px 30px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .footer-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 17px;
+      color: #fff;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 14.5px;
+      color: #c7c7c7;
+      margin-bottom: 11px;
+      font-weight: 400;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-div {
+      height: 1px;
+      background: #2a2a2a;
+      margin: 40px 0 30px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 26px;
+      height: 26px;
+      color: #fff;
+      opacity: .85;
+    }
+
+    .footer-social a:hover {
+      opacity: 1;
+      color: var(--hti-red);
+    }
+
+    .footer-contact h3 {
+      font-size: 20px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .footer-contact span {
+      color: var(--hti-red);
+    }
+
+    .footer-brand img {
+      width: 70px;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: #8a8a8a;
+      font-size: 13px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media(max-width:960px) {
+      .nav-menu {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 16px 24px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+        display: none;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .nav-item {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: 4px 0 4px 14px;
+        min-width: auto;
+        width: 100%;
+        display: none;
+      }
+
+      .nav-item.open .dropdown {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .footer-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .na-hero {
+        padding: 40px 0 36px;
+      }
+
+      .na-hero h1 {
+        font-size: 26px;
+      }
+
+      .na-info-card {
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .na-info-divider {
+        display: none;
+      }
+
+      .na-blocks {
+        padding: 40px 0;
+      }
+
+      .na-grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .na-bottom {
+        padding: 0 0 40px;
+      }
+    }
+
+    @media(max-width:600px) {
+      .footer-cols {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img
+          src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+          alt="HTI Logo" /></a>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+      <nav class="nav-menu" id="navMenu">
+        <div class="nav-item">Restaurants &amp; QSRs<span class="caret"></span>
+          <div class="dropdown">
+            <a href="super.html"><b>SUPER</b><span>Essential soft and job skills</span></a>
+            <a href="support.html"><b>SUPPORT</b><span>Skill upgradation pre-opening</span></a>
+            <a href="icedt.html"><b>ICEDT</b><span>Counter executives training</span></a>
+            <a href="icare.html"><b>iCARE</b><span>Teaching techniques</span></a>
+            <a href="vow.html"><b>Vow to Wow</b><span>Customer expectations</span></a>
+            <a href="ramp.html"><b>RAMP</b><span>Restaurant operations &amp; management</span></a>
+            <a href="restaurants.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Hotels<span class="caret"></span>
+          <div class="dropdown">
+            <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Staff skill upgrade</span></a>
+            <a href="hotcar.html"><b>HOT-CAR</b><span>Housekeeping operations</span></a>
+            <a href="fort.html"><b>FORT</b><span>Front desk operations</span></a>
+            <a href="kmt.html"><b>KMT</b><span>Kitchen management</span></a>
+            <a href="class.html"><b>CLASS</b><span>Grooming &amp; communication skills</span></a>
+            <a href="mdp.html"><b>MDP</b><span>Management development</span></a>
+            <a href="hotels.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Retail<span class="caret"></span>
+          <div class="dropdown">
+            <a href="post.html"><b>POST</b><span>Pantry operations</span></a>
+            <a href="cup.html"><b>CUP</b><span>Caretaker upgradation</span></a>
+            <a href="top.html"><b>TOP</b><span>Peons training</span></a>
+            <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item" style="display:none;">More<span class="caret"></span>
+          <div class="dropdown">
+            <a href="#">Team Building</a>
+            <a href="#">Leadership Development</a>
+            <a href="#">Sales Training</a>
+            <a href="#">Professional Etiquette</a>
+            <a href="#">Become A Trainer</a>
+            <a href="#">Develop SOPs &amp; How-To Videos</a>
+            <a href="blog.html">Blogs</a>
+          </div>
+        </div>
+        <a href="blog.html" class="nav-item">Blog</a>
+        <a href="contact.html" class="nav-contact">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="na-hero">
+    <div class="na-hero-inner">
+      <a href="blog.html" class="na-back">&#8592; Back to Blogs</a>
+      <div>
+        <span class="na-badge">Announcement</span>
+      </div>
+      <h1>HTI Launches New <span>Certification Program</span> for Hospitality Professionals</h1>
+      <div class="na-meta">
+        <span class="na-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-opacity="0.4" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+          July 13, 2026
+        </span>
+        <span class="na-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-opacity="0.4" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          HTI India
+        </span>
+        <span class="na-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-opacity="0.4" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9" />
+            <polyline points="12 7 12 12 15 14" />
+          </svg>
+          3 min read
+        </span>
+      </div>
+      <div class="na-info-card">
+        <div class="na-info-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="9" r="6" />
+            <path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5" />
+          </svg>
+        </div>
+        <div class="na-info-group">
+          <span class="na-info-label">Program launch</span>
+          <span class="na-info-value">New Certification</span>
+        </div>
+        <div class="na-info-divider"></div>
+        <div class="na-info-group">
+          <span class="na-info-label">Starting from</span>
+          <span class="na-info-value">August 2026</span>
+        </div>
+        <div class="na-info-divider"></div>
+        <div class="na-info-group">
+          <span class="na-info-label">Category</span>
+          <span class="na-info-value">Hospitality</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTENT BLOCKS ============ -->
+  <section class="na-blocks">
+    <div class="na-container">
+      <div class="na-grid-2">
+        <div class="na-card">
+          <div class="na-redbar"></div>
+          <div class="na-card-label">What's new</div>
+          <p class="na-card-text">We are excited to introduce a brand-new certification program designed for hospitality
+            professionals across India. This program covers essential skills for modern hotel and restaurant
+            environments.</p>
+        </div>
+        <div class="na-card">
+          <div class="na-redbar"></div>
+          <div class="na-card-label">Who it's for</div>
+          <p class="na-card-text">This program is ideal for hotel staff, restaurant teams, catering professionals, and
+            anyone looking to upskill in the hospitality sector.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUOTE ============ -->
+  <section class="na-quote-section">
+    <div class="na-container">
+      <div class="na-quote">
+        <p class="na-quote-text">Hospitality is not just a skill &mdash; it is an art. Our new program is designed to
+          shape professionals who bring warmth, precision, and excellence to every guest interaction.</p>
+        <p class="na-quote-attr">&mdash; Dr. Sanjay Vazirani, Founder, HTI India</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BOTTOM ROW ============ -->
+  <section class="na-bottom">
+    <div class="na-container">
+      <div class="na-grid-2">
+        <div class="na-image-block">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+            <circle cx="12" cy="13" r="4" />
+          </svg>
+          <span>Supporting image</span>
+        </div>
+        <div class="na-cta">
+          <h3>Ready to Train Your Team?</h3>
+          <p>Get in touch with our team to learn more about this program and book your seats today.</p>
+          <a class="na-wa-btn" href="https://wa.me/917738060902" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="#25D366">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413" />
+            </svg>
+            Book Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>HTI</h4>
+          <a href="#">About Us</a>
+          <a href="#">Case Studies</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <a href="restaurants.html">Restaurants &amp; QSRs</a>
+          <a href="hotels.html">Hotels</a>
+          <a href="offices.html">Offices</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="#">Team Building</a>
+          <a href="#">Leadership Development</a>
+          <a href="#">Sales Training</a>
+          <a href="#">Professional Etiquette</a>
+          <a href="#">Become A Trainer</a>
+          <a href="#">Develop SOPs &amp; How-To Videos</a>
+          <a href="blog.html">Blogs</a>
+        </div>
+      </div>
+      <div class="footer-div"></div>
+      <div class="footer-bottom">
+        <div class="footer-social">
+          <a href="https://www.facebook.com/hti.india/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg></a>
+          <a href="https://www.instagram.com/hti.india/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M12 2c-2.716 0-3.056.012-4.123.06c-1.064.049-1.791.218-2.427.465a4.901 4.901 0 0 0-1.772 1.153A4.902 4.902 0 0 0 2.525 5.45c-.247.636-.416 1.363-.465 2.427C2.011 8.944 2 9.284 2 12s.011 3.056.06 4.123c.049 1.064.218 1.791.465 2.427a4.903 4.903 0 0 0 1.153 1.772a4.903 4.903 0 0 0 1.772 1.153c.636.247 1.363.416 2.427.465c1.067.048 1.407.06 4.123.06s3.056-.012 4.123-.06c1.064-.049 1.791-.218 2.427-.465a4.902 4.902 0 0 0 1.772-1.153a4.902 4.902 0 0 0 1.153-1.772c.247-.636.416-1.363.465-2.427c.048-1.067.06-1.407.06-4.123s-.012-3.056-.06-4.123c-.049-1.064-.218-1.791-.465-2.427a4.902 4.902 0 0 0-1.153-1.772a4.901 4.901 0 0 0-1.772-1.153c-.636-.247-1.363-.416-2.427-.465C15.056 2.012 14.716 2 12 2m0 1.802c2.67 0 2.986.01 4.04.058c.976.045 1.505.207 1.858.344c.466.182.8.399 1.15.748c.35.35.566.684.748 1.15c.136.353.3.882.344 1.857c.048 1.055.058 1.37.058 4.041c0 2.67-.01 2.986-.058 4.04c-.045.976-.208 1.505-.344 1.858a3.1 3.1 0 0 1-.748 1.15c-.35.35-.684.566-1.15.748c-.353.136-.882.3-1.857.344c-1.054.048-1.37.058-4.041.058c-2.67 0-2.987-.01-4.04-.058c-.976-.045-1.505-.208-1.858-.344a3.098 3.098 0 0 1-1.15-.748a3.098 3.098 0 0 1-.748-1.15c-.137-.353-.3-.882-.344-1.857c-.048-1.055-.058-1.37-.058-4.041c0-2.67.01-2.986.058-4.04c.045-.976.207-1.505.344-1.858c.182-.466.399-.8.748-1.15c.35-.35.684-.566 1.15-.748c.353-.137.882-.3 1.857-.344c1.055-.048 1.37-.058 4.041-.058m0 11.531a3.333 3.333 0 1 1 0-6.666a3.333 3.333 0 0 1 0 6.666m0-8.468a5.135 5.135 0 1 0 0 10.27a5.135 5.135 0 0 0 0-10.27m6.538-.203a1.2 1.2 0 1 1-2.4 0a1.2 1.2 0 0 1 2.4 0" />
+            </svg></a>
+          <a href="https://www.linkedin.com/company/hospitality-training-institute-india-pvt-ltd" target="_blank"
+            aria-label="LinkedIn"><svg viewBox="0 0 32 32" fill="currentColor">
+              <path
+                d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+            </svg></a>
+          <a href="https://www.youtube.com/c/Hti-india" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg></a>
+        </div>
+        <div class="footer-contact"><a href="tel:+917738060902">
+            <h3>Contact Us: <span>+91 77380 60902</span></h3>
+          </a></div>
+        <a href="index.html" class="footer-brand"><img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+            alt="HTI" /></a>
+      </div>
+      <div class="footer-copy">&#169;&#65039; HOSPITALITY TRAINING INSTITUTE INDIA PRIVATE. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle — copy from blog-post.html
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const menu = document.getElementById('navMenu');
+      if (toggle && menu) {
+        toggle.addEventListener('click', () => menu.classList.toggle('open'));
+        document.querySelectorAll('.nav-item').forEach(item => {
+          item.addEventListener('click', (e) => {
+            if (window.innerWidth <= 960 && (e.target === item || e.target.classList.contains('caret'))) {
+              item.classList.toggle('open');
+            }
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+
+</html>
