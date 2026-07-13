@@ -1203,7 +1203,7 @@
   var grid = section.querySelector('.mfh-grid');
   var currentId = parseInt(section.getAttribute('data-current-id')) || 0;
   var SUPABASE_URL = 'https://ytthcgdsbfagvwcopoaj.supabase.co';
-  var ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0dGhjZ2RzYmZhZ3Zjb3BvYWoiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTY3MzQzMTM1OSwiZXhwIjoxOTg5MDA3MzU5fQ.Lo-MDeVFWMdHCpVqkJFO2MSbFEbVNO2RCxIxGo8RYLY';
+  var ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0dGhjZ2RzYmZhZ3Z3Y29wb2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzMjk5MTMsImV4cCI6MjA5ODkwNTkxM30.JIDahcRTu3VbFpZ55Ti5hHg_JrHobk0zh8PSaj9lWLc';
   fetch(SUPABASE_URL + '/rest/v1/blogs?select=id,title,cover_image,category,created_at&limit=20', {
     headers: {'apikey': ANON_KEY, 'Authorization': 'Bearer ' + ANON_KEY}
   })
