@@ -1131,186 +1131,61 @@
       });
     })();
   </script>
-  <!-- ============ MORE FROM HTI (related posts) ============ -->
-  <section class="mfh-section" data-current-id="0">
-    <div class="mfh-inner">
-      <h2 class="mfh-heading">More from HTI</h2>
-      <div class="mfh-grid" id="mfhGrid"></div>
+
+<!-- MORE FROM HTI -->
+<section class="mfh-section" data-current-id="0" style="background:#f9f9f9;padding:60px 20px;margin-top:0;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="margin-bottom:36px;">
+      <h2 style="font-family:sans-serif;font-size:28px;font-weight:800;color:#e31e24;margin:0 0 10px 0;letter-spacing:-0.5px;">More from HTI</h2>
+      <div style="width:50px;height:3px;background:#e31e24;border-radius:2px;"></div>
     </div>
-  </section>
-  <style>
-    .mfh-section {
-      background: #fff;
-      padding: 60px 24px;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .mfh-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-
-    .mfh-heading {
-      color: #e31e24;
-      font-size: 26px;
-      font-weight: 800;
-      text-align: left;
-      display: inline-block;
-      margin-bottom: 32px;
-      padding-bottom: 10px;
-      border-bottom: 4px solid #e31e24;
-    }
-
-    .mfh-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .mfh-card {
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-      transition: box-shadow .25s ease, transform .25s ease;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .mfh-card:hover {
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
-      transform: translateY(-4px);
-    }
-
-    .mfh-thumb {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      display: block;
-      background: #f3f2ef;
-    }
-
-    .mfh-body {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .mfh-cat {
-      color: #e31e24;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      margin-bottom: 8px;
-    }
-
-    .mfh-title {
-      color: #111;
-      font-size: 17px;
-      font-weight: 700;
-      line-height: 1.4;
-      margin-bottom: 12px;
-    }
-
-    .mfh-date {
-      color: #888;
-      font-size: 13px;
-      margin-bottom: 16px;
-    }
-
-    .mfh-readmore {
-      color: #e31e24;
-      font-weight: 700;
-      font-size: 14px;
-      margin-top: auto;
-      text-decoration: none;
-    }
-
-    .mfh-readmore:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 768px) {
-      .mfh-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-  <script>
-    (function () {
-      const SUPABASE_URL = "https://ytthcgdsbfagvwcopoaj.supabase.co";
-      const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0dGhjZ2RzYmZhZ3Z3Y29wb2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzMjk5MTMsImV4cCI6MjA5ODkwNTkxM30.JIDahcRTu3VbFpZ55Ti5hHg_JrHobk0zh8PSaj9lWLc";
-
-      const section = document.querySelector('.mfh-section');
-      if (!section) return;
-      const currentId = parseInt(section.getAttribute('data-current-id') || '0', 10);
-      const grid = section.querySelector('#mfhGrid');
-
-      function esc(str) {
-        return (str || '').replace(/[&<>"']/g, c => ({
-          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-        }[c]));
-      }
-
-      function fmtDate(s) {
-        if (!s) return '';
-        const d = new Date(s);
-        if (isNaN(d.getTime())) return '';
-        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        return String(d.getDate()).padStart(2, '0') + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
-      }
-
-      function shuffle(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-      }
-
-      async function loadMore() {
-        try {
-          const res = await fetch(
-            `${SUPABASE_URL}/rest/v1/blogs?is_published=eq.true&select=id,title,cover_image,category,created_at&order=created_at.desc&limit=10`, {
-            headers: {
-              apikey: SUPABASE_ANON_KEY,
-              Authorization: `Bearer ${SUPABASE_ANON_KEY}`
-            }
-          });
-          if (!res.ok) throw new Error('Request failed: ' + res.status);
-          let blogs = await res.json();
-          blogs = blogs.filter(b => parseInt(b.id, 10) !== currentId);
-          blogs = shuffle(blogs).slice(0, 3);
-          if (!blogs.length) { section.style.display = 'none'; return; }
-
-          grid.innerHTML = blogs.map(b => {
-            const cover = b.cover_image
-              ? `<img class="mfh-thumb" src="${esc(b.cover_image)}" alt="${esc(b.title || '')}" loading="lazy">`
-              : `<div class="mfh-thumb"></div>`;
-            const cat = b.category ? `<div class="mfh-cat">${esc(b.category)}</div>` : '';
-            const link = `blog-post.html?id=${encodeURIComponent(b.id)}`;
-            return `
-            <article class="mfh-card" onclick="location.href='${link}'">
-              ${cover}
-              <div class="mfh-body">
-                ${cat}
-                <h3 class="mfh-title">${esc(b.title || 'Untitled')}</h3>
-                <div class="mfh-date">${fmtDate(b.created_at)}</div>
-                <a class="mfh-readmore" href="${link}">Read More &rarr;</a>
-              </div>
-            </article>`;
-          }).join('');
-        } catch (err) {
-          console.error('More from HTI:', err);
-          section.style.display = 'none';
-        }
-      }
-      loadMore();
-    })();
-  </script>
+    <div class="mfh-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;">
+    </div>
+  </div>
+</section>
+<style>
+@media(max-width:768px){.mfh-grid{grid-template-columns:1fr !important;}}
+.mfh-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08);transition:transform 0.2s ease,box-shadow 0.2s ease;text-decoration:none;display:flex;flex-direction:column;}
+.mfh-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,0,0,0.14);}
+.mfh-card img{width:100%;height:200px;object-fit:cover;display:block;}
+.mfh-card-body{padding:20px;flex:1;display:flex;flex-direction:column;}
+.mfh-cat{font-size:11px;font-weight:700;color:#e31e24;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.mfh-title{font-family:sans-serif;font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.4;margin:0 0 12px 0;flex:1;}
+.mfh-meta{font-size:12px;color:#888;margin-bottom:14px;}
+.mfh-readmore{font-size:13px;font-weight:700;color:#e31e24;text-decoration:none;letter-spacing:0.3px;}
+.mfh-readmore:hover{text-decoration:underline;}
+</style>
+<script>
+(function(){
+  var section = document.querySelector('.mfh-section');
+  var grid = section.querySelector('.mfh-grid');
+  var currentId = parseInt(section.getAttribute('data-current-id')) || 0;
+  var SUPABASE_URL = 'https://ytthcgdsbfagvwcopoaj.supabase.co';
+  var ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0dGhjZ2RzYmZhZ3Zjb3BvYWoiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTY3MzQzMTM1OSwiZXhwIjoxOTg5MDA3MzU5fQ.Lo-MDeVFWMdHCpVqkJFO2MSbFEbVNO2RCxIxGo8RYLY';
+  fetch(SUPABASE_URL + '/rest/v1/blogs?select=id,title,cover_image,category,created_at&limit=20', {
+    headers: {'apikey': ANON_KEY, 'Authorization': 'Bearer ' + ANON_KEY}
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    var filtered = data.filter(function(b){ return b.id !== currentId && b.cover_image && b.title; });
+    filtered.sort(function(){return Math.random()-0.5;});
+    var picks = filtered.slice(0,3);
+    if(picks.length === 0){ section.style.display='none'; return; }
+    picks.forEach(function(b){
+      var date = new Date(b.created_at);
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var dateStr = date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+      var card = document.createElement('a');
+      card.href = 'blog-post.html?id=' + b.id;
+      card.className = 'mfh-card';
+      card.innerHTML = '<img src="' + b.cover_image + '" alt="' + b.title + '" loading="lazy"><div class="mfh-card-body"><div class="mfh-cat">' + (b.category||'General') + '</div><div class="mfh-title">' + b.title + '</div><div class="mfh-meta">' + dateStr + '</div><span class="mfh-readmore">Read More →</span></div>';
+      grid.appendChild(card);
+    });
+  })
+  .catch(function(){ section.style.display='none'; });
+})();
+</script>
+<!-- END MORE FROM HTI -->
 
 </body>
 
