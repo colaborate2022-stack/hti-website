@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | HTI</title>
+  <meta name="description" content="Read the latest insights from HTI India." />
+  <link rel="icon"
+    href="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63872ebc11d181ed9d69d77d_HTI%20star%20logo%2032x32%20px.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --hti-bg: #F3F2EF;
+      --hti-red: #e31e24;
+      --red: #e31e24;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #fff;
+      color: #111;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    /* ============ NAVBAR ============ */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--hti-bg);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #000, transparent);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 72px;
+    }
+
+    .nav-logo img {
+      width: 52px;
+      height: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-item {
+      position: relative;
+      font-weight: 600;
+      font-size: 15px;
+      color: #111;
+      cursor: pointer;
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-item .caret {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #333;
+      border-bottom: 2px solid #333;
+      transform: rotate(45deg);
+      margin-top: -3px;
+      transition: transform .2s;
+    }
+
+    .nav-item:hover .caret {
+      transform: rotate(-135deg);
+      margin-top: 3px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .14);
+      padding: 10px;
+      min-width: 230px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all .2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 120;
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      padding: 9px 12px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #222;
+    }
+
+    .dropdown a:hover {
+      background: var(--hti-bg);
+      color: var(--hti-red);
+    }
+
+    .dropdown a b {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .dropdown a span {
+      font-size: 12px;
+      color: #777;
+      font-weight: 400;
+    }
+
+    .nav-contact {
+      background: var(--hti-red);
+      color: #fff;
+      border-radius: 8px;
+      padding: 11px 22px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .nav-contact:hover {
+      background: #d40f0f;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      width: 26px;
+      height: 2px;
+      background: #000;
+      display: block;
+    }
+
+    /* ============ ARTICLE WRAPPER ============ */
+    .article {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    /* ============ HERO ============ */
+    .mag-hero {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      border-radius: 0 0 14px 14px;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .mag-hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .mag-hero .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, .85) 0%, rgba(0, 0, 0, .35) 55%, rgba(0, 0, 0, .15) 100%);
+    }
+
+    .mag-hero .hero-content {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 40px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .hero-cat {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      color: #fff;
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 22px;
+      max-width: 760px;
+    }
+
+    .hero-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .hero-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--red);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .author-info {
+      color: #fff;
+      line-height: 1.4;
+    }
+
+    .author-name {
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .author-date {
+      font-size: 13px;
+      opacity: .8;
+    }
+
+    .reading-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255, 255, 255, .15);
+      backdrop-filter: blur(4px);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 20px;
+    }
+
+    .reading-badge svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    /* ============ INTRO ============ */
+    .mag-intro {
+      font-size: 19px;
+      line-height: 1.75;
+      color: #333;
+      border-left: 3px solid var(--red);
+      padding-left: 22px;
+      margin: 48px 0;
+    }
+
+    /* ============ SECTIONS ============ */
+    .mag-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: center;
+      margin: 48px 0;
+    }
+
+    .mag-section .sec-img img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .mag-section.reverse .sec-img {
+      order: 2;
+    }
+
+    .mag-section.reverse .sec-text {
+      order: 1;
+    }
+
+    .sec-num {
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .sec-heading {
+      font-size: 23px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+
+    .sec-body {
+      font-size: 16px;
+      line-height: 1.75;
+      color: #444;
+    }
+
+    .tip-box {
+      background: #fff0f0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-top: 16px;
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    .tip-label {
+      color: var(--red);
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    /* ============ PULLQUOTE ============ */
+    .mag-pullquote {
+      position: relative;
+      background: #111;
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 56px 0;
+      overflow: hidden;
+    }
+
+    .mag-pullquote .quote-mark {
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-size: 80px;
+      line-height: 1;
+      color: var(--red);
+      opacity: .3;
+      font-family: Georgia, serif;
+      pointer-events: none;
+    }
+
+    .mag-pullquote p {
+      position: relative;
+      color: #fff;
+      font-size: 22px;
+      font-style: italic;
+      line-height: 1.5;
+      font-weight: 500;
+      margin: 0 0 14px;
+      padding-top: 18px;
+    }
+
+    .mag-pullquote .quote-author {
+      position: relative;
+      color: rgba(255, 255, 255, .6);
+      font-size: 14px;
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    /* ============ SUMMARY ============ */
+    .mag-summary {
+      background: #f5f5f5;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 48px 0;
+    }
+
+    .mag-summary .sum-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 19px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 14px;
+    }
+
+    .mag-summary .sum-head svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--red);
+    }
+
+    .mag-summary p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: #444;
+    }
+
+    /* ============ SHARE ============ */
+    .mag-share {
+      margin: 48px 0;
+      text-align: center;
+    }
+
+    .share-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 18px;
+    }
+
+    .share-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      padding: 9px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #444;
+      background: #fff;
+      cursor: pointer;
+      transition: all .2s ease;
+      font-family: inherit;
+    }
+
+    .share-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .share-btn:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
+
+    /* ============ MORE FROM HTI ============ */
+    .mfh-section {
+      background: #f7f7f7;
+      padding: 64px 24px;
+    }
+
+    .mfh-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .mfh-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .mfh-heading {
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--red);
+      margin: 0 0 12px 0;
+      letter-spacing: -0.5px;
+    }
+
+    .mfh-underline {
+      width: 56px;
+      height: 4px;
+      background: var(--red);
+      border-radius: 2px;
+      margin: 0 auto;
+    }
+
+    .mfh-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .mfh-card {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+      overflow: hidden;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+    }
+
+    .mfh-card:hover {
+      border-color: var(--red);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, .1);
+    }
+
+    .mfh-card-img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mfh-card-body {
+      padding: 18px 18px 20px;
+    }
+
+    .mfh-cat {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      margin-bottom: 8px;
+    }
+
+    .mfh-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.4;
+      margin: 0 0 10px 0;
+    }
+
+    .mfh-date {
+      font-size: 12px;
+      color: #999;
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+      background: #000;
+      color: #fff;
+      padding: 60px 30px 30px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .footer-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 17px;
+      color: #fff;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 14.5px;
+      color: #c7c7c7;
+      margin-bottom: 11px;
+      font-weight: 400;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-div {
+      height: 1px;
+      background: #2a2a2a;
+      margin: 40px 0 30px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 26px;
+      height: 26px;
+      color: #fff;
+      opacity: .85;
+    }
+
+    .footer-social a:hover {
+      opacity: 1;
+      color: var(--hti-red);
+    }
+
+    .footer-contact h3 {
+      font-size: 20px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .footer-contact span {
+      color: var(--hti-red);
+    }
+
+    .footer-brand img {
+      width: 70px;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: #8a8a8a;
+      font-size: 13px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media(max-width:960px) {
+      .nav-menu {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 16px 24px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+        display: none;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .nav-item {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: 4px 0 4px 14px;
+        min-width: auto;
+        width: 100%;
+        display: none;
+      }
+
+      .nav-item.open .dropdown {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .footer-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 28px;
+      }
+
+      .mag-hero .hero-content {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .mag-hero {
+        height: 280px;
+      }
+
+      .mag-section {
+        grid-template-columns: 1fr;
+      }
+
+      .mag-section.reverse .sec-img,
+      .mag-section.reverse .sec-text {
+        order: 0;
+      }
+
+      .mag-section .sec-img {
+        order: 0;
+      }
+
+      .mfh-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mag-intro {
+        font-size: 17px;
+      }
+    }
+
+    @media(max-width:600px) {
+      .footer-cols {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img
+          src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+          alt="HTI Logo" /></a>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+      <nav class="nav-menu" id="navMenu">
+        <div class="nav-item">Restaurants &amp; QSRs<span class="caret"></span>
+          <div class="dropdown">
+            <a href="super.html"><b>SUPER</b><span>Essential soft and job skills</span></a>
+            <a href="support.html"><b>SUPPORT</b><span>Skill upgradation pre-opening</span></a>
+            <a href="icedt.html"><b>ICEDT</b><span>Counter executives training</span></a>
+            <a href="icare.html"><b>iCARE</b><span>Teaching techniques</span></a>
+            <a href="vow.html"><b>Vow to Wow</b><span>Customer expectations</span></a>
+            <a href="ramp.html"><b>RAMP</b><span>Restaurant operations &amp; management</span></a>
+            <a href="restaurants.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Hotels<span class="caret"></span>
+          <div class="dropdown">
+            <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Staff skill upgrade</span></a>
+            <a href="hotcar.html"><b>HOT-CAR</b><span>Housekeeping operations</span></a>
+            <a href="fort.html"><b>FORT</b><span>Front desk operations</span></a>
+            <a href="kmt.html"><b>KMT</b><span>Kitchen management</span></a>
+            <a href="class.html"><b>CLASS</b><span>Grooming &amp; communication skills</span></a>
+            <a href="mdp.html"><b>MDP</b><span>Management development</span></a>
+            <a href="hotels.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Retail<span class="caret"></span>
+          <div class="dropdown">
+            <a href="post.html"><b>POST</b><span>Pantry operations</span></a>
+            <a href="cup.html"><b>CUP</b><span>Caretaker upgradation</span></a>
+            <a href="top.html"><b>TOP</b><span>Peons training</span></a>
+            <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item" style="display:none;">More<span class="caret"></span>
+          <div class="dropdown">
+            <a href="#">Team Building</a>
+            <a href="#">Leadership Development</a>
+            <a href="#">Sales Training</a>
+            <a href="#">Professional Etiquette</a>
+            <a href="#">Become A Trainer</a>
+            <a href="#">Develop SOPs &amp; How-To Videos</a>
+            <a href="blog.html">Blogs</a>
+          </div>
+        </div>
+        <a href="blog.html" class="nav-item">Blog</a>
+        <a href="contact.html" class="nav-contact">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ DYNAMIC ARTICLE CONTENT ============ -->
+  <main id="magRoot"></main>
+
+  <!-- ============ MORE FROM HTI ============ -->
+  <section class="mfh-section" id="mfhSection" style="display:none;">
+    <div class="mfh-wrap">
+      <div class="mfh-header">
+        <h2 class="mfh-heading">More from HTI</h2>
+        <div class="mfh-underline"></div>
+      </div>
+      <div class="mfh-grid" id="mfhGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>HTI</h4>
+          <a href="#">About Us</a>
+          <a href="#">Case Studies</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <a href="restaurants.html">Restaurants &amp; QSRs</a>
+          <a href="hotels.html">Hotels</a>
+          <a href="offices.html">Offices</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="#">Team Building</a>
+          <a href="#">Leadership Development</a>
+          <a href="#">Sales Training</a>
+          <a href="#">Professional Etiquette</a>
+          <a href="#">Become A Trainer</a>
+          <a href="#">Develop SOPs &amp; How-To Videos</a>
+          <a href="blog.html">Blogs</a>
+        </div>
+      </div>
+      <div class="footer-div"></div>
+      <div class="footer-bottom">
+        <div class="footer-social">
+          <a href="https://www.facebook.com/hti.india/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg></a>
+          <a href="https://www.instagram.com/hti.india/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M12 2c-2.716 0-3.056.012-4.123.06c-1.064.049-1.791.218-2.427.465a4.901 4.901 0 0 0-1.772 1.153A4.902 4.902 0 0 0 2.525 5.45c-.247.636-.416 1.363-.465 2.427C2.011 8.944 2 9.284 2 12s.011 3.056.06 4.123c.049 1.064.218 1.791.465 2.427a4.903 4.903 0 0 0 1.153 1.772a4.903 4.903 0 0 0 1.772 1.153c.636.247 1.363.416 2.427.465c1.067.048 1.407.06 4.123.06s3.056-.012 4.123-.06c1.064-.049 1.791-.218 2.427-.465a4.902 4.902 0 0 0 1.772-1.153a4.902 4.902 0 0 0 1.153-1.772c.247-.636.416-1.363.465-2.427c.048-1.067.06-1.407.06-4.123s-.012-3.056-.06-4.123c-.049-1.064-.218-1.791-.465-2.427a4.902 4.902 0 0 0-1.153-1.772a4.901 4.901 0 0 0-1.772-1.153c-.636-.247-1.363-.416-2.427-.465C15.056 2.012 14.716 2 12 2m0 1.802c2.67 0 2.986.01 4.04.058c.976.045 1.505.207 1.858.344c.466.182.8.399 1.15.748c.35.35.566.684.748 1.15c.136.353.3.882.344 1.857c.048 1.055.058 1.37.058 4.041c0 2.67-.01 2.986-.058 4.04c-.045.976-.208 1.505-.344 1.858a3.1 3.1 0 0 1-.748 1.15c-.35.35-.684.566-1.15.748c-.353.136-.882.3-1.857.344c-1.054.048-1.37.058-4.041.058c-2.67 0-2.987-.01-4.04-.058c-.976-.045-1.505-.208-1.858-.344a3.098 3.098 0 0 1-1.15-.748a3.098 3.098 0 0 1-.748-1.15c-.137-.353-.3-.882-.344-1.857c-.048-1.055-.058-1.37-.058-4.041c0-2.67.01-2.986.058-4.04c.045-.976.207-1.505.344-1.858c.182-.466.399-.8.748-1.15c.35-.35.684-.566 1.15-.748c.353-.137.882-.3 1.857-.344c1.055-.048 1.37-.058 4.041-.058m0 11.531a3.333 3.333 0 1 1 0-6.666a3.333 3.333 0 0 1 0 6.666m0-8.468a5.135 5.135 0 1 0 0 10.27a5.135 5.135 0 0 0 0-10.27m6.538-.203a1.2 1.2 0 1 1-2.4 0a1.2 1.2 0 0 1 2.4 0" />
+            </svg></a>
+          <a href="https://www.linkedin.com/company/hospitality-training-institute-india-pvt-ltd" target="_blank"
+            aria-label="LinkedIn"><svg viewBox="0 0 32 32" fill="currentColor">
+              <path
+                d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+            </svg></a>
+          <a href="https://www.youtube.com/c/Hti-india" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg></a>
+        </div>
+        <div class="footer-contact"><a href="tel:+917738060902">
+            <h3>Contact Us: <span>+91 77380 60902</span></h3>
+          </a></div>
+        <a href="index.html" class="footer-brand"><img
+            src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/637627a62b1c3e7f4f7b3496_HTI%20Logo%2003.png"
+            alt="HTI" /></a>
+      </div>
+      <div class="footer-copy">&#169;&#65039; HOSPITALITY TRAINING INSTITUTE INDIA PRIVATE. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // ============ CONFIG ============
+    var SUPABASE_URL = 'https://ytthcgdsbfagvwcopoaj.supabase.co';
+    var ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0dGhjZ2RzYmZhZ3Z3Y29wb2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzMjk5MTMsImV4cCI6MjA5ODkwNTkxM30.JIDahcRTu3VbFpZ55Ti5hHg_JrHobk0zh8PSaj9lWLc';
+    var SB_HEADERS = { 'apikey': ANON_KEY, 'Authorization': 'Bearer ' + ANON_KEY };
+
+    // ============ HELPERS ============
+    function esc(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    function formatDate(val) {
+      if (!val) return '';
+      var d = new Date(val);
+      if (isNaN(d.getTime())) return String(val);
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+    }
+
+    function initials(name) {
+      if (!name) return 'HT';
+      var parts = String(name).trim().split(/\s+/);
+      var out = parts[0].charAt(0);
+      if (parts.length > 1) out += parts[parts.length - 1].charAt(0);
+      return out.toUpperCase();
+    }
+
+    function pad2(n) {
+      return n < 10 ? '0' + n : '' + n;
+    }
+
+    // sections may arrive as a JSON string, an object, or already-parsed array
+    function parseSections(raw) {
+      if (!raw) return [];
+      if (Array.isArray(raw)) return raw;
+      if (typeof raw === 'object') return [].concat(raw);
+      if (typeof raw === 'string') {
+        try {
+          var parsed = JSON.parse(raw);
+          return Array.isArray(parsed) ? parsed : [].concat(parsed);
+        } catch (e) {
+          return [];
+        }
+      }
+      return [];
+    }
+
+    // ============ RENDER ============
+    function renderBlog(blog) {
+      var pageUrl = window.location.href;
+      var title = blog.title || 'Blog';
+
+      // document title + meta description
+      document.title = title + ' | HTI';
+      var metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc && blog.intro) metaDesc.setAttribute('content', String(blog.intro).slice(0, 160));
+
+      var sections = parseSections(blog.sections);
+      var html = '';
+
+      // ---- HERO ----
+      html += '<section class="mag-hero">';
+      if (blog.thumbnail_url) {
+        html += '<img src="' + esc(blog.thumbnail_url) + '" alt="' + esc(title) + '">';
+      }
+      html += '<div class="hero-overlay"></div>';
+      html += '<div class="hero-content">';
+      if (blog.category) {
+        html += '<span class="hero-cat">' + esc(blog.category) + '</span>';
+      }
+      html += '<h1 class="hero-title">' + esc(title) + '</h1>';
+      html += '<div class="hero-meta-row">';
+      html += '<div class="hero-author">';
+      html += '<div class="author-avatar">' + esc(initials(blog.author)) + '</div>';
+      html += '<div class="author-info">';
+      html += '<div class="author-name">' + esc(blog.author || 'HTI India') + '</div>';
+      html += '<div class="author-date">' + esc(formatDate(blog.date)) + '</div>';
+      html += '</div></div>';
+      if (blog.reading_time) {
+        html += '<span class="reading-badge">';
+        html += '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
+        html += esc(blog.reading_time);
+        html += '</span>';
+      }
+      html += '</div>'; // meta-row
+      html += '</div></section>'; // hero-content, hero
+
+      // ---- ARTICLE BODY ----
+      html += '<div class="article">';
+
+      // INTRO
+      if (blog.intro) {
+        html += '<p class="mag-intro">' + esc(blog.intro) + '</p>';
+      }
+
+      // SECTIONS
+      sections.forEach(function (sec, i) {
+        var reverse = (i % 2 === 1); // odd index (2nd, 4th...) -> text left, image right
+        html += '<section class="mag-section' + (reverse ? ' reverse' : '') + '">';
+        html += '<div class="sec-img">';
+        if (sec.image_url) {
+          html += '<img src="' + esc(sec.image_url) + '" alt="' + esc(sec.heading || '') + '">';
+        }
+        html += '</div>';
+        html += '<div class="sec-text">';
+        html += '<span class="sec-num">' + pad2(i + 1) + '</span>';
+        if (sec.heading) html += '<h2 class="sec-heading">' + esc(sec.heading) + '</h2>';
+        if (sec.body) html += '<p class="sec-body">' + esc(sec.body) + '</p>';
+        if (sec.tip_text || sec.tip_label) {
+          html += '<div class="tip-box">';
+          if (sec.tip_label) html += '<span class="tip-label">' + esc(sec.tip_label) + '</span>';
+          if (sec.tip_text) html += esc(sec.tip_text);
+          html += '</div>';
+        }
+        html += '</div>'; // sec-text
+        html += '</section>';
+      });
+
+      // PULLQUOTE
+      if (blog.pullquote) {
+        html += '<div class="mag-pullquote">';
+        html += '<span class="quote-mark">&ldquo;</span>';
+        html += '<p>' + esc(blog.pullquote) + '</p>';
+        html += '<span class="quote-author">&mdash; ' + esc(blog.author || 'HTI India') + '</span>';
+        html += '</div>';
+      }
+
+      // SUMMARY
+      if (blog.summary) {
+        html += '<div class="mag-summary">';
+        html += '<div class="sum-head">';
+        html += '<svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>';
+        html += 'Summing up</div>';
+        html += '<p>' + esc(blog.summary) + '</p>';
+        html += '</div>';
+      }
+
+      // SHARE
+      var eUrl = encodeURIComponent(pageUrl);
+      var eTitle = encodeURIComponent(title);
+      html += '<div class="mag-share">';
+      html += '<div class="share-title">Share this article</div>';
+      html += '<div class="share-row">';
+      html += '<a class="share-btn" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=' + eUrl + '">';
+      html += '<svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</a>';
+      html += '<a class="share-btn" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=' + eUrl + '&text=' + eTitle + '">';
+      html += '<svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Twitter</a>';
+      html += '<a class="share-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/shareArticle?mini=true&url=' + eUrl + '&title=' + eTitle + '">';
+      html += '<svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037c-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85c3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065a2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>';
+      html += '<button class="share-btn" type="button" id="copyLinkBtn">';
+      html += '<svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg><span id="copyLabel">Copy Link</span></button>';
+      html += '</div></div>';
+
+      html += '</div>'; // article
+
+      document.getElementById('magRoot').innerHTML = html;
+
+      // wire up copy link
+      var copyBtn = document.getElementById('copyLinkBtn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function () {
+          var label = document.getElementById('copyLabel');
+          function done() { if (label) { label.textContent = 'Copied!'; setTimeout(function () { label.textContent = 'Copy Link'; }, 2000); } }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(pageUrl).then(done, done);
+          } else {
+            var ta = document.createElement('textarea');
+            ta.value = pageUrl; document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); } catch (e) { }
+            document.body.removeChild(ta); done();
+          }
+        });
+      }
+    }
+
+    // ============ MORE FROM HTI ============
+    function loadMoreFromHti(currentId) {
+      fetch(SUPABASE_URL + '/rest/v1/blogs?layout=eq.magazine&select=id,title,thumbnail_url,category,date&limit=50', {
+        headers: SB_HEADERS
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (!Array.isArray(data)) return;
+          var filtered = data.filter(function (b) {
+            return String(b.id) !== String(currentId) && b.title;
+          });
+          // shuffle
+          for (var i = filtered.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var tmp = filtered[i]; filtered[i] = filtered[j]; filtered[j] = tmp;
+          }
+          var picks = filtered.slice(0, 2);
+          if (picks.length === 0) return;
+          var grid = document.getElementById('mfhGrid');
+          picks.forEach(function (b) {
+            var card = document.createElement('a');
+            card.href = 'magazine-blog.html?id=' + encodeURIComponent(b.id);
+            card.className = 'mfh-card';
+            var img = b.thumbnail_url
+              ? '<img class="mfh-card-img" src="' + esc(b.thumbnail_url) + '" alt="' + esc(b.title) + '" loading="lazy">'
+              : '';
+            card.innerHTML = img +
+              '<div class="mfh-card-body">' +
+              '<div class="mfh-cat">' + esc(b.category || 'General') + '</div>' +
+              '<div class="mfh-title">' + esc(b.title) + '</div>' +
+              '<div class="mfh-date">' + esc(formatDate(b.date)) + '</div>' +
+              '</div>';
+            grid.appendChild(card);
+          });
+          document.getElementById('mfhSection').style.display = 'block';
+        })
+        .catch(function () { });
+    }
+
+    // ============ INIT ============
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var id = params.get('id');
+
+      if (!id) {
+        window.location.replace('blog.html');
+        return;
+      }
+
+      fetch(SUPABASE_URL + '/rest/v1/blogs?id=eq.' + encodeURIComponent(id) + '&select=*', {
+        headers: SB_HEADERS
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (!Array.isArray(data) || data.length === 0) {
+            window.location.replace('blog.html');
+            return;
+          }
+          var blog = data[0];
+
+          // redirect layout -> follow the redirect_url
+          if (blog.layout === 'redirect' && blog.redirect_url) {
+            window.location.replace(blog.redirect_url);
+            return;
+          }
+
+          renderBlog(blog);
+          loadMoreFromHti(id);
+        })
+        .catch(function () {
+          window.location.replace('blog.html');
+        });
+    })();
+
+    // ============ MOBILE NAV TOGGLE ============
+    (function () {
+      var toggle = document.getElementById('navToggle');
+      var menu = document.getElementById('navMenu');
+      if (toggle && menu) {
+        toggle.addEventListener('click', function () { menu.classList.toggle('open'); });
+        document.querySelectorAll('.nav-item').forEach(function (item) {
+          item.addEventListener('click', function (e) {
+            if (window.innerWidth <= 960 && (e.target === item || e.target.classList.contains('caret'))) {
+              item.classList.toggle('open');
+            }
+          });
+        });
+      }
+    })();
+  </script>
+
+</body>
+
+</html>
