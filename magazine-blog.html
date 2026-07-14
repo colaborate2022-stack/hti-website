@@ -358,6 +358,11 @@
       margin: 48px 0;
     }
 
+    /* section with no image — text spans full width, no empty column */
+    .mag-section.no-img {
+      grid-template-columns: 1fr;
+    }
+
     .mag-section .sec-img {
       position: relative;
       background: #ffffff;
@@ -1061,14 +1066,17 @@
       // SECTIONS
       sections.forEach(function (sec, i) {
         var reverse = (i % 2 === 1); // odd index (2nd, 4th...) -> text left, image right
-        html += '<section class="mag-section' + (reverse ? ' reverse' : '') + '">';
-        html += '<div class="sec-img">';
-        if (sec.image_url) {
-          html += '<img src="' + esc(sec.image_url) + '" alt="' + esc(sec.heading || '') + '"' +
+        // fall back to the blog thumbnail when a section has no image of its own
+        var imgUrl = sec.image_url || blog.thumbnail_url || '';
+        html += '<section class="mag-section' + (reverse ? ' reverse' : '') + (imgUrl ? '' : ' no-img') + '">';
+        // only render the image container when we actually have an image — no empty box
+        if (imgUrl) {
+          html += '<div class="sec-img">';
+          html += '<img src="' + esc(imgUrl) + '" alt="' + esc(sec.heading || '') + '"' +
             ' onerror="this.style.display=\'none\';var p=this.nextElementSibling;if(p)p.style.display=\'flex\';">';
           html += '<div class="sec-img-placeholder" style="display:none;">' + esc(sec.heading || '') + '</div>';
+          html += '</div>';
         }
-        html += '</div>';
         html += '<div class="sec-text">';
         html += '<span class="sec-num">' + pad2(i + 1) + '</span>';
         if (sec.heading) html += '<h2 class="sec-heading">' + esc(sec.heading) + '</h2>';
