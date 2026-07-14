@@ -1124,8 +1124,13 @@
         html += '</section>';
       });
 
-      // PULLQUOTE
-      if (blog.pullquote) {
+      // PULLQUOTE — only show if meaningful (non-generic) and long enough
+      var pq = blog.pullquote ? String(blog.pullquote).trim() : '';
+      var genericPhrases = ['guest experience', 'hospitality professionals', 'customer service excellence', 'front-end staff'];
+      var pqLower = pq.toLowerCase();
+      var pqIsGeneric = genericPhrases.some(function (p) { return pqLower.indexOf(p) !== -1; });
+      var showPullquote = pq.length > 60 && !pqIsGeneric;
+      if (showPullquote) {
         html += '<div class="mag-pullquote">';
         html += '<span class="quote-mark">&ldquo;</span>';
         html += '<p>' + esc(blog.pullquote) + '</p>';
