@@ -209,50 +209,47 @@
       padding: 0 2rem 60px;
     }
 
-    /* ============ HERO ============ */
+    /* ============ HERO (two-panel split) ============ */
     .mag-hero {
       position: relative;
+      display: flex;
       width: 100%;
-      height: 480px;
+      height: 500px;
+    }
+
+    .hero-panel-left {
+      position: relative;
+      width: 50%;
+      background: rgba(0, 0, 0, 0.92);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 48px 40px 40px;
+    }
+
+    .hero-panel-right {
+      width: 50%;
       overflow: hidden;
       background: #111;
     }
 
-    .mag-hero img {
-      position: absolute;
-      inset: 0;
+    .hero-panel-right img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-
-    .mag-hero .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, rgba(0, 0, 0, .85) 0%, rgba(0, 0, 0, .6) 35%, rgba(0, 0, 0, .3) 65%, rgba(0, 0, 0, .3) 100%);
-    }
-
-    .mag-hero .hero-content {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 40px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .mag-hero .hero-inner {
-      max-width: 50%;
+      object-position: center;
+      display: block;
     }
 
     .hero-back {
-      display: inline-block;
+      position: absolute;
+      top: 20px;
+      left: 24px;
+      z-index: 2;
       color: #fff;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       opacity: .9;
-      margin-bottom: 18px;
     }
 
     .hero-back:hover {
@@ -262,6 +259,7 @@
 
     .hero-cat {
       display: inline-block;
+      align-self: flex-start;
       background: var(--red);
       color: #fff;
       font-size: 11px;
@@ -362,7 +360,8 @@
     }
 
     .mag-section .sec-img {
-      background: #f5f5f5;
+      position: relative;
+      background: #f8f8f8;
       border-radius: 12px;
       overflow: hidden;
       height: 280px;
@@ -372,11 +371,24 @@
       width: 100%;
       height: 280px;
       object-fit: cover;
+      object-position: center;
       border-radius: 12px;
+      display: block;
     }
 
-    .mag-section .sec-img img.contain {
-      object-fit: contain;
+    .sec-img-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      background: #f0f0f0;
+      color: #999;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 12px;
     }
 
     .mag-section.reverse .sec-img {
@@ -789,24 +801,28 @@
     }
 
     @media (max-width: 768px) {
-      .hero-title {
-        font-size: 28px;
+      .mag-hero {
+        flex-direction: column;
+        height: auto;
       }
 
-      .mag-hero .hero-content {
+      .hero-panel-right {
+        width: 100%;
+        height: 200px;
+        order: -1;
+      }
+
+      .hero-panel-left {
+        width: 100%;
         padding: 24px;
       }
 
-      .mag-hero .hero-inner {
-        max-width: 100%;
+      .hero-title {
+        font-size: 26px;
       }
     }
 
     @media (max-width: 640px) {
-      .mag-hero {
-        height: 280px;
-      }
-
       .article {
         padding: 0 1rem 60px;
       }
@@ -1037,14 +1053,12 @@
       var sections = parseSections(blog.sections);
       var html = '';
 
-      // ---- HERO ----
+      // ---- HERO (two-panel split; right panel uses the clean first-section image) ----
+      var heroImg = (sections[0] && sections[0].image_url) ? sections[0].image_url : blog.thumbnail_url;
       html += '<section class="mag-hero">';
-      if (blog.thumbnail_url) {
-        html += '<img src="' + esc(blog.thumbnail_url) + '" alt="' + esc(title) + '">';
-      }
-      html += '<div class="hero-overlay"></div>';
-      html += '<div class="hero-content"><div class="hero-inner">';
       html += '<a href="blog.html" class="hero-back">&#8592; Back to Blogs</a>';
+      // LEFT: dark text panel — category -> title -> author row
+      html += '<div class="hero-panel-left">';
       if (blog.category) {
         html += '<span class="hero-cat">' + esc(blog.category) + '</span>';
       }
@@ -1063,7 +1077,14 @@
         html += '</span>';
       }
       html += '</div>'; // meta-row
-      html += '</div></div></section>'; // hero-inner, hero-content, hero
+      html += '</div>'; // panel-left
+      // RIGHT: clean image panel
+      html += '<div class="hero-panel-right">';
+      if (heroImg) {
+        html += '<img src="' + esc(heroImg) + '" alt="' + esc(title) + '">';
+      }
+      html += '</div>';
+      html += '</section>';
 
       // ---- ARTICLE BODY ----
       html += '<div class="article">';
@@ -1079,8 +1100,9 @@
         html += '<section class="mag-section' + (reverse ? ' reverse' : '') + '">';
         html += '<div class="sec-img">';
         if (sec.image_url) {
-          var isSvg = /\.svg(\?.*)?$/i.test(sec.image_url);
-          html += '<img class="' + (isSvg ? 'contain' : 'cover') + '" src="' + esc(sec.image_url) + '" alt="' + esc(sec.heading || '') + '">';
+          html += '<img src="' + esc(sec.image_url) + '" alt="' + esc(sec.heading || '') + '"' +
+            ' onerror="this.style.display=\'none\';var p=this.nextElementSibling;if(p)p.style.display=\'flex\';">';
+          html += '<div class="sec-img-placeholder" style="display:none;">' + esc(sec.heading || '') + '</div>';
         }
         html += '</div>';
         html += '<div class="sec-text">';
