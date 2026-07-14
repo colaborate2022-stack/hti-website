@@ -288,7 +288,17 @@
       padding: 16px;
     }
 
-    /* fallback title (only shown when there is no cover image) */
+    /* category pill above the title */
+    .blog-cat {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--hti-red);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
     .blog-card-title {
       font-size: 18px;
       font-weight: 700;
@@ -670,7 +680,7 @@
       const gridEl = document.getElementById('blogGrid');
       try {
         const res = await fetch(
-          `${SUPABASE_URL}/rest/v1/blogs?is_published=eq.true&order=created_at.desc&select=*`, {
+          `${SUPABASE_URL}/rest/v1/blogs?layout=eq.magazine&is_published=eq.true&order=created_at.desc&select=id,title,author,date,reading_time,category,thumbnail_url,intro,created_at`, {
           headers: {
             apikey: SUPABASE_ANON_KEY,
             Authorization: `Bearer ${SUPABASE_ANON_KEY}`
@@ -687,21 +697,24 @@
 
         statusEl.style.display = 'none';
         gridEl.innerHTML = blogs.map(b => {
-          const cover = b.cover_image
-            ? `<img class="blog-cover" src="${escapeHtml(b.cover_image)}" alt="${escapeHtml(b.title || '')}" loading="lazy">`
+          const cover = b.thumbnail_url
+            ? `<img class="blog-cover" src="${escapeHtml(b.thumbnail_url)}" alt="${escapeHtml(b.title || '')}" loading="lazy">`
             : '';
-          // title is baked into the thumbnail — only show it as text when there's no cover image
-          const titleFallback = b.cover_image
-            ? ''
-            : `<h3 class="blog-card-title">${escapeHtml(b.title || 'Untitled')}</h3>`;
+          const cat = b.category
+            ? `<div class="blog-cat">${escapeHtml(b.category)}</div>`
+            : '';
+          // magazine `date` is a preformatted string (e.g. "15-06-2024"); fall back to created_at
+          const dateStr = b.date ? escapeHtml(b.date) : formatDate(b.created_at);
+          const rt = b.reading_time ? escapeHtml(b.reading_time) : readTime(b.intro);
           return `
-          <article class="blog-card" onclick="location.href='blog-post.html?id=${encodeURIComponent(b.id)}'">
+          <article class="blog-card" onclick="location.href='magazine-blog.html?id=${encodeURIComponent(b.id)}'">
             ${cover}
             <div class="blog-card-body">
-              ${titleFallback}
-              <p class="blog-excerpt">${escapeHtml(excerpt(b.body, 200))}</p>
+              ${cat}
+              <h3 class="blog-card-title">${escapeHtml(b.title || 'Untitled')}</h3>
+              <p class="blog-excerpt">${escapeHtml(excerpt(b.intro, 160))}</p>
               <div class="blog-author">${escapeHtml(b.author || 'Team HTI')}</div>
-              <div class="blog-meta">${formatDate(b.created_at)}<span class="dot">&bull;</span>${readTime(b.body)}</div>
+              <div class="blog-meta">${dateStr}<span class="dot">&bull;</span>${rt}</div>
             </div>
           </article>`;
         }).join('');
