@@ -212,23 +212,22 @@
     /* ============ HERO (two-panel split) ============ */
     .mag-hero {
       position: relative;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       width: 100%;
-      height: 500px;
+      height: 480px;
     }
 
     .hero-panel-left {
       position: relative;
-      width: 50%;
-      background: rgba(0, 0, 0, 0.92);
+      background: #0a0a0a;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 48px 40px 40px;
+      padding: 3rem;
     }
 
     .hero-panel-right {
-      width: 50%;
       overflow: hidden;
       background: #111;
     }
@@ -361,7 +360,8 @@
 
     .mag-section .sec-img {
       position: relative;
-      background: #f8f8f8;
+      background: #ffffff;
+      border: 1px solid #f0f0f0;
       border-radius: 12px;
       overflow: hidden;
       height: 280px;
@@ -369,9 +369,10 @@
 
     .mag-section .sec-img img {
       width: 100%;
-      height: 280px;
-      object-fit: cover;
+      height: 100%;
+      object-fit: contain;
       object-position: center;
+      padding: 12px;
       border-radius: 12px;
       display: block;
     }
@@ -802,18 +803,16 @@
 
     @media (max-width: 768px) {
       .mag-hero {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         height: auto;
       }
 
       .hero-panel-right {
-        width: 100%;
-        height: 200px;
+        height: 220px;
         order: -1;
       }
 
       .hero-panel-left {
-        width: 100%;
         padding: 24px;
       }
 
@@ -1053,12 +1052,11 @@
       var sections = parseSections(blog.sections);
       var html = '';
 
-      // ---- HERO (two-panel split; right panel uses the clean first-section image) ----
-      var heroImg = (sections[0] && sections[0].image_url) ? sections[0].image_url : blog.thumbnail_url;
+      // ---- HERO (two-panel split; left = clean black text panel, right = thumbnail image) ----
       html += '<section class="mag-hero">';
-      html += '<a href="blog.html" class="hero-back">&#8592; Back to Blogs</a>';
-      // LEFT: dark text panel — category -> title -> author row
+      // LEFT: solid black text panel — back link -> category -> title -> author row
       html += '<div class="hero-panel-left">';
+      html += '<a href="blog.html" class="hero-back">&#8592; Back to Blogs</a>';
       if (blog.category) {
         html += '<span class="hero-cat">' + esc(blog.category) + '</span>';
       }
@@ -1078,10 +1076,10 @@
       }
       html += '</div>'; // meta-row
       html += '</div>'; // panel-left
-      // RIGHT: clean image panel
+      // RIGHT: thumbnail image panel (any baked-in text stays on the right, away from our text)
       html += '<div class="hero-panel-right">';
-      if (heroImg) {
-        html += '<img src="' + esc(heroImg) + '" alt="' + esc(title) + '">';
+      if (blog.thumbnail_url) {
+        html += '<img src="' + esc(blog.thumbnail_url) + '" alt="' + esc(title) + '">';
       }
       html += '</div>';
       html += '</section>';
