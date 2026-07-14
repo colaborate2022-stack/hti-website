@@ -204,17 +204,16 @@
 
     /* ============ ARTICLE WRAPPER ============ */
     .article {
-      max-width: 820px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 0 24px 60px;
+      padding: 0 2rem 60px;
     }
 
     /* ============ HERO ============ */
     .mag-hero {
       position: relative;
       width: 100%;
-      height: 420px;
-      border-radius: 0 0 14px 14px;
+      height: 480px;
       overflow: hidden;
       background: #111;
     }
@@ -230,7 +229,7 @@
     .mag-hero .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, .85) 0%, rgba(0, 0, 0, .35) 55%, rgba(0, 0, 0, .15) 100%);
+      background: linear-gradient(to right, rgba(0, 0, 0, .85) 0%, rgba(0, 0, 0, .6) 35%, rgba(0, 0, 0, .3) 65%, rgba(0, 0, 0, .3) 100%);
     }
 
     .mag-hero .hero-content {
@@ -239,8 +238,26 @@
       right: 0;
       bottom: 0;
       padding: 40px;
-      max-width: 820px;
+      max-width: 1100px;
       margin: 0 auto;
+    }
+
+    .mag-hero .hero-inner {
+      max-width: 50%;
+    }
+
+    .hero-back {
+      display: inline-block;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      opacity: .9;
+      margin-bottom: 18px;
+    }
+
+    .hero-back:hover {
+      opacity: 1;
+      text-decoration: underline;
     }
 
     .hero-cat {
@@ -258,11 +275,10 @@
 
     .hero-title {
       color: #fff;
-      font-size: 40px;
-      font-weight: 800;
-      line-height: 1.15;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.2;
       margin-bottom: 22px;
-      max-width: 760px;
     }
 
     .hero-meta-row {
@@ -340,16 +356,27 @@
     .mag-section {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      gap: 3rem;
       align-items: center;
       margin: 48px 0;
     }
 
+    .mag-section .sec-img {
+      background: #f5f5f5;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 280px;
+    }
+
     .mag-section .sec-img img {
       width: 100%;
-      height: 200px;
+      height: 280px;
       object-fit: cover;
-      border-radius: 10px;
+      border-radius: 12px;
+    }
+
+    .mag-section .sec-img img.contain {
+      object-fit: contain;
     }
 
     .mag-section.reverse .sec-img {
@@ -607,6 +634,16 @@
       color: #999;
     }
 
+    .mfh-empty-box {
+      background: #f0f0f0;
+      border-radius: 10px;
+      padding: 32px 24px;
+      text-align: center;
+      color: #888;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
     /* ============ FOOTER ============ */
     .footer {
       background: #000;
@@ -759,11 +796,19 @@
       .mag-hero .hero-content {
         padding: 24px;
       }
+
+      .mag-hero .hero-inner {
+        max-width: 100%;
+      }
     }
 
     @media (max-width: 640px) {
       .mag-hero {
         height: 280px;
+      }
+
+      .article {
+        padding: 0 1rem 60px;
       }
 
       .mag-section {
@@ -998,7 +1043,8 @@
         html += '<img src="' + esc(blog.thumbnail_url) + '" alt="' + esc(title) + '">';
       }
       html += '<div class="hero-overlay"></div>';
-      html += '<div class="hero-content">';
+      html += '<div class="hero-content"><div class="hero-inner">';
+      html += '<a href="blog.html" class="hero-back">&#8592; Back to Blogs</a>';
       if (blog.category) {
         html += '<span class="hero-cat">' + esc(blog.category) + '</span>';
       }
@@ -1017,7 +1063,7 @@
         html += '</span>';
       }
       html += '</div>'; // meta-row
-      html += '</div></section>'; // hero-content, hero
+      html += '</div></div></section>'; // hero-inner, hero-content, hero
 
       // ---- ARTICLE BODY ----
       html += '<div class="article">';
@@ -1033,7 +1079,8 @@
         html += '<section class="mag-section' + (reverse ? ' reverse' : '') + '">';
         html += '<div class="sec-img">';
         if (sec.image_url) {
-          html += '<img src="' + esc(sec.image_url) + '" alt="' + esc(sec.heading || '') + '">';
+          var isSvg = /\.svg(\?.*)?$/i.test(sec.image_url);
+          html += '<img class="' + (isSvg ? 'contain' : 'cover') + '" src="' + esc(sec.image_url) + '" alt="' + esc(sec.heading || '') + '">';
         }
         html += '</div>';
         html += '<div class="sec-text">';
@@ -1124,8 +1171,14 @@
             var tmp = filtered[i]; filtered[i] = filtered[j]; filtered[j] = tmp;
           }
           var picks = filtered.slice(0, 2);
-          if (picks.length === 0) return;
           var grid = document.getElementById('mfhGrid');
+          document.getElementById('mfhSection').style.display = 'block';
+          // Fewer than 2 related magazine blogs -> show fallback message
+          if (picks.length < 2) {
+            grid.className = 'mfh-empty';
+            grid.innerHTML = '<div class="mfh-empty-box">More articles coming soon — check back shortly.</div>';
+            return;
+          }
           picks.forEach(function (b) {
             var card = document.createElement('a');
             card.href = 'magazine-blog.html?id=' + encodeURIComponent(b.id);
@@ -1141,7 +1194,6 @@
               '</div>';
             grid.appendChild(card);
           });
-          document.getElementById('mfhSection').style.display = 'block';
         })
         .catch(function () { });
     }
