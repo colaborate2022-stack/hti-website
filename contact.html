@@ -280,11 +280,11 @@
 
     /* ============ CONTACT CARDS ============ */
     .contact-cards {
-      max-width: 1100px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 40px 24px 60px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 24px;
     }
 
@@ -623,7 +623,7 @@
       }
 
       .contact-cards {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .stats-band-inner {
@@ -648,6 +648,10 @@
     }
 
     @media(max-width:600px) {
+      .contact-cards {
+        grid-template-columns: 1fr;
+      }
+
       .stats-band-inner {
         grid-template-columns: 1fr;
       }
@@ -764,6 +768,23 @@
       <p>For detailed enquiries, proposals, or partnerships.</p>
       <div class="c-detail">kaushal@hti-india.com</div>
       <a href="mailto:kaushal@hti-india.com" class="contact-btn">Send an email</a>
+    </div>
+
+    <div class="contact-card">
+      <div class="c-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+      </div>
+      <h3>Contact form</h3>
+      <p>Prefer to write it out? Fill our quick form and we'll get back to you.</p>
+      <div class="c-detail">Takes under 2 minutes</div>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdFpuK_F7WErP4QiuqFchgH2Wjx8dh5rRqth9yT8zpiaQ0CMw/viewform" target="_blank" class="contact-btn">Fill the form</a>
     </div>
   </section>
 
