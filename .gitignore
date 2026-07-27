@@ -1,2 +1,8 @@
 # Local script containing Supabase API keys — never commit
 insert-blog.js
+
+.claude/
+blog-partners.json
+body.json
+layouts.json
+patch-61.json
