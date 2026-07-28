@@ -87,6 +87,33 @@
       bottom: 0;
       height: 1px;
       background: linear-gradient(to right, transparent, #000, transparent);
+      transition: opacity .25s ease;
+    }
+
+    /* static line hides once the scroll progress line takes over */
+    .navbar.scrolled::after {
+      opacity: 0;
+    }
+
+    /* ---------- Scroll progress line (sits under the navbar) ---------- */
+    .scroll-progress {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, var(--hti-red, #e32129), var(--hti-red2, #ff0000));
+      transform: scaleX(0);
+      transform-origin: left center;
+      opacity: 0;
+      transition: opacity .25s ease;
+      will-change: transform;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .navbar.scrolled .scroll-progress {
+      opacity: 1;
     }
 
     .nav-inner {
@@ -776,6 +803,7 @@
         <a href="contact.html" class="nav-contact">Contact Us</a>
       </nav>
     </div>
+    <div class="scroll-progress" id="scrollProgress"></div>
   </header>
 
   <!-- ============ SECTION 1 — HERO ============ -->
@@ -1221,6 +1249,39 @@
     })();
   </script>
 
+  <script>
+    /* ---------- Scroll progress line under the navbar ---------- */
+    (function () {
+      const bar = document.getElementById('scrollProgress');
+      const navbar = document.querySelector('.navbar');
+      if (!bar || !navbar) return;
+      let ticking = false;
+
+      function update() {
+        ticking = false;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const y = window.scrollY || window.pageYOffset;
+        const ratio = max > 0 ? Math.min(Math.max(y / max, 0), 1) : 0;
+        bar.style.transform = `scaleX(${ratio})`;
+        navbar.classList.toggle('scrolled', y > 4);
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      }, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      window.addEventListener('orientationchange', update);
+      /* mobile browsers resize the viewport when the URL bar hides/shows */
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', update);
+      }
+      window.addEventListener('load', update);
+      update();
+    })();
+  </script>
 </body>
 
 </html>
