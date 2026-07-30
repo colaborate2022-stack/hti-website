@@ -737,6 +737,8 @@
           let href;
           if (b.layout === 'magazine') {
             href = `magazine-blog.html?id=${encodeURIComponent(b.id)}`;
+          } else if (b.layout === 'immersive') {
+            href = `immersive-blog.html?id=${encodeURIComponent(b.id)}`;
           } else if (b.layout === 'redirect') {
             href = b.redirect_url || `blog-post.html?id=${encodeURIComponent(b.id)}`;
           } else {

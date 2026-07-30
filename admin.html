@@ -470,6 +470,12 @@
       font-size: 11px;
     }
 
+    .badge.layout-immersive {
+      background: linear-gradient(135deg, #e31e24, #ff4a51);
+      color: #fff;
+      font-size: 11px;
+    }
+
     .row-actions {
       display: flex;
       gap: 7px;
@@ -581,13 +587,29 @@
             <label for="layoutInput">Page Layout</label>
             <select id="layoutInput">
               <option value="standard">Standard Blog (default)</option>
+              <option value="immersive">Immersive 3D — rich &amp; animated</option>
               <option value="timeline">Timeline (e.g. Sanjay Vazirani)</option>
               <option value="story-interview">Story Interview (e.g. Agnibh Mudi)</option>
               <option value="news-announcement">News / Announcement</option>
             </select>
             <p style="font-size:12px; color:#888; margin-top:6px;">
-              Choose <b>Standard Blog</b> for regular posts. Choose <b>Timeline</b> or <b>Story Interview</b> for special story pages — then fill in the Redirect URL below.
+              Choose <b>Standard Blog</b> for regular posts, or <b>Immersive 3D</b> for a premium animated layout — both build the page from what you write below, so no Redirect URL is needed. Choose <b>Timeline</b> or <b>Story Interview</b> only for hand-built story pages, then fill in the Redirect URL.
             </p>
+          </div>
+
+          <!-- Guidance shown only for the Immersive 3D layout -->
+          <div class="field full" id="immersiveHint"
+            style="display:none; background:#fff5f5; border:1px solid #f3d0d2; border-radius:9px; padding:14px 16px;">
+            <p style="font-size:13px; color:#8a2b2f; margin:0; line-height:1.65;">
+              <b>Immersive 3D layout</b> — your post is split into animated chapters automatically:
+            </p>
+            <ul style="font-size:12.5px; color:#8a2b2f; margin:9px 0 0 18px; line-height:1.75;">
+              <li>Each <b>Heading 2</b> in your text starts a new chapter (alternating dark / light bands).</li>
+              <li>The <b>first image</b> inside a chapter becomes that chapter's 3D tilting photo.</li>
+              <li>Text before your first heading becomes the hero intro.</li>
+              <li>A final heading called <b>Summing Up</b> or <b>Conclusion</b> renders as the raised summary card.</li>
+              <li>Bullet lists become depth chips. A <b>Cover Image</b> is strongly recommended — it becomes the floating hero photo.</li>
+            </ul>
           </div>
 
           <!-- Redirect URL (only relevant for Timeline / Story Interview) -->
@@ -860,7 +882,9 @@
             <td>${formatDate(p.created_at)}</td>
             <td><span class="badge ${pub ? 'pub' : 'draft'}">${pub ? 'Published' : 'Draft'}</span></td>
             <td>
-              ${p.layout === 'timeline'
+              ${p.layout === 'immersive'
+                ? '<span class="badge layout-immersive">Immersive 3D</span>'
+                : p.layout === 'timeline'
                 ? '<span class="badge layout-timeline">Timeline</span>'
                 : p.layout === 'story-interview'
                 ? '<span class="badge layout-story">Story Interview</span>'
@@ -868,6 +892,11 @@
             </td>
             <td>
               <div class="row-actions">
+                <a class="mini-btn" style="text-decoration:none;" target="_blank" rel="noopener"
+                   href="${p.layout === 'immersive' ? `immersive-blog.html?id=${p.id}`
+                        : p.layout === 'magazine' ? `magazine-blog.html?id=${p.id}`
+                        : (p.layout && p.layout !== 'standard' && p.redirect_url) ? escapeHtml(p.redirect_url)
+                        : `blog-post.html?id=${p.id}`}">View</a>
                 <button class="mini-btn" onclick="editPost('${p.id}')">Edit</button>
                 <button class="mini-btn" onclick="togglePublish('${p.id}', ${pub})">${pub ? 'Unpublish' : 'Publish'}</button>
                 <button class="mini-btn danger" onclick="deletePost('${p.id}', this)">Delete</button>
@@ -895,13 +924,24 @@
       }
     }
     $('coverInput').addEventListener('input', updateCoverPreview);
-    // Show redirect URL field only when a special layout is chosen
-    $('layoutInput').addEventListener('change', function() {
-      const isSpecial = this.value !== 'standard';
-      $('redirectUrlField').style.display = isSpecial ? 'block' : 'none';
-      if (!isSpecial) $('redirectUrlInput').value = '';
+    /* 'standard' and 'immersive' both render the post from what the author
+       typed, so neither needs a redirect target. Everything else points at a
+       hand-built static page. */
+    function needsRedirect(layout) {
+      return layout !== 'standard' && layout !== 'immersive';
+    }
+
+    function syncLayoutFields(layout) {
+      const wantsRedirect = needsRedirect(layout);
+      $('redirectUrlField').style.display = wantsRedirect ? 'block' : 'none';
+      $('immersiveHint').style.display = layout === 'immersive' ? 'block' : 'none';
+      if (!wantsRedirect) $('redirectUrlInput').value = '';
       // Auto-fill the redirect target for the News / Announcement layout
-      if (this.value === 'news-announcement') $('redirectUrlInput').value = 'news-announcement.html';
+      if (layout === 'news-announcement') $('redirectUrlInput').value = 'news-announcement.html';
+    }
+
+    $('layoutInput').addEventListener('change', function () {
+      syncLayoutFields(this.value);
     });
     // hide preview if the image fails to load
     $('coverPreviewImg').addEventListener('error', () => {
@@ -935,7 +975,7 @@
       $('coverInput').value = '';
       $('layoutInput').value = 'standard';
       $('redirectUrlInput').value = '';
-      $('redirectUrlField').style.display = 'none';
+      syncLayoutFields('standard');
       quill.setContents([]);
       updateCoverPreview();
       $('formHeading').textContent = 'Write New Post';
@@ -997,7 +1037,7 @@
         $('coverInput').value = p.cover_image || '';
         $('layoutInput').value = p.layout || 'standard';
         $('redirectUrlInput').value = p.redirect_url || '';
-        $('redirectUrlField').style.display = (p.layout && p.layout !== 'standard') ? 'block' : 'none';
+        syncLayoutFields(p.layout || 'standard');
         updateCoverPreview();
         // load existing HTML into the rich text editor
         quill.setContents([]);

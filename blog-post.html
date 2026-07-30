@@ -753,6 +753,13 @@
 
         const b = rows[0];
 
+        // Immersive posts have their own renderer — hand off before drawing
+        // anything, so a direct link here still lands in the right layout.
+        if (b.layout === 'immersive') {
+          window.location.replace(`immersive-blog.html?id=${encodeURIComponent(b.id)}`);
+          return;
+        }
+
         // Data-driven redirect: special-layout posts point at their own page.
         if (b.redirect_url) {
           window.location.replace(b.redirect_url);
