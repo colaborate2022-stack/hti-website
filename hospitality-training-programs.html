@@ -877,20 +877,17 @@
       color: #fff;
     }
 
-    /* codes that link to a program page should look clickable without shouting */
+    /* codes that link to a program page stay undecorated; the colour shift on
+       hover is the only affordance, so the lists read clean at rest */
     .focus-list li a,
     .ch-body p a {
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
-      text-decoration-color: rgba(227, 33, 41, .55);
-      transition: color .3s ease, text-decoration-color .3s ease;
+      text-decoration: none;
+      transition: color .3s ease;
     }
 
     .focus-list li a:hover,
     .ch-body p a:hover {
       color: var(--red);
-      text-decoration-color: var(--red);
     }
 
     .chapter.dark .ch-body p strong {
