@@ -541,12 +541,15 @@
       font-weight: 800;
     }
 
-    .trainers-slider {
+    .trainers-carousel {
       position: relative;
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
+      padding: 0 46px;
+    }
+
+    .trainers-slider {
       overflow: hidden;
-      border-radius: 14px;
     }
 
     .trainers-track {
@@ -554,17 +557,49 @@
       transition: transform .5s ease;
     }
 
-    .trainers-track a {
-      min-width: 100%;
+    .trainer-card {
+      flex: 0 0 33.3333%;
+      max-width: 33.3333%;
+      padding: 0 11px;
+      box-sizing: border-box;
     }
 
-    .trainers-track img {
-      width: 200px;
-      height: 220px;
-      border-radius: 0;
+    .tc-inner {
+      height: 100%;
+      background: #111;
+      border: 1px solid #262626;
+      border-radius: 16px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .trainer-card img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
       object-fit: cover;
       display: block;
-      margin: 0 auto 12px auto;
+      background: #1a1a1a;
+    }
+
+    .tc-body {
+      padding: 16px 14px 20px;
+    }
+
+    .tc-body h3 {
+      margin: 0 0 5px;
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .tc-body p {
+      margin: 0;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #b5b5b5;
+      line-height: 1.45;
     }
 
     .tr-arrow {
@@ -577,7 +612,7 @@
       width: 44px;
       height: 44px;
       border-radius: 0;
-      font-size: 20px;
+      font-size: 26px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -587,11 +622,11 @@
     }
 
     .tr-arrow.left {
-      left: 14px;
+      left: 0;
     }
 
     .tr-arrow.right {
-      right: 14px;
+      right: 0;
     }
 
     .tr-dots {
@@ -1000,6 +1035,11 @@
 
     /* ============ RESPONSIVE ============ */
     @media(max-width:960px) {
+      .trainer-card {
+        flex-basis: 50%;
+        max-width: 50%;
+      }
+
       .nav-menu {
         position: fixed;
         top: 72px;
@@ -1091,6 +1131,16 @@
     }
 
     @media(max-width:600px) {
+      .trainers-carousel {
+        padding: 0 34px;
+      }
+
+      .trainer-card {
+        flex-basis: 100%;
+        max-width: 100%;
+        padding: 0 6px;
+      }
+
       .testi-grid {
         columns: 1;
       }
@@ -1291,20 +1341,63 @@
   <section class="trainers">
     <div class="wrap">
       <h2>Our Trainers</h2>
-      <div class="trainers-slider">
-        <div class="trainers-track" id="trainersTrack">
-          <a href="#"><img
-              src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63972e3b75e66c7f6c540805_1.webp"
-              alt="Dominic CostaBir" /></a>
-          <a href="#"><img
-              src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63972e3b1e93d524e890b8e0_2.webp"
-              alt="Kaushal Dutta" /></a>
-          <a href="#"><img
-              src="https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/63972e3a57cbd6a92d540ecb_3.webp"
-              alt="Rajan Kale" /></a>
+      <div class="trainers-carousel">
+        <div class="trainers-slider">
+          <div class="trainers-track" id="trainersTrack">
+            <article class="trainer-card">
+              <div class="tc-inner">
+                <img src="images/trainers/dominic-costabir.jpg" width="300" height="300" loading="lazy"
+                  alt="Dominic CostaBir, Director at HTI India Pvt Ltd" />
+                <div class="tc-body">
+                  <h3>Dominic CostaBir</h3>
+                  <p>Director, HTI India Pvt Ltd</p>
+                </div>
+              </div>
+            </article>
+            <article class="trainer-card">
+              <div class="tc-inner">
+                <img src="images/trainers/kaushal-dutta.jpg" width="300" height="300" loading="lazy"
+                  alt="Kaushal Dutta, CEO of HTI India Pvt Ltd" />
+                <div class="tc-body">
+                  <h3>Kaushal Dutta</h3>
+                  <p>CEO, HTI India Pvt Ltd</p>
+                </div>
+              </div>
+            </article>
+            <article class="trainer-card">
+              <div class="tc-inner">
+                <img src="images/trainers/rajan-kale.jpg" width="300" height="300" loading="lazy"
+                  alt="Rajan Kale, COO Restaurants at HTI India Pvt Ltd" />
+                <div class="tc-body">
+                  <h3>Rajan Kale</h3>
+                  <p>COO Restaurants, HTI India Pvt Ltd</p>
+                </div>
+              </div>
+            </article>
+            <article class="trainer-card">
+              <div class="tc-inner">
+                <img src="images/trainers/ketaki-ponde.jpg" width="300" height="300" loading="lazy"
+                  alt="Ketaki Ponde, Strategic Business Partner and Senior Trainer at HTI India Pvt Ltd" />
+                <div class="tc-body">
+                  <h3>Ketaki Ponde</h3>
+                  <p>Strategic Business Partner &amp; Senior Trainer</p>
+                </div>
+              </div>
+            </article>
+            <article class="trainer-card">
+              <div class="tc-inner">
+                <img src="images/trainers/bhaskar-sen.jpg" width="300" height="300" loading="lazy"
+                  alt="Bhaskar Sen, Training Manager at HTI India Pvt Ltd" />
+                <div class="tc-body">
+                  <h3>Bhaskar Sen</h3>
+                  <p>Training Manager, HTI India Pvt Ltd</p>
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
-        <button class="tr-arrow left" id="trPrev">&#10094;</button>
-        <button class="tr-arrow right" id="trNext">&#10095;</button>
+        <button class="tr-arrow left" id="trPrev" aria-label="Previous trainers">&#10094;</button>
+        <button class="tr-arrow right" id="trNext" aria-label="Next trainers">&#10095;</button>
       </div>
       <div class="tr-dots" id="trDots"></div>
     </div>
@@ -1614,20 +1707,38 @@
     /* ---------- Trainers slider ---------- */
     (function () {
       const track = document.getElementById('trainersTrack');
-      const slides = track.children.length;
+      const cards = track.children.length;
       const dotsWrap = document.getElementById('trDots');
-      let idx = 0;
-      for (let i = 0; i < slides; i++) {
-        const s = document.createElement('span');
-        if (i === 0) s.className = 'active';
-        s.addEventListener('click', () => go(i));
-        dotsWrap.appendChild(s);
+      let per = 3, pages = 1, idx = 0;
+
+      const perView = () => window.innerWidth <= 600 ? 1 : (window.innerWidth <= 960 ? 2 : 3);
+
+      function buildDots() {
+        dotsWrap.innerHTML = '';
+        for (let i = 0; i < pages; i++) {
+          const s = document.createElement('span');
+          s.addEventListener('click', () => go(i));
+          dotsWrap.appendChild(s);
+        }
       }
       function go(i) {
-        idx = (i + slides) % slides;
-        track.style.transform = `translateX(-${idx * 100}%)`;
+        idx = (i + pages) % pages;
+        // clamp so the final page ends flush with the last card instead of showing gaps
+        const offset = Math.max(0, Math.min(idx * per, cards - per));
+        // the track box is exactly one page wide, so shift in page-fractions
+        track.style.transform = `translateX(-${offset / per * 100}%)`;
         [...dotsWrap.children].forEach((d, j) => d.className = j === idx ? 'active' : '');
       }
+      function layout() {
+        const next = perView();
+        if (next === per && dotsWrap.children.length) return;
+        per = next;
+        pages = Math.max(1, Math.ceil(cards / per));
+        buildDots();
+        go(Math.min(idx, pages - 1));
+      }
+      layout();
+      window.addEventListener('resize', layout);
       document.getElementById('trPrev').addEventListener('click', () => go(idx - 1));
       document.getElementById('trNext').addEventListener('click', () => go(idx + 1));
       setInterval(() => go(idx + 1), 5000);
