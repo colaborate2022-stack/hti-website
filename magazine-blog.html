@@ -1262,6 +1262,14 @@
             }
           });
         });
+        /* tapping any nav link closes the menu - matters for links that open
+           in a new tab and so never navigate this page away */
+        menu.querySelectorAll('a').forEach(function (link) {
+          link.addEventListener('click', function () {
+            menu.classList.remove('open');
+            menu.querySelectorAll('.nav-item.open').forEach(function (i) { i.classList.remove('open'); });
+          });
+        });
       }
     })();
   </script>

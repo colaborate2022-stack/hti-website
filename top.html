@@ -1376,6 +1376,14 @@
           }
         });
       });
+      /* tapping any nav link closes the menu - matters for links that open
+         in a new tab and so never navigate this page away */
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menu.classList.remove('open');
+          menu.querySelectorAll('.nav-item.open').forEach(i => i.classList.remove('open'));
+        });
+      });
     })();
   </script>
   <script>
