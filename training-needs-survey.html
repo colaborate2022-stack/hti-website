@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Training Needs Survey for Hotels, Restaurants &amp; QSRs | HTI India</title>
+  <meta name="description" content="Take HTI India's free 3-minute training needs survey. Tell us about your team and get a recommended hospitality training plan for your hotel, restaurant, QSR or office." />
+  <link rel="canonical" href="https://www.hti-india.com/training-needs-survey.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Free Training Needs Survey for Hotels, Restaurants &amp; QSRs | HTI India" />
+  <meta property="og:description" content="Take HTI India's free 3-minute training needs survey and get a recommended training plan for your team." />
+  <meta property="og:url" content="https://www.hti-india.com/training-needs-survey.html" />
+  <meta property="og:site_name" content="HTI India" />
+  <meta property="og:image" content="https://www.hti-india.com/images/brand/hti-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Training Needs Survey for Hotels, Restaurants &amp; QSRs | HTI India" />
+  <meta name="twitter:description" content="Take HTI India's free 3-minute training needs survey and get a recommended training plan for your team." />
+  <meta name="twitter:image" content="https://www.hti-india.com/images/brand/hti-logo.png" />
+  <link rel="icon" href="images/brand/hti-favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --hti-bg: #ede9e3;
+      --hti-black: #000;
+      --hti-red: #e8191a;
+      --hti-red2: #e8191a;
+      --hti-text: #111;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      background: var(--hti-bg);
+      color: var(--hti-text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    /* ============ NAVBAR ============ */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--hti-bg);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #000, transparent);
+      transition: opacity .25s ease;
+    }
+
+    .navbar.scrolled::after {
+      opacity: 0;
+    }
+
+    .scroll-progress {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, var(--hti-red, #e32129), var(--hti-red2, #ff0000));
+      transform: scaleX(0);
+      transform-origin: left center;
+      opacity: 0;
+      transition: opacity .25s ease;
+      will-change: transform;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .navbar.scrolled .scroll-progress {
+      opacity: 1;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 72px;
+    }
+
+    .nav-logo img {
+      width: 52px;
+      height: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-item {
+      position: relative;
+      font-weight: 600;
+      font-size: 15px;
+      color: #111;
+      cursor: pointer;
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-item .caret {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #333;
+      border-bottom: 2px solid #333;
+      transform: rotate(45deg);
+      margin-top: -3px;
+      transition: transform .2s;
+    }
+
+    .nav-item:hover .caret {
+      transform: rotate(-135deg);
+      margin-top: 3px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .14);
+      padding: 10px;
+      min-width: 230px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all .2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 120;
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      padding: 9px 12px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #222;
+    }
+
+    .dropdown a:hover {
+      background: var(--hti-bg);
+      color: var(--hti-red);
+    }
+
+    .dropdown a.active-nav {
+      color: #e8191a;
+      font-weight: 700;
+    }
+
+    .dropdown a b {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .dropdown a span {
+      font-size: 12px;
+      color: #777;
+      font-weight: 400;
+    }
+
+    .nav-contact {
+      background: var(--hti-red);
+      color: #fff;
+      border-radius: 8px;
+      padding: 11px 22px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .nav-contact:hover {
+      background: #c40f10;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      width: 26px;
+      height: 2px;
+      background: #000;
+      display: block;
+    }
+
+    /* ============ HERO ============ */
+    .survey-hero {
+      padding: 70px 24px 20px;
+      text-align: center;
+    }
+
+    .survey-eyebrow {
+      display: inline-block;
+      background: #fff;
+      border: 1px solid #e0d9d0;
+      color: var(--hti-red);
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 7px 16px;
+      margin-bottom: 18px;
+    }
+
+    .survey-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 14px;
+    }
+
+    .survey-hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: #555;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .hero-points {
+      max-width: 900px;
+      margin: 34px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .hero-point {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 14px;
+      padding: 18px 20px;
+      text-align: left;
+    }
+
+    .hero-point h3 {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .hero-point p {
+      font-size: 13.5px;
+      color: #666;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* ============ FORM SHELL ============ */
+    .survey-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .progress-shell {
+      position: sticky;
+      top: 72px;
+      z-index: 60;
+      background: var(--hti-bg);
+      padding: 10px 0 14px;
+      margin-bottom: 10px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 13px;
+      font-weight: 700;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .progress-label b {
+      color: var(--hti-red);
+      font-size: 14px;
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: #ded7ce;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, var(--hti-red), #ff5a2b);
+      border-radius: 999px;
+      transition: width .3s ease;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .06);
+      margin-bottom: 22px;
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+
+    .step-num {
+      flex: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--hti-red);
+      color: #fff;
+      font-weight: 800;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-head h2 {
+      font-size: 21px;
+      font-weight: 800;
+      color: #111;
+    }
+
+    .card-sub {
+      color: #777;
+      font-size: 14px;
+      margin: 0 0 24px 48px;
+      line-height: 1.5;
+    }
+
+    .field {
+      margin-bottom: 22px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    .field>label,
+    .field .q {
+      display: block;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 9px;
+    }
+
+    .req {
+      color: var(--hti-red);
+    }
+
+    .hint {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #888;
+      margin-top: 3px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      font-family: inherit;
+      font-size: 15px;
+      color: #111;
+      background: #fbfaf8;
+      border: 1.5px solid #ddd6cd;
+      border-radius: 10px;
+      padding: 12px 14px;
+      transition: border-color .18s ease, box-shadow .18s ease;
+    }
+
+    textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='3'><polyline points='6 9 12 15 18 9'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--hti-red);
+      box-shadow: 0 0 0 3px rgba(232, 25, 26, .12);
+    }
+
+    /* ---- choice chips (radio + checkbox) ---- */
+    .choices {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .choices.cols {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .choice {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fbfaf8;
+      border: 1.5px solid #ddd6cd;
+      border-radius: 10px;
+      padding: 11px 15px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      transition: all .16s ease;
+      min-height: 44px;
+    }
+
+    .choice:hover {
+      border-color: #bbb2a7;
+    }
+
+    .choice input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .box {
+      flex: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #c3bbb0;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .16s ease;
+    }
+
+    .choice.radio .box {
+      border-radius: 50%;
+    }
+
+    .box::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      background: #fff;
+      transform: scale(0);
+      transition: transform .16s ease;
+    }
+
+    .choice.radio .box::after {
+      border-radius: 50%;
+    }
+
+    .choice input:checked~.box {
+      background: var(--hti-red);
+      border-color: var(--hti-red);
+    }
+
+    .choice input:checked~.box::after {
+      transform: scale(1);
+    }
+
+    .choice:has(input:checked) {
+      border-color: var(--hti-red);
+      background: #fff5f5;
+      color: #111;
+    }
+
+    .choice input:focus-visible~.box {
+      box-shadow: 0 0 0 3px rgba(232, 25, 26, .25);
+    }
+
+    /* ---- rating scale ---- */
+    .scale {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .scale label {
+      flex: 1 1 0;
+      min-width: 40px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .scale input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .scale span {
+      display: block;
+      text-align: center;
+      padding: 11px 0;
+      border: 1.5px solid #ddd6cd;
+      border-radius: 9px;
+      background: #fbfaf8;
+      font-weight: 700;
+      font-size: 14px;
+      color: #555;
+      transition: all .16s ease;
+    }
+
+    .scale label:hover span {
+      border-color: #bbb2a7;
+    }
+
+    .scale input:checked+span {
+      background: var(--hti-red);
+      border-color: var(--hti-red);
+      color: #fff;
+    }
+
+    .scale-ends {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #888;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    /* ---- validation ---- */
+    .field.invalid input,
+    .field.invalid select,
+    .field.invalid textarea {
+      border-color: var(--hti-red);
+      background: #fff7f7;
+    }
+
+    .field.invalid .choice {
+      border-color: #f0a6a6;
+    }
+
+    .err {
+      display: none;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--hti-red);
+      margin-top: 8px;
+    }
+
+    .field.invalid .err {
+      display: block;
+    }
+
+    .hp {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    /* ---- submit ---- */
+    .submit-card {
+      text-align: center;
+    }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--hti-red);
+      color: #fff;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 800;
+      border: none;
+      border-radius: 10px;
+      padding: 15px 40px;
+      cursor: pointer;
+      transition: background .2s ease, transform .12s ease;
+    }
+
+    .btn-submit:hover {
+      background: #c40f10;
+    }
+
+    .btn-submit:active {
+      transform: translateY(1px);
+    }
+
+    .btn-submit[disabled] {
+      opacity: .65;
+      cursor: not-allowed;
+    }
+
+    .submit-note {
+      font-size: 13px;
+      color: #888;
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+
+    .form-msg {
+      display: none;
+      margin-top: 18px;
+      border-radius: 10px;
+      padding: 16px 18px;
+      font-size: 14px;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .form-msg.show {
+      display: block;
+    }
+
+    .form-msg.warn {
+      background: #fff6ea;
+      border: 1px solid #f0d3a8;
+      color: #7a5518;
+    }
+
+    .form-msg .wa-btn {
+      display: inline-block;
+      margin-top: 12px;
+      background: #25d366;
+      color: #fff;
+      font-weight: 800;
+      font-size: 14px;
+      border-radius: 8px;
+      padding: 11px 22px;
+    }
+
+    /* ---- thank you ---- */
+    .thanks {
+      display: none;
+      text-align: center;
+      padding: 50px 30px;
+    }
+
+    .thanks.show {
+      display: block;
+    }
+
+    .thanks .tick {
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      background: #eafaf0;
+      color: #17a04a;
+      margin: 0 auto 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .thanks .tick svg {
+      width: 34px;
+      height: 34px;
+    }
+
+    .thanks h2 {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .thanks p {
+      color: #666;
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 24px;
+    }
+
+    .thanks-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .thanks-btns a {
+      border-radius: 8px;
+      padding: 12px 26px;
+      font-weight: 800;
+      font-size: 14.5px;
+    }
+
+    .btn-wa {
+      background: #25d366;
+      color: #fff;
+    }
+
+    .btn-ghost {
+      border: 1.5px solid #ddd6cd;
+      color: #333;
+    }
+
+    /* ============ STATS BAND ============ */
+    .stats-band {
+      background: #1a1a1a;
+      padding: 60px 24px;
+    }
+
+    .stats-band-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px 0;
+    }
+
+    .stat-block {
+      text-align: center;
+      padding: 6px 16px;
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .stat-block:nth-child(4n) {
+      border-right: none;
+    }
+
+    .stat-num {
+      font-size: 34px;
+      font-weight: 800;
+      color: #e31e24;
+      line-height: 1;
+    }
+
+    .stat-text {
+      color: #fff;
+      font-size: 14px;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    /* ============ FAQ ============ */
+    .faq {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 70px 24px 90px;
+    }
+
+    .faq h2 {
+      font-size: 26px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .faq-item {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 14px;
+      padding: 22px 26px;
+      margin-bottom: 14px;
+    }
+
+    .faq-item h3 {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 9px;
+    }
+
+    .faq-item p {
+      color: #666;
+      font-size: 14.5px;
+      line-height: 1.7;
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+      background: #000;
+      color: #fff;
+      padding: 60px 30px 30px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .footer-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 17px;
+      color: #fff;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 14.5px;
+      color: #c7c7c7;
+      margin-bottom: 11px;
+      font-weight: 400;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-div {
+      height: 1px;
+      background: #2a2a2a;
+      margin: 40px 0 30px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 26px;
+      height: 26px;
+      color: #fff;
+      opacity: .85;
+    }
+
+    .footer-social a:hover {
+      opacity: 1;
+      color: var(--hti-red);
+    }
+
+    .footer-contact h3 {
+      font-size: 20px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .footer-contact span {
+      color: var(--hti-red);
+    }
+
+    .footer-brand img {
+      width: 70px;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: #8a8a8a;
+      font-size: 13px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media(max-width:960px) {
+      .nav-menu {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 16px 24px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+        display: none;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .nav-item {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: 4px 0 4px 14px;
+        min-width: auto;
+        width: 100%;
+        display: none;
+      }
+
+      .nav-item.open .dropdown {
+        display: flex;
+      }
+
+      .dropdown a {
+        min-height: 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .hero-points {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-band-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat-block:nth-child(4n) {
+        border-right: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .stat-block:nth-child(2n) {
+        border-right: none;
+      }
+
+      .footer-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:640px) {
+      .card {
+        padding: 24px 20px;
+      }
+
+      .card-sub {
+        margin-left: 0;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .choices.cols {
+        grid-template-columns: 1fr;
+      }
+
+      .scale label {
+        min-width: 0;
+      }
+
+      .scale span {
+        padding: 10px 0;
+        font-size: 13px;
+      }
+
+      .stats-band-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-block {
+        border-right: none !important;
+      }
+
+      .btn-submit {
+        width: 100%;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long does the training needs survey take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "About three minutes. It is 15 short questions about your team, the skill gaps you are seeing and when you want to start training."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do I get after submitting the survey?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An HTI training consultant reviews your answers and comes back within one working day with the programs that match your team, an outline of session content and an indicative schedule."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the training needs survey free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The survey and the recommendation that follows are completely free, with no obligation to book a program."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which teams is HTI training designed for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hotels and resorts, restaurants, QSRs and cloud kitchens, and corporate office and retail support staff. HTI has trained over 300,000 participants across 410+ cities in 13+ languages."
+        }
+      }
+    ]
+  }
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBKJQQRP0N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SBKJQQRP0N');
+  </script>
+</head>
+
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img src="images/brand/hti-logo.png" alt="HTI Logo" /></a>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+      <nav class="nav-menu" id="navMenu">
+        <div class="nav-item">Restaurants &amp; QSRs<span class="caret"></span>
+          <div class="dropdown">
+            <a href="super.html"><b>SUPER</b><span>Essential soft and job skills</span></a>
+            <a href="support.html"><b>SUPPORT</b><span>Skill upgradation pre-opening</span></a>
+            <a href="icedt.html"><b>ICEDT</b><span>Counter executives training</span></a>
+            <a href="icare.html"><b>iCARE</b><span>Teaching techniques</span></a>
+            <a href="vow.html"><b>Vow to Wow</b><span>Customer expectations</span></a>
+            <a href="ramp.html"><b>RAMP</b><span>Restaurant operations &amp; management</span></a>
+            <a href="restaurants.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Hotels<span class="caret"></span>
+          <div class="dropdown">
+            <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Staff skill upgrade</span></a>
+            <a href="hotcar.html"><b>HOT-CAR</b><span>Housekeeping operations</span></a>
+            <a href="fort.html"><b>FORT</b><span>Front desk operations</span></a>
+            <a href="kmt.html"><b>KMT</b><span>Kitchen management</span></a>
+            <a href="class.html"><b>CLASS</b><span>Grooming &amp; communication skills</span></a>
+            <a href="mdp.html"><b>MDP</b><span>Management development</span></a>
+            <a href="hotels.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Retail<span class="caret"></span>
+          <div class="dropdown">
+            <a href="post.html"><b>POST</b><span>Pantry operations</span></a>
+            <a href="cup.html"><b>CUP</b><span>Caretaker upgradation</span></a>
+            <a href="top.html"><b>TOP</b><span>Peons training</span></a>
+            <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">More<span class="caret"></span>
+          <div class="dropdown">
+            <a href="https://wooshbiz.com/" target="_blank" rel="noopener">Team Building</a>
+            <a href="leadership-development.html">Leadership Development</a>
+            <a href="professional-etiquette.html">Professional Etiquette</a>
+            <a href="posh-training.html">POSH Training</a>
+            <a href="fssai-training.html">FSSAI Training</a>
+            <a href="dox.html">Develop SOPs &amp; How-To Videos</a>
+            <a href="training-needs-survey.html" class="active-nav">Training Needs Survey</a>
+            <a href="blog.html">Blogs</a>
+          </div>
+        </div>
+        <a href="contact.html" class="nav-contact">Contact Us</a>
+      </nav>
+    </div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="survey-hero">
+    <span class="survey-eyebrow">Free &middot; 3 minutes &middot; No obligation</span>
+    <h1>Training Needs Survey</h1>
+    <p>Tell us how your team works today and where guests notice the gaps. We'll come back with the HTI programs that
+      fit &mdash; the right modules, the right languages, and a schedule that works around your shifts.</p>
+
+    <div class="hero-points">
+      <div class="hero-point">
+        <h3>1. Answer 15 short questions</h3>
+        <p>About your outlets, your team size and the skills that need work. Most people finish in three minutes.</p>
+      </div>
+      <div class="hero-point">
+        <h3>2. We map it to our programs</h3>
+        <p>A training consultant matches your answers to the modules that solve those specific gaps.</p>
+      </div>
+      <div class="hero-point">
+        <h3>3. You get a plan in 1 working day</h3>
+        <p>Recommended programs, session outline and an indicative schedule. No cost, no commitment.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SURVEY FORM ============ -->
+  <div class="survey-wrap">
+
+    <div class="progress-shell" id="progressShell">
+      <div class="progress-label"><span>Your progress</span><b id="progressPct">0%</b></div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <form id="surveyForm" novalidate>
+
+      <!-- ---------- STEP 1 ---------- -->
+      <section class="card">
+        <div class="card-head">
+          <div class="step-num">1</div>
+          <h2>About you</h2>
+        </div>
+        <p class="card-sub">So we know who to send the recommendation to.</p>
+
+        <div class="grid-2">
+          <div class="field" data-required>
+            <label for="name">Your name <span class="req">*</span></label>
+            <input type="text" id="name" name="name" autocomplete="name" placeholder="e.g. Rahul Sharma" />
+            <div class="err">Please tell us your name.</div>
+          </div>
+          <div class="field" data-required>
+            <label for="company">Company / property name <span class="req">*</span></label>
+            <input type="text" id="company" name="company" autocomplete="organization"
+              placeholder="e.g. Grand Regency Hotels" />
+            <div class="err">Please tell us where you work.</div>
+          </div>
+          <div class="field" data-required>
+            <label for="phone">Phone / WhatsApp <span class="req">*</span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="e.g. 98765 43210" />
+            <div class="err">Please enter a valid 10-digit mobile number.</div>
+          </div>
+          <div class="field" data-required>
+            <label for="email">Work email <span class="req">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="you@company.com" />
+            <div class="err">Please enter a valid email address.</div>
+          </div>
+          <div class="field">
+            <label for="role">Your role</label>
+            <input type="text" id="role" name="role" placeholder="e.g. HR Manager, Operations Head" />
+          </div>
+          <div class="field">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" autocomplete="address-level2" placeholder="e.g. Mumbai" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- STEP 2 ---------- -->
+      <section class="card">
+        <div class="card-head">
+          <div class="step-num">2</div>
+          <h2>Your team</h2>
+        </div>
+        <p class="card-sub">This decides which of our program families is the right starting point.</p>
+
+        <div class="field" data-required data-group="business_type">
+          <span class="q">What kind of business is it? <span class="req">*</span></span>
+          <div class="choices">
+            <label class="choice radio"><input type="radio" name="business_type" value="Hotel / Resort" /><span
+                class="box"></span>Hotel / Resort</label>
+            <label class="choice radio"><input type="radio" name="business_type" value="Restaurant / Cafe" /><span
+                class="box"></span>Restaurant / Cafe</label>
+            <label class="choice radio"><input type="radio" name="business_type" value="QSR chain" /><span
+                class="box"></span>QSR chain</label>
+            <label class="choice radio"><input type="radio" name="business_type" value="Cloud kitchen" /><span
+                class="box"></span>Cloud kitchen</label>
+            <label class="choice radio"><input type="radio" name="business_type"
+                value="Corporate office / Facility" /><span class="box"></span>Corporate office / Facility</label>
+            <label class="choice radio"><input type="radio" name="business_type" value="Retail" /><span
+                class="box"></span>Retail</label>
+            <label class="choice radio"><input type="radio" name="business_type" value="Other" /><span
+                class="box"></span>Other</label>
+          </div>
+          <div class="err">Please pick one.</div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="outlets">How many outlets / properties?</label>
+            <select id="outlets" name="outlets">
+              <option value="">Select</option>
+              <option>1</option>
+              <option>2 - 5</option>
+              <option>6 - 20</option>
+              <option>21 - 50</option>
+              <option>More than 50</option>
+            </select>
+          </div>
+          <div class="field" data-required>
+            <label for="team_size">How many people need training? <span class="req">*</span></label>
+            <select id="team_size" name="team_size">
+              <option value="">Select</option>
+              <option>Up to 25</option>
+              <option>26 - 100</option>
+              <option>101 - 500</option>
+              <option>501 - 2000</option>
+              <option>More than 2000</option>
+            </select>
+            <div class="err">Please pick a range.</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="q">Which languages should the training be delivered in?
+            <span class="hint">Pick as many as apply &mdash; we train in 13+ Indian languages.</span></span>
+          <div class="choices">
+            <label class="choice"><input type="checkbox" name="languages" value="English" /><span
+                class="box"></span>English</label>
+            <label class="choice"><input type="checkbox" name="languages" value="Hindi" /><span
+                class="box"></span>Hindi</label>
+            <label class="choice"><input type="checkbox" name="languages" value="Marathi" /><span
+                class="box"></span>Marathi</label>
+            <label class="choice"><input type="checkbox" name="languages" value="Tamil" /><span
+                class="box"></span>Tamil</label>
+            <label class="choice"><input type="checkbox" name="languages" value="Telugu" /><span
+                class="box"></span>Telugu</label>
+            <label class="choice"><input type="checkbox" name="languages" value="Kannada" /><span
+                class="box"></span>Kannada</label>
+            <label class="choice"><input type="checkbox" name="languages" value="Bengali" /><span
+                class="box"></span>Bengali</label>
+            <label class="choice"><input type="checkbox" name="languages" value="Other" /><span
+                class="box"></span>Other</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- STEP 3 ---------- -->
+      <section class="card">
+        <div class="card-head">
+          <div class="step-num">3</div>
+          <h2>Where the gaps are</h2>
+        </div>
+        <p class="card-sub">The heart of the survey &mdash; be as honest as you can, it only makes the plan sharper.</p>
+
+        <div class="field" data-required data-group="focus_areas">
+          <span class="q">Which areas need the most work? <span class="req">*</span>
+            <span class="hint">Select all that apply.</span></span>
+          <div class="choices cols">
+            <label class="choice"><input type="checkbox" name="focus_areas" value="Guest service & soft skills" /><span
+                class="box"></span>Guest service &amp; soft skills</label>
+            <label class="choice"><input type="checkbox" name="focus_areas" value="Front office / reception" /><span
+                class="box"></span>Front office / reception</label>
+            <label class="choice"><input type="checkbox" name="focus_areas" value="Housekeeping" /><span
+                class="box"></span>Housekeeping</label>
+            <label class="choice"><input type="checkbox" name="focus_areas" value="F&B service / stewarding" /><span
+                class="box"></span>F&amp;B service / stewarding</label>
+            <label class="choice"><input type="checkbox" name="focus_areas"
+                value="Kitchen & food production" /><span class="box"></span>Kitchen &amp; food production</label>
+            <label class="choice"><input type="checkbox" name="focus_areas" value="Food safety & hygiene (FOSTAC)" /><span
+                class="box"></span>Food safety &amp; hygiene (FOSTAC)</label>
+            <label class="choice"><input type="checkbox" name="focus_areas" value="Grooming & communication" /><span
+                class="box"></span>Grooming &amp; communication</label>
+            <label class="choice"><input type="checkbox" name="focus_areas" value="Sales & upselling" /><span
+                class="box"></span>Sales &amp; upselling</label>
+            <label class="choice"><input type="checkbox" name="focus_areas"
+                value="Supervisory & leadership skills" /><span class="box"></span>Supervisory &amp; leadership
+              skills</label>
+            <label class="choice"><input type="checkbox" name="focus_areas" value="SOPs & how-to documentation" /><span
+                class="box"></span>SOPs &amp; how-to documentation</label>
+          </div>
+          <div class="err">Please select at least one area.</div>
+        </div>
+
+        <div class="field" data-required data-group="challenge">
+          <span class="q">What's the single biggest problem you're trying to fix? <span class="req">*</span></span>
+          <div class="choices cols">
+            <label class="choice radio"><input type="radio" name="challenge"
+                value="Inconsistent service across shifts or outlets" /><span class="box"></span>Inconsistent service
+              across shifts or outlets</label>
+            <label class="choice radio"><input type="radio" name="challenge"
+                value="High attrition / constant new joiners" /><span class="box"></span>High attrition / constant new
+              joiners</label>
+            <label class="choice radio"><input type="radio" name="challenge"
+                value="Falling guest ratings and online reviews" /><span class="box"></span>Falling guest ratings and
+              online reviews</label>
+            <label class="choice radio"><input type="radio" name="challenge"
+                value="Opening a new outlet or property" /><span class="box"></span>Opening a new outlet or
+              property</label>
+            <label class="choice radio"><input type="radio" name="challenge"
+                value="Low average bill / weak upselling" /><span class="box"></span>Low average bill / weak
+              upselling</label>
+            <label class="choice radio"><input type="radio" name="challenge"
+                value="Supervisors not managing their teams well" /><span class="box"></span>Supervisors not managing
+              their teams well</label>
+          </div>
+          <div class="err">Please pick the one that hurts most.</div>
+        </div>
+
+        <div class="field" data-required data-group="service_rating">
+          <span class="q">How would you rate your team's service standard today? <span class="req">*</span></span>
+          <div class="scale" id="ratingScale"></div>
+          <div class="scale-ends"><span>1 &mdash; Needs a full reset</span><span>10 &mdash; Best in class</span></div>
+          <div class="err">Please pick a number from 1 to 10.</div>
+        </div>
+
+        <div class="field" data-required data-group="trained_recently">
+          <span class="q">Have you run formal staff training in the last 12 months? <span class="req">*</span></span>
+          <div class="choices">
+            <label class="choice radio"><input type="radio" name="trained_recently" value="Yes, regularly" /><span
+                class="box"></span>Yes, regularly</label>
+            <label class="choice radio"><input type="radio" name="trained_recently" value="Once or twice" /><span
+                class="box"></span>Once or twice</label>
+            <label class="choice radio"><input type="radio" name="trained_recently" value="No, not yet" /><span
+                class="box"></span>No, not yet</label>
+          </div>
+          <div class="err">Please pick one.</div>
+        </div>
+
+        <div class="field">
+          <label for="measure">How do you measure whether training worked?</label>
+          <textarea id="measure" name="measure"
+            placeholder="e.g. guest feedback scores, mystery audits, average bill value, attrition - or 'we don't measure it yet'"></textarea>
+        </div>
+      </section>
+
+      <!-- ---------- STEP 4 ---------- -->
+      <section class="card">
+        <div class="card-head">
+          <div class="step-num">4</div>
+          <h2>Format &amp; timing</h2>
+        </div>
+        <p class="card-sub">Last few &mdash; so the plan we send you is actually schedulable.</p>
+
+        <div class="field" data-required data-group="format">
+          <span class="q">How would you like the training delivered? <span class="req">*</span></span>
+          <div class="choices">
+            <label class="choice radio"><input type="radio" name="format" value="On-site at our location" /><span
+                class="box"></span>On-site at our location</label>
+            <label class="choice radio"><input type="radio" name="format" value="Online / live virtual" /><span
+                class="box"></span>Online / live virtual</label>
+            <label class="choice radio"><input type="radio" name="format" value="Blended" /><span
+                class="box"></span>Blended</label>
+            <label class="choice radio"><input type="radio" name="format" value="Not sure yet" /><span
+                class="box"></span>Not sure yet</label>
+          </div>
+          <div class="err">Please pick one.</div>
+        </div>
+
+        <div class="field" data-required data-group="timeline">
+          <span class="q">When do you want to start? <span class="req">*</span></span>
+          <div class="choices">
+            <label class="choice radio"><input type="radio" name="timeline" value="Immediately" /><span
+                class="box"></span>Immediately</label>
+            <label class="choice radio"><input type="radio" name="timeline" value="Within a month" /><span
+                class="box"></span>Within a month</label>
+            <label class="choice radio"><input type="radio" name="timeline" value="1 - 3 months" /><span
+                class="box"></span>1 &mdash; 3 months</label>
+            <label class="choice radio"><input type="radio" name="timeline" value="Just exploring" /><span
+                class="box"></span>Just exploring</label>
+          </div>
+          <div class="err">Please pick one.</div>
+        </div>
+
+        <div class="field">
+          <label for="notes">Anything else we should know?</label>
+          <textarea id="notes" name="notes"
+            placeholder="Shift timings, a past training that didn't land, a specific outlet that needs help first..."></textarea>
+        </div>
+
+        <div class="field">
+          <label class="choice" style="font-weight:600;">
+            <input type="checkbox" id="consent" name="consent" checked /><span class="box"></span>
+            HTI may contact me on the phone number and email above about this enquiry.
+          </label>
+        </div>
+
+        <!-- honeypot: hidden from people, catches bots -->
+        <div class="hp" aria-hidden="true">
+          <label for="website">Leave this field empty</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+      </section>
+
+      <!-- ---------- SUBMIT ---------- -->
+      <section class="card submit-card">
+        <button type="submit" class="btn-submit" id="submitBtn">Send my survey</button>
+        <p class="submit-note">We reply within one working day, Monday to Saturday.<br />Your answers are used only to
+          build your training recommendation.</p>
+        <div class="form-msg warn" id="formMsg"></div>
+      </section>
+    </form>
+
+    <!-- ---------- THANK YOU ---------- -->
+    <section class="card thanks" id="thanks">
+      <div class="tick">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+          stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h2>Thank you &mdash; that's everything we needed.</h2>
+      <p>A training consultant is reading your answers now. You'll hear from us within one working day with the programs
+        that fit your team. In a hurry? Message us on WhatsApp and we'll pull your survey up straight away.</p>
+      <div class="thanks-btns">
+        <a href="https://wa.me/917738060902" target="_blank" rel="noopener" class="btn-wa">Chat on WhatsApp</a>
+        <a href="hospitality-training-programs.html" class="btn-ghost">Browse our programs</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ STATS BAND ============ -->
+  <section class="stats-band">
+    <div class="stats-band-inner">
+      <div class="stat-block">
+        <div class="stat-num">300K+</div>
+        <div class="stat-text">Total Students</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">60+</div>
+        <div class="stat-text">Brands</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">5</div>
+        <div class="stat-text">Countries</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">410+</div>
+        <div class="stat-text">Cities</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">13+</div>
+        <div class="stat-text">Languages</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">15+</div>
+        <div class="stat-text">Programs</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">350+</div>
+        <div class="stat-text">Local Language Trainers</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">400K+</div>
+        <div class="stat-text">Total Live Hours</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="faq">
+    <h2>Questions people ask before filling this in</h2>
+    <div class="faq-item">
+      <h3>How long does the survey take?</h3>
+      <p>About three minutes. It's 15 short questions about your team, the skill gaps you're seeing and when you'd like
+        to start. Nothing needs to be looked up in advance.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What do I get back?</h3>
+      <p>An HTI training consultant reads your answers and comes back within one working day with the programs that
+        match your team, an outline of what each session covers, and an indicative schedule built around your shifts.
+      </p>
+    </div>
+    <div class="faq-item">
+      <h3>Is it free? Am I committing to anything?</h3>
+      <p>The survey and the recommendation are free, and there's no obligation to book. Plenty of teams use it simply to
+        understand where their gaps are.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Who is this designed for?</h3>
+      <p>Hotels and resorts, restaurants, QSRs and cloud kitchens, and corporate office and retail support teams. We've
+        trained over 300,000 participants across 410+ cities in 13+ languages &mdash; from a single outlet to national
+        chains.</p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>HTI</h4>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="training-needs-survey.html">Training Needs Survey</a>
+        </div>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <a href="restaurants.html">Restaurants &amp; QSRs</a>
+          <a href="hotels.html">Hotels</a>
+          <a href="offices.html">Offices</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="https://wooshbiz.com/" target="_blank" rel="noopener">Team Building</a>
+          <a href="leadership-development.html">Leadership Development</a>
+          <a href="professional-etiquette.html">Professional Etiquette</a>
+          <a href="posh-training.html">POSH Training</a>
+          <a href="fssai-training.html">FSSAI Training</a>
+          <a href="dox.html">Develop SOPs &amp; How-To Videos</a>
+          <a href="blog.html">Blogs</a>
+        </div>
+      </div>
+      <div class="footer-div"></div>
+      <div class="footer-bottom">
+        <div class="footer-social">
+          <a href="https://www.facebook.com/hti.india/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg></a>
+          <a href="https://www.instagram.com/hti.india/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M12 2c-2.716 0-3.056.012-4.123.06c-1.064.049-1.791.218-2.427.465a4.901 4.901 0 0 0-1.772 1.153A4.902 4.902 0 0 0 2.525 5.45c-.247.636-.416 1.363-.465 2.427C2.011 8.944 2 9.284 2 12s.011 3.056.06 4.123c.049 1.064.218 1.791.465 2.427a4.903 4.903 0 0 0 1.153 1.772a4.903 4.903 0 0 0 1.772 1.153c.636.247 1.363.416 2.427.465c1.067.048 1.407.06 4.123.06s3.056-.012 4.123-.06c1.064-.049 1.791-.218 2.427-.465a4.902 4.902 0 0 0 1.772-1.153a4.902 4.902 0 0 0 1.153-1.772c.247-.636.416-1.363.465-2.427c.048-1.067.06-1.407.06-4.123s-.012-3.056-.06-4.123c-.049-1.064-.218-1.791-.465-2.427a4.902 4.902 0 0 0-1.153-1.772a4.901 4.901 0 0 0-1.772-1.153c-.636-.247-1.363-.416-2.427-.465C15.056 2.012 14.716 2 12 2m0 1.802c2.67 0 2.986.01 4.04.058c.976.045 1.505.207 1.858.344c.466.182.8.399 1.15.748c.35.35.566.684.748 1.15c.136.353.3.882.344 1.857c.048 1.055.058 1.37.058 4.041c0 2.67-.01 2.986-.058 4.04c-.045.976-.208 1.505-.344 1.858a3.1 3.1 0 0 1-.748 1.15c-.35.35-.684.566-1.15.748c-.353.136-.882.3-1.857.344c-1.054.048-1.37.058-4.041.058c-2.67 0-2.987-.01-4.04-.058c-.976-.045-1.505-.208-1.858-.344a3.098 3.098 0 0 1-1.15-.748a3.098 3.098 0 0 1-.748-1.15c-.137-.353-.3-.882-.344-1.857c-.048-1.055-.058-1.37-.058-4.041c0-2.67.01-2.986.058-4.04c.045-.976.207-1.505.344-1.858c.182-.466.399-.8.748-1.15c.35-.35.684-.566 1.15-.748c.353-.137.882-.3 1.857-.344c1.055-.048 1.37-.058 4.041-.058m0 11.531a3.333 3.333 0 1 1 0-6.666a3.333 3.333 0 0 1 0 6.666m0-8.468a5.135 5.135 0 1 0 0 10.27a5.135 5.135 0 0 0 0-10.27m6.538-.203a1.2 1.2 0 1 1-2.4 0a1.2 1.2 0 0 1 2.4 0" />
+            </svg></a>
+          <a href="https://www.linkedin.com/company/hospitality-training-institute-india-pvt-ltd" target="_blank"
+            aria-label="LinkedIn"><svg viewBox="0 0 32 32" fill="currentColor">
+              <path
+                d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+            </svg></a>
+          <a href="https://www.youtube.com/c/Hti-india" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg></a>
+        </div>
+        <div class="footer-contact"><a href="tel:+917738060902">
+            <h3>Contact Us: <span>+91 77380 60902</span></h3>
+          </a></div>
+        <a href="index.html" class="footer-brand"><img src="images/brand/hti-logo.png" alt="HTI" /></a>
+      </div>
+      <div class="footer-copy">&#169;&#65039; HOSPITALITY TRAINING INSTITUTE INDIA PRIVATE. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    /* ---------- Mobile nav ---------- */
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const menu = document.getElementById('navMenu');
+      toggle.addEventListener('click', () => menu.classList.toggle('open'));
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          if (window.innerWidth <= 960 && e.target === item || (e.target.classList.contains('caret'))) {
+            item.classList.toggle('open');
+          }
+        });
+      });
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menu.classList.remove('open');
+          menu.querySelectorAll('.nav-item.open').forEach(i => i.classList.remove('open'));
+        });
+      });
+    })();
+
+    /* ---------- Scroll progress line under the navbar ---------- */
+    (function () {
+      const bar = document.getElementById('scrollProgress');
+      const navbar = document.querySelector('.navbar');
+      if (!bar || !navbar) return;
+      let ticking = false;
+
+      function update() {
+        ticking = false;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const y = window.scrollY || window.pageYOffset;
+        const ratio = max > 0 ? Math.min(Math.max(y / max, 0), 1) : 0;
+        bar.style.transform = `scaleX(${ratio})`;
+        navbar.classList.toggle('scrolled', y > 4);
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      window.addEventListener('orientationchange', update);
+      if (window.visualViewport) window.visualViewport.addEventListener('resize', update);
+      window.addEventListener('load', update);
+      update();
+    })();
+  </script>
+
+  <script>
+    /* =========================================================
+       SURVEY
+       Answers go to Supabase (table: survey_responses).
+       If that call fails for any reason the answers are never
+       lost - we hand the visitor a pre-filled WhatsApp message.
+       ========================================================= */
+    (function () {
+      const SUPABASE_URL = "https://ytthcgdsbfagvwcopoaj.supabase.co";
+      const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0dGhjZ2RzYmZhZ3Z3Y29wb2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzMjk5MTMsImV4cCI6MjA5ODkwNTkxM30.JIDahcRTu3VbFpZ55Ti5hHg_JrHobk0zh8PSaj9lWLc";
+      const TABLE = "survey_responses";
+      const WHATSAPP = "917738060902";
+
+      const form = document.getElementById('surveyForm');
+      const btn = document.getElementById('submitBtn');
+      const msg = document.getElementById('formMsg');
+      const thanks = document.getElementById('thanks');
+      const fill = document.getElementById('progressFill');
+      const pct = document.getElementById('progressPct');
+
+      /* ---------- build the 1-10 rating scale ---------- */
+      (function buildScale() {
+        const scale = document.getElementById('ratingScale');
+        let html = '';
+        for (let i = 1; i <= 10; i++) {
+          html += `<label><input type="radio" name="service_rating" value="${i}" /><span>${i}</span></label>`;
+        }
+        scale.innerHTML = html;
+      })();
+
+      /* ---------- helpers ---------- */
+      const val = n => (form.elements[n] && form.elements[n].value || '').trim();
+      const picked = n => {
+        const el = form.querySelector(`input[name="${n}"]:checked`);
+        return el ? el.value : '';
+      };
+      const pickedAll = n =>
+        Array.from(form.querySelectorAll(`input[name="${n}"]:checked`)).map(el => el.value);
+
+      const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+      /* Indian mobiles, tolerant of +91, a leading 0, spaces and dashes.
+         Strip the country code by length, not by prefix - plenty of real
+         numbers start with 91 themselves. */
+      const phoneOk = function (v) {
+        const d = v.replace(/\D/g, '');
+        if (d.length === 10) return /^[6-9]/.test(d);
+        if (d.length === 11) return d[0] === '0' && /^[6-9]/.test(d.slice(1));
+        if (d.length === 12) return d.slice(0, 2) === '91' && /^[6-9]/.test(d.slice(2));
+        return false;
+      };
+
+      /* every field that must be answered, in page order */
+      const required = Array.from(form.querySelectorAll('.field[data-required]'));
+
+      function isFilled(field) {
+        const group = field.dataset.group;
+        if (group) {
+          return form.querySelectorAll(`input[name="${group}"]:checked`).length > 0;
+        }
+        const input = field.querySelector('input, select, textarea');
+        if (!input) return true;
+        const v = input.value.trim();
+        if (!v) return false;
+        if (input.type === 'email') return emailOk(v);
+        if (input.type === 'tel') return phoneOk(v);
+        return true;
+      }
+
+      /* ---------- progress ---------- */
+      function updateProgress() {
+        const done = required.filter(isFilled).length;
+        const p = Math.round(done / required.length * 100);
+        fill.style.width = p + '%';
+        pct.textContent = p + '%';
+      }
+
+      form.addEventListener('input', e => {
+        updateProgress();
+        const field = e.target.closest('.field');
+        if (field && field.classList.contains('invalid') && isFilled(field)) {
+          field.classList.remove('invalid');
+        }
+      });
+      form.addEventListener('change', updateProgress);
+      updateProgress();
+
+      /* ---------- answers -> object ---------- */
+      function collect() {
+        return {
+          name: val('name'),
+          email: val('email'),
+          phone: val('phone'),
+          company: val('company'),
+          role: val('role'),
+          city: val('city'),
+          business_type: picked('business_type'),
+          outlets: val('outlets'),
+          team_size: val('team_size'),
+          languages: pickedAll('languages'),
+          focus_areas: pickedAll('focus_areas'),
+          challenge: picked('challenge'),
+          service_rating: Number(picked('service_rating')) || null,
+          trained_recently: picked('trained_recently'),
+          measure: val('measure'),
+          format: picked('format'),
+          timeline: picked('timeline'),
+          notes: val('notes'),
+          consent: form.elements['consent'].checked,
+          source: location.pathname.replace(/^\//, '') || 'training-needs-survey.html'
+        };
+      }
+
+      /* ---------- WhatsApp fallback ---------- */
+      function whatsappLink(a) {
+        const lines = [
+          'Training needs survey - HTI',
+          '',
+          `Name: ${a.name}`,
+          `Company: ${a.company}`,
+          `Phone: ${a.phone}`,
+          `Email: ${a.email}`,
+          a.role ? `Role: ${a.role}` : '',
+          a.city ? `City: ${a.city}` : '',
+          '',
+          `Business: ${a.business_type}`,
+          a.outlets ? `Outlets: ${a.outlets}` : '',
+          `Team to train: ${a.team_size}`,
+          a.languages.length ? `Languages: ${a.languages.join(', ')}` : '',
+          '',
+          `Focus areas: ${a.focus_areas.join(', ')}`,
+          `Biggest problem: ${a.challenge}`,
+          `Service rating today: ${a.service_rating}/10`,
+          `Trained in last 12 months: ${a.trained_recently}`,
+          a.measure ? `How they measure: ${a.measure}` : '',
+          '',
+          `Format: ${a.format}`,
+          `Timeline: ${a.timeline}`,
+          a.notes ? `Notes: ${a.notes}` : ''
+        ].filter(l => l !== '');
+        return `https://wa.me/${WHATSAPP}?text=` + encodeURIComponent(lines.join('\n'));
+      }
+
+      function showFallback(answers) {
+        msg.innerHTML =
+          '<b>We couldn\'t save that automatically.</b><br />Nothing is lost - tap below and your answers ' +
+          'travel across as a WhatsApp message, or call us on ' +
+          '<a href="tel:+917738060902" style="color:inherit;text-decoration:underline;">+91 77380 60902</a>.' +
+          `<br /><a class="wa-btn" href="${whatsappLink(answers)}" target="_blank" rel="noopener">Send on WhatsApp</a>`;
+        msg.classList.add('show');
+        btn.disabled = false;
+        btn.textContent = 'Try again';
+      }
+
+      /* ---------- submit ---------- */
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        msg.classList.remove('show');
+
+        /* bots fill hidden fields; people don't */
+        if (val('website')) return;
+
+        let firstBad = null;
+        required.forEach(field => {
+          const ok = isFilled(field);
+          field.classList.toggle('invalid', !ok);
+          if (!ok && !firstBad) firstBad = field;
+        });
+
+        if (firstBad) {
+          const y = firstBad.getBoundingClientRect().top + window.scrollY - 160;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+          const focusable = firstBad.querySelector('input:not([type=radio]):not([type=checkbox]), select, textarea');
+          if (focusable) setTimeout(() => focusable.focus({ preventScroll: true }), 400);
+          return;
+        }
+
+        const answers = collect();
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+
+        try {
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLE}`, {
+            method: 'POST',
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(answers)
+          });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+
+          if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', {
+              event_category: 'survey',
+              event_label: 'training_needs_survey'
+            });
+          }
+
+          form.style.display = 'none';
+          document.getElementById('progressShell').style.display = 'none';
+          thanks.classList.add('show');
+          window.scrollTo({ top: thanks.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+        } catch (err) {
+          showFallback(answers);
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>

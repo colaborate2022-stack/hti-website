@@ -792,6 +792,41 @@
       margin-top: 28px;
     }
 
+    .cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid rgba(255, 255, 255, .35);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 12px 26px;
+      font-size: 17px;
+      line-height: 1;
+      margin-top: 28px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, .1);
+      border-color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .cta-sub {
+      color: #9a9a9a;
+      font-size: 14px;
+      margin-top: 16px;
+    }
+
     .cta-big {
       font-size: 120px;
       font-weight: 800;
@@ -1444,7 +1479,11 @@
   <section class="cta">
     <div class="wrap">
       <h2>Let's find the right training plan for your team!</h2>
-      <a href="https://wa.me/917738060902" target="_blank" class="btn-red">Let's chat</a>
+      <div class="cta-actions">
+        <a href="https://wa.me/917738060902" target="_blank" class="btn-red">Let's chat</a>
+        <a href="training-needs-survey.html" class="btn-outline">Take the training needs survey</a>
+      </div>
+      <p class="cta-sub">15 questions, 3 minutes &mdash; and we'll send back a plan built for your team.</p>
       <div class="cta-big">3,00,000+</div>
     </div>
     <div class="cta-brands">
@@ -1515,6 +1554,7 @@
           <h4>HTI</h4>
           <a href="about.html">About Us</a>
           <a href="contact.html">Contact Us</a>
+          <a href="training-needs-survey.html">Training Needs Survey</a>
         </div>
         <div class="footer-col">
           <h4>Programs</h4>

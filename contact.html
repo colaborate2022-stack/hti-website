@@ -384,6 +384,70 @@
       background: #c40f10;
     }
 
+    /* ============ SURVEY BANNER ============ */
+    .survey-banner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px 70px;
+    }
+
+    .survey-banner-inner {
+      background: #111;
+      border-radius: 18px;
+      padding: 40px 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .survey-banner-tag {
+      display: inline-block;
+      border: 1px solid rgba(255, 255, 255, .25);
+      color: #fff;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 6px 14px;
+      margin-bottom: 14px;
+    }
+
+    .survey-banner h2 {
+      color: #fff;
+      font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .survey-banner p {
+      color: #b9b9b9;
+      font-size: 15px;
+      line-height: 1.65;
+      max-width: 640px;
+    }
+
+    .survey-banner-btn {
+      flex: none;
+      margin-top: 0;
+      padding: 0.95rem 1.9rem;
+      font-size: 15px;
+    }
+
+    @media(max-width:800px) {
+      .survey-banner-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 32px 26px;
+      }
+
+      .survey-banner-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
     /* ============ STATS BAND ============ */
     .stats-band {
       background: #1a1a1a;
@@ -831,6 +895,19 @@
     </div>
   </section>
 
+  <!-- ============ SECTION 2b: SURVEY BANNER ============ -->
+  <section class="survey-banner">
+    <div class="survey-banner-inner">
+      <div class="survey-banner-text">
+        <span class="survey-banner-tag">Free &middot; 3 minutes</span>
+        <h2>Not sure which program your team needs?</h2>
+        <p>Answer 15 short questions about your outlets, your team and the gaps guests notice. A training consultant
+          comes back within one working day with the programs that fit &mdash; at no cost.</p>
+      </div>
+      <a href="training-needs-survey.html" class="contact-btn survey-banner-btn">Take the training needs survey</a>
+    </div>
+  </section>
+
   <!-- ============ SECTION 3: STATS BAND ============ -->
   <section class="stats-band">
     <div class="stats-band-inner">
@@ -901,6 +978,7 @@
           <h4>HTI</h4>
           <a href="about.html">About Us</a>
           <a href="contact.html">Contact Us</a>
+          <a href="training-needs-survey.html">Training Needs Survey</a>
         </div>
         <div class="footer-col">
           <h4>Programs</h4>

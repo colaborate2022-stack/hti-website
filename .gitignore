@@ -3,6 +3,9 @@ insert-blog.js
 
 .claude/
 
+# Editor settings — local to each machine
+.vscode/
+
 # Local DB migration backups — rollback data, never commit
 .migrate/
 
