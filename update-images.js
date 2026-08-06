@@ -1,10 +1,41 @@
-// Updates the cover_image column for each blog post in Supabase, matching by slug.
+// ============================================================================
+// RETIRED — DO NOT RUN WITHOUT FIRST CHECKING THE URLS BELOW.
+// ============================================================================
+//
+// What this does:
+//   Updates the cover_image column of each blog post in Supabase, matched by
+//   slug, by PATCHing the `blogs` table over the REST API.
+//
+// Why it is retired:
+//   The Webflow migration is COMPLETE. Every asset the site and the database
+//   referenced on the old Webflow CDN is now self-hosted in this repo
+//   under images/, and every cover_image, thumbnail_url and sections URL in
+//   the blogs table has been repointed to https://www.hti-india.com/images/...
+//   This script originally wrote Webflow CDN URLs into cover_image. Running it
+//   in that state would have silently reverted that migration for every slug
+//   listed below.
+//
+// Why it still exists:
+//   It is the only record of the slug -> cover-image mapping, and is useful if
+//   covers ever need to be re-applied in bulk.
+//
+// BEFORE RUNNING — read this:
+//   The BASE below now points at this site, but the FILENAMES still carry
+//   their original Webflow hash prefixes (e.g. "6a3d16f4..._Blog-28.avif").
+//   Those are NOT the migrated local filenames, which were decoded and
+//   hyphenated (e.g. "blog-28.avif") and live in per-post folders under
+//   images/blog/. As written, every URL this script would PATCH is a 404.
+//   Fix each entry to a real path under images/ and verify it returns 200
+//   before running, or you will blank the covers on the live blog.
+//
 // Run with: node update-images.js
 
 const SUPABASE_URL = "https://ytthcgdsbfagvwcopoaj.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0dGhjZ2RzYmZhZ3Z3Y29wb2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzMjk5MTMsImV4cCI6MjA5ODkwNTkxM30.JIDahcRTu3VbFpZ55Ti5hHg_JrHobk0zh8PSaj9lWLc";
 
-const CDN = "https://cdn.prod.website-files.com/637627a62b1c3e0d3b7b3432/";
+// Was the Webflow CDN root; now this site. See the warning at the top of the
+// file — the filenames appended to this base are still the old Webflow ones.
+const CDN = "https://www.hti-india.com/images/";
 
 const updates = [
   { slug: "hospitality-is-about-how-guests-feel", cover_image: CDN + "6a3d16f434a1e63bbe0e9d46_Blog-28.avif" },
