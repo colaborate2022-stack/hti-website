@@ -19,6 +19,70 @@
   <meta name="twitter:image" content="https://www.hti-india.com/images/brand/hti-logo.png" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"POSH Training","description":"Workplace training on the Prevention of Sexual Harassment (POSH) Act, 2013 for teams in India — what constitutes harassment, the Internal Committee and its role, how to report, the complaint and redressal process, employer duties and building a respectful workplace culture.","url":"https://www.hti-india.com/posh-training.html","image":"https://www.hti-india.com/images/blog/hti-training-programs/02-hti-training-session-hospitality-team.jpg","inLanguage":"en","provider":{"@type":"Organization","name":"HTI India","url":"https://www.hti-india.com"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.hti-india.com/"},{"@type":"ListItem","position":2,"name":"POSH Training","item":"https://www.hti-india.com/posh-training.html"}]}</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does this training make us POSH-compliant?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It covers one of them. Running awareness programmes is an employer duty under the Act, and this session is how you meet it. Constituting the Internal Committee and the annual reporting obligation are separate duties you still have to meet yourself."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who should attend — all staff, or only the Internal Committee?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both, and they are not the same session. All staff need to know what the line is and how to report. Internal Committee members also need orientation on receiving a complaint and running an inquiry."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do we need this if we have fewer than 10 employees?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The obligation to constitute an Internal Committee applies once a workplace has 10 or more employees. Below that, talk to us about what makes sense for the size of your team."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "In what languages do you conduct these sessions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We have conducted sessions in 13+ languages, across 410+ cities in 5 countries. Language is not a barrier. Our trainers speak in a language best understood by the participants."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will this be in-person or online sessions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "All the sessions will be done in-person. Our trainer visits your location and conducts the session."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the timings?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We conduct sessions at a time convenient to our partner."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I get a refund?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. We don't provide refunds. If you are not sure about the workshop, check out the testimonials, read more about the trainer and take an informed decision. In case you are not happy with the outcomes of a particular session, we can redo the session only ONCE."
+        }
+      }
+    ]
+  }
+  </script>
   <link rel="icon" href="images/brand/hti-favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -257,6 +321,22 @@
       height: 2px;
       background: #000;
       display: block;
+      transition: transform .25s ease, opacity .2s ease;
+    }
+
+    /* while the menu is open the hamburger becomes a cross, so there is an
+       obvious way to close it - and it sits in the sticky header, so it stays
+       reachable even when the menu panel is scrolled */
+    .nav-toggle.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
     }
 
     /* =====================================================================
@@ -897,6 +977,153 @@
       font-family: 'Gilroy-Bold', 'Gilroy', 'Montserrat', sans-serif;
     }
 
+
+    /* ============ HOW IT WORKS ============ */
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .how-step {
+      background: #fff;
+      border: 1px solid #e4ded6;
+      border-radius: 16px;
+      padding: 28px 18px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .05);
+      transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out), border-color .35s ease;
+    }
+
+    .how-step:hover {
+      border-color: rgba(227, 30, 36, .35);
+      box-shadow: 0 22px 44px -20px rgba(0, 0, 0, .28);
+    }
+
+    .how-step .num {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), #ff5a60);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      font-family: 'Gilroy-Bold', 'Gilroy', 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 12px 24px -12px rgba(227, 30, 36, .95);
+    }
+
+    .how-step p {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #222;
+      line-height: 1.5;
+    }
+
+    /* ============ FAQ ============
+       Written as static HTML rather than injected from a JS array, so the
+       answers are in the served markup where crawlers can read them. */
+    .faq-band {
+      background: #e6e1d9;
+    }
+
+    .faq-list {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: #fff;
+      border: 1px solid #e4ded6;
+      border-radius: 14px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .05);
+      transition: box-shadow .35s var(--ease-out), border-color .35s ease;
+    }
+
+    .faq-item.open {
+      border-color: rgba(227, 30, 36, .35);
+      box-shadow: 0 22px 44px -22px rgba(0, 0, 0, .3);
+    }
+
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 20px 24px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      color: #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      min-height: 44px;
+    }
+
+    .faq-q .sign {
+      color: var(--red);
+      font-size: 24px;
+      font-weight: 800;
+      flex: 0 0 auto;
+      line-height: 1;
+      transition: transform .3s var(--ease-out);
+    }
+
+    .faq-item.open .faq-q .sign {
+      transform: rotate(180deg);
+    }
+
+    /* grid-template-rows animates to the answer's real height, so a long
+       answer is never clipped the way a fixed max-height would clip it */
+    .faq-answer {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .35s var(--ease-out);
+    }
+
+    .faq-item.open .faq-answer {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-answer>div {
+      overflow: hidden;
+    }
+
+    .faq-answer p {
+      padding: 0 24px 22px;
+      font-size: 15px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .faq-answer a {
+      color: var(--red);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    .faq-foot {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 15px;
+      color: #555;
+    }
+
+    .faq-foot a {
+      color: var(--red);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
     /* ============ RAISED CARD (why it matters) ============ */
     .raised-wrap {
       max-width: 1160px;
@@ -1140,6 +1367,10 @@
         opacity: .3;
       }
 
+      .how-steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
       .aud-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -1185,6 +1416,18 @@
 
       .nav-item.open .dropdown {
         display: flex;
+      }
+
+      /* a tap leaves :hover stuck on touch devices, which used to point the
+         caret up while the panel stayed shut - drive it from the real state */
+      .nav-item:hover .caret {
+        transform: rotate(45deg);
+        margin-top: -3px;
+      }
+
+      .nav-item.open .caret {
+        transform: rotate(-135deg);
+        margin-top: 3px;
       }
 
       /* touch targets: every dropdown link is at least 44px tall */
@@ -1270,6 +1513,15 @@
         gap: 16px;
       }
 
+      .how-steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .faq-q {
+        font-size: 15px;
+        padding: 18px 18px;
+      }
+
       .hero-card {
         flex: 1 1 calc(50% - 6px);
         min-width: 0;
@@ -1295,6 +1547,7 @@
       .js .hero-meta .hero-card,
       .js .aud-grid .aud-card,
       .js .cover-list li,
+      .js .how-steps .how-step,
       .js .shot-strip .shot {
         opacity: 1;
         transform: none;
@@ -1326,7 +1579,7 @@
   <header class="navbar">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo"><img src="images/brand/hti-logo.png" alt="HTI Logo" /></a>
-      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
       <nav class="nav-menu" id="navMenu">
         <div class="nav-item">Restaurants &amp; QSRs<span class="caret"></span>
           <div class="dropdown">
@@ -1390,11 +1643,9 @@
         <h1 data-reveal style="--rd:80ms">POSH <em>Training</em></h1>
         <p class="hero-sub" data-reveal style="--rd:150ms">Workplace training on the Prevention of Sexual Harassment
           (POSH) Act, 2013.</p>
-        <p class="hero-lede" data-reveal style="--rd:210ms">Indian law requires every workplace with 10 or more
-          employees to constitute an Internal Committee to receive and resolve complaints of sexual harassment, and it
-          places a duty on the employer to run regular awareness programmes for staff and orientation for committee
-          members. HTI delivers that training on site, in the languages your team actually works in, so the requirement
-          is met in practice and not just on paper.</p>
+        <p class="hero-lede" data-reveal style="--rd:210ms">Indian law requires workplaces with 10 or more employees to
+          constitute an Internal Committee and to run regular awareness programmes. We deliver that training on site,
+          in the languages your team actually works in.</p>
         <p class="hero-kicker" data-reveal style="--rd:280ms">A policy on a noticeboard is not training.</p>
         <br>
         <a href="https://wa.me/917738060902" target="_blank" rel="noopener" class="hero-cta" data-reveal
@@ -1440,8 +1691,7 @@
             <path d="M9 10h.01M15 10h.01M9 13h.01M15 13h.01" />
           </svg></div>
         <h3>Hotels</h3>
-        <p>Large, mixed teams working across shifts, guest floors and back-of-house areas, where staff and guests
-          interact around the clock.</p>
+        <p>Mixed teams across shifts, guest floors and back-of-house, interacting around the clock.</p>
       </div>
       <div class="aud-card">
         <div class="aud-ico" aria-hidden="true"><svg viewBox="0 0 24 24">
@@ -1449,8 +1699,7 @@
             <path d="M17 3c-1.5 1.5-2 3.5-2 5.5V13h4V8.5c0-2-.5-4-2-5.5zM17 13v8" />
           </svg></div>
         <h3>Restaurants &amp; QSRs</h3>
-        <p>Fast-moving kitchen and service floors with young crews and high turnover, where induction has to cover
-          conduct from day one.</p>
+        <p>Young crews and high turnover, where induction has to cover conduct from day one.</p>
       </div>
       <div class="aud-card">
         <div class="aud-ico" aria-hidden="true"><svg viewBox="0 0 24 24">
@@ -1458,8 +1707,7 @@
             <path d="M9 11V6a3 3 0 0 1 6 0v5" />
           </svg></div>
         <h3>Retail</h3>
-        <p>Store teams and outlet staff spread across locations, who need the same standard of awareness and the same
-          reporting route everywhere.</p>
+        <p>Teams spread across locations, needing the same awareness and the same reporting route everywhere.</p>
       </div>
       <div class="aud-card">
         <div class="aud-ico" aria-hidden="true"><svg viewBox="0 0 24 24">
@@ -1467,8 +1715,7 @@
             <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M2.5 12.5h19" />
           </svg></div>
         <h3>Corporate offices</h3>
-        <p>Head-office and support functions, including managers and Internal Committee members who handle complaints
-          and need to understand the process.</p>
+        <p>Managers and Internal Committee members who handle complaints and need to know the process.</p>
       </div>
     </div>
   </section>
@@ -1499,25 +1746,23 @@
       <ul class="cover-list" data-reveal>
         <li>
           <span class="cv-num">01</span>
-          <div><b>What constitutes harassment under the Act</b>Unwelcome physical, verbal and non-verbal conduct, the
-            specific circumstances the Act names, and worked examples drawn from real workplace situations rather than
-            abstract definitions.</div>
+          <div><b>What constitutes harassment under the Act</b>Unwelcome physical, verbal and non-verbal conduct, and
+            the circumstances the Act names — taught through real workplace situations, not definitions.</div>
         </li>
         <li>
           <span class="cv-num">02</span>
-          <div><b>The Internal Committee and its role</b>How the committee is constituted, who sits on it, what powers
-            it has, and what its members are expected to do when a complaint arrives.</div>
+          <div><b>The Internal Committee and its role</b>How it is constituted, who sits on it, what powers it has, and
+            what members do when a complaint arrives.</div>
         </li>
         <li>
           <span class="cv-num">03</span>
-          <div><b>How to report</b>Who an employee can approach, the time limits that apply, what a written complaint
-            should contain, and the support available to someone who needs help filing one.</div>
+          <div><b>How to report</b>Who an employee can approach, the time limits that apply, what a complaint should
+            contain, and the help available to file one.</div>
         </li>
         <li>
           <span class="cv-num">04</span>
-          <div><b>The complaint and redressal process</b>What happens after a complaint is filed — the inquiry, the
-            right of both parties to be heard, confidentiality obligations, interim relief, and how findings and
-            recommendations are arrived at.</div>
+          <div><b>The complaint and redressal process</b>The inquiry, the right of both parties to be heard,
+            confidentiality, interim relief, and how findings are reached.</div>
         </li>
         <li>
           <span class="cv-num">05</span>
@@ -1527,15 +1772,44 @@
         </li>
         <li>
           <span class="cv-num">06</span>
-          <div><b>Building a respectful workplace culture</b>Bystander responsibility, how managers should respond when
-            something is raised informally, and the everyday behaviour that keeps a team safe long before any complaint
-            is made.</div>
+          <div><b>Building a respectful workplace culture</b>Bystander responsibility, how managers respond when
+            something is raised informally, and the behaviour that prevents complaints.</div>
         </li>
       </ul>
     </div>
   </section>
 
-  <!-- ============ SECTION 5: WHY IT MATTERS ============ -->
+  <!-- ============ SECTION 5: HOW IT WORKS ============ -->
+  <section class="section">
+    <div class="sec-head">
+      <span class="sec-tag">The Process</span>
+      <h2>How it <em>works</em></h2>
+    </div>
+    <div class="how-steps" data-reveal>
+      <div class="how-step">
+        <div class="num">1</div>
+        <p>Develop module with partners</p>
+      </div>
+      <div class="how-step">
+        <div class="num">2</div>
+        <p>LIVE in person sessions</p>
+      </div>
+      <div class="how-step">
+        <div class="num">3</div>
+        <p>Mock simulations of real situations</p>
+      </div>
+      <div class="how-step">
+        <div class="num">4</div>
+        <p>Audit, Test &amp; Quizzes</p>
+      </div>
+      <div class="how-step">
+        <div class="num">5</div>
+        <p>Present report to partners</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 6: WHY IT MATTERS ============ -->
   <section class="raised-wrap">
     <div class="raised" data-reveal>
       <span class="sec-tag">Why it matters</span>
@@ -1544,14 +1818,100 @@
         running awareness programmes are statutory duties, and non-compliance carries consequences for the employer
         under the Act. An untrained committee is very nearly as exposed as no committee at all, because a complaint
         handled badly can be challenged on process alone.</p>
-      <p>The stronger reason is simpler. Staff who know what the line is, and who know exactly where to go when it is
-        crossed, raise problems early — while they are still small. Teams that have never been told either thing tend
-        to stay quiet, and the first anyone hears of a problem is when it has already become serious. Training is what
+      <p>The stronger reason is simpler. Staff who know where the line is, and where to go when it is crossed, raise
+        problems early. Teams that have never been told either thing stay quiet until it is serious. Training is what
         turns a policy on a noticeboard into something your people can actually use.</p>
     </div>
   </section>
 
-  <!-- ============ SECTION 6: CLOSING CTA ============ -->
+  <!-- ============ SECTION 7: FAQ ============
+       Written as static HTML, not injected from a JS array, so the answers
+       are in the served markup for crawlers and no-JS users. -->
+  <section class="faq-band">
+    <div class="section">
+      <div class="sec-head">
+        <span class="sec-tag">Questions</span>
+        <h2>Frequently asked <em>questions</em></h2>
+      </div>
+      <div class="faq-list" data-reveal>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">Does this training make us POSH-compliant?<span
+              class="sign">&#8964;</span></button>
+          <div class="faq-answer">
+            <div>
+              <p>It covers one of them. Running awareness programmes is an employer duty under the Act, and this
+                session is how you meet it. Constituting the Internal Committee and the annual reporting obligation are
+                separate duties you still have to meet yourself.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">Who should attend — all staff, or only the
+            Internal Committee?<span class="sign">&#8964;</span></button>
+          <div class="faq-answer">
+            <div>
+              <p>Both, and they are not the same session. All staff need to know what the line is and how to report.
+                Internal Committee members also need orientation on receiving a complaint and running an inquiry.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">Do we need this if we have fewer than 10
+            employees?<span class="sign">&#8964;</span></button>
+          <div class="faq-answer">
+            <div>
+              <p>The obligation to constitute an Internal Committee applies once a workplace has 10 or more employees.
+                Below that, talk to us about what makes sense for the size of your team.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">In what languages do you conduct these
+            sessions?<span class="sign">&#8964;</span></button>
+          <div class="faq-answer">
+            <div>
+              <p>We have conducted sessions in 13+ languages, across 410+ cities in 5 countries. Language is not a
+                barrier. Our trainers speak in a language best understood by the participants.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">Will this be in-person or online sessions?<span
+              class="sign">&#8964;</span></button>
+          <div class="faq-answer">
+            <div>
+              <p>All the sessions will be done in-person. Our trainer visits your location and conducts the session.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">What are the timings?<span
+              class="sign">&#8964;</span></button>
+          <div class="faq-answer">
+            <div>
+              <p>We conduct sessions at a time convenient to our partner.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">Can I get a refund?<span
+              class="sign">&#8964;</span></button>
+          <div class="faq-answer">
+            <div>
+              <p>No. We don't provide refunds. If you are not sure about the workshop, check out the testimonials, read
+                more about the trainer and take an informed decision. In case you are not happy with the outcomes of a
+                particular session, we can redo the session only ONCE.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="faq-foot">Not sure which programme fits your team? <a href="training-needs-survey.html">Take the
+          3-minute training needs survey</a>.</p>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 8: CLOSING CTA ============ -->
   <section class="cta-band">
     <h2 data-reveal>Let us run a POSH session for your team, at your workplace, in the language they work in.</h2>
     <a href="https://wa.me/917738060902" target="_blank" rel="noopener" class="cta-btn" data-reveal
@@ -1622,10 +1982,32 @@
     (function () {
       const toggle = document.getElementById('navToggle');
       const menu = document.getElementById('navMenu');
-      toggle.addEventListener('click', () => menu.classList.toggle('open'));
+
+      /* one source of truth for the open state, so the panel, the
+         hamburger-to-cross animation and the ARIA state always agree */
+      function setNav(open) {
+        menu.classList.toggle('open', open);
+        toggle.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        if (!open) {
+          menu.querySelectorAll('.nav-item.open').forEach(i => i.classList.remove('open'));
+        }
+      }
+
+      toggle.addEventListener('click', () => setNav(!menu.classList.contains('open')));
+
+      /* Escape, or a tap outside the panel, also closes it */
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu.classList.contains('open')) setNav(false);
+      });
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 960 && menu.classList.contains('open') &&
+          !menu.contains(e.target) && !toggle.contains(e.target)) setNav(false);
+      });
       document.querySelectorAll('.nav-item').forEach(item => {
         item.addEventListener('click', (e) => {
-          if (window.innerWidth <= 960 && e.target === item || (e.target.classList.contains('caret'))) {
+          if (window.innerWidth <= 960 && (e.target === item || e.target.classList.contains('caret'))) {
             item.classList.toggle('open');
           }
         });
@@ -1634,8 +2016,7 @@
          in a new tab and so never navigate this page away */
       menu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-          menu.classList.remove('open');
-          menu.querySelectorAll('.nav-item.open').forEach(i => i.classList.remove('open'));
+          setNav(false);
         });
       });
     })();
@@ -1671,6 +2052,29 @@
       }
       window.addEventListener('load', update);
       update();
+    })();
+  </script>
+  <script>
+    /* ---------- FAQ accordion ----------
+       Single-open. Markup is already in the HTML; this only wires behaviour,
+       so the answers stay readable with JS off. */
+    (function () {
+      const list = document.querySelector('.faq-list');
+      if (!list) return;
+      list.querySelectorAll('.faq-q').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.parentElement;
+          const wasOpen = item.classList.contains('open');
+          list.querySelectorAll('.faq-item').forEach(i => {
+            i.classList.remove('open');
+            i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+          });
+          if (!wasOpen) {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
     })();
   </script>
   <script>

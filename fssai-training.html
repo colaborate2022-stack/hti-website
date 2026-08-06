@@ -19,6 +19,70 @@
   <meta name="twitter:image" content="https://www.hti-india.com/images/brand/hti-logo.png" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"FSSAI Food Safety Training","description":"On-site food safety training for food handlers and Food Safety Supervisors at restaurants, hotels, cloud kitchens, caterers and food manufacturing and retail businesses — food safety fundamentals, personal and kitchen hygiene, storage and temperature control, cross-contamination, cleaning and sanitation, and documentation and record-keeping.","url":"https://www.hti-india.com/fssai-training.html","image":"https://www.hti-india.com/images/blog/hti-training-programs/03-hti-restaurant-team-training.jpg","inLanguage":"en","provider":{"@type":"Organization","name":"HTI India","url":"https://www.hti-india.com"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.hti-india.com/"},{"@type":"ListItem","position":2,"name":"FSSAI Food Safety Training","item":"https://www.hti-india.com/fssai-training.html"}]}</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does this session certify my Food Safety Supervisor?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The Food Safety Supervisor certification is issued by FSSAI through its own FoSTaC scheme — we do not issue it. Our session is practical food safety training for the whole team that handles your food. Read our full FoSTaC guide."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who should attend — only the supervisor or the whole team?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The whole team. The person plating the food, the one receiving the delivery and the one wiping the prep counter all have to work to the same standard the supervisor is accountable for."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the session built around our own kitchen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. We build the module with you first, around your menu, your storage and your service pattern, so the examples are situations your team actually meets."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "In what languages do you conduct these sessions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We have conducted sessions in 13+ languages, across 410+ cities in 5 countries. Language is not a barrier. Our trainers speak in a language best understood by the participants."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will this be in-person or online sessions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "All the sessions will be done in-person. Our trainer visits your location and conducts the session."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can we conduct this session in countries outside India?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we have already trained for companies in Dubai, Saudi Arabia, Maldives and Mauritius."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I get a refund?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. We don't provide refunds. If you are not sure about the workshop, check out the testimonials, read more about the trainer and take an informed decision. In case you are not happy with the outcomes of a particular session, we can redo the session only ONCE."
+        }
+      }
+    ]
+  }
+  </script>
   <link rel="icon" href="images/brand/hti-favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -257,6 +321,22 @@
       height: 2px;
       background: #000;
       display: block;
+      transition: transform .25s ease, opacity .2s ease;
+    }
+
+    /* while the menu is open the hamburger becomes a cross, so there is an
+       obvious way to close it - and it sits in the sticky header, so it stays
+       reachable even when the menu panel is scrolled */
+    .nav-toggle.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
     }
 
     /* =====================================================================
@@ -899,6 +979,152 @@
       font-family: 'Gilroy-Bold', 'Gilroy', 'Montserrat', sans-serif;
     }
 
+    /* ============ HOW IT WORKS ============ */
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .how-step {
+      background: #fff;
+      border: 1px solid #e4ded6;
+      border-radius: 16px;
+      padding: 28px 18px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .05);
+      transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out), border-color .35s ease;
+    }
+
+    .how-step:hover {
+      border-color: rgba(227, 30, 36, .35);
+      box-shadow: 0 22px 44px -20px rgba(0, 0, 0, .28);
+    }
+
+    .how-step .num {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), #ff5a60);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      font-family: 'Gilroy-Bold', 'Gilroy', 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 12px 24px -12px rgba(227, 30, 36, .95);
+    }
+
+    .how-step p {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #222;
+      line-height: 1.5;
+    }
+
+    /* ============ FAQ ============
+       Written as static HTML rather than injected from a JS array, so the
+       answers are in the served markup where crawlers can read them. */
+    .faq-band {
+      background: #e6e1d9;
+    }
+
+    .faq-list {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: #fff;
+      border: 1px solid #e4ded6;
+      border-radius: 14px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .05);
+      transition: box-shadow .35s var(--ease-out), border-color .35s ease;
+    }
+
+    .faq-item.open {
+      border-color: rgba(227, 30, 36, .35);
+      box-shadow: 0 22px 44px -22px rgba(0, 0, 0, .3);
+    }
+
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 20px 24px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      color: #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      min-height: 44px;
+    }
+
+    .faq-q .sign {
+      color: var(--red);
+      font-size: 24px;
+      font-weight: 800;
+      flex: 0 0 auto;
+      line-height: 1;
+      transition: transform .3s var(--ease-out);
+    }
+
+    .faq-item.open .faq-q .sign {
+      transform: rotate(180deg);
+    }
+
+    /* grid-template-rows animates to the answer's real height, so a long
+       answer is never clipped the way a fixed max-height would clip it */
+    .faq-answer {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .35s var(--ease-out);
+    }
+
+    .faq-item.open .faq-answer {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-answer>div {
+      overflow: hidden;
+    }
+
+    .faq-answer p {
+      padding: 0 24px 22px;
+      font-size: 15px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .faq-answer a {
+      color: var(--red);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    .faq-foot {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 15px;
+      color: #555;
+    }
+
+    .faq-foot a {
+      color: var(--red);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
     /* ============ RAISED CARD (FoSTaC cross-link) ============ */
     .raised-wrap {
       max-width: 1160px;
@@ -1170,6 +1396,10 @@
         opacity: .3;
       }
 
+      .how-steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
       /* two per row: the centring offsets no longer apply */
       .aud-grid {
         grid-template-columns: repeat(4, 1fr);
@@ -1221,6 +1451,18 @@
 
       .nav-item.open .dropdown {
         display: flex;
+      }
+
+      /* a tap leaves :hover stuck on touch devices, which used to point the
+         caret up while the panel stayed shut - drive it from the real state */
+      .nav-item:hover .caret {
+        transform: rotate(45deg);
+        margin-top: -3px;
+      }
+
+      .nav-item.open .caret {
+        transform: rotate(-135deg);
+        margin-top: 3px;
       }
 
       /* touch targets: every dropdown link is at least 44px tall */
@@ -1312,6 +1554,15 @@
         gap: 16px;
       }
 
+      .how-steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .faq-q {
+        font-size: 15px;
+        padding: 18px 18px;
+      }
+
       .hero-card {
         flex: 1 1 calc(50% - 6px);
         min-width: 0;
@@ -1337,6 +1588,7 @@
       .js .hero-meta .hero-card,
       .js .aud-grid .aud-card,
       .js .cover-list li,
+      .js .how-steps .how-step,
       .js .shot-strip .shot {
         opacity: 1;
         transform: none;
@@ -1368,7 +1620,7 @@
   <header class="navbar">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo"><img src="images/brand/hti-logo.png" alt="HTI Logo" /></a>
-      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
       <nav class="nav-menu" id="navMenu">
         <div class="nav-item">Restaurants &amp; QSRs<span class="caret"></span>
           <div class="dropdown">
@@ -1430,17 +1682,11 @@
       <div class="hero-copy">
         <span class="hero-tag" data-reveal>Food Safety Training</span>
         <h1 data-reveal style="--rd:80ms">FSSAI <em>Food Safety</em> Training</h1>
-        <p class="hero-lede" data-reveal style="--rd:150ms">FSSAI requires food businesses to have trained Food Safety
-          Supervisors. In practice that means someone on your payroll — usually a chef, kitchen manager or outlet
-          manager — has to hold the Food Safety Supervisor certification that FSSAI issues through its own FoSTaC
-          scheme, and is then accountable for how food is handled on that premises: hygiene standards, temperature
-          discipline, cleaning schedules and the records that prove all three were followed.</p>
-        <p class="hero-lede" data-reveal style="--rd:210ms">Training the supervisor alone rarely changes much. The
-          person plating the food, the one receiving the delivery and the one wiping the prep counter all have to work
-          to the same standard. HTI runs practical food safety sessions for whole teams, on your premises, in the
-          languages your staff work in, so the standard the supervisor is accountable for is the standard the floor
-          actually keeps.</p>
-        <p class="hero-kicker" data-reveal style="--rd:280ms">One trained supervisor. One untrained line cook.</p>
+        <p class="hero-lede" data-reveal style="--rd:150ms">FSSAI requires every food business to have a trained Food
+          Safety Supervisor. But the supervisor is not the person plating the food. We train the whole team that
+          handles it — on your premises, in the languages they work in.</p>
+        <p class="hero-kicker" data-reveal style="--rd:280ms">Your supervisor is certified. Your kitchen is only as
+          safe as the person handling the food.</p>
         <br>
         <a href="https://wa.me/917738060902" target="_blank" rel="noopener" class="hero-cta" data-reveal
           style="--rd:340ms">Book training for your team <span class="arr">&rarr;</span></a>
@@ -1485,8 +1731,7 @@
             <path d="M17 3c-1.5 1.5-2 3.5-2 5.5V13h4V8.5c0-2-.5-4-2-5.5zM17 13v8" />
           </svg></div>
         <h3>Restaurants &amp; QSRs</h3>
-        <p>High-volume kitchens and service counters where crews change often and every new joiner needs the same
-          handling standard fast.</p>
+        <p>High-volume kitchens where crews change often and every new joiner needs the standard fast.</p>
       </div>
       <div class="aud-card">
         <div class="aud-ico" aria-hidden="true"><svg viewBox="0 0 24 24">
@@ -1494,8 +1739,7 @@
             <path d="M9 10h.01M15 10h.01M9 13h.01M15 13h.01" />
           </svg></div>
         <h3>Hotels</h3>
-        <p>Multiple outlets, banquets and room service running off shared kitchens and stores, where one weak link
-          affects every cover served.</p>
+        <p>Outlets, banquets and room service off shared kitchens, where one weak link affects every cover.</p>
       </div>
       <div class="aud-card">
         <div class="aud-ico" aria-hidden="true"><svg viewBox="0 0 24 24">
@@ -1505,8 +1749,7 @@
             <path d="M9 17.5h6M3 13v4.5h2M20 16v1.5h1" />
           </svg></div>
         <h3>Cloud kitchens</h3>
-        <p>Delivery-only operations where food sits in transit after it leaves you, and packing and holding discipline
-          decides what the customer opens.</p>
+        <p>Food sits in transit after it leaves you — packing and holding decide what the customer opens.</p>
       </div>
       <div class="aud-card">
         <div class="aud-ico" aria-hidden="true"><svg viewBox="0 0 24 24">
@@ -1514,8 +1757,7 @@
             <path d="M12 10.5V8M10.5 8h3M9 21h6" />
           </svg></div>
         <h3>Catering</h3>
-        <p>Off-site and event catering, where food is cooked in one place, transported, held and served hours later
-          under far less control.</p>
+        <p>Cooked in one place, transported, held and served hours later under far less control.</p>
       </div>
       <div class="aud-card">
         <div class="aud-ico" aria-hidden="true"><svg viewBox="0 0 24 24">
@@ -1523,8 +1765,7 @@
             <path d="M7 17h.01M11 17h.01M15 17h.01" />
           </svg></div>
         <h3>Food manufacturing &amp; retail</h3>
-        <p>Production units, packhouses and store teams handling open and packaged food, with audit trails and
-          documentation to maintain.</p>
+        <p>Production units, packhouses and store teams, with audit trails and documentation to maintain.</p>
       </div>
     </div>
   </section>
@@ -1555,42 +1796,69 @@
       <ul class="cover-list" data-reveal>
         <li>
           <span class="cv-num">01</span>
-          <div><b>Food safety fundamentals</b>How food becomes unsafe in the first place — biological, chemical and
-            physical hazards, how contamination spreads through a kitchen, and the handful of controls that prevent
-            most of it.</div>
+          <div><b>Food safety fundamentals</b>Biological, chemical and physical hazards, how contamination spreads, and the
+            few controls that prevent most of it.</div>
         </li>
         <li>
           <span class="cv-num">02</span>
-          <div><b>Personal and kitchen hygiene</b>Handwashing at the moments that matter, uniform and grooming
-            standards, reporting illness and cuts, and the habits that separate a clean kitchen from one that only
-            looks clean.</div>
+          <div><b>Personal and kitchen hygiene</b>Handwashing at the moments that matter, grooming standards, reporting
+            illness and cuts, and the habits behind a genuinely clean kitchen.</div>
         </li>
         <li>
           <span class="cv-num">03</span>
-          <div><b>Storage and temperature control</b>Receiving and checking deliveries, cold and dry store
-            organisation, stock rotation, safe cooking, cooling, holding and reheating temperatures, and how to
-            actually check them.</div>
+          <div><b>Storage and temperature control</b>Checking deliveries, store organisation, stock rotation, and safe
+            cooking, cooling, holding and reheating temperatures.</div>
         </li>
         <li>
           <span class="cv-num">04</span>
-          <div><b>Cross-contamination</b>Separating raw and ready-to-eat food, colour-coded boards and equipment,
-            allergen handling, and the cross-over points in a busy service where mistakes are most likely.</div>
+          <div><b>Cross-contamination</b>Separating raw and ready-to-eat food, colour-coded equipment, allergen handling, and
+            where a busy service goes wrong.</div>
         </li>
         <li>
           <span class="cv-num">05</span>
-          <div><b>Cleaning and sanitation</b>The difference between cleaning and sanitising, correct dilution and
-            contact times, cleaning schedules that survive a rush, waste handling and pest prevention.</div>
+          <div><b>Cleaning and sanitation</b>Cleaning versus sanitising, correct dilution and contact times, schedules that
+            survive a rush, waste and pest control.</div>
         </li>
         <li>
           <span class="cv-num">06</span>
-          <div><b>Documentation and record-keeping</b>Temperature logs, cleaning checklists, supplier and traceability
-            records, and how to keep them so they are useful during service and defensible during an inspection.</div>
+          <div><b>Documentation and record-keeping</b>Temperature logs, cleaning checklists and traceability records — useful
+            during service, defensible during an inspection.</div>
         </li>
       </ul>
     </div>
   </section>
 
-  <!-- ============ SECTION 5: CROSS-LINK TO FoSTaC GUIDE ============ -->
+  <!-- ============ SECTION 5: HOW IT WORKS ============ -->
+  <section class="section">
+    <div class="sec-head">
+      <span class="sec-tag">The Process</span>
+      <h2>How it <em>works</em></h2>
+    </div>
+    <div class="how-steps" data-reveal>
+      <div class="how-step">
+        <div class="num">1</div>
+        <p>Develop module with partners</p>
+      </div>
+      <div class="how-step">
+        <div class="num">2</div>
+        <p>LIVE in person sessions</p>
+      </div>
+      <div class="how-step">
+        <div class="num">3</div>
+        <p>Mock simulations of real situations</p>
+      </div>
+      <div class="how-step">
+        <div class="num">4</div>
+        <p>Audit, Test &amp; Quizzes</p>
+      </div>
+      <div class="how-step">
+        <div class="num">5</div>
+        <p>Present report to partners</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 6: CROSS-LINK TO FoSTaC GUIDE ============ -->
   <section class="raised-wrap">
     <div class="raised" data-reveal>
       <span class="sec-tag">Start here first</span>
@@ -1602,7 +1870,94 @@
     </div>
   </section>
 
-  <!-- ============ SECTION 6: CLOSING CTA ============ -->
+  <!-- ============ SECTION 7: FAQ ============
+       Written as static HTML, not injected from a JS array, so the answers
+       are in the served markup for crawlers and no-JS users. -->
+  <section class="faq-band">
+    <div class="section">
+      <div class="sec-head">
+        <span class="sec-tag">Questions</span>
+        <h2>Frequently asked <em>questions</em></h2>
+      </div>
+      <div class="faq-list" data-reveal>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">Does this session certify my Food Safety
+            Supervisor?<span class="sign">&#8964;</span></button>
+          <div class="faq-answer">
+            <div>
+              <p>No. The Food Safety Supervisor certification is issued by FSSAI through its own FoSTaC scheme — we do
+                not issue it. Our session is practical food safety training for the whole team that handles your food.
+                <a href="fostac.html">Read our full FoSTaC guide</a>.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">Who should attend — only the supervisor or the
+            whole team?<span class="sign">&#8964;</span></button>
+          <div class="faq-answer">
+            <div>
+              <p>The whole team. The person plating the food, the one receiving the delivery and the one wiping the
+                prep counter all have to work to the same standard the supervisor is accountable for.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">Is the session built around our own kitchen?<span
+              class="sign">&#8964;</span></button>
+          <div class="faq-answer">
+            <div>
+              <p>Yes. We build the module with you first, around your menu, your storage and your service pattern, so
+                the examples are situations your team actually meets.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">In what languages do you conduct these
+            sessions?<span class="sign">&#8964;</span></button>
+          <div class="faq-answer">
+            <div>
+              <p>We have conducted sessions in 13+ languages, across 410+ cities in 5 countries. Language is not a
+                barrier. Our trainers speak in a language best understood by the participants.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">Will this be in-person or online sessions?<span
+              class="sign">&#8964;</span></button>
+          <div class="faq-answer">
+            <div>
+              <p>All the sessions will be done in-person. Our trainer visits your location and conducts the session.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">Can we conduct this session in countries outside
+            India?<span class="sign">&#8964;</span></button>
+          <div class="faq-answer">
+            <div>
+              <p>Yes, we have already trained for companies in Dubai, Saudi Arabia, Maldives and Mauritius.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">Can I get a refund?<span
+              class="sign">&#8964;</span></button>
+          <div class="faq-answer">
+            <div>
+              <p>No. We don't provide refunds. If you are not sure about the workshop, check out the testimonials, read
+                more about the trainer and take an informed decision. In case you are not happy with the outcomes of a
+                particular session, we can redo the session only ONCE.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="faq-foot">Not sure which programme fits your team? <a href="training-needs-survey.html">Take the
+          3-minute training needs survey</a>.</p>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 8: CLOSING CTA ============ -->
   <section class="cta-band">
     <h2 data-reveal>Tell us how many food handlers you have and where they work — we will build the session around your
       kitchen.</h2>
@@ -1674,10 +2029,32 @@
     (function () {
       const toggle = document.getElementById('navToggle');
       const menu = document.getElementById('navMenu');
-      toggle.addEventListener('click', () => menu.classList.toggle('open'));
+
+      /* one source of truth for the open state, so the panel, the
+         hamburger-to-cross animation and the ARIA state always agree */
+      function setNav(open) {
+        menu.classList.toggle('open', open);
+        toggle.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        if (!open) {
+          menu.querySelectorAll('.nav-item.open').forEach(i => i.classList.remove('open'));
+        }
+      }
+
+      toggle.addEventListener('click', () => setNav(!menu.classList.contains('open')));
+
+      /* Escape, or a tap outside the panel, also closes it */
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu.classList.contains('open')) setNav(false);
+      });
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 960 && menu.classList.contains('open') &&
+          !menu.contains(e.target) && !toggle.contains(e.target)) setNav(false);
+      });
       document.querySelectorAll('.nav-item').forEach(item => {
         item.addEventListener('click', (e) => {
-          if (window.innerWidth <= 960 && e.target === item || (e.target.classList.contains('caret'))) {
+          if (window.innerWidth <= 960 && (e.target === item || e.target.classList.contains('caret'))) {
             item.classList.toggle('open');
           }
         });
@@ -1686,8 +2063,7 @@
          in a new tab and so never navigate this page away */
       menu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-          menu.classList.remove('open');
-          menu.querySelectorAll('.nav-item.open').forEach(i => i.classList.remove('open'));
+          setNav(false);
         });
       });
     })();
@@ -1723,6 +2099,29 @@
       }
       window.addEventListener('load', update);
       update();
+    })();
+  </script>
+  <script>
+    /* ---------- FAQ accordion ----------
+       Single-open. Markup is already in the HTML; this only wires behaviour,
+       so the answers stay readable with JS off. */
+    (function () {
+      const list = document.querySelector('.faq-list');
+      if (!list) return;
+      list.querySelectorAll('.faq-q').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.parentElement;
+          const wasOpen = item.classList.contains('open');
+          list.querySelectorAll('.faq-item').forEach(i => {
+            i.classList.remove('open');
+            i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+          });
+          if (!wasOpen) {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
     })();
   </script>
   <script>
