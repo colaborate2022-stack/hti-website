@@ -267,6 +267,22 @@
       height: 2px;
       background: #000;
       display: block;
+      transition: transform .25s ease, opacity .2s ease;
+    }
+
+    /* while the menu is open the hamburger becomes a cross, so there is an
+       obvious way to close it - and it sits in the sticky header, so it stays
+       reachable even when the menu panel is scrolled */
+    .nav-toggle.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
     }
 
     /* =====================================================================
@@ -1267,6 +1283,18 @@
         display: flex;
       }
 
+      /* a tap leaves :hover stuck on touch devices, which used to point the
+         caret up while the panel stayed shut - drive it from the real state */
+      .nav-item:hover .caret {
+        transform: rotate(45deg);
+        margin-top: -3px;
+      }
+
+      .nav-item.open .caret {
+        transform: rotate(-135deg);
+        margin-top: 3px;
+      }
+
       /* touch targets: every dropdown link is at least 44px tall */
       .dropdown a {
         min-height: 44px;
@@ -1413,7 +1441,7 @@
       <a href="index.html" class="nav-logo"><img
           src="images/brand/hti-logo.png"
           alt="HTI Logo" /></a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
       <nav class="nav-menu" id="navMenu">
         <div class="nav-item">Restaurants &amp; QSRs<span class="caret"></span>
           <div class="dropdown">
@@ -1800,7 +1828,29 @@
       const toggle = document.getElementById('navToggle');
       const menu = document.getElementById('navMenu');
       if (toggle && menu) {
-        toggle.addEventListener('click', () => menu.classList.toggle('open'));
+
+        /* one source of truth for the open state, so the panel, the
+           hamburger-to-cross animation and the ARIA state always agree */
+        function setNav(open) {
+          menu.classList.toggle('open', open);
+          toggle.classList.toggle('open', open);
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+          if (!open) {
+            menu.querySelectorAll('.nav-item.open').forEach(i => i.classList.remove('open'));
+          }
+        }
+
+        toggle.addEventListener('click', () => setNav(!menu.classList.contains('open')));
+
+        /* Escape, or a tap outside the panel, also closes it */
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && menu.classList.contains('open')) setNav(false);
+        });
+        document.addEventListener('click', (e) => {
+          if (window.innerWidth <= 960 && menu.classList.contains('open') &&
+            !menu.contains(e.target) && !toggle.contains(e.target)) setNav(false);
+        });
         document.querySelectorAll('.nav-item').forEach(item => {
           item.addEventListener('click', (e) => {
             if (window.innerWidth <= 960 && (e.target === item || e.target.classList.contains('caret'))) {
@@ -1812,8 +1862,7 @@
            in a new tab and so never navigate this page away */
         menu.querySelectorAll('a').forEach(link => {
           link.addEventListener('click', () => {
-            menu.classList.remove('open');
-            menu.querySelectorAll('.nav-item.open').forEach(i => i.classList.remove('open'));
+            setNav(false);
           });
         });
       }
