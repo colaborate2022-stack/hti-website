@@ -2,6 +2,10 @@
 insert-blog.js
 
 .claude/
+
+# Local DB migration backups — rollback data, never commit
+.migrate/
+
 blog-partners.json
 body.json
 layouts.json
