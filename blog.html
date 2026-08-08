@@ -317,19 +317,26 @@
       cursor: pointer;
     }
 
-    /* TOP: cover image, edge to edge */
+    /* TOP: cover image, edge to edge.
+       Our thumbnails are 1200x577 banners with the headline baked into the
+       left half, so the box has to match that ratio - a squarer box makes
+       object-fit:cover eat the sides and slice the words in half. */
     .blog-cover {
       width: 100%;
-      height: 200px;
+      height: auto;
+      aspect-ratio: 1200 / 577;
       object-fit: cover;
+      object-position: center;
+      background: #f2f2f2;
       border-radius: 0;
       display: block;
     }
 
-    /* grey placeholder when a blog has no image */
+    /* grey placeholder when a blog has no image, or the image 404s */
     .blog-cover-ph {
       width: 100%;
-      height: 200px;
+      height: auto;
+      aspect-ratio: 1200 / 577;
       background: #e5e5e5;
       display: block;
     }
@@ -572,6 +579,8 @@
         grid-template-columns: 1fr;
       }
     }
+  
+
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBKJQQRP0N"></script>
@@ -581,6 +590,11 @@
     gtag('js', new Date());
     gtag('config', 'G-SBKJQQRP0N');
   </script>
+  <!-- shared motion layer: progressive enhancement, see assets/motion.css -->
+  <script>document.documentElement.className += ' mo';</script>
+  <link rel="stylesheet" href="assets/motion.css" />
+  <link rel="stylesheet" href="assets/polish.css" />
+  <script src="assets/motion.js" defer></script>
 </head>
 
 <body>
@@ -595,43 +609,54 @@
       <nav class="nav-menu" id="navMenu">
         <div class="nav-item">Restaurants &amp; QSRs<span class="caret"></span>
           <div class="dropdown">
-            <a href="super.html"><b>SUPER</b><span>Essential soft and job skills</span></a>
-            <a href="support.html"><b>SUPPORT</b><span>Skill upgradation pre-opening</span></a>
-            <a href="icedt.html"><b>ICEDT</b><span>Counter executives training</span></a>
-            <a href="icare.html"><b>iCARE</b><span>Teaching techniques</span></a>
-            <a href="vow.html"><b>Vow to Wow</b><span>Customer expectations</span></a>
-            <a href="ramp.html"><b>RAMP</b><span>Restaurant operations &amp; management</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Service Team</div>
+            <a href="super.html"><b>SUPER</b><span>Waiters, stewards, captains, hostess</span></a>
+            <a href="support.html"><b>SUPPORT</b><span>Same roles &mdash; pre-opening restaurant</span></a>
+            <a href="icedt.html"><b>ICEDT</b><span>Counter executives, sales boys, servers</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Guest Experience</div>
+            <a href="icare.html"><b>iCARE</b><span>Customer service execs, supervisors</span></a>
+            <a href="vow.html"><b>Vow to Wow</b><span>Frontline reps, team leaders</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Managers</div>
+            <a href="ramp.html"><b>RAMP</b><span>Restaurant managers &amp; supervisors</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
             <a href="restaurants.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
           </div>
         </div>
         <div class="nav-item">Hotels<span class="caret"></span>
           <div class="dropdown">
-            <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Staff skill upgrade</span></a>
-            <a href="hotcar.html"><b>HOT-CAR</b><span>Housekeeping operations</span></a>
-            <a href="fort.html"><b>FORT</b><span>Front desk operations</span></a>
-            <a href="kmt.html"><b>KMT</b><span>Kitchen management</span></a>
-            <a href="class.html"><b>CLASS</b><span>Grooming &amp; communication skills</span></a>
-            <a href="mdp.html"><b>MDP</b><span>Management development</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Rooms &amp; Front Desk</div>
+            <a href="fort.html"><b>FORT</b><span>Receptionists, FO executives, GRE, bell boys</span></a>
+            <a href="hotcar.html"><b>HOT-CAR</b><span>Housekeeping attendants &amp; supervisors</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Kitchen</div>
+            <a href="kmt.html"><b>KMT</b><span>Chefs, sous chefs, kitchen supervisors</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Whole Property</div>
+            <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Every hotel role &mdash; F&amp;B to security</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Grooming &amp; Management</div>
+            <a href="class.html"><b>CLASS</b><span>Guest-facing &amp; corporate professionals</span></a>
+            <a href="mdp.html"><b>MDP</b><span>Newly promoted &amp; mid-level managers</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
             <a href="hotels.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
           </div>
         </div>
-        <div class="nav-item">Retail<span class="caret"></span>
+        <div class="nav-item">Offices &amp; Retail<span class="caret"></span>
           <div class="dropdown">
-            <a href="post.html"><b>POST</b><span>Pantry operations</span></a>
-            <a href="cup.html"><b>CUP</b><span>Caretaker upgradation</span></a>
-            <a href="top.html"><b>TOP</b><span>Peons training</span></a>
+            <a href="post.html"><b>POST</b><span>Corporate pantry staff &amp; attendants</span></a>
+            <a href="cup.html"><b>CUP</b><span>Caretakers of villas, homestays, guesthouses</span></a>
+            <a href="top.html"><b>TOP</b><span>Peons, office boys, support staff</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
             <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
           </div>
         </div>
         <div class="nav-item">More<span class="caret"></span>
           <div class="dropdown">
-            <a href="https://wooshbiz.com/" target="_blank" rel="noopener">Team Building</a>
-            <a href="leadership-development.html">Leadership Development</a>
-            <a href="professional-etiquette.html">Professional Etiquette</a>
-            <a href="posh-training.html">POSH Training</a>
-            <a href="fssai-training.html">FSSAI Training</a>
-            <a href="dox.html">Develop SOPs &amp; How-To Videos</a>
-            <a href="blog.html">Blogs</a>
+            <a href="leadership-development.html"><b>Leadership Development</b><span>Senior managers &amp; future leaders</span></a>
+            <a href="professional-etiquette.html"><b>Professional Etiquette</b><span>Corporate &amp; client-facing professionals</span></a>
+            <a href="posh-training.html"><b>POSH Training</b><span>All employees, managers &amp; ICC members</span></a>
+            <a href="fssai-training.html"><b>FSSAI Training</b><span>Food handlers &amp; food safety supervisors</span></a>
+            <a href="https://wooshbiz.com/" target="_blank" rel="noopener"><b>Team Building</b><span>Group activities for any team</span></a>
+            <a href="dox.html"><b>Develop SOPs &amp; How-To Videos</b><span>Owners &amp; operations heads</span></a>
+            <a href="blog.html"><b>Blogs</b><span>Hospitality insights &amp; guides</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
           </div>
         </div>
         <a href="contact.html" class="nav-contact">Contact Us</a>
@@ -789,9 +814,11 @@
           }
 
           // ---- thumbnail: thumbnail_url -> cover_image -> grey placeholder ----
+          // a dead image URL swaps itself for the placeholder rather than
+          // leaving a broken-image icon in the middle of the grid
           const imgSrc = b.thumbnail_url || b.cover_image || '';
           const cover = imgSrc
-            ? `<img class="blog-cover" src="${escapeHtml(imgSrc)}" alt="${escapeHtml(b.title || '')}" loading="lazy">`
+            ? `<img class="blog-cover" src="${escapeHtml(imgSrc)}" alt="${escapeHtml(b.title || '')}" loading="lazy" decoding="async" onerror="this.className='blog-cover-ph';this.removeAttribute('src');this.alt='';">`
             : `<div class="blog-cover-ph"></div>`;
 
           const cat = b.category

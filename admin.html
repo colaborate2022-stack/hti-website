@@ -306,12 +306,18 @@
       display: none;
     }
 
+    /* preview the thumbnail in the same 1200x577 frame the blog cards use,
+       so what the editor sees here is what the site renders */
     .cover-preview img {
       width: 100%;
-      max-height: 180px;
+      max-width: 360px;
+      height: auto;
+      aspect-ratio: 1200 / 577;
       object-fit: cover;
+      background: #f2f2f2;
       border-radius: 8px;
       border: 1px solid #eee;
+      display: block;
     }
 
     /* ---- Quill editor (Google-Docs-like white area) ---- */

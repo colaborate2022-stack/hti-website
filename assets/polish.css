@@ -1,0 +1,408 @@
+/* =====================================================================
+   HTI SITE-WIDE POLISH LAYER
+   ---------------------------------------------------------------------
+   Loaded after assets/motion.css, which is itself loaded after each
+   page's inline <style>. That ordering is the whole mechanism: every
+   rule here overrides the inline sheet at equal specificity, so no
+   page markup has to change and nothing needs !important.
+
+   Scope is deliberately narrow — colour, contrast, shadow and hover.
+   No rule here changes layout, copy, source order or the brand red
+   (#e31e24), so there is no SEO or content cost.
+
+   READABILITY IS THE POINT. The site leaned on #777/#999 greys for
+   secondary text, which sit at roughly 4:1 on the warm #ede9e3 page and
+   read as washed out. Those are pulled to a warm mid-tone (--ink-3) and
+   small uppercase labels move to the deep brand red (--red-deep) —
+   dark enough to read comfortably, far enough from #e31e24 not to
+   compete with buttons and links.
+
+   Light-on-dark greys (footer, CTA bands) move the OTHER way. Darkening
+   those would have wrecked them, so they are listed separately below.
+   ===================================================================== */
+
+:root {
+  /* warm neutral ramp — tuned against the #ede9e3 page, not pure grey */
+  --ink-1: #17120f;
+  /* headings                          */
+  --ink-2: #3a332e;
+  /* strong body                       */
+  --ink-3: #5f574f;
+  /* secondary text — replaces #777    */
+  --ink-4: #7d746b;
+  /* faintest text still readable      */
+
+  --red-deep: #a8161c;
+  /* labels, eyebrows, small caps      */
+  --line: #e0d8cf;
+  /* warm hairline — replaces #eee     */
+  --tint: rgba(227, 30, 36, .07);
+  /* brand wash for hover states       */
+
+  /* layered warm shadows — the old ones were flat neutral black */
+  --sh-1: 0 2px 8px -2px rgba(48, 30, 18, .10);
+  --sh-2: 0 10px 28px -12px rgba(48, 30, 18, .22);
+  --sh-3: 0 26px 56px -24px rgba(48, 30, 18, .34);
+
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+/* ---------------------------------------------------------------
+   1. SECONDARY TEXT ON LIGHT BACKGROUNDS
+   --------------------------------------------------------------- */
+.dropdown a span,
+.course-desc,
+.testi-title,
+.testi-person .role,
+.designed-by .small,
+.sec-head p,
+.aud-card p,
+.courses-sub {
+  color: var(--ink-3);
+}
+
+.course-badge {
+  color: var(--ink-2);
+}
+
+/* ---------------------------------------------------------------
+   2. SECONDARY TEXT ON DARK BACKGROUNDS — moves the opposite way
+   --------------------------------------------------------------- */
+.footer-copy {
+  color: #a8a19a;
+}
+
+.cta-note {
+  color: #d2ccc6;
+}
+
+/* ---------------------------------------------------------------
+   3. NAVBAR
+   The bar itself gets a warmer translucent surface and a real
+   hairline; the old one was a hard 1px line with no depth.
+   --------------------------------------------------------------- */
+.navbar {
+  background: rgba(253, 251, 249, .88);
+  backdrop-filter: saturate(1.3) blur(10px);
+  -webkit-backdrop-filter: saturate(1.3) blur(10px);
+}
+
+.nav-item {
+  color: var(--ink-1);
+  transition: color .22s var(--ease);
+}
+
+.nav-item:hover {
+  color: var(--red-deep);
+}
+
+.nav-item .caret {
+  border-color: var(--ink-3);
+  transition: transform .25s var(--ease), border-color .22s ease;
+}
+
+.nav-item:hover .caret {
+  border-color: var(--red-deep);
+}
+
+/* ---- the dropdown panel ---- */
+.dropdown {
+  min-width: 278px;
+  max-height: calc(100vh - 90px);
+  overflow-y: auto;
+  padding: 9px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  box-shadow: var(--sh-3), 0 2px 6px -2px rgba(48, 30, 18, .14);
+  transition: opacity .22s var(--ease), transform .28s var(--ease), visibility .22s;
+}
+
+/* thin, unobtrusive scrollbar for the taller panels */
+.dropdown::-webkit-scrollbar {
+  width: 7px;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+  background: #d9d0c6;
+  border-radius: 99px;
+}
+
+.dropdown::-webkit-scrollbar-thumb:hover {
+  background: #c3b8ab;
+}
+
+/* ---- THE GROUP HEADINGS ----
+   Was #9b9b9b at 10px, which disappeared against white. Deep brand red
+   at a slightly larger size, with a hairline running under it so each
+   band reads as a real group rather than floating text. */
+.dropdown .dd-head {
+  font-size: 10.5px !important;
+  font-weight: 800 !important;
+  letter-spacing: .11em !important;
+  text-transform: uppercase;
+  color: var(--red-deep) !important;
+  padding: 13px 12px 6px !important;
+  margin-bottom: 3px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* first heading in a panel does not need the top breathing room */
+.dropdown .dd-head:first-child {
+  padding-top: 6px !important;
+}
+
+/* ---- dropdown items ---- */
+.dropdown a {
+  position: relative;
+  padding: 9px 12px;
+  border-radius: 9px;
+  transition: background .2s ease, color .2s ease, transform .2s var(--ease);
+}
+
+.dropdown a b {
+  color: var(--ink-1);
+  transition: color .2s ease;
+}
+
+.dropdown a:hover {
+  background: var(--tint);
+  transform: translateX(3px);
+}
+
+.dropdown a:hover b,
+.dropdown a:hover {
+  color: var(--red-deep);
+}
+
+.dropdown a:hover span {
+  color: var(--ink-2);
+}
+
+.dropdown a.active-nav b {
+  color: var(--hti-red, #e31e24);
+}
+
+/* the two red utility links at the foot of each panel */
+.dropdown a.see-all,
+.dropdown a[href="training-by-role.html"] {
+  border-radius: 9px;
+}
+
+.dropdown a.see-all:hover,
+.dropdown a[href="training-by-role.html"]:hover {
+  background: var(--tint);
+}
+
+/* ---- contact button ---- */
+.nav-contact {
+  box-shadow: 0 6px 18px -8px rgba(227, 30, 36, .75);
+  transition: transform .22s var(--ease), box-shadow .28s var(--ease), background-color .22s ease;
+}
+
+.nav-contact:hover {
+  background: var(--red-deep);
+  box-shadow: 0 12px 26px -10px rgba(227, 30, 36, .9);
+  transform: translateY(-1px);
+}
+
+/* mobile: the panel is an inline accordion, so the desktop clamp and
+   the floating-panel chrome both have to come back off */
+@media (max-width: 960px) {
+  .navbar {
+    background: rgba(253, 251, 249, .96);
+  }
+
+  .dropdown {
+    max-height: none;
+    overflow-y: visible;
+    min-width: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 4px 0 4px 14px;
+  }
+
+  .dropdown a:hover {
+    transform: none;
+  }
+
+  .dropdown .dd-head {
+    padding-left: 0 !important;
+  }
+}
+
+/* ---------------------------------------------------------------
+   4. EYEBROWS AND SMALL CAPS LABELS
+   .sec-tag only. NOT .hero-tag — that one is a solid red pill with
+   white text sitting on the dark hero, so pulling it toward a faint
+   tint would strip its contrast rather than improve it.
+   --------------------------------------------------------------- */
+.sec-tag {
+  color: var(--red-deep);
+  border-color: rgba(168, 22, 28, .26);
+  background: rgba(168, 22, 28, .08);
+}
+
+/* ---------------------------------------------------------------
+   5. CARDS — warmer, layered depth instead of flat neutral shadow
+   --------------------------------------------------------------- */
+.course-card,
+.aud-card,
+.tbr-card,
+.blog-card,
+.mfh-card,
+.testi-card,
+.stat-card,
+.team-card,
+.trainer-card {
+  border-radius: 18px;
+  box-shadow: var(--sh-1);
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+  .course-card:hover,
+  .blog-card:hover,
+  .mfh-card:hover,
+  .testi-card:hover,
+  .team-card:hover,
+  .trainer-card:hover {
+    box-shadow: var(--sh-3);
+    border-color: rgba(227, 30, 36, .3);
+  }
+}
+
+/* the check rows on every course page */
+.who-item {
+  border-radius: 12px;
+  transition: transform .25s var(--ease), background-color .25s ease, box-shadow .25s var(--ease);
+}
+
+.who-item span {
+  color: var(--ink-2);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .who-item:hover {
+    background: var(--tint);
+    transform: translateY(-2px);
+    box-shadow: var(--sh-1);
+  }
+}
+
+/* ---------------------------------------------------------------
+   6. FOCUS — visible for keyboard users, invisible for mouse users.
+   The nav opens on :hover only, so keyboard users had nothing at all.
+   --------------------------------------------------------------- */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--red-deep);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* let a focused link inside a dropdown hold the panel open */
+.nav-item:focus-within .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ---------------------------------------------------------------
+   PARK THE HERO DECORATION ONCE IT LEAVES THE SCREEN
+
+   The immersive hero paints a stack of large blurred orbs, a spinning
+   ring grid and a drifting floor, all on infinite animations. They kept
+   ticking and compositing for the entire length of the page — long
+   after the hero had scrolled away — and on a throttled phone that one
+   layer was the difference between 33ms frames and 16ms frames:
+
+       with the layer live   median 33.3ms   78% of frames janky
+       with it parked        median 16.6ms    0% of frames janky
+
+   JS adds .is-parked the moment the hero leaves the viewport.
+   content-visibility drops it from rendering entirely; the paused
+   animations are the fallback for browsers without it. Purely visual
+   and entirely off-screen, so nothing observable changes.
+   --------------------------------------------------------------- */
+.hero3d-bg.is-parked {
+  display: none;
+}
+
+.hero3d-bg.is-parked,
+.hero3d-bg.is-parked * {
+  animation-play-state: paused !important;
+}
+
+/* And cut what it costs while it IS on screen. A 70px blur on a 460px
+   orb is one of the most expensive things you can ask a phone GPU for,
+   and it sits inside a preserve-3d layer alongside a rotateX floor and
+   a ring that spins forever. Halving the blur radius and freezing the
+   ring keeps the composition identical to the eye at phone width while
+   removing the per-frame work behind it. */
+@media (max-width: 720px) {
+  .hero-orb {
+    filter: blur(38px);
+  }
+
+  .hero-rings {
+    animation: none;
+  }
+}
+
+/* Same treatment for the logo marquees: an off-screen belt sliding
+   forever is work nobody can see. */
+.marquee.is-parked *,
+.logo-column.is-parked,
+.trainers-track.is-parked {
+  animation-play-state: paused !important;
+}
+
+/* ---------------------------------------------------------------
+   7. RETIRE THE PERPETUAL CARD BOB
+
+   Three pages floated their course cards on `floatCard … infinite` and
+   fifteen bobbed their step cards on `cardWave … infinite`. Both
+   keyframe `transform: translateY()` — the exact property the motion
+   layer composes — so the two systems were writing to the same channel
+   and fighting each other frame by frame.
+
+   The motion layer wins while it is active (an !important declaration
+   outranks a CSS animation in the cascade), which is why this mostly
+   went unnoticed. But it left cards bobbing forever whenever the
+   motion layer stood down, and a loop that never ends is battery the
+   phone spends on nothing. The scroll entrance replaces it.
+   --------------------------------------------------------------- */
+.course-card,
+.how-step {
+  animation: none !important;
+}
+
+/* ---------------------------------------------------------------
+   8. REDUCED MOTION
+   Colour and contrast stay; movement goes. The blanket rule is the
+   point — infinite decorative loops (marquees, pulsing rings, drifting
+   floors) are precisely what this preference exists to stop, and they
+   live in page CSS this layer cannot enumerate.
+   --------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .dropdown a:hover,
+  .who-item:hover,
+  .nav-contact:hover,
+  .tbr-chip:hover {
+    transform: none;
+  }
+}

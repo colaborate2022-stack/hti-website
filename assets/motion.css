@@ -1,0 +1,332 @@
+/* =====================================================================
+   HTI SITE-WIDE MOTION LAYER
+   ---------------------------------------------------------------------
+   Progressive enhancement only. The hiding rules below are gated on
+   html.mo, a class set by a one-line inline script in <head>. With JS
+   disabled the class never lands, so every page renders fully visible —
+   which is exactly what crawlers and no-JS users get. Nothing here
+   changes layout, copy or source order, so there is no SEO cost.
+
+   DESIGN RULE: SCROLL FIRST, POINTER SECOND.
+   A phone has no cursor, so anything that only exists on :hover simply
+   does not exist for most visitors. Every motion that matters here is
+   therefore driven by scroll position and behaves identically on a
+   phone and a desktop. Pointer effects are a small accent layered on
+   top for people who happen to have a mouse — never the main event.
+
+   THE CARD MOTION IS A RISE THAT SETTLES, NOT A WOBBLE.
+   Cards enter lifted, rotated back in 3D and slightly small, then
+   converge to perfectly flat by the time they reach reading height —
+   and stay there. Nothing rotates while you are reading it, which is
+   what keeps text crisp: a permanent rotateX on a text block forces
+   subpixel-blurred glyph rendering for as long as it is applied.
+
+   Every animated element shares ONE transform expression composed from
+   custom properties, so the scroll entrance and the pointer accent can
+   stack on the same element without overwriting each other:
+
+     --mo-sx/sy   scroll offset       --mo-srx/sry  scroll rotation
+     --mo-ss      scroll scale        --mo-rx/--mo-ry   pointer tilt
+     --mo-hy/hz   hover lift          --mo-hs       hover scale
+
+   IMPORTANT: the selector lists below are duplicated as TEXT and CARDS
+   in assets/motion.js. Edit them together.
+   ===================================================================== */
+
+:root {
+  --mo-dur: .75s;
+  --mo-ease: cubic-bezier(.16, .84, .34, 1);
+  --mo-persp: 1100px;
+  --mo-accent: 227, 33, 41;
+  /* how long the transform takes to catch up with the scroll value.
+     Short enough to feel attached to the finger, long enough to damp
+     the per-frame steps into a smooth glide. */
+  --mo-track: .34s;
+}
+
+/* ---------------------------------------------------------------
+   TEXT — deliberately 2D.
+   Headings and paragraphs rise and fade, and that is all. They get no
+   rotation and no scale, because both soften glyph edges and text is
+   the one thing on the page nobody should have to read through a
+   filter.
+   --------------------------------------------------------------- */
+.mo:not(.mo-lite) :is(section>h1,
+  section>h2,
+  section>h3,
+  section>h4,
+  section>p,
+  section>.wrap>h1,
+  section>.wrap>h2,
+  section>.wrap>h3,
+  section>.wrap>h4,
+  section>.wrap>p,
+  .section-head,
+  .sec-head,
+  .courses-head,
+  .stats-head,
+  .testi-head,
+  .track-head,
+  .leaders-head,
+  .mfh-header,
+  .center-btn,
+  .see-all,
+  section>.btn-red,
+  section>.cta-btn,
+  section>.hero-cta,
+  .article-body>p,
+  .article-body>h2,
+  .article-body>h3,
+  .article-body>img,
+  .article-body>figure,
+  .article>p,
+  .article>h2,
+  .article>h3,
+  .mag-intro,
+  .mag-summary,
+  .hero-figure,
+  .stats-band-inner) {
+  opacity: var(--mo-o, 0);
+  transform: translate3d(0, var(--mo-sy, 30px), 0);
+  transition:
+    opacity var(--mo-dur) var(--mo-ease),
+    transform var(--mo-track) var(--mo-ease);
+}
+
+/* ---------------------------------------------------------------
+   CARDS — the 3D one.
+   Declared against .mo-card with !important because five pages ship
+   their own reveal system whose rules sit at higher specificity and
+   would otherwise pin the card flat and cancel the entrance entirely.
+   --------------------------------------------------------------- */
+.mo .mo-card {
+  opacity: var(--mo-o, 0) !important;
+  transform:
+    perspective(var(--mo-persp))
+    translate3d(var(--mo-sx, 0px),
+      calc(var(--mo-sy, 46px) + var(--mo-hy, 0px)),
+      var(--mo-hz, 0px))
+    rotateX(calc(var(--mo-srx, 7deg) + var(--mo-rx, 0deg)))
+    rotateY(calc(var(--mo-sry, 0deg) + var(--mo-ry, 0deg)))
+    scale(calc(var(--mo-ss, .955) * var(--mo-hs, 1))) !important;
+  transition:
+    opacity var(--mo-dur) var(--mo-ease),
+    transform var(--mo-track) var(--mo-ease),
+    box-shadow .45s var(--mo-ease) !important;
+  transform-origin: 50% 85%;
+  backface-visibility: hidden;
+}
+
+/* Landed. JS drives --mo-sy/--mo-srx/--mo-ss to their resting values as
+   the card rises, so this rule only has to turn the card on. */
+.mo .mo-in {
+  --mo-o: 1;
+}
+
+/* Once settled, drop the 3D context entirely so glyphs snap back to
+   full sharpness — a card you are reading has no perspective applied
+   at all. JS adds this the moment the entrance completes.
+
+   Note this deliberately omits rotateX/rotateY: the pointer tilt is
+   re-attached below, under a real-cursor guard, so the perspective
+   only ever comes back while someone is actively hovering. */
+.mo .mo-card.mo-settled {
+  transform: translate3d(var(--mo-sx, 0px), var(--mo-hy, 0px), 0)
+    scale(var(--mo-hs, 1)) !important;
+}
+
+/* ---------------------------------------------------------------
+   DEPTH GRADING
+   Only cards that actually paint a background get a shadow — JS adds
+   .mo-solid after checking the computed background, so flat list rows
+   are not given a floating-panel shadow they never had.
+   --------------------------------------------------------------- */
+.mo .mo-card.mo-solid {
+  box-shadow:
+    0 18px 38px -26px rgba(48, 30, 18, .42),
+    0 3px 10px -5px rgba(48, 30, 18, .14);
+}
+
+/* ---------------------------------------------------------------
+   EXCLUSIONS
+   Marquees, carousels and the navbar drive transforms of their own —
+   the sliding track, the dropdown caret, the hamburger that folds into
+   a cross. JS already refuses to animate anything inside them, so all
+   the CSS has to do is make sure nothing in there is left hidden.
+
+   It does that by handing those subtrees identity values for the
+   motion variables rather than by forcing `transform: none`. Custom
+   properties inherit, so every descendant — including any added later
+   — resolves to a no-op, while elements this layer never styled keep
+   their own transforms completely untouched.
+   --------------------------------------------------------------- */
+.mo :is(.navbar,
+  .marquee,
+  .marquee-track,
+  .logo-column,
+  .trainers-carousel,
+  .trainers-track,
+  .tl-spine-track,
+  .shot-strip,
+  .scroll-progress,
+  [data-motion="off"]),
+.mo :is(.navbar,
+  .marquee,
+  .marquee-track,
+  .logo-column,
+  .trainers-carousel,
+  .trainers-track,
+  .tl-spine-track,
+  .shot-strip,
+  .scroll-progress,
+  [data-motion="off"]) * {
+  --mo-o: 1;
+  --mo-sx: 0px;
+  --mo-sy: 0px;
+  --mo-srx: 0deg;
+  --mo-sry: 0deg;
+  --mo-ss: 1;
+  --mo-hy: 0px;
+  --mo-hz: 0px;
+  --mo-hs: 1;
+  --mo-rx: 0deg;
+  --mo-ry: 0deg;
+}
+
+/* ---------------------------------------------------------------
+   TOUCH FEEDBACK — the replacement for :hover.
+   On a phone the only gesture available is the tap, so every card and
+   button answers one. :active fires on touch in every mobile browser,
+   which is what makes this the mobile counterpart of the desktop
+   hover lift rather than a decoration nobody sees.
+   --------------------------------------------------------------- */
+.mo .mo-card:active {
+  --mo-hs: .975;
+  transition-duration: .09s !important;
+}
+
+:is(.btn-red, .cta-btn, .hero-cta, a.center-btn, .course-card, .blog-card, .tbr-chip, .aud-card):active {
+  transform: scale(.97);
+}
+
+/* iOS keeps the last-tapped element in :hover until you tap elsewhere,
+   so every hover payload is quarantined behind a real pointer. */
+@media (hover: hover) and (pointer: fine) {
+
+  /* A restrained lift. The old version scaled to 1.04 and pushed 70px
+     toward the viewer, which on a dense grid read as cards jumping out
+     of the page. This is a nudge, not a leap. */
+  .mo .mo-card.mo-in:hover {
+    --mo-hy: -6px;
+    --mo-hs: 1.015;
+    z-index: 3;
+  }
+
+  .mo .mo-card.mo-solid.mo-in:hover {
+    box-shadow:
+      0 30px 60px -30px rgba(48, 30, 18, .5),
+      0 0 0 1.5px rgba(var(--mo-accent), .28);
+  }
+
+  /* Re-attach the perspective and the pointer tilt for the duration of
+     the hover only. Without this the settled card is a flat plane and
+     --mo-rx/--mo-ry, which JS is busy publishing, would render nothing. */
+  .mo .mo-card.mo-settled:hover {
+    transform:
+      perspective(var(--mo-persp))
+      translate3d(var(--mo-sx, 0px), var(--mo-hy, 0px), 0)
+      rotateX(var(--mo-rx, 0deg))
+      rotateY(var(--mo-ry, 0deg))
+      scale(var(--mo-hs, 1)) !important;
+  }
+
+  /* Buttons lift and take a sheen. */
+  .mo :is(.btn-red, .cta-btn, .hero-cta, a.center-btn) {
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s var(--mo-ease), box-shadow .3s var(--mo-ease);
+  }
+
+  .mo :is(.btn-red, .cta-btn, .hero-cta, a.center-btn)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform .65s var(--mo-ease);
+    pointer-events: none;
+  }
+
+  .mo :is(.btn-red, .cta-btn, .hero-cta, a.center-btn):hover::after {
+    transform: translateX(120%);
+  }
+
+  .mo :is(.btn-red, .cta-btn, .hero-cta, a.center-btn):hover {
+    transform: translate3d(0, -3px, 0);
+    box-shadow: 0 18px 32px -14px rgba(var(--mo-accent), .7);
+  }
+
+  .mo .mo-card :is(img, .mfh-card-img, .blog-cover) {
+    transition: transform .55s var(--mo-ease);
+  }
+
+  .mo .mo-card:hover :is(img, .mfh-card-img, .blog-cover) {
+    transform: scale(1.05);
+  }
+}
+
+/* ---------------------------------------------------------------
+   SCROLL-DRIVEN IMAGE PARALLAX — every device.
+   JS publishes --mo-par on cards that contain a photo. The image
+   drifts against its own frame as the card crosses the viewport, so
+   the depth is visible on a phone with no gesture at all.
+   --------------------------------------------------------------- */
+.mo .mo-parallax {
+  overflow: hidden;
+}
+
+.mo .mo-parallax>img {
+  transform: translate3d(0, var(--mo-par, 0px), 0) scale(1.06);
+  transition: transform var(--mo-track) linear;
+  will-change: transform;
+}
+
+/* ---------------------------------------------------------------
+   NAVBAR DEPTH ON SCROLL — every device
+   --------------------------------------------------------------- */
+.mo .navbar {
+  transition: box-shadow .3s ease, backdrop-filter .3s ease, background-color .3s ease;
+}
+
+.mo.mo-scrolled .navbar {
+  box-shadow: 0 14px 34px -18px rgba(48, 30, 18, .42);
+}
+
+/* ---------------------------------------------------------------
+   REDUCED MOTION
+   motion.js drops the .mo class outright when this preference is set,
+   which disables everything above. This block covers the gap before
+   the deferred script runs: without it a reduced-motion visitor would
+   still get a flash of hidden content while the stylesheet is live and
+   the script is not.
+   --------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+  .mo,
+  .mo * {
+    --mo-o: 1;
+    --mo-sx: 0px;
+    --mo-sy: 0px;
+    --mo-srx: 0deg;
+    --mo-sry: 0deg;
+    --mo-ss: 1;
+    --mo-hy: 0px;
+    --mo-hz: 0px;
+    --mo-hs: 1;
+    --mo-rx: 0deg;
+    --mo-ry: 0deg;
+    --mo-par: 0px;
+    --mo-dur: .001ms;
+    --mo-track: .001ms;
+  }
+}
