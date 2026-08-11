@@ -487,3 +487,20 @@ summary:focus-visible,
     transform: none;
   }
 }
+
+/* ---------------------------------------------------------------
+   IMAGE ASPECT RATIO GUARD
+   ---------------------------------------------------------------
+   Every <img> now carries real width/height attributes so the browser
+   can reserve space before the file arrives (that is what stops the
+   page jumping as it loads - Cumulative Layout Shift).
+
+   The catch: where page CSS sets a width but no height, the height
+   ATTRIBUTE would win and stretch the image. :where() has zero
+   specificity, so this rule only applies when nothing else has set a
+   height - any existing rule (.lead-grid img{height:100%} and the
+   like) still overrides it exactly as before.
+   --------------------------------------------------------------- */
+:where(img[width][height]) {
+  height: auto;
+}
