@@ -4,19 +4,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dox by HTI | SOPs, Training Videos &amp; Checklists</title>
-  <meta name="description" content="Dox by HTI documents your Standard Operating Procedures, builds training and how-to videos, and sets up daily checklists so your team runs consistently without constant follow-ups." />
+  <title>SOPs, How-To Videos &amp; Checklists | Dox by HTI</title>
+  <meta name="description" content="Dox by HTI documents your policies and processes, builds training and how-to videos, and sets up daily checklists — so any teammate can replicate the work your best people do." />
   <link rel="canonical" href="https://www.hti-india.com/dox.html" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Dox by HTI | SOPs, Training Videos &amp; Checklists" />
-  <meta property="og:description" content="Dox by HTI documents your Standard Operating Procedures, builds training and how-to videos, and sets up daily checklists so your team runs consistently without constant follow-ups." />
+  <meta property="og:title" content="SOPs, How-To Videos &amp; Checklists | Dox by HTI" />
+  <meta property="og:description" content="Dox by HTI documents your policies and processes, builds training and how-to videos, and sets up daily checklists — so any teammate can replicate the work your best people do." />
   <meta property="og:url" content="https://www.hti-india.com/dox.html" />
   <meta property="og:site_name" content="HTI India" />
   <meta property="og:image" content="https://www.hti-india.com/images/dox/dox-logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Dox by HTI | SOPs, Training Videos &amp; Checklists" />
-  <meta name="twitter:description" content="Dox by HTI documents your Standard Operating Procedures, builds training and how-to videos, and sets up daily checklists so your team runs consistently without constant follow-ups." />
+  <meta name="twitter:title" content="SOPs, How-To Videos &amp; Checklists | Dox by HTI" />
+  <meta name="twitter:description" content="Dox by HTI documents your policies and processes, builds training and how-to videos, and sets up daily checklists." />
   <meta name="twitter:image" content="https://www.hti-india.com/images/dox/dox-logo.png" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Dox by HTI","serviceType":"Standard Operating Procedure documentation, training video production and operational checklists","description":"Dox by HTI advises and helps curate Job Descriptions, policies and Standard Operating Procedures, produces training and how-to videos, and sets up daily, weekly, monthly and yearly checklists for teams.","url":"https://www.hti-india.com/dox.html","image":"https://www.hti-india.com/images/dox/dox-logo.png","provider":{"@type":"Organization","name":"HTI India","url":"https://www.hti-india.com","logo":"https://www.hti-india.com/images/brand/hti-logo.png"},"areaServed":"IN","hasOfferCatalog":{"@type":"OfferCatalog","name":"What Dox builds","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Document policies and processes"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Create training and how-to videos"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Manage your team with checklists"}}]}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.hti-india.com/"},{"@type":"ListItem","position":2,"name":"Our Brands","item":"https://www.hti-india.com/brands.html"},{"@type":"ListItem","position":3,"name":"Dox by HTI","item":"https://www.hti-india.com/dox.html"}]}</script>
   <link rel="icon" href="images/brand/hti-favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,6 +28,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+  <!-- marks that JS is available; reveal animations only engage when it is, so content is
+       always present for crawlers and no-JS users -->
+  <script>document.documentElement.className += ' js';</script>
   <style>
     :root {
       --hti-bg: #ede9e3;
@@ -33,6 +38,14 @@
       --hti-red: #e31e24;
       --hti-red2: #e31e24;
       --hti-text: #111;
+
+      --red: #e31e24;
+      --red-deep: #A8161C;
+      --ink: #0A0A0B;
+
+      /* motion */
+      --ease-out: cubic-bezier(.22, .61, .36, 1);
+      --dur: .75s;
     }
 
     * {
@@ -262,260 +275,923 @@
       transform: translateY(-7px) rotate(-45deg);
     }
 
-    /* ============ DOX HERO ============ */
-    .dox-hero {
-      padding: 70px 24px 60px;
-      text-align: center;
+    /* =====================================================================
+       REVEAL SYSTEM — progressive enhancement only. Without JS the .js class
+       is never added, so every [data-reveal] element renders fully visible,
+       which is what crawlers see.
+       ===================================================================== */
+    .js [data-reveal] {
+      opacity: 0;
+      transform: translate3d(0, var(--reveal-y, 34px), 0);
+      transition: opacity var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+      transition-delay: var(--rd, 0ms);
     }
 
-    .dox-logo {
-      width: 190px;
-      margin: 0 auto 28px;
+    .js [data-reveal].from-top {
+      --reveal-y: -34px;
     }
 
-    .dox-hero h1 {
-      font-size: clamp(1.9rem, 4.6vw, 2.9rem);
+    .js [data-reveal].is-in {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* elements whose resting transform is not flat need it restored by hand,
+       because .is-in would otherwise flatten them */
+    .js .hero-kicker[data-reveal].is-in {
+      transform: translateZ(40px);
+    }
+
+    /* --- staggered children ---
+       These carry their own hover transforms, so they are animated from the
+       parent's .is-in rather than each getting [data-reveal] — that keeps the
+       hover rule winning on specificity instead of being flattened. */
+    .js .hero-meta .hero-card,
+    .js .aud-grid .aud-card,
+    .js .cover-list li,
+    .js .shot-strip .shot {
+      opacity: 0;
+      transform: translate3d(0, 18px, 0);
+      transition: opacity .55s var(--ease-out), transform .55s var(--ease-out), background .45s ease, box-shadow .4s var(--ease-out), border-color .35s ease;
+    }
+
+    .js .hero-meta.is-in .hero-card,
+    .js .aud-grid.is-in .aud-card,
+    .js .cover-list.is-in li,
+    .js .shot-strip.is-in .shot {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .js .hero-meta.is-in .hero-card:hover,
+    .js .aud-grid.is-in .aud-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .js .cover-list.is-in li:hover {
+      transform: translate3d(6px, -2px, 0);
+    }
+
+    .js .hero-meta.is-in .hero-card:nth-child(2),
+    .js .aud-grid.is-in .aud-card:nth-child(2),
+    .js .cover-list.is-in li:nth-child(2),
+    .js .shot-strip.is-in .shot:nth-child(2) {
+      transition-delay: 90ms;
+    }
+
+    .js .hero-meta.is-in .hero-card:nth-child(3),
+    .js .aud-grid.is-in .aud-card:nth-child(3),
+    .js .cover-list.is-in li:nth-child(3) {
+      transition-delay: 180ms;
+    }
+
+    .js .aud-grid.is-in .aud-card:nth-child(4),
+    .js .cover-list.is-in li:nth-child(4) {
+      transition-delay: 270ms;
+    }
+
+    .js .cover-list.is-in li:nth-child(5) {
+      transition-delay: 360ms;
+    }
+
+    .js .cover-list.is-in li:nth-child(6) {
+      transition-delay: 450ms;
+    }
+
+    /* while a tilt is scroll-driven (touch), drop the easing so it tracks
+       the scroll position 1:1 instead of lagging behind it */
+    .tilt-scroll {
+      transition: none !important;
+    }
+
+    /* ============ HERO — layered 3D stage ============ */
+    .hero3d {
+      position: relative;
+      background: var(--ink);
+      color: #fff;
+      overflow: hidden;
+      isolation: isolate;
+      padding: 72px max(24px, calc((100% - 1160px) / 2)) 96px;
+      perspective: 1400px;
+      perspective-origin: 50% 38%;
+    }
+
+    .hero3d-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      transform-style: preserve-3d;
+    }
+
+    /* receding perspective floor — the main depth cue */
+    .hero-floor {
+      position: absolute;
+      left: 50%;
+      bottom: -26%;
+      width: 240%;
+      height: 78%;
+      transform: translateX(-50%) rotateX(74deg) translateY(var(--pFloor, 0px));
+      transform-origin: 50% 100%;
+      background-image:
+        linear-gradient(rgba(227, 33, 41, .30) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .07) 1px, transparent 1px);
+      background-size: 70px 70px, 70px 70px;
+      -webkit-mask-image: radial-gradient(ellipse 65% 90% at 50% 0%, #000 0%, transparent 72%);
+      mask-image: radial-gradient(ellipse 65% 90% at 50% 0%, #000 0%, transparent 72%);
+      animation: floorDrift 14s linear infinite;
+      opacity: .9;
+    }
+
+    @keyframes floorDrift {
+      to {
+        background-position: 0 70px, 0 0;
+      }
+    }
+
+    /* soft coloured glows at different depths */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: .5;
+    }
+
+    .hero-orb.a {
+      width: 460px;
+      height: 460px;
+      top: -140px;
+      right: -80px;
+      background: radial-gradient(circle, rgba(227, 33, 41, .85), transparent 68%);
+      transform: translateY(var(--pOrbA, 0px));
+    }
+
+    .hero-orb.b {
+      width: 380px;
+      height: 380px;
+      bottom: -120px;
+      left: -110px;
+      background: radial-gradient(circle, rgba(120, 60, 200, .40), transparent 68%);
+      transform: translateY(var(--pOrbB, 0px));
+    }
+
+    /* slow-rotating wireframe rings — abstract, not techy */
+    .hero-rings {
+      position: absolute;
+      top: 12%;
+      right: 6%;
+      width: 300px;
+      height: 300px;
+      transform-style: preserve-3d;
+      animation: ringSpin 34s linear infinite;
+      opacity: .45;
+    }
+
+    .hero-rings i {
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(255, 255, 255, .30);
+      border-radius: 50%;
+    }
+
+    .hero-rings i:nth-child(1) {
+      transform: rotateX(74deg);
+    }
+
+    .hero-rings i:nth-child(2) {
+      transform: rotateX(74deg) rotateY(60deg);
+      border-color: rgba(227, 33, 41, .55);
+    }
+
+    .hero-rings i:nth-child(3) {
+      transform: rotateX(74deg) rotateY(120deg);
+    }
+
+    .hero-rings i:nth-child(4) {
+      transform: rotateY(80deg);
+      border-color: rgba(255, 255, 255, .16);
+    }
+
+    @keyframes ringSpin {
+      to {
+        transform: rotateY(360deg) rotateZ(12deg);
+      }
+    }
+
+    /* --- hero content --- */
+    .hero3d-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 56px;
+      align-items: center;
+      transform-style: preserve-3d;
+    }
+
+    .hero-tag {
+      background: linear-gradient(135deg, var(--red), #ff4a51);
+      color: #fff;
+      font-size: 10.5px;
       font-weight: 800;
-      color: #111;
-      max-width: 900px;
-      margin: 0 auto 26px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      padding: 7px 15px;
+      border-radius: 30px;
+      display: inline-block;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 26px -8px rgba(227, 33, 41, .85);
+    }
+
+    .hero3d h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(32px, 4.6vw, 56px);
+      font-weight: 800;
+      line-height: 1.14;
+      letter-spacing: -.8px;
+      color: #fff;
+      margin-bottom: 20px;
+      text-wrap: balance;
+    }
+
+    .hero3d h1 em {
+      font-style: normal;
+      background: linear-gradient(120deg, #ff5a60, var(--red) 45%, #ff8a8f);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: var(--red);
+    }
+
+    .hero-sub {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(16px, 1.8vw, 19px);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.5;
+      margin-bottom: 18px;
+      max-width: 52ch;
+    }
+
+    .hero-lede {
+      font-size: 16px;
+      line-height: 1.78;
+      color: rgba(255, 255, 255, .78);
+      margin-bottom: 14px;
+      max-width: 56ch;
+    }
+
+    /* the pull-line: a small 3D plate that lifts off the page */
+    .hero-kicker {
+      position: relative;
+      display: inline-block;
+      margin: 18px 0 30px;
+      padding: 16px 26px;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 700;
+      color: #fff;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-left: 3px solid var(--red);
+      border-radius: 4px 12px 12px 4px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 22px 44px -22px rgba(0, 0, 0, .9);
+      transform: translateZ(40px);
     }
 
     .hero-cta {
-      display: inline-block;
-      background: #e31e24;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--red), #ff4a51);
       color: #fff;
-      font-weight: 700;
-      border-radius: 8px;
-      padding: 0.9rem 2rem;
-      transition: all 0.2s ease;
+      font-weight: 800;
+      font-size: 15.5px;
+      border-radius: 10px;
+      padding: 15px 30px;
+      margin-bottom: 34px;
+      box-shadow: 0 20px 44px -16px rgba(227, 33, 41, .95);
+      transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out);
+    }
+
+    .hero-cta .arr {
+      transition: transform .3s var(--ease-out);
     }
 
     .hero-cta:hover {
-      background: #c40f10;
+      transform: translateY(-3px);
+      box-shadow: 0 26px 54px -14px rgba(227, 33, 41, 1);
     }
 
-    /* ============ SECTION SHELL ============ */
+    .hero-cta:hover .arr {
+      transform: translateX(5px);
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 14px;
+      padding: 12px 18px;
+      min-width: 118px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform .35s var(--ease-out), border-color .35s ease;
+    }
+
+    .hero-card:hover {
+      border-color: rgba(227, 33, 41, .55);
+    }
+
+    .hero-card .hc-value {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--red);
+      display: block;
+      font-family: 'Gilroy-Bold', 'Gilroy', 'Poppins', sans-serif;
+      line-height: 1;
+    }
+
+    .hero-card .hc-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .55);
+      display: block;
+      margin-top: 7px;
+    }
+
+    /* --- hero cover image, floating in 3D --- */
+    .hero-visual {
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .hero-visual-inner {
+      position: relative;
+      transform-style: preserve-3d;
+      transform:
+        rotateY(var(--ry, -13deg))
+        rotateX(var(--rx, 6deg))
+        translateY(var(--pImg, 0px));
+      transition: transform .9s var(--ease-out);
+      will-change: transform;
+    }
+
+    .hero-visual img {
+      width: 100%;
+      /* the width/height attributes reserve the aspect ratio against layout
+         shift; height:auto stops the height attribute becoming a fixed size */
+      height: auto;
+      border-radius: 16px;
+      box-shadow:
+        0 50px 90px -30px rgba(0, 0, 0, .95),
+        0 18px 40px -18px rgba(227, 33, 41, .45);
+    }
+
+    /* depth plates sitting behind the photo in Z */
+    .hero-visual-inner::before {
+      content: "";
+      position: absolute;
+      inset: 14px -18px -20px 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(227, 33, 41, .45);
+      transform: translateZ(-60px);
+      pointer-events: none;
+    }
+
+    .hero-visual-inner::after {
+      content: "";
+      position: absolute;
+      inset: 30px -38px -42px 42px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      transform: translateZ(-110px);
+      pointer-events: none;
+    }
+
+    /* ============ SECTION HELPERS ============ */
     .section {
       max-width: 1160px;
       margin: 0 auto;
-      padding: 60px 24px;
+      padding: 84px 24px;
     }
 
-    .section-title {
-      font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+    .sec-tag {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(227, 30, 36, .09);
+      border: 1px solid rgba(227, 30, 36, .22);
+      border-radius: 30px;
+      padding: 6px 15px;
+      margin-bottom: 16px;
+    }
+
+    .sec-head {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .sec-head h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.6rem, 3.4vw, 2.35rem);
       font-weight: 800;
       color: #111;
-      text-align: center;
-      margin-bottom: 34px;
+      letter-spacing: -.5px;
     }
 
-    /* ============ WHY SOPs ============ */
-    .prose {
-      max-width: 760px;
-      margin: 0 auto;
-      background: #ffffff;
-      border: 1px solid #e0e0e0;
-      border-radius: 16px;
-      padding: 2.5rem;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    .sec-head h2 em {
+      font-style: normal;
+      color: var(--red);
     }
 
-    .prose p {
-      color: #444;
-      font-size: 16px;
-      line-height: 1.8;
-      margin-bottom: 18px;
+    .sec-head p {
+      max-width: 620px;
+      margin: 14px auto 0;
+      color: #666;
+      font-size: 15.5px;
+      line-height: 1.7;
     }
 
-    .prose p:last-child {
-      margin-bottom: 0;
-    }
-
-    .prose p.lead {
-      color: #111;
-      font-weight: 700;
-    }
-
-    /* ============ USE US TO ============ */
-    .use-grid {
+    /* ============ AUDIENCE CARDS ============ */
+    .aud-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 24px;
     }
 
-    .use-card {
+    .aud-card {
+      position: relative;
       background: #ffffff;
-      border: 1px solid #e0e0e0;
-      border-radius: 16px;
+      border: 1px solid #e4ded6;
+      border-radius: 18px;
+      padding: 2rem 1.6rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
       overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-      display: flex;
-      flex-direction: column;
-      transition: all 0.2s ease;
+      transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out), border-color .35s ease;
     }
 
-    .use-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
-    }
-
-    .use-card img {
+    /* red rule that draws itself across the top on hover */
+    .aud-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 3px;
       width: 100%;
-      height: 190px;
-      object-fit: cover;
+      background: linear-gradient(90deg, var(--red), #ff7a80);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform .45s var(--ease-out);
     }
 
-    .use-body {
-      padding: 1.8rem;
+    .aud-card:hover {
+      border-color: rgba(227, 30, 36, .35);
+      box-shadow: 0 22px 44px -20px rgba(0, 0, 0, .28);
     }
 
-    .use-body h3 {
-      font-size: 19px;
+    .aud-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .aud-ico {
+      width: 54px;
+      height: 54px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(227, 30, 36, .13), rgba(227, 30, 36, .04));
+      color: var(--red);
+      margin-bottom: 18px;
+      transition: background .4s ease, color .4s ease, transform .45s var(--ease-out);
+    }
+
+    .aud-card:hover .aud-ico {
+      background: linear-gradient(135deg, var(--red), #ff5a60);
+      color: #fff;
+      transform: translateY(-3px) rotate(-5deg);
+    }
+
+    .aud-ico svg {
+      width: 26px;
+      height: 26px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .aud-card h3 {
+      font-size: 18px;
       font-weight: 800;
       color: #111;
-      margin-bottom: 12px;
+      margin-bottom: 11px;
     }
 
-    .use-body p {
+    .aud-card p {
       color: #666;
       font-size: 14.5px;
       line-height: 1.65;
     }
 
-    /* ============ MEET THE TEAM ============ */
-    .team-grid {
+    /* ============ PHOTO STRIP ============ */
+    .shot-strip {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px 84px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
+      perspective: 1200px;
     }
 
-    .team-card {
-      background: #ffffff;
-      border: 1px solid #e0e0e0;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+    .shot {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #ded7ce;
+      box-shadow: 0 18px 40px -22px rgba(0, 0, 0, .5);
     }
 
-    .team-card img {
-      width: 120px;
-      height: 120px;
+    .shot img {
+      width: 100%;
+      height: 330px;
       object-fit: cover;
-      object-position: top center;
-      border-radius: 50%;
-      border: 3px solid var(--hti-bg);
-      margin-bottom: 20px;
-      background: var(--hti-bg);
+      transition: transform .9s var(--ease-out);
     }
 
-    /* subject sits low in this frame - crop to the face, not the backdrop */
-    .team-card img.crop-low {
-      object-position: center bottom;
+    .shot:hover img {
+      transform: scale(1.06);
     }
 
-    .team-quote {
-      color: #444;
-      font-size: 15px;
-      line-height: 1.7;
-      font-style: italic;
-      margin-bottom: 20px;
+    /* caption plate that rises on hover */
+    .shot figcaption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 40px 22px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(to top, rgba(0, 0, 0, .82), transparent);
+      transform: translateY(8px);
+      opacity: .92;
+      transition: transform .45s var(--ease-out), opacity .45s ease;
     }
 
-    .team-name {
-      font-size: 16px;
+    .shot:hover figcaption {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ============ COVERAGE LIST ============ */
+    .cover-band {
+      background: #e6e1d9;
+    }
+
+    .cover-list {
+      max-width: 900px;
+      margin: 0 auto;
+      list-style: none;
+    }
+
+    .cover-list li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: start;
+      background: #fff;
+      border: 1px solid #e4ded6;
+      border-left: 4px solid var(--red);
+      border-radius: 14px;
+      padding: 22px 26px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .05);
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: #555;
+    }
+
+    .cover-list li:hover {
+      box-shadow: 0 22px 44px -22px rgba(0, 0, 0, .32);
+    }
+
+    .cv-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--red), #ff5a60);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-family: 'Gilroy-Bold', 'Gilroy', 'Poppins', sans-serif;
       font-weight: 800;
-      color: #111;
-      margin-top: auto;
+      font-size: 16px;
+      box-shadow: 0 12px 24px -12px rgba(227, 30, 36, .95);
     }
 
-    .team-role {
-      font-size: 13.5px;
-      color: #e31e24;
+    .cover-list li b {
+      display: block;
+      font-size: 17px;
       font-weight: 700;
-      margin-top: 5px;
+      color: #111;
+      margin-bottom: 7px;
+      font-family: 'Gilroy-Bold', 'Gilroy', 'Montserrat', sans-serif;
     }
 
-    /* ============ CLIENTS ============ */
-    .clients {
-      background: #ffffff;
-      border-top: 1px solid #e0e0e0;
-      border-bottom: 1px solid #e0e0e0;
-      padding: 60px 24px;
+
+    /* ============ HOW IT WORKS ============ */
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
-    .clients h2 {
+    .how-step {
+      background: #fff;
+      border: 1px solid #e4ded6;
+      border-radius: 16px;
+      padding: 28px 18px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .05);
+      transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out), border-color .35s ease;
+    }
+
+    .how-step:hover {
+      border-color: rgba(227, 30, 36, .35);
+      box-shadow: 0 22px 44px -20px rgba(0, 0, 0, .28);
+    }
+
+    .how-step .num {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), #ff5a60);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      font-family: 'Gilroy-Bold', 'Gilroy', 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 12px 24px -12px rgba(227, 30, 36, .95);
+    }
+
+    .how-step p {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #222;
+      line-height: 1.5;
+    }
+
+    /* ============ FAQ ============
+       Written as static HTML rather than injected from a JS array, so the
+       answers are in the served markup where crawlers can read them. */
+    .faq-band {
+      background: #e6e1d9;
+    }
+
+    .faq-list {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: #fff;
+      border: 1px solid #e4ded6;
+      border-radius: 14px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .05);
+      transition: box-shadow .35s var(--ease-out), border-color .35s ease;
+    }
+
+    .faq-item.open {
+      border-color: rgba(227, 30, 36, .35);
+      box-shadow: 0 22px 44px -22px rgba(0, 0, 0, .3);
+    }
+
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 20px 24px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      color: #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      min-height: 44px;
+    }
+
+    .faq-q .sign {
+      color: var(--red);
+      font-size: 24px;
+      font-weight: 800;
+      flex: 0 0 auto;
+      line-height: 1;
+      transition: transform .3s var(--ease-out);
+    }
+
+    .faq-item.open .faq-q .sign {
+      transform: rotate(180deg);
+    }
+
+    /* grid-template-rows animates to the answer's real height, so a long
+       answer is never clipped the way a fixed max-height would clip it */
+    .faq-answer {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .35s var(--ease-out);
+    }
+
+    .faq-item.open .faq-answer {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-answer>div {
+      overflow: hidden;
+    }
+
+    .faq-answer p {
+      padding: 0 24px 22px;
+      font-size: 15px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .faq-answer a {
+      color: var(--red);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    .faq-foot {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 15px;
+      color: #555;
+    }
+
+    .faq-foot a {
+      color: var(--red);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    /* ============ RAISED CARD (why it matters) ============ */
+    .raised-wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 84px 24px;
+    }
+
+    .raised {
+      position: relative;
+      background: linear-gradient(160deg, #ffffff, #faf7f4);
+      border: 1px solid #e4ded6;
+      border-radius: 24px;
+      padding: 56px 52px;
+      box-shadow: 0 44px 84px -46px rgba(0, 0, 0, .48);
+      overflow: hidden;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* soft red bloom in the corner, echoing the hero orbs */
+    .raised::before {
+      content: "";
+      position: absolute;
+      top: -45%;
+      right: -12%;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(227, 30, 36, .12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .raised>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .raised h2 {
+      font-family: 'Poppins', sans-serif;
       font-size: clamp(1.5rem, 3.2vw, 2.1rem);
       font-weight: 800;
       color: #111;
-      text-align: center;
-      margin-bottom: 34px;
+      margin-bottom: 22px;
+      letter-spacing: -.5px;
     }
 
-    .clients-row {
-      max-width: 1160px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 30px 54px;
+    .raised p {
+      color: #4a4a4a;
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 18px;
     }
 
-    .clients-row img {
-      height: 58px;
-      width: auto;
-      object-fit: contain;
-      /* some client logos are solid-background tiles, others transparent
-         wordmarks - the radius keeps the tiles looking deliberate */
-      border-radius: 8px;
-      filter: grayscale(100%);
-      opacity: 0.6;
-      transition: filter 0.25s ease, opacity 0.25s ease;
-    }
-
-    .clients-row img:hover {
-      filter: grayscale(0%);
-      opacity: 1;
+    .raised p:last-child {
+      margin-bottom: 0;
     }
 
     /* ============ CLOSING CTA ============ */
     .cta-band {
-      background: #1a1a1a;
-      padding: 70px 24px;
+      position: relative;
+      background: var(--ink);
+      padding: 88px 24px;
       text-align: center;
+      overflow: hidden;
+      isolation: isolate;
     }
 
-    .cta-band img {
-      width: 150px;
-      margin: 0 auto 26px;
+    .cta-band::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 720px;
+      height: 720px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(227, 33, 41, .30), transparent 62%);
+      filter: blur(50px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* faint grid so the band reads as the same 3D world as the hero */
+    .cta-band::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000, transparent 75%);
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000, transparent 75%);
+      z-index: -1;
+      pointer-events: none;
     }
 
     .cta-band h2 {
       color: #fff;
-      font-size: clamp(1.35rem, 3vw, 2rem);
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.4rem, 3.2vw, 2.1rem);
       font-weight: 800;
       max-width: 820px;
-      margin: 0 auto 28px;
-      line-height: 1.3;
+      margin: 0 auto 30px;
+      line-height: 1.32;
+      letter-spacing: -.4px;
     }
 
     .cta-btn {
-      display: inline-block;
-      background: #e31e24;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--red), #ff4a51);
       color: #fff;
-      font-weight: 700;
-      border-radius: 8px;
-      padding: 0.9rem 2rem;
-      transition: all 0.2s ease;
+      font-weight: 800;
+      font-size: 16px;
+      border-radius: 10px;
+      padding: 16px 34px;
+      box-shadow: 0 20px 44px -16px rgba(227, 33, 41, .95);
+      transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out);
+    }
+
+    .cta-btn .arr {
+      transition: transform .3s var(--ease-out);
     }
 
     .cta-btn:hover {
-      background: #c40f10;
+      transform: translateY(-3px);
+      box-shadow: 0 28px 58px -14px rgba(227, 33, 41, 1);
+    }
+
+    .cta-btn:hover .arr {
+      transform: translateX(5px);
     }
 
     /* ============ FOOTER ============ */
@@ -610,6 +1286,32 @@
     }
 
     /* ============ RESPONSIVE ============ */
+    @media(max-width:1024px) {
+      .hero3d-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .hero-visual-inner {
+        --ry: -8deg;
+        --rx: 4deg;
+      }
+
+      .hero-rings {
+        width: 220px;
+        height: 220px;
+        opacity: .3;
+      }
+
+      .how-steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .aud-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media(max-width:960px) {
       .nav-menu {
         position: fixed;
@@ -676,37 +1378,577 @@
         display: flex;
       }
 
-      .use-grid,
-      .team-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
       .footer-cols {
         grid-template-columns: 1fr 1fr;
       }
     }
 
-    @media(max-width:600px) {
+    @media (max-width: 768px) {
+      .hero3d {
+        padding: 48px 20px 72px;
+      }
 
-      .use-grid,
-      .team-grid {
+      .hero-kicker {
+        transform: none;
+        padding: 14px 20px;
+      }
+
+      .hero-visual-inner {
+        --ry: 0deg;
+      }
+
+      /* keep one depth plate on phones — it is the cue that survives without
+         hover — and drop the second, which is too wide for a narrow screen */
+      .hero-visual-inner::before {
+        inset: 10px -10px -12px 12px;
+      }
+
+      .hero-visual-inner::after {
+        display: none;
+      }
+
+      .hero-rings {
+        width: 190px;
+        height: 190px;
+        top: auto;
+        bottom: 4%;
+        right: -8%;
+        opacity: .22;
+      }
+
+      .section,
+      .raised-wrap {
+        padding: 60px 20px;
+      }
+
+      .raised {
+        padding: 38px 26px;
+        border-radius: 20px;
+      }
+
+      .shot-strip {
+        padding: 0 20px 60px;
+      }
+    }
+
+    @media(max-width:600px) {
+      .aud-grid {
         grid-template-columns: 1fr;
       }
 
-      .prose {
-        padding: 1.6rem;
+      .shot-strip {
+        grid-template-columns: 1fr;
       }
 
-      .clients-row {
-        gap: 26px 34px;
+      .shot img {
+        height: 250px;
       }
 
-      .clients-row img {
-        height: 44px;
+      .cover-list li {
+        padding: 20px;
+        gap: 16px;
+      }
+
+      .how-steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .faq-q {
+        font-size: 15px;
+        padding: 18px 18px;
+      }
+
+      .hero-card {
+        flex: 1 1 calc(50% - 6px);
+        min-width: 0;
+      }
+    }
+
+    /* ============ MOTION SAFETY ============ */
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+
+      .js [data-reveal],
+      .js .hero-meta .hero-card,
+      .js .aud-grid .aud-card,
+      .js .cover-list li,
+      .js .how-steps .how-step,
+      .js .shot-strip .shot {
+        opacity: 1;
+        transform: none;
+      }
+
+      .hero-visual-inner {
+        transform: none !important;
+      }
+
+      .hero-floor,
+      .hero-rings {
+        animation: none;
       }
     }
   
 
+
+    /* =================================================================
+       DOX — brand layer on top of the shared page template.
+
+       The old page was one flat beige field with grey type on it. The
+       lift here is colour, and it is not decorative: Dox sells three
+       distinct deliverables, and the wordmark already carries three
+       colours, so each deliverable is given one and keeps it everywhere
+       it appears — card, icon, number, photo caption, checklist.
+       Sampled straight off images/dox/dox-logo.png.
+       ================================================================= */
+    :root {
+      --dox-green: #00b81f;
+      --dox-green-ink: #0a8a24;
+      /* darkened for text contrast on white */
+      --dox-blue: #1147c9;
+      --dox-blue-ink: #0f3ea8;
+    }
+
+    /* ---------- hero: the same 3D stage, in Dox colours ---------- */
+    .hero3d {
+      background: radial-gradient(120% 85% at 78% 8%, #16202c 0%, var(--ink) 58%);
+    }
+
+    .hero-floor {
+      background-image:
+        linear-gradient(rgba(0, 184, 31, .26) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17, 71, 201, .30) 1px, transparent 1px);
+    }
+
+    .hero-orb.a {
+      background: radial-gradient(circle, rgba(0, 184, 31, .80), transparent 68%);
+    }
+
+    .hero-orb.b {
+      background: radial-gradient(circle, rgba(17, 71, 201, .72), transparent 68%);
+    }
+
+    /* a third glow, so the red of the HTI mark is present in the stage too */
+    .hero-orb.c {
+      width: 300px;
+      height: 300px;
+      top: 42%;
+      left: 38%;
+      background: radial-gradient(circle, rgba(227, 30, 36, .50), transparent 66%);
+      transform: translateY(var(--pOrbC, 0px));
+    }
+
+    .hero-rings i:nth-child(2) {
+      border-color: rgba(0, 184, 31, .60);
+    }
+
+    .hero-rings i:nth-child(3) {
+      border-color: rgba(17, 71, 201, .55);
+    }
+
+    /* the wordmark leads the hero - it is the brand people recognise */
+    .hero-wordmark {
+      width: 210px;
+      height: auto;
+      margin-bottom: 22px;
+      filter: drop-shadow(0 10px 26px rgba(0, 0, 0, .55));
+    }
+
+    .hero3d h1 em {
+      background: linear-gradient(100deg, var(--dox-green) 8%, #46e06a 38%, #5b9bff 68%, var(--dox-blue) 96%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .hero3d h1 small {
+      display: block;
+      margin-top: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(15px, 1.7vw, 19px);
+      font-weight: 600;
+      letter-spacing: 0;
+      color: rgba(255, 255, 255, .9);
+    }
+
+    .hero-kicker {
+      border-left-color: var(--dox-green);
+    }
+
+    /* ---------- the three things ---------- */
+    /* Reuses the template's card, but each one carries its own accent
+       through --accent, so the trio reads as three products rather than
+       three paragraphs. */
+    .tri-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .aud-card {
+      --accent: var(--red);
+      --accent-soft: rgba(227, 30, 36, .12);
+      padding-top: 2.3rem;
+    }
+
+    .aud-card.is-green {
+      --accent: var(--dox-green-ink);
+      --accent-soft: rgba(0, 184, 31, .14);
+    }
+
+    .aud-card.is-blue {
+      --accent: var(--dox-blue);
+      --accent-soft: rgba(17, 71, 201, .12);
+    }
+
+    .aud-card::before {
+      background: var(--accent);
+    }
+
+    /* on the trio the rule is always drawn, and only brightens on hover -
+       a card that shows nothing until you touch it reads as unfinished */
+    .tri-grid .aud-card::before {
+      transform: scaleX(1);
+      opacity: .55;
+      transition: opacity .4s ease, height .4s var(--ease-out);
+    }
+
+    .tri-grid .aud-card:hover::before {
+      opacity: 1;
+      height: 5px;
+    }
+
+    .aud-card:hover {
+      border-color: var(--accent);
+    }
+
+    .aud-ico {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .aud-card:hover .aud-ico {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* the step number sits behind the card, large and faint */
+    .tri-num {
+      position: absolute;
+      top: 8px;
+      right: 18px;
+      font-family: 'Gilroy-Bold', 'Gilroy', 'Montserrat', sans-serif;
+      font-size: 66px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--accent);
+      opacity: .13;
+      pointer-events: none;
+      transition: opacity .4s ease, transform .5s var(--ease-out);
+    }
+
+    .aud-card:hover .tri-num {
+      opacity: .22;
+      transform: translateY(-4px);
+    }
+
+    .aud-card ul {
+      list-style: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed #e4ded6;
+    }
+
+    .aud-card li {
+      position: relative;
+      padding-left: 20px;
+      margin-top: 8px;
+      font-size: 13.5px;
+      color: #555;
+    }
+
+    .aud-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 9px;
+      height: 9px;
+      border-radius: 3px;
+      background: var(--accent);
+      opacity: .75;
+    }
+
+    /* ---------- coverage list, tinted per row ---------- */
+    .cover-list li:nth-child(3n+2) {
+      --cv: var(--dox-green-ink);
+    }
+
+    .cover-list li:nth-child(3n) {
+      --cv: var(--dox-blue);
+    }
+
+    .cv-num {
+      background: var(--cv, var(--red));
+    }
+
+    /* ---------- team ---------- */
+    .team-grid {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      perspective: 1200px;
+    }
+
+    /* .team-card is in the shared motion layer's card list, so the entrance,
+       the depth shadow and the pointer tilt all come from assets/motion.js -
+       this only has to paint it. Declaring a transform here would be
+       overridden by that layer anyway. */
+    .team-card {
+      --accent: var(--red);
+      position: relative;
+      background: #fff;
+      border: 1px solid #e4ded6;
+      border-radius: 20px;
+      padding: 2rem 1.6rem 1.8rem;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .05);
+      transition: box-shadow .4s var(--ease-out), border-color .35s ease;
+    }
+
+    .team-card.is-green {
+      --accent: var(--dox-green-ink);
+    }
+
+    .team-card.is-blue {
+      --accent: var(--dox-blue);
+    }
+
+    .team-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 26px 50px -24px rgba(0, 0, 0, .34);
+    }
+
+    /* the portrait ring picks up that person's accent */
+    .team-photo {
+      width: 108px;
+      height: 108px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--hti-bg);
+      box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--accent);
+      transition: box-shadow .4s ease, transform .5s var(--ease-out);
+    }
+
+    .team-card:hover .team-photo {
+      transform: translateY(-4px);
+      box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--accent);
+    }
+
+    .team-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* This portrait is shot wide against a patterned wall, so at 108px the
+       face lands about eight pixels tall. Oversize the image inside the
+       circle and re-centre on the subject rather than the frame. Done with
+       width/margin, not transform, because the shared motion layer already
+       owns transform on images inside a card. */
+    .team-photo img.crop-low {
+      width: 200%;
+      /* the global img rule caps width at 100%, which would leave the
+         oversize applying to the height only and tear the crop in half */
+      max-width: none;
+      height: 200%;
+      margin-left: -50%;
+      margin-top: -50%;
+      object-position: 50% 62%;
+    }
+
+    .team-quote {
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: #555;
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+
+    .team-quote::before {
+      content: "\201C";
+      color: var(--accent);
+      font-size: 30px;
+      line-height: 0;
+      vertical-align: -6px;
+      margin-right: 3px;
+      font-style: normal;
+    }
+
+    .team-name {
+      font-family: 'Gilroy-Bold', 'Gilroy', 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: #111;
+    }
+
+    .team-role {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+
+    /* ---------- clients ---------- */
+    /* Previously these sat greyed-out at 60% on beige, which is most of why
+       the page read as washed. They are proof - they get to be legible. */
+    .clients-band {
+      background: #fff;
+      padding: 62px 24px 66px;
+      border-top: 1px solid #e6e0d8;
+      border-bottom: 1px solid #e6e0d8;
+    }
+
+    .clients-row {
+      max-width: 900px;
+      margin: 26px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    /* normalising on height alone shrinks the square marks to thumbnails next
+       to the wide ones, so cap both axes and let each logo use whichever
+       limit it hits first - they end up optically the same size */
+    .clients-row img {
+      max-height: 44px;
+      max-width: 118px;
+      height: auto;
+      width: auto;
+      opacity: .82;
+      filter: saturate(.9);
+      transition: opacity .3s ease, transform .4s var(--ease-out), filter .3s ease;
+    }
+
+    .clients-row img.is-square {
+      max-height: 58px;
+      max-width: 58px;
+    }
+
+    .clients-row img:hover {
+      opacity: 1;
+      filter: none;
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    @media(max-width:960px) {
+      .tri-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-wordmark {
+        width: 160px;
+      }
+    }
+
+    @media(max-width:600px) {
+      .clients-row {
+        gap: 22px;
+        justify-content: center;
+      }
+
+      .clients-row img {
+        height: 32px;
+      }
+
+      .tri-num {
+        font-size: 52px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .hero-orb.c,
+      .tri-num,
+      .team-photo,
+      .clients-row img {
+        transition: none !important;
+      }
+    }
+
+    /* ---------- hero brand plate ----------
+       The visual slot on this page holds the wordmark rather than a photo:
+       a training photograph would be showing HTI's classroom work on a page
+       about documents. The plate still gets the tilt and the parallax, so
+       the hero keeps its depth. */
+    .hero-visual-inner.is-plate {
+      background: linear-gradient(150deg, #ffffff 0%, #f4f1ec 62%, #e9e4dc 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 54px 34px 46px;
+      text-align: center;
+      border-radius: 18px;
+      box-shadow:
+        0 50px 90px -30px rgba(0, 0, 0, .95),
+        0 18px 40px -18px rgba(0, 184, 31, .28);
+    }
+
+    /* beats .hero-visual img, which is written for a full-bleed photograph
+       and would otherwise give the wordmark a photo frame of its own */
+    .hero-visual-inner.is-plate img.hero-wordmark {
+      width: min(300px, 76%);
+      height: auto;
+      margin: 0 0 4px;
+      border-radius: 0;
+      box-shadow: none;
+      filter: none;
+    }
+
+    .plate-line {
+      font-family: 'Gilroy-Bold', 'Gilroy', 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .01em;
+      color: #3a3a3a;
+      padding-top: 16px;
+      border-top: 2px solid var(--dox-green);
+    }
+
+    /* the plate paints its own light, so the template's dark scrim is off */
+    .hero-visual-inner.is-plate::before,
+    .hero-visual-inner.is-plate::after {
+      display: none;
+    }
+
+    .clients-band .sec-head {
+      margin-bottom: 0;
+    }
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBKJQQRP0N"></script>
@@ -717,7 +1959,7 @@
     gtag('config', 'G-SBKJQQRP0N');
   </script>
   <!-- shared motion layer: progressive enhancement, see assets/motion.css -->
-  <script>document.documentElement.className += ' mo';</script>
+  <script>document.documentElement.className += ' mo mo-lite';</script>
   <link rel="stylesheet" href="assets/motion.css" />
   <link rel="stylesheet" href="assets/polish.css" />
   <script src="assets/motion.js" defer></script>
@@ -757,6 +1999,8 @@
             <a href="kmt.html"><b>KMT</b><span>Chefs, sous chefs, kitchen supervisors</span></a>
             <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Whole Property</div>
             <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Every hotel role &mdash; F&amp;B to security</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Villas &amp; Homestays</div>
+            <a href="cup.html"><b>CUP</b><span>Caretakers of villas, homestays, guesthouses</span></a>
             <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Grooming &amp; Management</div>
             <a href="class.html"><b>CLASS</b><span>Guest-facing &amp; corporate professionals</span></a>
             <a href="mdp.html"><b>MDP</b><span>Newly promoted &amp; mid-level managers</span></a>
@@ -767,7 +2011,6 @@
         <div class="nav-item">Offices &amp; Retail<span class="caret"></span>
           <div class="dropdown">
             <a href="post.html"><b>POST</b><span>Corporate pantry staff &amp; attendants</span></a>
-            <a href="cup.html"><b>CUP</b><span>Caretakers of villas, homestays, guesthouses</span></a>
             <a href="top.html"><b>TOP</b><span>Peons, office boys, support staff</span></a>
             <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
             <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
@@ -775,6 +2018,8 @@
         </div>
         <div class="nav-item">More<span class="caret"></span>
           <div class="dropdown">
+            <a href="brands.html"><b>Our Brands</b><span>HTI, Woosh Biz, Star, Lead, Dox &amp; T3</span></a>
+            <a href="lead.html"><b>Lead by HTI</b><span>Train the trainer, presentation &amp; soft skills</span></a>
             <a href="leadership-development.html"><b>Leadership Development</b><span>Senior managers &amp; future leaders</span></a>
             <a href="professional-etiquette.html"><b>Professional Etiquette</b><span>Corporate &amp; client-facing professionals</span></a>
             <a href="posh-training.html"><b>POSH Training</b><span>All employees, managers &amp; ICC members</span></a>
@@ -791,110 +2036,251 @@
     <div class="scroll-progress" id="scrollProgress"></div>
   </header>
 
-  <!-- ============ SECTION 1: DOX HERO ============ -->
-  <section class="dox-hero">
-    <img class="dox-logo" src="images/dox/dox-logo.png" alt="Dox by HTI" width="673" height="367" />
-    <h1>Dox by HTI — for your Standard Operating Procedures</h1>
-    <a href="contact.html" class="hero-cta">Talk to us</a>
-  </section>
-
-  <!-- ============ SECTION 2: WHY SOPs ============ -->
-  <section class="section">
-    <h2 class="section-title">Why SOPs?</h2>
-    <div class="prose">
-      <p>Systems form an ideal - they're a perfect step-by-step process of what is to be. When companies are formed,
-        they're formed with a vision. As the processes align with the vision, you might find yourself lucky enough to
-        find the perfect person for the job.</p>
-      <p class="lead">Sounds great? Until it's not.</p>
-      <p>It's great because they are the perfect person. It's not great because what happens when you want to expand?
-        One person can only do so much. And what if they leave?</p>
-      <p>The star players of your team can be put to better use - bigger use.</p>
-      <p>Have them break down their tasks (Standard Operating Procedures - SOPs) in fine detail - in a way that anyone
-        can replicate those tasks.</p>
-      <p>Having them documented makes them easily transferable.</p>
-      <p>Now, the training period required for a new staffer taking up that job role can be drastically decreased, and
-        with the help of daily checklists and step-by-step processes, their work can be made delay-free.</p>
+  <!-- ============ SECTION 1: HERO ============ -->
+  <!-- ============ SECTION 1: HERO ============ -->
+  <section class="hero3d" id="hero">
+    <div class="hero3d-bg" aria-hidden="true">
+      <span class="hero-orb a" data-parallax="orbA"></span>
+      <span class="hero-orb b" data-parallax="orbB"></span>
+      <span class="hero-orb c" data-parallax="orbC"></span>
+      <div class="hero-rings"><i></i><i></i><i></i><i></i></div>
+      <div class="hero-floor" data-parallax="floor"></div>
     </div>
-  </section>
 
-  <!-- ============ SECTION 3: USE US TO ============ -->
-  <section class="section">
-    <h2 class="section-title">Use Us To</h2>
-    <div class="use-grid">
-      <div class="use-card">
-        <img src="images/dox/docs.jpg" alt="Documented policies and processes" loading="lazy" />
-        <div class="use-body">
-          <h3>Document Policies &amp; Processes</h3>
-          <p>Documentation makes it easier for a brand to maintain consistency across both back-end and front-end
-            operations</p>
+    <div class="hero3d-inner">
+      <div class="hero-copy">
+        <span class="hero-tag" data-reveal>SOPs &middot; Videos &middot; Checklists</span>
+        <!-- the phrase people actually search for stays inside the h1; it is
+             set smaller so the brand still leads the hero visually -->
+        <h1 data-reveal style="--rd:80ms">Dox <em>by HTI</em><small>for your Standard Operating
+            Procedures</small></h1>
+        <p class="hero-lede" data-reveal style="--rd:210ms">Dox advises and helps curate Job Descriptions, policies and
+          Standard Operating Procedures. SOPs let teammates with limited training replicate tasks consistently &mdash;
+          which is what makes Speed, Scale and Skilling possible.</p>
+        <p class="hero-kicker" data-reveal style="--rd:280ms">Having them documented makes them easily transferable.</p>
+        <br>
+        <a href="contact.html" class="hero-cta" data-reveal style="--rd:340ms">Talk to us <span
+            class="arr">&rarr;</span></a>
+        <div class="hero-meta" data-reveal style="--rd:400ms">
+          <div class="hero-card">
+            <span class="hc-value">3</span>
+            <span class="hc-label">Things Dox builds</span>
+          </div>
+          <div class="hero-card">
+            <span class="hc-value">2002</span>
+            <span class="hc-label">HTI since</span>
+          </div>
+          <div class="hero-card">
+            <span class="hc-value">300K+</span>
+            <span class="hc-label">Trained by HTI</span>
+          </div>
         </div>
       </div>
-      <div class="use-card">
-        <img src="images/dox/video.jpg" alt="Training and how-to video production" loading="lazy" />
-        <div class="use-body">
-          <h3>Create Training &amp; How-To Videos</h3>
-          <p>Put information across in an easy-to-digest format. Videos make the process clear and concise.</p>
-        </div>
-      </div>
-      <div class="use-card">
-        <img src="images/dox/check.jpg" alt="Daily task checklists for teams" loading="lazy" />
-        <div class="use-body">
-          <h3>Manage your team with Checklists</h3>
-          <p>Constant follow-ups can take a backseat. Your team now has a list of tasks they need to complete during the
-            day, week, month and year.</p>
+
+      <div class="hero-visual" data-reveal style="--rd:200ms">
+        <div class="hero-visual-inner is-plate" data-tilt data-parallax="img">
+          <img class="hero-wordmark" src="images/dox/dox-logo.png" alt="Dox by HTI" width="673" height="367"
+            fetchpriority="high" />
+          <span class="plate-line">Document it once. Anyone can run it.</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ SECTION 4: MEET THE TEAM ============ -->
-  <section class="section">
-    <h2 class="section-title">Meet The Team</h2>
-    <div class="team-grid">
+  <!-- ============ SECTION 2: THE THREE THINGS ============ -->
+  <section class="section" id="what-we-build">
+    <div class="sec-head">
+      <span class="sec-tag">Use us to</span>
+      <h2>Three things we <em>build for you</em></h2>
+      <p>Documents, video and checklists. Three formats, one job &mdash; turning what your best people know into work
+        anyone on the team can repeat.</p>
+    </div>
+    <div class="aud-grid tri-grid" data-reveal>
+
+      <div class="aud-card">
+        <span class="tri-num" aria-hidden="true">01</span>
+        <div class="aud-ico" aria-hidden="true"><svg viewBox="0 0 24 24">
+            <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z" />
+            <path d="M14 3v5h5M9 13h6M9 17h4" />
+          </svg></div>
+        <h3>Document Policies &amp; Processes</h3>
+        <p>Documentation makes it easier for a brand to maintain consistency across both back-end and front-end
+          operations.</p>
+        <ul>
+          <li>Job Descriptions</li>
+          <li>Policies</li>
+          <li>Standard Operating Procedures</li>
+        </ul>
+      </div>
+
+      <div class="aud-card is-green">
+        <span class="tri-num" aria-hidden="true">02</span>
+        <div class="aud-ico" aria-hidden="true"><svg viewBox="0 0 24 24">
+            <rect x="2.5" y="5" width="14" height="14" rx="2.5" />
+            <path d="M16.5 10.5l5-3v9l-5-3z" />
+            <path d="M8 9.5l3.5 2.5L8 14.5z" />
+          </svg></div>
+        <h3>Create Training &amp; How-To Videos</h3>
+        <p>Put information across in an easy-to-digest format. Videos make the process clear and concise.</p>
+        <ul>
+          <li>Training videos</li>
+          <li>How-to videos</li>
+        </ul>
+      </div>
+
+      <div class="aud-card is-blue">
+        <span class="tri-num" aria-hidden="true">03</span>
+        <div class="aud-ico" aria-hidden="true"><svg viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
+            <rect x="9" y="3" width="6" height="4" rx="1.2" />
+            <path d="M8.5 12.5l2 2 4-4.5" />
+          </svg></div>
+        <h3>Manage your team with Checklists</h3>
+        <p>Constant follow-ups can take a backseat. Your team now has a list of tasks they need to complete during the
+          day, week, month and year.</p>
+        <ul>
+          <li>Daily &amp; weekly</li>
+          <li>Monthly &amp; yearly</li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Book Now <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3: WHY SOPs ============
+       The same argument the old page made in seven grey paragraphs, kept
+       word for word but numbered, so the reader can see where it is going. -->
+  <section class="cover-band" id="why-sops">
+    <div class="section">
+      <div class="sec-head">
+        <span class="sec-tag">The case for it</span>
+        <h2>Why <em>SOPs</em>?</h2>
+      </div>
+      <ul class="cover-list" data-reveal>
+        <li>
+          <span class="cv-num">01</span>
+          <div><b>Systems form an ideal</b>They are a perfect step-by-step process of what is to be. When companies are
+            formed, they are formed with a vision. As the processes align with the vision, you might find yourself lucky
+            enough to find the perfect person for the job.</div>
+        </li>
+        <li>
+          <span class="cv-num">02</span>
+          <div><b>Sounds great? Until it&#39;s not</b>It is great because they are the perfect person. It is not great
+            because what happens when you want to expand? One person can only do so much. And what if they leave?</div>
+        </li>
+        <li>
+          <span class="cv-num">03</span>
+          <div><b>Your star players can do bigger work</b>The star players of your team can be put to better use &mdash;
+            bigger use.</div>
+        </li>
+        <li>
+          <span class="cv-num">04</span>
+          <div><b>So break the job down</b>Have them break down their tasks (Standard Operating Procedures &mdash; SOPs)
+            in fine detail, in a way that anyone can replicate those tasks.</div>
+        </li>
+        <li>
+          <span class="cv-num">05</span>
+          <div><b>Documented means transferable</b>Once the work is written down, it moves with the role instead of
+            walking out with the person.</div>
+        </li>
+        <li>
+          <span class="cv-num">06</span>
+          <div><b>New staff get productive sooner</b>The training period required for a new staffer taking up that job
+            role can be drastically decreased, and with the help of daily checklists and step-by-step processes, their
+            work can be made delay-free.</div>
+        </li>
+      </ul>
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Let's talk <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4: WHY IT MATTERS ============ -->
+  <section class="raised-wrap">
+    <div class="raised" data-reveal>
+      <span class="sec-tag">Why it matters</span>
+      <h2>One person&#39;s know-how, made repeatable by everyone</h2>
+      <p>Every growing team has someone who simply knows how it is done. That knowledge is the most valuable thing in
+        the building, and the most fragile &mdash; it sits with one person, and it leaves when they do.</p>
+      <p>Writing it down is what turns it into an asset the business owns. SOPs allow teammates with limited training or
+        instruction to replicate tasks consistently, which is what makes Speed, Scale and Skilling possible.</p>
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Book Now <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 5: MEET THE TEAM ============ -->
+  <section class="section" id="team">
+    <div class="sec-head">
+      <span class="sec-tag">Who you work with</span>
+      <h2>Meet the <em>team</em></h2>
+    </div>
+    <div class="team-grid" data-reveal>
+
       <div class="team-card">
-        <img src="images/dox/dominic.svg" alt="Dominic CostaBir, Director, HTI" loading="lazy" />
-        <p class="team-quote">"Whether it is an organization, a body or a bus, every part needs to understand its role
-          and play it. The wheel of a bus isn't any less important than the steering wheel."</p>
+        <div class="team-photo"><img src="images/dox/dominic.svg" alt="Dominic CostaBir, Director, HTI" width="280"
+            height="350" loading="lazy" /></div>
+        <p class="team-quote">Whether it is an organization, a body or a bus, every part needs to understand its role
+          and play it. The wheel of a bus isn&#39;t any less important than the steering wheel.</p>
         <div class="team-name">Dominic CostaBir</div>
         <div class="team-role">Director, HTI</div>
       </div>
-      <div class="team-card">
-        <img src="images/dox/kaushal.png" alt="Kaushal Dutta, CEO - HTI" loading="lazy" />
-        <p class="team-quote">"Organizations should prioritize processes over individual personalities. This focus
-          allows the organization to function more smoothly and efficiently."</p>
+
+      <div class="team-card is-green">
+        <div class="team-photo"><img src="images/dox/kaushal.png" alt="Kaushal Dutta, CEO, HTI" width="280" height="350"
+            loading="lazy" /></div>
+        <p class="team-quote">Organizations should prioritize processes over individual personalities. This focus allows
+          the organization to function more smoothly and efficiently.</p>
         <div class="team-name">Kaushal Dutta</div>
-        <div class="team-role">CEO - HTI</div>
+        <div class="team-role">CEO, HTI</div>
       </div>
-      <div class="team-card">
-        <img class="crop-low" src="images/dox/tsunami.png" alt="Tsunami Costabir, COO - Dox by HTI" loading="lazy" />
-        <p class="team-quote">"Getting everything absolutely perfect might be difficult. But if you know what needs to
-          be done before you start, you actually could."</p>
+
+      <div class="team-card is-blue">
+        <div class="team-photo"><img class="crop-low" src="images/dox/tsunami.png"
+            alt="Tsunami Costabir, COO, Dox by HTI" width="280" height="350" loading="lazy" /></div>
+        <p class="team-quote">Getting everything absolutely perfect might be difficult. But if you know what needs to be
+          done before you start, you actually could.</p>
         <div class="team-name">Tsunami Costabir</div>
-        <div class="team-role">COO - Dox by HTI</div>
+        <div class="team-role">COO, Dox by HTI</div>
       </div>
+
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Let's talk <span aria-hidden="true">&rarr;</span></a>
     </div>
   </section>
 
-  <!-- ============ SECTION 5: OUR CLIENTS ============ -->
-  <section class="clients">
-    <h2>Our Clients</h2>
-    <div class="clients-row">
-      <img src="images/dox/client-ykbi.png" alt="YKBI" loading="lazy" />
+  <!-- ============ SECTION 6: CLIENTS ============ -->
+  <section class="clients-band">
+    <div class="sec-head">
+      <span class="sec-tag">Proof</span>
+      <h2>Teams we have <em>documented for</em></h2>
+    </div>
+    <div class="clients-row" data-reveal>
+      <img src="images/dox/client-ykbi.png" alt="YKBI" width="1013" height="512" loading="lazy" />
       <picture>
         <source srcset="images/dox/client-zomato.avif" type="image/avif" />
-        <img src="images/dox/client-zomato.png" alt="Zomato" loading="lazy" />
+        <img class="is-square" src="images/dox/client-zomato.png" alt="Zomato" width="300" height="300" loading="lazy" />
       </picture>
-      <img src="images/dox/client-reviv.png" alt="Reviv" loading="lazy" />
-      <img src="images/dox/client-star.png" alt="STAR" loading="lazy" />
-      <img src="images/dox/client-lead.png" alt="Lead" loading="lazy" />
+      <img class="is-square" src="images/dox/client-reviv.png" alt="Reviv" width="225" height="225" loading="lazy" />
+      <img src="images/dox/client-star.png" alt="Star by HTI" width="653" height="320" loading="lazy" />
+      <img src="images/dox/client-lead.png" alt="Lead by HTI" width="1503" height="812" loading="lazy" />
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Book Now <span aria-hidden="true">&rarr;</span></a>
     </div>
   </section>
 
-  <!-- ============ SECTION 6: CLOSING CTA ============ -->
+  <!-- ============ SECTION 7: CLOSING CTA ============ -->
   <section class="cta-band">
-    <img src="images/dox/dox-logo-white.png" alt="Dox by HTI" width="571" height="311" loading="lazy" />
-    <h2>Let us document your SOPs, build your how-to videos and set up your checklists.</h2>
-    <a href="contact.html" class="cta-btn">Talk to us</a>
+    <h2 data-reveal>Let us document your SOPs, build your how-to videos and set up your checklists.</h2>
+    <a href="contact.html" class="cta-btn" data-reveal style="--rd:120ms">Talk to us <span
+        class="arr">&rarr;</span></a>
   </section>
 
   <!-- ============ FOOTER ============ -->
@@ -914,7 +2300,9 @@
         </div>
         <div class="footer-col">
           <h4>More</h4>
+          <a href="brands.html">Our Brands</a>
           <a href="https://wooshbiz.com/" target="_blank" rel="noopener">Team Building</a>
+          <a href="lead.html">Lead by HTI</a>
           <a href="leadership-development.html">Leadership Development</a>
           <a href="professional-etiquette.html">Professional Etiquette</a>
           <a href="posh-training.html">POSH Training</a>
@@ -947,7 +2335,7 @@
                 d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
             </svg></a>
         </div>
-        <div class="footer-contact"><a href="tel:+917738060902">
+        <div class="footer-contact"><a href="contact.html">
             <h3>Contact Us: <span>+91 77380 60902</span></h3>
           </a></div>
         <a href="index.html" class="footer-brand"><img src="images/brand/hti-logo.png" alt="HTI" /></a>
@@ -1031,6 +2419,139 @@
       }
       window.addEventListener('load', update);
       update();
+    })();
+  </script>
+  <script>
+    /* =================================================================
+       MOTION LAYER
+       Everything here is progressive enhancement: with JS off or motion
+       reduced, the page still renders complete and readable.
+       ================================================================= */
+    (function () {
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revealables = document.querySelectorAll('[data-reveal]');
+
+      if (reduced || !('IntersectionObserver' in window)) {
+        revealables.forEach(el => el.classList.add('is-in'));
+        return;
+      }
+
+      /* ---------- 1. Reveal on scroll — re-arms in BOTH directions ----------
+         Reveal once ~18% is showing, and only re-arm once the element is fully
+         out of view. On the way out we record which side it left by, so it
+         animates back in from that same side. */
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const el = entry.target;
+          /* a tall block parked at the fold can show a genuinely useful slice
+             while still falling short of 18%, so accept either signal */
+          if (entry.intersectionRatio >= 0.18 || (entry.isIntersecting && entry.intersectionRect.height > 140)) {
+            el.classList.add('is-in');
+          } else if (!entry.isIntersecting) {
+            el.classList.toggle('from-top', entry.boundingClientRect.top < 0);
+            el.classList.remove('is-in');
+          }
+        });
+      }, { threshold: [0, 0.05, 0.18, 0.5] });
+      revealables.forEach(el => io.observe(el));
+
+      /* ---------- 2. Hero parallax (transform-only, rAF-throttled) ---------- */
+      const hero = document.getElementById('hero');
+      const layers = hero ? {
+        floor: hero.querySelector('[data-parallax="floor"]'),
+        orbA: hero.querySelector('[data-parallax="orbA"]'),
+        orbB: hero.querySelector('[data-parallax="orbB"]'),
+        orbC: hero.querySelector('[data-parallax="orbC"]'),
+        img: hero.querySelector('[data-parallax="img"]')
+      } : null;
+
+      let parked = false;
+
+      function parallax() {
+        parked = false;
+        if (!hero) return;
+        const y = window.scrollY || window.pageYOffset;
+        if (y > hero.offsetHeight) return;              // stop working once off-screen
+        if (layers.floor) layers.floor.style.setProperty('--pFloor', (y * 0.14) + 'px');
+        if (layers.orbA) layers.orbA.style.setProperty('--pOrbA', (y * 0.22) + 'px');
+        if (layers.orbB) layers.orbB.style.setProperty('--pOrbB', (y * -0.10) + 'px');
+        if (layers.orbC) layers.orbC.style.setProperty('--pOrbC', (y * 0.16) + 'px');
+        if (layers.img) layers.img.style.setProperty('--pImg', (y * -0.06) + 'px');
+      }
+
+      if (hero) {
+        window.addEventListener('scroll', () => {
+          if (!parked) { parked = true; requestAnimationFrame(parallax); }
+        }, { passive: true });
+        parallax();
+      }
+
+      /* ---------- 3. Scroll-driven depth ----------
+         Touch devices have no hover, so the tilt that desktop gets from the
+         cursor is driven by scroll position instead: the photo leans one way
+         as it rises into view, passes through flat at centre screen, and leans
+         the other way on its way out. */
+      const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      const scrollTilters = canHover ? [] : Array.from(document.querySelectorAll('[data-tilt]'));
+      scrollTilters.forEach(el => el.classList.add('tilt-scroll'));
+
+      if (scrollTilters.length) {
+        const live = new Set();
+        const seen = new IntersectionObserver((entries) => {
+          entries.forEach(e => e.isIntersecting ? live.add(e.target) : live.delete(e.target));
+        }, { rootMargin: '12% 0px 12% 0px' });
+        scrollTilters.forEach(el => seen.observe(el));
+
+        let tick = null;
+
+        function paint() {
+          tick = null;
+          const vh = window.innerHeight || 1;
+          live.forEach(el => {
+            const r = el.getBoundingClientRect();
+            /* -1 = element centre at top of screen, 0 = centred, 1 = at bottom */
+            const p = Math.max(-1, Math.min(1, ((r.top + r.height / 2) - vh / 2) / (vh / 2)));
+            el.style.setProperty('--rx', (-p * 7).toFixed(2) + 'deg');
+          });
+        }
+
+        function queue() {
+          if (!tick) tick = requestAnimationFrame(paint);
+        }
+
+        window.addEventListener('scroll', queue, { passive: true });
+        window.addEventListener('resize', queue, { passive: true });
+        window.addEventListener('load', queue);
+        queue();
+      }
+
+      /* ---------- 4. Pointer tilt (desktop only) ---------- */
+      if (canHover) {
+        document.querySelectorAll('[data-tilt]').forEach(el => {
+          const MAX = 9;
+          let raf = null;
+
+          function apply(e) {
+            raf = null;
+            const r = el.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width - 0.5;   // -0.5 .. 0.5
+            const py = (e.clientY - r.top) / r.height - 0.5;
+            el.style.setProperty('--ry', (px * MAX * 2).toFixed(2) + 'deg');
+            el.style.setProperty('--rx', (-py * MAX).toFixed(2) + 'deg');
+          }
+
+          el.addEventListener('pointermove', (e) => {
+            el.style.transitionDuration = '.18s';
+            if (!raf) raf = requestAnimationFrame(() => apply(e));
+          });
+
+          el.addEventListener('pointerleave', () => {
+            el.style.transitionDuration = '';
+            el.style.removeProperty('--ry');
+            el.style.removeProperty('--rx');
+          });
+        });
+      }
     })();
   </script>
 </body>

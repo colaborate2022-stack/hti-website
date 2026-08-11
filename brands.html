@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Brands | HTI, Woosh Biz, Star, Lead, Dox &amp; T3 | HTI India</title>
+  <meta name="description" content="The six training brands of HTI India — HTI, Woosh Biz, Star by HTI, Lead by HTI, Dox by HTI and T3. Job skills, soft skills, team building, leadership, SOPs & training tech." />
+  <link rel="canonical" href="https://www.hti-india.com/brands.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Our Brands | HTI, Woosh Biz, Star, Lead, Dox &amp; T3 | HTI India" />
+  <meta property="og:description" content="The six training brands of HTI India — HTI, Woosh Biz, Star by HTI, Lead by HTI, Dox by HTI and T3. Job skills, soft skills, team building, leadership, SOPs & training tech." />
+  <meta property="og:url" content="https://www.hti-india.com/brands.html" />
+  <meta property="og:site_name" content="HTI India" />
+  <meta property="og:image" content="https://www.hti-india.com/images/brands/hti-brand-banner.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Our Brands | HTI, Woosh Biz, Star, Lead, Dox &amp; T3 | HTI India" />
+  <meta name="twitter:description" content="The six training brands of HTI India — HTI, Woosh Biz, Star by HTI, Lead by HTI, Dox by HTI and T3." />
+  <meta name="twitter:image" content="https://www.hti-india.com/images/brands/hti-brand-banner.webp" />
+  <link rel="icon" href="images/brand/hti-favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="preload" as="image" href="images/brands/hti-brand-banner.webp"
+    imagesrcset="images/brands/hti-brand-banner-800.webp 800w, images/brands/hti-brand-banner.webp 1052w"
+    imagesizes="100vw" />
+  <style>
+    :root {
+      --hti-bg: #ede9e3;
+      --hti-black: #000;
+      --hti-red: #e8191a;
+      --hti-red2: #e8191a;
+      --hti-text: #111;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      /* this page runs on white end to end - the section margins between the
+         brand blocks would otherwise show the site's beige as banding */
+      background: #fff;
+      color: var(--hti-text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .btn-red {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--hti-red);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 14px 34px;
+      font-size: 18px;
+      line-height: 1;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-red:hover {
+      background: #c41515;
+      transform: scale(1.03);
+    }
+
+    /* ============ NAVBAR ============ */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--hti-bg);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #000, transparent);
+      transition: opacity .25s ease;
+    }
+
+    /* static line hides once the scroll progress line takes over */
+    .navbar.scrolled::after {
+      opacity: 0;
+    }
+
+    /* ---------- Scroll progress line (sits under the navbar) ---------- */
+    .scroll-progress {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, var(--hti-red, #e32129), var(--hti-red2, #ff0000));
+      transform: scaleX(0);
+      transform-origin: left center;
+      opacity: 0;
+      transition: opacity .25s ease;
+      will-change: transform;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .navbar.scrolled .scroll-progress {
+      opacity: 1;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 72px;
+    }
+
+    .nav-logo img {
+      width: 52px;
+      height: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-item {
+      position: relative;
+      font-weight: 600;
+      font-size: 15px;
+      color: #111;
+      cursor: pointer;
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-item .caret {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #333;
+      border-bottom: 2px solid #333;
+      transform: rotate(45deg);
+      margin-top: -3px;
+      transition: transform .2s;
+    }
+
+    .nav-item:hover .caret {
+      transform: rotate(-135deg);
+      margin-top: 3px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .14);
+      padding: 10px;
+      min-width: 230px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all .2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 120;
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      padding: 9px 12px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #222;
+    }
+
+    .dropdown a:hover {
+      background: var(--hti-bg);
+      color: var(--hti-red);
+    }
+
+    .dropdown a.active-nav {
+      color: #e8191a;
+      font-weight: 700;
+    }
+
+    .dropdown a b {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .dropdown a span {
+      font-size: 12px;
+      color: #777;
+      font-weight: 400;
+    }
+
+    .nav-contact {
+      background: var(--hti-red);
+      color: #fff;
+      border-radius: 8px;
+      padding: 11px 22px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .nav-contact:hover {
+      background: #c40f10;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      width: 26px;
+      height: 2px;
+      background: #000;
+      display: block;
+      transition: transform .25s ease, opacity .2s ease;
+    }
+
+    /* while the menu is open the hamburger becomes a cross, so there is an
+       obvious way to close it - and it sits in the sticky header, so it stays
+       reachable even when the menu panel is scrolled */
+    .nav-toggle.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ============ SHARED: "KNOW MORE" OUTLINE BUTTON ============ */
+    .know-more {
+      display: inline-block;
+      border: 1px solid var(--hti-red);
+      color: var(--hti-red);
+      text-align: center;
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: .01em;
+      transition: background-color .2s ease;
+    }
+
+    .know-more:hover {
+      background: #ffaaab;
+    }
+
+    .know-more:active {
+      background: #ab0000;
+      color: #fff;
+    }
+
+    /* the in-row variant sits closer to the copy above it */
+    .know-more--row {
+      margin-top: 30px;
+      padding: 12px;
+      font-size: 18px;
+    }
+
+    /* ============ HERO SLIDER ============ */
+    /* The banner photographs are laid over white at low opacity with a
+       multiply blend - that is what keeps the brand logo and the one-liner
+       readable without a dark scrim over the photo. */
+    .brand-hero {
+      background: #fff;
+      position: relative;
+    }
+
+    .brand-hero__viewport {
+      position: relative;
+      height: 800px;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .brand-hero__track {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      transition: transform .5s ease;
+      will-change: transform;
+    }
+
+    .brand-hero__slide {
+      position: relative;
+      flex: 0 0 100%;
+      height: 100%;
+      /* the white ground the banner multiplies against - without it the
+         translucent photo composites over whatever is behind the track and
+         comes out at full strength */
+      background: #fff;
+    }
+
+    .brand-hero__bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .41;
+      mix-blend-mode: multiply;
+    }
+
+    .brand-hero__panel {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1000px, 92%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .brand-hero__logo {
+      width: 200px;
+      height: auto;
+      margin-bottom: 60px;
+    }
+
+    .brand-hero__logo--hti {
+      width: 130px;
+      margin-bottom: 32px;
+    }
+
+    .brand-hero__logo--t3 {
+      width: 100px;
+      margin-bottom: 32px;
+    }
+
+    .brand-hero__line {
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #000;
+      text-shadow: 2px 0 8px #fff;
+    }
+
+    .brand-hero__panel .know-more {
+      margin-top: 178px;
+    }
+
+    .brand-hero__arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 50%;
+      background: #fafafa;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 3;
+      transition: transform .25s ease-out;
+    }
+
+    .brand-hero__arrow svg {
+      width: 18px;
+      height: 18px;
+      color: #333;
+    }
+
+    .brand-hero__arrow--prev {
+      left: 24px;
+    }
+
+    .brand-hero__arrow--next {
+      right: 24px;
+    }
+
+    .brand-hero__arrow--prev:hover {
+      transform: translateY(-50%) scale(1.1) translateX(-3px);
+    }
+
+    .brand-hero__arrow--next:hover {
+      transform: translateY(-50%) scale(1.1) translateX(3px);
+    }
+
+    .brand-hero__dots {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 16px;
+      display: flex;
+      justify-content: center;
+      gap: 3px;
+      z-index: 3;
+    }
+
+    /* the banners are pale, so plain white dots vanish into them - the hairline
+       ring is what keeps the inactive ones readable on every slide */
+    .brand-hero__dot {
+      width: 10px;
+      height: 10px;
+      border: none;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, .25);
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .brand-hero__dot[aria-current="true"] {
+      opacity: 1;
+      background: var(--hti-red);
+    }
+
+    /* ============ INTRO ============ */
+    .brands-intro {
+      background: #fff;
+      margin: 44px 0;
+    }
+
+    .brands-intro__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .brands-intro h1 {
+      font-size: 38px;
+      color: #000;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brands-intro h1 .rule {
+      color: #8f8f8f;
+      font-size: 70px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    /* ============ BRAND ROWS ============ */
+    .brand-section {
+      background: #fff;
+    }
+
+    .brand-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .brand-row__media {
+      overflow: hidden;
+    }
+
+    .brand-row__media img {
+      width: 100%;
+      height: auto;
+    }
+
+    .brand-row__body {
+      align-self: center;
+      padding: 0 40px;
+    }
+
+    .brand-row__logo {
+      width: 150px;
+      height: auto;
+      margin-bottom: 32px;
+    }
+
+    .brand-row__logo--hti {
+      width: 130px;
+    }
+
+    .brand-row__logo--t3 {
+      width: 100px;
+    }
+
+    .brand-copy {
+      text-align: justify;
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+
+    .brand-copy+.brand-copy {
+      margin-top: 1em;
+    }
+
+    /* ============ LOGO STRIP ============ */
+    .brands-logos {
+      background: #efefef;
+      border-bottom: 1px solid #e4ebf3;
+      padding: 60px 30px;
+    }
+
+    .brands-logos h2 {
+      text-align: center;
+      font-size: 24px;
+      line-height: 32px;
+      margin-bottom: 24px;
+    }
+
+    .brands-divider {
+      background: rgba(0, 0, 0, .2);
+      height: 1px;
+    }
+
+    .brands-logos__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 750px;
+      margin: 20px auto 0;
+    }
+
+    .brands-logos__row img {
+      width: 90px;
+      height: auto;
+    }
+
+    .brands-logos__row img.is-hti {
+      width: 60px;
+    }
+
+    .brands-logos__row img.is-star,
+    .brands-logos__row img.is-lead {
+      width: 70px;
+    }
+
+    .brands-logos__row img.is-dox {
+      width: 80px;
+    }
+
+    .brands-logos__row img.is-t3 {
+      width: 40px;
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+      background: #000;
+      color: #fff;
+      padding: 60px 30px 30px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .footer-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 17px;
+      color: #fff;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 14.5px;
+      color: #c7c7c7;
+      margin-bottom: 11px;
+      font-weight: 400;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-div {
+      height: 1px;
+      background: #2a2a2a;
+      margin: 40px 0 30px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 26px;
+      height: 26px;
+      color: #fff;
+      opacity: .85;
+    }
+
+    .footer-social a:hover {
+      opacity: 1;
+      color: var(--hti-red);
+    }
+
+    .footer-contact h3 {
+      font-size: 20px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .footer-contact span {
+      color: var(--hti-red);
+    }
+
+    .footer-brand img {
+      width: 70px;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: #8a8a8a;
+      font-size: 13px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media(max-width:1200px) {
+      .brand-hero__viewport {
+        height: 640px;
+      }
+
+      .brand-hero__line {
+        font-size: 32px;
+      }
+
+      .brand-hero__panel .know-more {
+        margin-top: 120px;
+      }
+
+      .brand-copy {
+        font-size: 21px;
+      }
+
+      .brand-row__body {
+        padding: 0 28px;
+      }
+    }
+
+    @media(max-width:960px) {
+      .nav-menu {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 16px 24px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+        display: none;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .nav-item {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: 4px 0 4px 14px;
+        min-width: auto;
+        width: 100%;
+        display: none;
+      }
+
+      .nav-item.open .dropdown {
+        display: flex;
+      }
+
+      /* a tap leaves :hover stuck on touch devices, which used to point the
+         caret up while the panel stayed shut - drive it from the real state */
+      .nav-item:hover .caret {
+        transform: rotate(45deg);
+        margin-top: -3px;
+      }
+
+      .nav-item.open .caret {
+        transform: rotate(-135deg);
+        margin-top: 3px;
+      }
+
+      /* touch targets: every dropdown link is at least 44px tall */
+      .dropdown a {
+        min-height: 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .brand-hero__viewport {
+        height: 480px;
+      }
+
+      .brand-hero__logo {
+        width: 150px;
+        margin-bottom: 34px;
+      }
+
+      .brand-hero__line {
+        font-size: 26px;
+      }
+
+      .brand-hero__panel .know-more {
+        margin-top: 60px;
+        padding: 12px;
+        font-size: 16px;
+      }
+
+      .brands-intro h1 {
+        font-size: 30px;
+      }
+
+      .brands-intro h1 .rule {
+        font-size: 52px;
+      }
+
+      .brand-copy {
+        font-size: 17px;
+      }
+
+      .brand-row__logo {
+        width: 110px;
+        margin-bottom: 20px;
+      }
+
+      .footer-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:600px) {
+      .brand-hero__viewport {
+        height: 400px;
+      }
+
+      .brand-hero__logo {
+        width: 130px;
+        margin-bottom: 26px;
+      }
+
+      .brand-hero__logo--hti {
+        width: 80px;
+      }
+
+      .brand-hero__logo--t3 {
+        width: 60px;
+      }
+
+      .brand-hero__line {
+        font-size: 18px;
+      }
+
+      .brand-hero__arrow {
+        width: 33px;
+        height: 33px;
+      }
+
+      .brand-hero__arrow--prev {
+        left: 10px;
+      }
+
+      .brand-hero__arrow--next {
+        right: 10px;
+      }
+
+      /* stack every row image-first, whichever side it sits on for desktop */
+      .brand-row {
+        grid-template-columns: 1fr;
+      }
+
+      .brand-row--text-first .brand-row__media {
+        order: -1;
+      }
+
+      .brand-row__body {
+        padding: 20px 15px 30px;
+      }
+
+      .brand-copy {
+        font-size: 16px;
+        line-height: 1.45;
+      }
+
+      .brands-logos__row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+        justify-items: center;
+      }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBKJQQRP0N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-SBKJQQRP0N');
+  </script>
+  <!-- shared motion layer: progressive enhancement, see assets/motion.css -->
+  <link rel="stylesheet" href="assets/motion.css" />
+  <link rel="stylesheet" href="assets/polish.css" />
+  <script src="assets/motion.js" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Our Brands",
+    "url": "https://www.hti-india.com/brands.html",
+    "description": "The six training brands of HTI India — HTI, Woosh Biz, Star by HTI, Lead by HTI, Dox by HTI and T3.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "HTI India",
+      "url": "https://www.hti-india.com/"
+    },
+    "about": {
+      "@type": "Organization",
+      "name": "Hospitality Training Institute India Private Limited",
+      "alternateName": "HTI India",
+      "url": "https://www.hti-india.com/",
+      "logo": "https://www.hti-india.com/images/brand/hti-logo.png",
+      "foundingDate": "2002",
+      "telephone": "+91-77380-60902",
+      "brand": [
+        { "@type": "Brand", "name": "HTI", "description": "Job skills and soft skills training for hotels, restaurants and the service industry." },
+        { "@type": "Brand", "name": "Woosh Biz by HTI", "description": "Inbound and outbound team building programs.", "url": "https://wooshbiz.com" },
+        { "@type": "Brand", "name": "Star by HTI", "description": "Public speaking and train-the-trainer development for supervisors." },
+        { "@type": "Brand", "name": "Lead by HTI", "description": "Leadership development programs for managers and above." },
+        { "@type": "Brand", "name": "Dox by HTI", "description": "Job descriptions, policies and standard operating procedures." },
+        { "@type": "Brand", "name": "T3 - The Training Tsunami", "description": "App that hosts training content and monitors training delivery and impact." }
+      ]
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.hti-india.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Our Brands", "item": "https://www.hti-india.com/brands.html" }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img
+          src="images/brand/hti-logo.png"
+          alt="HTI Logo" /></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+      <nav class="nav-menu" id="navMenu">
+        <div class="nav-item">Restaurants &amp; QSRs<span class="caret"></span>
+          <div class="dropdown">
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Service Team</div>
+            <a href="super.html"><b>SUPER</b><span>Waiters, stewards, captains, hostess</span></a>
+            <a href="support.html"><b>SUPPORT</b><span>Same roles &mdash; pre-opening restaurant</span></a>
+            <a href="icedt.html"><b>ICEDT</b><span>Counter executives, sales boys, servers</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Guest Experience</div>
+            <a href="icare.html"><b>iCARE</b><span>Customer service execs, supervisors</span></a>
+            <a href="vow.html"><b>Vow to Wow</b><span>Frontline reps, team leaders</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Managers</div>
+            <a href="ramp.html"><b>RAMP</b><span>Restaurant managers &amp; supervisors</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
+            <a href="restaurants.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Hotels<span class="caret"></span>
+          <div class="dropdown">
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Rooms &amp; Front Desk</div>
+            <a href="fort.html"><b>FORT</b><span>Receptionists, FO executives, GRE, bell boys</span></a>
+            <a href="hotcar.html"><b>HOT-CAR</b><span>Housekeeping attendants &amp; supervisors</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Kitchen</div>
+            <a href="kmt.html"><b>KMT</b><span>Chefs, sous chefs, kitchen supervisors</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Whole Property</div>
+            <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Every hotel role &mdash; F&amp;B to security</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Villas &amp; Homestays</div>
+            <a href="cup.html"><b>CUP</b><span>Caretakers of villas, homestays, guesthouses</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Grooming &amp; Management</div>
+            <a href="class.html"><b>CLASS</b><span>Guest-facing &amp; corporate professionals</span></a>
+            <a href="mdp.html"><b>MDP</b><span>Newly promoted &amp; mid-level managers</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
+            <a href="hotels.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Offices &amp; Retail<span class="caret"></span>
+          <div class="dropdown">
+            <a href="post.html"><b>POST</b><span>Corporate pantry staff &amp; attendants</span></a>
+            <a href="top.html"><b>TOP</b><span>Peons, office boys, support staff</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
+            <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">More<span class="caret"></span>
+          <div class="dropdown">
+            <a href="brands.html" class="active-nav"><b>Our Brands</b><span>HTI, Woosh Biz, Star, Lead, Dox &amp; T3</span></a>
+            <a href="lead.html"><b>Lead by HTI</b><span>Train the trainer, presentation &amp; soft skills</span></a>
+            <a href="leadership-development.html"><b>Leadership Development</b><span>Senior managers &amp; future leaders</span></a>
+            <a href="professional-etiquette.html"><b>Professional Etiquette</b><span>Corporate &amp; client-facing professionals</span></a>
+            <a href="posh-training.html"><b>POSH Training</b><span>All employees, managers &amp; ICC members</span></a>
+            <a href="fssai-training.html"><b>FSSAI Training</b><span>Food handlers &amp; food safety supervisors</span></a>
+            <a href="https://wooshbiz.com/" target="_blank" rel="noopener"><b>Team Building</b><span>Group activities for any team</span></a>
+            <a href="dox.html"><b>Develop SOPs &amp; How-To Videos</b><span>Owners &amp; operations heads</span></a>
+            <a href="blog.html"><b>Blogs</b><span>Hospitality insights &amp; guides</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
+          </div>
+        </div>
+        <a href="contact.html" class="nav-contact">Contact Us</a>
+      </nav>
+    </div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+  </header>
+
+  <!-- ============ SECTION 1: BRAND SLIDER ============ -->
+  <section class="brand-hero" data-motion="off" aria-label="HTI brands">
+    <div class="brand-hero__viewport" id="brandHero">
+      <div class="brand-hero__track" id="brandHeroTrack">
+
+        <div class="brand-hero__slide" role="group" aria-label="HTI">
+          <img class="brand-hero__bg" src="images/brands/hti-brand-banner.webp"
+            srcset="images/brands/hti-brand-banner-800.webp 800w, images/brands/hti-brand-banner.webp 1052w"
+            sizes="100vw" width="1052" height="600" fetchpriority="high"
+            alt="HTI trainer leading a classroom session for hospitality staff" />
+          <div class="brand-hero__panel">
+            <img class="brand-hero__logo brand-hero__logo--hti" src="images/brands/hti-logo-mark.png" width="500"
+              height="380" loading="eager" alt="HTI logo" />
+            <p class="brand-hero__line">HTI (since 2002) the complete training solution provider&hellip;</p>
+            <a href="index.html" class="know-more">KNOW MORE</a>
+          </div>
+        </div>
+
+        <div class="brand-hero__slide" role="group" aria-label="Woosh Biz by HTI">
+          <img class="brand-hero__bg" src="images/brands/woosh-biz-by-hti-banner.webp"
+            srcset="images/brands/woosh-biz-by-hti-banner-800.webp 800w, images/brands/woosh-biz-by-hti-banner.webp 1052w"
+            sizes="100vw" width="1052" height="600" loading="lazy"
+            alt="Teams playing an outdoor team building game at an HTI Woosh Biz session" />
+          <div class="brand-hero__panel">
+            <img class="brand-hero__logo" src="images/brands/woosh-biz-by-hti-logo.png" width="1182" height="466"
+              loading="lazy" alt="Woosh Biz by HTI logo" />
+            <p class="brand-hero__line">curates inbound &amp; outbound Team Building&hellip;</p>
+            <a href="https://wooshbiz.com" target="_blank" rel="noopener" class="know-more">KNOW MORE</a>
+          </div>
+        </div>
+
+        <div class="brand-hero__slide" role="group" aria-label="Star by HTI">
+          <img class="brand-hero__bg" src="images/brands/star-by-hti-banner.webp"
+            srcset="images/brands/star-by-hti-banner-800.webp 800w, images/brands/star-by-hti-banner.webp 1052w"
+            sizes="100vw" width="1052" height="600" loading="lazy"
+            alt="Supervisor presenting to a full hall during an HTI Star public speaking workshop" />
+          <div class="brand-hero__panel">
+            <img class="brand-hero__logo" src="images/brands/star-by-hti-logo.png" width="653" height="320"
+              loading="lazy" alt="Star by HTI logo" />
+            <p class="brand-hero__line">trains supervisors in public speaking&hellip;</p>
+          </div>
+        </div>
+
+        <div class="brand-hero__slide" role="group" aria-label="Lead by HTI">
+          <img class="brand-hero__bg" src="images/brands/lead-by-hti-banner.webp"
+            srcset="images/brands/lead-by-hti-banner-800.webp 800w, images/brands/lead-by-hti-banner.webp 1052w"
+            sizes="100vw" width="1052" height="600" loading="lazy"
+            alt="HTI facilitator running a leadership development session for managers" />
+          <div class="brand-hero__panel">
+            <img class="brand-hero__logo" src="images/brands/lead-by-hti-logo.png" width="500" height="270"
+              loading="lazy" alt="Lead by HTI logo" />
+            <p class="brand-hero__line">Lead by HTI facilitates inbound &amp; outbound&hellip;</p>
+            <a href="lead.html" class="know-more">KNOW MORE</a>
+          </div>
+        </div>
+
+        <div class="brand-hero__slide" role="group" aria-label="Dox by HTI">
+          <img class="brand-hero__bg" src="images/brands/dox-by-hti-banner.webp"
+            srcset="images/brands/dox-by-hti-banner-800.webp 800w, images/brands/dox-by-hti-banner.webp 1052w"
+            sizes="100vw" width="1052" height="600" loading="lazy"
+            alt="Hand selecting a document icon, representing HTI Dox SOP and policy documentation" />
+          <div class="brand-hero__panel">
+            <img class="brand-hero__logo" src="images/brands/dox-by-hti-logo.png" width="673" height="367"
+              loading="lazy" alt="Dox by HTI logo" />
+            <p class="brand-hero__line"><strong>Dox by HTI</strong> advises &amp; helps curate Job&hellip;</p>
+            <a href="#dox-by-hti" class="know-more">KNOW MORE</a>
+          </div>
+        </div>
+
+        <div class="brand-hero__slide" role="group" aria-label="T3 by HTI">
+          <img class="brand-hero__bg" src="images/brands/t3-by-hti-banner.webp"
+            srcset="images/brands/t3-by-hti-banner-800.webp 800w, images/brands/t3-by-hti-banner.webp 1052w"
+            sizes="100vw" width="1052" height="600" loading="lazy"
+            alt="Diagram of the HTI Training Tsunami app workflow, from registering participants to analysing progress" />
+          <div class="brand-hero__panel">
+            <img class="brand-hero__logo brand-hero__logo--t3" src="images/brands/t3-by-hti-logo.png" width="500"
+              height="521" loading="lazy" alt="T3 - The Training Tsunami by HTI logo" />
+            <p class="brand-hero__line">The Training Tsunami app hosts&hellip;</p>
+            <a href="#t3-by-hti" class="know-more">KNOW MORE</a>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="brand-hero__arrow brand-hero__arrow--prev" id="brandHeroPrev" aria-label="Previous brand"
+        aria-controls="brandHeroTrack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 18 9 12l6-6" />
+        </svg></button>
+      <button class="brand-hero__arrow brand-hero__arrow--next" id="brandHeroNext" aria-label="Next brand"
+        aria-controls="brandHeroTrack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m9 18 6-6-6-6" />
+        </svg></button>
+      <div class="brand-hero__dots" id="brandHeroDots" role="tablist" aria-label="Choose a brand"></div>
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Book Now <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2: INTRO ============ -->
+  <section class="brands-intro">
+    <div class="brands-intro__inner">
+      <h1><span class="rule" aria-hidden="true">|</span> Our Brands</h1>
+      <p class="brand-copy"><strong>Salt is like training &ndash; the presence is unnoticed; the absence &ndash; ruins
+          organisations.</strong></p>
+      <p class="brand-copy">Solid product, fancy office, snazzy website &amp; social media make an impact; but it&rsquo;s
+        <strong>your team that makes or breaks your brand!</strong> Dream teams convert one-off patrons into loyal
+        customers; raving fans. Dream teams are not found &#39;readymade&#39;; they are intentionally built by persistent
+        training that leads to organisational growth &amp; expansion.
+      </p>
+      <p class="brand-copy">Growth and expansion calls for hiring and promoting. New hires must be trained &amp; when
+        promoting, both incumbent and replacement must be trained to handle the next level. <strong>Training is
+          irreplaceable &ndash; like salt.</strong></p>
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Let's talk <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3: BRAND ROWS ============ -->
+  <section class="brand-section" id="hti">
+    <div class="brand-row">
+      <div class="brand-row__media"><img src="images/brands/hti-brand-banner.webp"
+          srcset="images/brands/hti-brand-banner-800.webp 800w, images/brands/hti-brand-banner.webp 1052w"
+          sizes="(max-width: 600px) 100vw, 50vw" width="1052" height="600" loading="lazy"
+          alt="HTI trainer running a hospitality staff training session in a hotel banquet hall" /></div>
+      <div class="brand-row__body">
+        <img class="brand-row__logo brand-row__logo--hti" src="images/brands/hti-logo-mark.png" width="500" height="380"
+          loading="lazy" alt="HTI logo" />
+        <p class="brand-copy">HTI (since 2002) the complete training solution provider&hellip; we either build or become
+          your training department.</p>
+        <p class="brand-copy">HTI specialises in training staff of hotels, restaurants &amp; the service industry in job
+          skills and soft skills. We have programs to train Stewards (Servers), Housekeeping Associates, Front Office
+          Executives, Guesthouse Caretakers &amp; Office Boys.</p>
+        <a href="index.html" class="know-more know-more--row">KNOW MORE</a>
+      </div>
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Book Now <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <section class="brand-section" id="woosh-biz-by-hti">
+    <div class="brand-row brand-row--text-first">
+      <div class="brand-row__body">
+        <img class="brand-row__logo" src="images/brands/woosh-biz-by-hti-logo.png" width="1182" height="466"
+          loading="lazy" alt="Woosh Biz by HTI logo" />
+        <p class="brand-copy"><strong>Woosh Biz by HTI</strong> curates inbound &amp; outbound Team Building programs
+          with an emphasis on strategic thinking, agility, &amp; risk-taking ability. With competition, good-natured
+          cheating and the odd blame game, our games encourage the inner child to come out &amp; play, bond, laugh,
+          learn.</p>
+        <p class="brand-copy">Get the whole organization together or conduct it selectively for departments or strategic
+          teams.</p>
+        <a href="https://wooshbiz.com" target="_blank" rel="noopener" class="know-more know-more--row">KNOW MORE</a>
+      </div>
+      <div class="brand-row__media"><img src="images/brands/woosh-biz-by-hti-banner.webp"
+          srcset="images/brands/woosh-biz-by-hti-banner-800.webp 800w, images/brands/woosh-biz-by-hti-banner.webp 1052w"
+          sizes="(max-width: 600px) 100vw, 50vw" width="1052" height="600" loading="lazy"
+          alt="Participants working together in an outdoor team building activity run by HTI Woosh Biz" /></div>
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Let's talk <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <section class="brand-section" id="star-by-hti">
+    <div class="brand-row">
+      <div class="brand-row__media"><img src="images/brands/star-by-hti-banner.webp"
+          srcset="images/brands/star-by-hti-banner-800.webp 800w, images/brands/star-by-hti-banner.webp 1052w"
+          sizes="(max-width: 600px) 100vw, 50vw" width="1052" height="600" loading="lazy"
+          alt="Trainee addressing a large audience during an HTI Star public speaking program" /></div>
+      <div class="brand-row__body">
+        <img class="brand-row__logo" src="images/brands/star-by-hti-logo.png" width="653" height="320" loading="lazy"
+          alt="Star by HTI logo" />
+        <p class="brand-copy"><strong>Star by HTI</strong> trains supervisors in public speaking &amp; to be in-house
+          trainers, while boosting confidence &amp; developing personality. Ideal for, Floor Managers, Mid Management
+          &amp; Management Students.</p>
+      </div>
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Book Now <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <section class="brand-section" id="lead-by-hti">
+    <div class="brand-row brand-row--text-first">
+      <div class="brand-row__body">
+        <img class="brand-row__logo" src="images/brands/lead-by-hti-logo.png" width="500" height="270" loading="lazy"
+          alt="Lead by HTI logo" />
+        <p class="brand-copy"><strong>Lead by HTI</strong> facilitates inbound &amp; outbound Leadership Development
+          Programs for managers &amp; above; addressing Growth Orientation, Strategic Communication, Managing VUCA &amp;
+          Strategy.</p>
+        <a href="lead.html" class="know-more know-more--row">KNOW MORE</a>
+      </div>
+      <div class="brand-row__media"><img src="images/brands/lead-by-hti-banner.webp"
+          srcset="images/brands/lead-by-hti-banner-800.webp 800w, images/brands/lead-by-hti-banner.webp 1052w"
+          sizes="(max-width: 600px) 100vw, 50vw" width="1052" height="600" loading="lazy"
+          alt="HTI facilitator addressing managers during a Lead by HTI leadership development program" /></div>
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Let's talk <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <section class="brand-section" id="dox-by-hti">
+    <div class="brand-row">
+      <div class="brand-row__media"><img src="images/brands/dox-by-hti-banner.webp"
+          srcset="images/brands/dox-by-hti-banner-800.webp 800w, images/brands/dox-by-hti-banner.webp 1052w"
+          sizes="(max-width: 600px) 100vw, 50vw" width="1052" height="600" loading="lazy"
+          alt="Hand reaching for a document icon, representing SOPs and policies written by HTI Dox" /></div>
+      <div class="brand-row__body">
+        <img class="brand-row__logo" src="images/brands/dox-by-hti-logo.png" width="673" height="367" loading="lazy"
+          alt="Dox by HTI logo" />
+        <p class="brand-copy"><strong>Dox by HTI</strong> advises &amp; helps curate Job Descriptions (JDs), policies
+          &amp; Standard Operating Procedures (SOPs). SOPs allow teammates with limited training / instructions to
+          replicate / duplicate tasks consistently. SOPs make Speed, Scale &amp; Skilling possible.</p>
+        <a href="dox.html" class="know-more know-more--row">KNOW MORE</a>
+      </div>
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Book Now <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <section class="brand-section" id="t3-by-hti">
+    <div class="brand-row brand-row--text-first">
+      <div class="brand-row__body">
+        <img class="brand-row__logo brand-row__logo--t3" src="images/brands/t3-by-hti-logo.png" width="500" height="521"
+          loading="lazy" alt="T3 - The Training Tsunami by HTI logo" />
+        <p class="brand-copy">The Training Tsunami app hosts training content, builds certifications per designation,
+          &amp; supports in storing, cascading &amp; monitoring training delivery &amp; impact.</p>
+        <a href="index.html#training-tsunami" class="know-more know-more--row">KNOW MORE</a>
+      </div>
+      <div class="brand-row__media"><img src="images/brands/t3-by-hti-banner.webp"
+          srcset="images/brands/t3-by-hti-banner-800.webp 800w, images/brands/t3-by-hti-banner.webp 1052w"
+          sizes="(max-width: 600px) 100vw, 50vw" width="1052" height="600" loading="lazy"
+          alt="Workflow diagram of the HTI Training Tsunami app, from uploading material to analysing participant progress" /></div>
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Let's talk <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4: BRAND LOGO STRIP ============ -->
+  <section class="brands-logos">
+    <h2>Our Brands</h2>
+    <div class="brands-divider"></div>
+    <div class="brands-logos__row">
+      <a href="index.html"><img class="is-hti" src="images/brands/hti-logo-mark.png" width="500" height="380"
+          loading="lazy" alt="HTI logo" /></a>
+      <a href="https://wooshbiz.com" target="_blank" rel="noopener"><img src="images/brands/woosh-biz-by-hti-logo.png"
+          width="1182" height="466" loading="lazy" alt="Woosh Biz by HTI logo" /></a>
+      <a href="#star-by-hti"><img class="is-star" src="images/brands/star-by-hti-logo.png" width="653" height="320"
+          loading="lazy" alt="Star by HTI logo" /></a>
+      <a href="lead.html"><img class="is-lead" src="images/brands/lead-by-hti-logo.png" width="500"
+          height="270" loading="lazy" alt="Lead by HTI logo" /></a>
+      <a href="dox.html"><img class="is-dox" src="images/brands/dox-by-hti-logo.png" width="673" height="367"
+          loading="lazy" alt="Dox by HTI logo" /></a>
+      <a href="index.html#training-tsunami"><img class="is-t3" src="images/brands/t3-by-hti-logo.png" width="500"
+          height="521" loading="lazy" alt="T3 - The Training Tsunami by HTI logo" /></a>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>HTI</h4>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <a href="restaurants.html">Restaurants &amp; QSRs</a>
+          <a href="hotels.html">Hotels</a>
+          <a href="offices.html">Offices</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="brands.html">Our Brands</a>
+          <a href="https://wooshbiz.com/" target="_blank" rel="noopener">Team Building</a>
+          <a href="lead.html">Lead by HTI</a>
+          <a href="leadership-development.html">Leadership Development</a>
+          <a href="professional-etiquette.html">Professional Etiquette</a>
+          <a href="posh-training.html">POSH Training</a>
+          <a href="fssai-training.html">FSSAI Training</a>
+          <a href="dox.html">Develop SOPs &amp; How-To Videos</a>
+          <a href="blog.html">Blogs</a>
+        </div>
+      </div>
+      <div class="footer-div"></div>
+      <div class="footer-bottom">
+        <div class="footer-social">
+          <a href="https://www.facebook.com/hti.india/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg></a>
+          <a href="https://www.instagram.com/hti.india/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M12 2c-2.716 0-3.056.012-4.123.06c-1.064.049-1.791.218-2.427.465a4.901 4.901 0 0 0-1.772 1.153A4.902 4.902 0 0 0 2.525 5.45c-.247.636-.416 1.363-.465 2.427C2.011 8.944 2 9.284 2 12s.011 3.056.06 4.123c.049 1.064.218 1.791.465 2.427a4.903 4.903 0 0 0 1.153 1.772a4.903 4.903 0 0 0 1.772 1.153c.636.247 1.363.416 2.427.465c1.067.048 1.407.06 4.123.06s3.056-.012 4.123-.06c1.064-.049 1.791-.218 2.427-.465a4.902 4.902 0 0 0 1.772-1.153a4.902 4.902 0 0 0 1.153-1.772c.247-.636.416-1.363.465-2.427c.048-1.067.06-1.407.06-4.123s-.012-3.056-.06-4.123c-.049-1.064-.218-1.791-.465-2.427a4.902 4.902 0 0 0-1.153-1.772a4.901 4.901 0 0 0-1.772-1.153c-.636-.247-1.363-.416-2.427-.465C15.056 2.012 14.716 2 12 2m0 1.802c2.67 0 2.986.01 4.04.058c.976.045 1.505.207 1.858.344c.466.182.8.399 1.15.748c.35.35.566.684.748 1.15c.136.353.3.882.344 1.857c.048 1.055.058 1.37.058 4.041c0 2.67-.01 2.986-.058 4.04c-.045.976-.208 1.505-.344 1.858a3.1 3.1 0 0 1-.748 1.15c-.35.35-.684.566-1.15.748c-.353.136-.882.3-1.857.344c-1.054.048-1.37.058-4.041.058c-2.67 0-2.987-.01-4.04-.058c-.976-.045-1.505-.208-1.858-.344a3.098 3.098 0 0 1-1.15-.748a3.098 3.098 0 0 1-.748-1.15c-.137-.353-.3-.882-.344-1.857c-.048-1.055-.058-1.37-.058-4.041c0-2.67.01-2.986.058-4.04c.045-.976.207-1.505.344-1.858c.182-.466.399-.8.748-1.15c.35-.35.684-.566 1.15-.748c.353-.137.882-.3 1.857-.344c1.055-.048 1.37-.058 4.041-.058m0 11.531a3.333 3.333 0 1 1 0-6.666a3.333 3.333 0 0 1 0 6.666m0-8.468a5.135 5.135 0 1 0 0 10.27a5.135 5.135 0 0 0 0-10.27m6.538-.203a1.2 1.2 0 1 1-2.4 0a1.2 1.2 0 0 1 2.4 0" />
+            </svg></a>
+          <a href="https://www.linkedin.com/company/hospitality-training-institute-india-pvt-ltd" target="_blank"
+            aria-label="LinkedIn"><svg viewBox="0 0 32 32" fill="currentColor">
+              <path
+                d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+            </svg></a>
+          <a href="https://www.youtube.com/c/Hti-india" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg></a>
+        </div>
+        <div class="footer-contact"><a href="contact.html">
+            <h3>Contact Us: <span>+91 77380 60902</span></h3>
+          </a></div>
+        <a href="index.html" class="footer-brand"><img
+            src="images/brand/hti-logo.png"
+            alt="HTI" /></a>
+      </div>
+      <div class="footer-copy">&#169;&#65039; HOSPITALITY TRAINING INSTITUTE INDIA PRIVATE. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    /* ---------- Mobile nav ---------- */
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const menu = document.getElementById('navMenu');
+
+      /* one source of truth for the open state, so the panel, the
+         hamburger-to-cross animation and the ARIA state always agree */
+      function setNav(open) {
+        menu.classList.toggle('open', open);
+        toggle.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        if (!open) {
+          menu.querySelectorAll('.nav-item.open').forEach(i => i.classList.remove('open'));
+        }
+      }
+
+      toggle.addEventListener('click', () => setNav(!menu.classList.contains('open')));
+
+      /* Escape, or a tap outside the panel, also closes it */
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu.classList.contains('open')) setNav(false);
+      });
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 960 && menu.classList.contains('open') &&
+          !menu.contains(e.target) && !toggle.contains(e.target)) setNav(false);
+      });
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          if (window.innerWidth <= 960 && (e.target === item || e.target.classList.contains('caret'))) {
+            item.classList.toggle('open');
+          }
+        });
+      });
+      /* tapping any nav link closes the menu - matters for links that open
+         in a new tab and so never navigate this page away */
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          setNav(false);
+        });
+      });
+    })();
+  </script>
+  <script>
+    /* ---------- Brand slider ----------
+       Autoplays every 4s like the source deck, but pauses whenever someone is
+       reading it: on hover, on keyboard focus, and whenever the tab is hidden.
+       Everything is transform-driven so no layout work happens per frame. */
+    (function () {
+      const viewport = document.getElementById('brandHero');
+      const track = document.getElementById('brandHeroTrack');
+      const dotsBox = document.getElementById('brandHeroDots');
+      if (!viewport || !track) return;
+
+      const slides = Array.prototype.slice.call(track.children);
+      const count = slides.length;
+      const DELAY = 4000;
+      let index = 0;
+      let timer = null;
+      let paused = false;
+
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      const dots = slides.map((slide, i) => {
+        const b = document.createElement('button');
+        b.className = 'brand-hero__dot';
+        b.type = 'button';
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-label', slide.getAttribute('aria-label') || ('Slide ' + (i + 1)));
+        b.addEventListener('click', () => { go(i); restart(); });
+        dotsBox.appendChild(b);
+        return b;
+      });
+
+      /* Slides past the first sit off-screen horizontally, so a lazy image on
+         them is never in the viewport and the browser holds the fetch until
+         the slide has already slid in - which shows as a blank slide on the
+         first pass. Flipping the loading attribute after parse does not
+         un-defer an image, so warm the HTTP cache with a detached request a
+         step ahead instead: by the time the real <img> is revealed it paints
+         from cache, and slide one still gets the network to itself for LCP. */
+      const warmed = new Set();
+
+      function prime(i) {
+        const slide = slides[(i + count) % count];
+        slide.querySelectorAll('img').forEach(img => {
+          const key = img.getAttribute('src');
+          if (!key || warmed.has(key) || img.complete) return;
+          warmed.add(key);
+          const pre = new Image();
+          if (img.sizes) pre.sizes = img.sizes;
+          if (img.srcset) pre.srcset = img.srcset;
+          pre.src = key;
+        });
+      }
+
+      function go(i) {
+        index = (i + count) % count;
+        track.style.transform = 'translate3d(' + (-index * 100) + '%,0,0)';
+        slides.forEach((s, n) => s.setAttribute('aria-hidden', n === index ? 'false' : 'true'));
+        dots.forEach((d, n) => d.setAttribute('aria-current', n === index ? 'true' : 'false'));
+        prime(index + 1);
+      }
+
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+      function start() {
+        stop();
+        if (paused || reduce.matches || document.hidden) return;
+        timer = setInterval(() => go(index + 1), DELAY);
+      }
+
+      function restart() { stop(); start(); }
+
+      document.getElementById('brandHeroPrev').addEventListener('click', () => { go(index - 1); restart(); });
+      document.getElementById('brandHeroNext').addEventListener('click', () => { go(index + 1); restart(); });
+
+      /* a slide people are looking at, or tabbing through, should hold still */
+      ['mouseenter', 'focusin'].forEach(ev =>
+        viewport.addEventListener(ev, () => { paused = true; stop(); }));
+      ['mouseleave', 'focusout'].forEach(ev =>
+        viewport.addEventListener(ev, () => { paused = false; start(); }));
+      document.addEventListener('visibilitychange', start);
+      reduce.addEventListener('change', start);
+
+      /* swipe, for the mobile layout where the arrows are small */
+      let x0 = null;
+      viewport.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+      viewport.addEventListener('touchend', e => {
+        if (x0 === null) return;
+        const dx = e.changedTouches[0].clientX - x0;
+        if (Math.abs(dx) > 45) { go(index + (dx < 0 ? 1 : -1)); restart(); }
+        x0 = null;
+      }, { passive: true });
+
+      go(0);
+      /* jumping straight to a far slide via a dot skips the step-ahead
+         priming, so once the page has settled let the rest fetch too */
+      window.addEventListener('load', () => {
+        setTimeout(() => slides.forEach((s, i) => prime(i)), 1200);
+      });
+      start();
+    })();
+  </script>
+  <script>
+    /* ---------- Scroll progress line under the navbar ---------- */
+    (function () {
+      const bar = document.getElementById('scrollProgress');
+      const navbar = document.querySelector('.navbar');
+      if (!bar || !navbar) return;
+      let ticking = false;
+
+      function update() {
+        ticking = false;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const y = window.scrollY || window.pageYOffset;
+        const ratio = max > 0 ? Math.min(Math.max(y / max, 0), 1) : 0;
+        bar.style.transform = `scaleX(${ratio})`;
+        navbar.classList.toggle('scrolled', y > 4);
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      }, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      window.addEventListener('orientationchange', update);
+      /* mobile browsers resize the viewport when the URL bar hides/shows */
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', update);
+      }
+      window.addEventListener('load', update);
+      update();
+    })();
+  </script>
+</body>
+
+</html>

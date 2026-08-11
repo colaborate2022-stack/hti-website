@@ -17,6 +17,8 @@
   <meta name="twitter:title" content="Leadership Development Training Programs | HTI India" />
   <meta name="twitter:description" content="Leadership training for hospitality teams — growth orientation, strategic communication, management frameworks and the art of war. Short 2-3 day programs by HTI India." />
   <meta name="twitter:image" content="https://www.hti-india.com/images/about/leadership-og.png" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"Leadership Development Training","description":"Short leadership programs for hospitality managers and future leaders — growth orientation, strategic communication, frameworks of management and the art of war. Delivered in person over 2-3 days by HTI India.","url":"https://www.hti-india.com/leadership-development.html","image":["https://www.hti-india.com/images/leadership/growth-orientation.webp","https://www.hti-india.com/images/leadership/strategic-communication.webp","https://www.hti-india.com/images/leadership/framework-of-management.webp","https://www.hti-india.com/images/leadership/art-of-war.webp"],"inLanguage":"en","provider":{"@type":"Organization","name":"HTI India","url":"https://www.hti-india.com"},"hasCourseInstance":{"@type":"CourseInstance","courseMode":"onsite","courseWorkload":"P3D"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.hti-india.com/"},{"@type":"ListItem","position":2,"name":"Leadership Development","item":"https://www.hti-india.com/leadership-development.html"}]}</script>
   <link rel="icon" href="images/brand/hti-favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -297,7 +299,7 @@
       background: #ffffff;
       border: 1px solid #e0e0e0;
       border-radius: 16px;
-      padding: 2rem;
+      overflow: hidden;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
       display: flex;
       flex-direction: column;
@@ -308,6 +310,32 @@
       transform: translateY(-4px);
       border-color: #e31e24;
       box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
+    }
+
+    /* the photo is a real batch from that programme - it carries the card, so
+       it sits edge to edge above the copy rather than inside the padding */
+    .course-media {
+      overflow: hidden;
+      background: #ddd8d1;
+    }
+
+    .course-media img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1200 / 630;
+      object-fit: cover;
+      transition: transform .35s ease;
+    }
+
+    .course-card:hover .course-media img {
+      transform: scale(1.04);
+    }
+
+    .course-body {
+      padding: 1.6rem 1.7rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
 
     .course-dur {
@@ -600,6 +628,8 @@
             <a href="kmt.html"><b>KMT</b><span>Chefs, sous chefs, kitchen supervisors</span></a>
             <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Whole Property</div>
             <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Every hotel role &mdash; F&amp;B to security</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Villas &amp; Homestays</div>
+            <a href="cup.html"><b>CUP</b><span>Caretakers of villas, homestays, guesthouses</span></a>
             <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Grooming &amp; Management</div>
             <a href="class.html"><b>CLASS</b><span>Guest-facing &amp; corporate professionals</span></a>
             <a href="mdp.html"><b>MDP</b><span>Newly promoted &amp; mid-level managers</span></a>
@@ -610,7 +640,6 @@
         <div class="nav-item">Offices &amp; Retail<span class="caret"></span>
           <div class="dropdown">
             <a href="post.html"><b>POST</b><span>Corporate pantry staff &amp; attendants</span></a>
-            <a href="cup.html"><b>CUP</b><span>Caretakers of villas, homestays, guesthouses</span></a>
             <a href="top.html"><b>TOP</b><span>Peons, office boys, support staff</span></a>
             <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
             <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
@@ -618,6 +647,8 @@
         </div>
         <div class="nav-item">More<span class="caret"></span>
           <div class="dropdown">
+            <a href="brands.html"><b>Our Brands</b><span>HTI, Woosh Biz, Star, Lead, Dox &amp; T3</span></a>
+            <a href="lead.html"><b>Lead by HTI</b><span>Train the trainer, presentation &amp; soft skills</span></a>
             <a href="leadership-development.html"><b>Leadership Development</b><span>Senior managers &amp; future leaders</span></a>
             <a href="professional-etiquette.html"><b>Professional Etiquette</b><span>Corporate &amp; client-facing professionals</span></a>
             <a href="posh-training.html"><b>POSH Training</b><span>All employees, managers &amp; ICC members</span></a>
@@ -639,29 +670,60 @@
     <h1>Featured Courses for Leadership Training</h1>
     <p>The best that we offer — weeks packed with learning, live sessions (in person), community, assignments &amp;
       more.</p>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Book Now <span aria-hidden="true">&rarr;</span></a>
+    </div>
   </section>
 
   <!-- ============ SECTION 2: COURSE CARDS ============ -->
   <section class="courses">
-    <a href="https://wa.me/917738060902" target="_blank" rel="noopener" class="course-card">
-      <span class="course-dur">2-3 Days</span>
-      <h3>Growth Orientation</h3>
-      <span class="course-link">Enquire on WhatsApp <span class="arr">&rarr;</span></span>
+    <a href="contact.html" class="course-card">
+      <div class="course-media"><img src="images/leadership/growth-orientation.webp"
+          srcset="images/leadership/growth-orientation-500.webp 500w, images/leadership/growth-orientation-800.webp 800w, images/leadership/growth-orientation.webp 1200w"
+          sizes="(max-width:600px) 92vw, (max-width:960px) 45vw, 23vw" width="1200" height="630" fetchpriority="high"
+          decoding="async" alt="Managers with their HTI trainer at the end of a Growth Orientation leadership session" />
+      </div>
+      <div class="course-body">
+        <span class="course-dur">2-3 Days</span>
+        <h3>Growth Orientation</h3>
+        <span class="course-link">Enquire on WhatsApp <span class="arr">&rarr;</span></span>
+      </div>
     </a>
-    <a href="https://wa.me/917738060902" target="_blank" rel="noopener" class="course-card">
-      <span class="course-dur">2-3 Days</span>
-      <h3>Strategic Communication</h3>
-      <span class="course-link">Enquire on WhatsApp <span class="arr">&rarr;</span></span>
+    <a href="contact.html" class="course-card">
+      <div class="course-media"><img src="images/leadership/strategic-communication.webp"
+          srcset="images/leadership/strategic-communication-500.webp 500w, images/leadership/strategic-communication-800.webp 800w, images/leadership/strategic-communication.webp 1200w"
+          sizes="(max-width:600px) 92vw, (max-width:960px) 45vw, 23vw" width="1200" height="630" loading="lazy"
+          decoding="async" alt="A full batch of managers photographed after HTI's Strategic Communication workshop" />
+      </div>
+      <div class="course-body">
+        <span class="course-dur">2-3 Days</span>
+        <h3>Strategic Communication</h3>
+        <span class="course-link">Enquire on WhatsApp <span class="arr">&rarr;</span></span>
+      </div>
     </a>
-    <a href="https://wa.me/917738060902" target="_blank" rel="noopener" class="course-card">
-      <span class="course-dur">2-3 Days</span>
-      <h3>Framework of Management</h3>
-      <span class="course-link">Enquire on WhatsApp <span class="arr">&rarr;</span></span>
+    <a href="contact.html" class="course-card">
+      <div class="course-media"><img src="images/leadership/framework-of-management.webp"
+          srcset="images/leadership/framework-of-management-500.webp 500w, images/leadership/framework-of-management-800.webp 800w, images/leadership/framework-of-management.webp 1200w"
+          sizes="(max-width:600px) 92vw, (max-width:960px) 45vw, 23vw" width="1200" height="630" loading="lazy"
+          decoding="async" alt="Participants working through a group exercise in HTI's Framework of Management session" />
+      </div>
+      <div class="course-body">
+        <span class="course-dur">2-3 Days</span>
+        <h3>Framework of Management</h3>
+        <span class="course-link">Enquire on WhatsApp <span class="arr">&rarr;</span></span>
+      </div>
     </a>
-    <a href="https://wa.me/917738060902" target="_blank" rel="noopener" class="course-card">
-      <span class="course-dur">2-3 Days</span>
-      <h3>Art of War</h3>
-      <span class="course-link">Enquire on WhatsApp <span class="arr">&rarr;</span></span>
+    <a href="contact.html" class="course-card">
+      <div class="course-media"><img src="images/leadership/art-of-war.webp"
+          srcset="images/leadership/art-of-war-500.webp 500w, images/leadership/art-of-war-800.webp 800w, images/leadership/art-of-war.webp 1200w"
+          sizes="(max-width:600px) 92vw, (max-width:960px) 45vw, 23vw" width="1200" height="630" loading="lazy"
+          decoding="async" alt="An HTI trainer leading the Art of War leadership session for a room of managers" />
+      </div>
+      <div class="course-body">
+        <span class="course-dur">2-3 Days</span>
+        <h3>Art of War</h3>
+        <span class="course-link">Enquire on WhatsApp <span class="arr">&rarr;</span></span>
+      </div>
     </a>
   </section>
 
@@ -688,7 +750,9 @@
         </div>
         <div class="footer-col">
           <h4>More</h4>
+          <a href="brands.html">Our Brands</a>
           <a href="https://wooshbiz.com/" target="_blank" rel="noopener">Team Building</a>
+          <a href="lead.html">Lead by HTI</a>
           <a href="leadership-development.html">Leadership Development</a>
           <a href="professional-etiquette.html">Professional Etiquette</a>
           <a href="posh-training.html">POSH Training</a>
@@ -721,7 +785,7 @@
                 d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
             </svg></a>
         </div>
-        <div class="footer-contact"><a href="tel:+917738060902">
+        <div class="footer-contact"><a href="contact.html">
             <h3>Contact Us: <span>+91 77380 60902</span></h3>
           </a></div>
         <a href="index.html" class="footer-brand"><img src="images/brand/hti-logo.png" alt="HTI" /></a>

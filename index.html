@@ -296,6 +296,7 @@
       min-height: 520px;
       background: #ede9e3;
       overflow: hidden;
+      position: relative;
     }
 
     .clients-left {
@@ -402,19 +403,28 @@
     }
 
     /* ============ CLIENTS RIGHT (two vertical scrolling logo columns) ============ */
+    /* Pinned to the full section height rather than a fixed 520px: the copy on the
+       left can run taller than that, which used to leave the logos stopping short
+       with dead space beneath them. Absolute rather than a stretched flex item
+       because the scrolling track inside is thousands of pixels tall, so letting
+       it drive the flex line's cross size would blow the section open. */
     .clients-right {
-      flex: 0 0 60%;
-      max-width: 60%;
-      width: 100%;
-      height: 520px;
+      position: absolute;
+      top: 0;
+      left: 45%;
+      width: 60%;
+      height: 100%;
       padding-top: 20px;
       display: flex;
       overflow: hidden;
+      /* soften both ends so logos fade out instead of being sliced mid-wordmark */
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%);
     }
 
     .logo-column {
       width: 50%;
-      height: 520px;
+      height: 100%;
       overflow: hidden;
     }
 
@@ -433,6 +443,8 @@
     .logo-column-inner img {
       display: block;
       width: auto;
+      /* wide wordmarks (Pugdundee, SBI) must scale down rather than spill the column */
+      max-width: 100%;
       height: 80px;
       object-fit: contain;
       margin-bottom: 30px;
@@ -1192,7 +1204,10 @@
       }
 
       .clients-right {
+        /* stacked layout: back to a normal in-flow block under the copy */
+        position: static;
         flex: 1 1 auto;
+        width: auto;
         max-width: 100%;
         padding: 0 24px 40px;
         height: 420px;
@@ -1301,6 +1316,8 @@
             <a href="kmt.html"><b>KMT</b><span>Chefs, sous chefs, kitchen supervisors</span></a>
             <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Whole Property</div>
             <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Every hotel role &mdash; F&amp;B to security</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Villas &amp; Homestays</div>
+            <a href="cup.html"><b>CUP</b><span>Caretakers of villas, homestays, guesthouses</span></a>
             <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Grooming &amp; Management</div>
             <a href="class.html"><b>CLASS</b><span>Guest-facing &amp; corporate professionals</span></a>
             <a href="mdp.html"><b>MDP</b><span>Newly promoted &amp; mid-level managers</span></a>
@@ -1311,7 +1328,6 @@
         <div class="nav-item">Offices &amp; Retail<span class="caret"></span>
           <div class="dropdown">
             <a href="post.html"><b>POST</b><span>Corporate pantry staff &amp; attendants</span></a>
-            <a href="cup.html"><b>CUP</b><span>Caretakers of villas, homestays, guesthouses</span></a>
             <a href="top.html"><b>TOP</b><span>Peons, office boys, support staff</span></a>
             <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
             <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
@@ -1319,6 +1335,8 @@
         </div>
         <div class="nav-item">More<span class="caret"></span>
           <div class="dropdown">
+            <a href="brands.html"><b>Our Brands</b><span>HTI, Woosh Biz, Star, Lead, Dox &amp; T3</span></a>
+            <a href="lead.html"><b>Lead by HTI</b><span>Train the trainer, presentation &amp; soft skills</span></a>
             <a href="leadership-development.html"><b>Leadership Development</b><span>Senior managers &amp; future leaders</span></a>
             <a href="professional-etiquette.html"><b>Professional Etiquette</b><span>Corporate &amp; client-facing professionals</span></a>
             <a href="posh-training.html"><b>POSH Training</b><span>All employees, managers &amp; ICC members</span></a>
@@ -1438,6 +1456,9 @@
         </div>
       </div>
     </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Book Now <span aria-hidden="true">&rarr;</span></a>
+    </div>
   </section>
 
   <!-- ============ TRAINERS ============ -->
@@ -1490,10 +1511,10 @@
             <article class="trainer-card">
               <div class="tc-inner">
                 <img src="images/trainers/bhaskar-sen.jpg" width="300" height="300" loading="lazy"
-                  alt="Bhaskar Sen, Training Manager at HTI India Pvt Ltd" />
+                  alt="Bhaskar Sen, Strategic Partner and Senior Trainer at HTI India Pvt Ltd" />
                 <div class="tc-body">
                   <h3>Bhaskar Sen</h3>
-                  <p>Training Manager, HTI India Pvt Ltd</p>
+                  <p>Strategic Partner &amp; Senior Trainer</p>
                 </div>
               </div>
             </article>
@@ -1503,6 +1524,9 @@
         <button class="tr-arrow right" id="trNext" aria-label="Next trainers">&#10095;</button>
       </div>
       <div class="tr-dots" id="trDots"></div>
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Let's talk <span aria-hidden="true">&rarr;</span></a>
     </div>
   </section>
 
@@ -1515,6 +1539,9 @@
     <div class="marquee">
       <div class="marquee-track" id="leadersTrack" style="--dur:50s"></div>
     </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Book Now <span aria-hidden="true">&rarr;</span></a>
+    </div>
   </section>
 
   <!-- ============ TESTIMONIALS ============ -->
@@ -1525,6 +1552,9 @@
         <p>Students, professionals and budding entrepreneurs inspire us! Here's what they have to say…</p>
       </div>
       <div class="testi-grid" id="testiGrid"></div>
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Let's talk <span aria-hidden="true">&rarr;</span></a>
     </div>
   </section>
 
@@ -1548,7 +1578,7 @@
   </section>
 
   <!-- ============ TRACK PROGRESS ============ -->
-  <section class="track">
+  <section class="track" id="training-tsunami">
     <div class="wrap">
       <div class="track-head">
         <h2>Track participant progress&#9889;&#65039;</h2>
@@ -1587,6 +1617,9 @@
         </div>
       </div>
     </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Book Now <span aria-hidden="true">&rarr;</span></a>
+    </div>
   </section>
 
   <!-- ============ FEATURED IN ============ -->
@@ -1617,7 +1650,9 @@
         </div>
         <div class="footer-col">
           <h4>More</h4>
+          <a href="brands.html">Our Brands</a>
           <a href="https://wooshbiz.com/" target="_blank" rel="noopener">Team Building</a>
+          <a href="lead.html">Lead by HTI</a>
           <a href="leadership-development.html">Leadership Development</a>
           <a href="professional-etiquette.html">Professional Etiquette</a>
           <a href="posh-training.html">POSH Training</a>
@@ -1650,7 +1685,7 @@
                 d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
             </svg></a>
         </div>
-        <div class="footer-contact"><a href="tel:+917738060902">
+        <div class="footer-contact"><a href="contact.html">
             <h3>Contact Us: <span>+91 77380 60902</span></h3>
           </a></div>
         <a href="index.html" class="footer-brand"><img
@@ -1684,10 +1719,20 @@
     })();
 
     /* ---------- Build marquees (duplicate for seamless loop) ---------- */
+    /* Logo lists are [file, brand name] pairs so the client walls carry real alt text.
+       Every wall renders its list twice for the seamless loop, so the second copy is
+       hidden from assistive tech and search engines to avoid repeating every name. */
+    function logoHTML(list, cls, isDupe) {
+      return list.map(item => {
+        const [src, name] = Array.isArray(item) ? item : [item, ''];
+        const a = isDupe ? 'alt="" aria-hidden="true"' : `alt="${name}"`;
+        return `<img src="${CDN}${src}" ${a} loading="lazy" class="${cls || ''}">`;
+      }).join('');
+    }
+
     function fillMarquee(id, imgs, cls) {
       const track = document.getElementById(id);
-      const html = imgs.map(u => `<img src="${CDN}${u}" alt="" loading="lazy" class="${cls || ''}">`).join('');
-      track.innerHTML = html + html;
+      track.innerHTML = logoHTML(imgs, cls, false) + logoHTML(imgs, cls, true);
     }
 
     const brandLogos = [
@@ -1701,6 +1746,8 @@
       "images/clients/48.svg", "images/clients/21.svg", "images/clients/22.svg",
       "images/clients/23.svg", "images/clients/24.svg", "images/clients/25.svg",
       "images/clients/26.svg", "images/clients/53-birla-opus.png",
+      "images/clients/64-hilton.svg", "images/clients/65-sbi.svg",
+      "images/clients/66-pugdundee-safaris.webp", "images/clients/67-singinawa.webp",
       "images/clients/zomato-add-new-logo.avif", "images/clients/wet-n-joy-add-new-logo.avif",
       "images/clients/61e9cd5fc8676cdfb20ffdf362373a68-54-bpcl.png",
       "images/clients/27.svg", "images/clients/29.svg", "images/clients/30.svg",
@@ -1712,38 +1759,73 @@
       "images/clients/47.svg", "images/clients/49.svg", "images/clients/50.svg",
       "images/clients/51.svg", "images/clients/52.svg"
     ];
-    /* ---------- Vertical scrolling logo columns (duplicate list for seamless loop) ---------- */
+    /* ---------- Vertical scrolling logo columns (duplicate list for seamless loop) ----------
+       Led by the largest names we have trained, hospitality and corporate mixed through
+       both columns so neither one reads as the "big brand" column. */
     const colLogos1 = [
-      "images/clients/bbt-update-logo.avif",
-      "images/clients/3.svg", "images/clients/5.svg",
-      "images/clients/7.svg", "images/clients/9.svg",
-      "images/clients/6.svg", "images/clients/16.svg",
-      "images/clients/21.svg", "images/clients/23.svg"
+      ["images/clients/64-hilton.svg", "Hilton Hotels & Resorts"],
+      ["images/clients/zomato-add-new-logo.avif", "Zomato"],
+      ["images/clients/7.svg", "Ginger Hotels"],
+      ["images/clients/65-sbi.svg", "State Bank of India"],
+      ["images/clients/4.svg", "Mainland China"],
+      ["images/clients/66-pugdundee-safaris.webp", "Pugdundee Safaris"],
+      ["images/clients/21.svg", "Air India"],
+      ["images/clients/15.svg", "Sahara Star"],
+      ["images/clients/9.svg", "Hakkasan"],
+      ["images/clients/3.svg", "Dhaba Estd 1986 Delhi"]
     ];
     const colLogos2 = [
-      "images/clients/4.svg", "images/clients/8.svg",
-      "images/clients/10.svg", "images/clients/11.svg",
-      "images/clients/12.svg", "images/clients/13.svg",
-      "images/clients/17.svg", "images/clients/18.svg",
-      "images/clients/19.svg", "images/clients/22.svg"
+      ["images/clients/53-birla-opus.png", "Birla Opus"],
+      ["images/clients/27.svg", "Club Mahindra, Mahindra Holidays & Resorts"],
+      ["images/clients/29.svg", "Pidilite Industries"],
+      ["images/clients/67-singinawa.webp", "Singinawa Jungle Lodge, Kanha"],
+      ["images/clients/13.svg", "OYO"],
+      ["images/clients/8.svg", "Copper Chimney"],
+      ["images/clients/17.svg", "Tata Motors"],
+      ["images/clients/10.svg", "VITS Select Hotels"],
+      ["images/clients/bbt-update-logo.avif", "Bhagat Tarachand"],
+      ["images/clients/22.svg", "Asia Kitchen"]
     ];
     function fillColumn(id, imgs) {
       const col = document.getElementById(id);
-      const html = imgs.map(u => `<img src="${CDN}${u}" alt="" loading="lazy">`).join('');
-      col.innerHTML = html + html; // duplicate stacked copies for seamless infinite loop
+      // duplicate stacked copies for seamless infinite loop
+      col.innerHTML = logoHTML(imgs, '', false) + logoHTML(imgs, '', true);
     }
     fillColumn('logoCol1', colLogos1);
     fillColumn('logoCol2', colLogos2);
 
+    /* White-on-dark logo set. Names match the colour set: see the contact sheet mapping
+       in images/clients -- the .webp files are the reversed-out variants. */
     const leaderImgs = [
-      "images/clients/1.webp", "images/clients/2.webp", "images/clients/3.webp",
-      "images/clients/4.webp", "images/clients/5.webp", "images/clients/6.webp",
-      "images/clients/7.webp", "images/clients/8.webp", "images/clients/9.webp",
-      "images/clients/10.webp", "images/clients/11.webp", "images/clients/12.webp",
-      "images/clients/13.webp", "images/clients/14.webp", "images/clients/15.webp",
-      "images/clients/16.webp", "images/clients/17.webp", "images/clients/18.webp",
-      "images/clients/19.webp", "images/clients/20.webp", "images/clients/21.webp",
-      "images/clients/22.webp", "images/clients/23.webp", "images/clients/24.webp"
+      ["images/clients/1.webp", "Bhagat Tarachand"],
+      ["images/clients/2.webp", "Mamagoto"],
+      ["images/clients/3.webp", "The Yellow Chilli"],
+      ["images/clients/4.webp", "Prasad Food Divine"],
+      ["images/clients/5.webp", "Copper Chimney"],
+      ["images/clients/6.webp", "VITS Select Hotels"],
+      ["images/clients/7.webp", "Mainland China"],
+      ["images/clients/8.webp", "CinCin"],
+      ["images/clients/9.webp", "Bhagat Tarachand"],
+      ["images/clients/10.webp", "Ginger Hotels"],
+      ["images/clients/11.webp", "Hakkasan"],
+      ["images/clients/12.webp", "Sahara Star"],
+      ["images/clients/13.webp", "Yauatcha"],
+      ["images/clients/14.webp", "OYO"],
+      ["images/clients/15.webp", "Tata Motors"],
+      ["images/clients/16.webp", "Club Mahindra, Mahindra Holidays & Resorts"],
+      ["images/clients/17.webp", "Air India"],
+      ["images/clients/18.webp", "Pidilite Industries"],
+      ["images/clients/19.webp", "Foxtrot"],
+      ["images/clients/20.webp", "Hindustan Petroleum"],
+      ["images/clients/21.webp", "Goa Portuguesa"],
+      ["images/clients/22.webp", "India Pavilion"],
+      ["images/clients/23.webp", "Invisible Restaurant Bar"],
+      ["images/clients/24.webp", "Miraj Cinemas"],
+      /* white-on-dark variants of the newly added brands */
+      ["images/clients/64-hilton-white.svg", "Hilton Hotels & Resorts"],
+      ["images/clients/65-sbi-white.svg", "State Bank of India"],
+      ["images/clients/66-pugdundee-safaris-white.webp", "Pugdundee Safaris"],
+      ["images/clients/67-singinawa-white.webp", "Singinawa Jungle Lodge, Kanha"]
     ];
     fillMarquee('leadersTrack', leaderImgs);
 
@@ -1770,9 +1852,11 @@
         "images/participants/16.webp", "images/participants/17.webp", "images/participants/18.webp"
       ];
       const logos = [
-        "images/clients/62.svg", "images/clients/63.svg", "images/clients/26.svg",
-        "images/clients/9-638f2c.svg", "images/clients/b-bhagat-tarachand-logo.png",
-        "images/clients/16.svg", "images/clients/18.svg", "images/clients/23.svg"
+        "images/clients/64-hilton.svg", "images/clients/63.svg", "images/clients/26.svg",
+        "images/clients/66-pugdundee-safaris.webp", "images/clients/b-bhagat-tarachand-logo.png",
+        "images/clients/27.svg", "images/clients/15.svg", "images/clients/23.svg",
+        "images/clients/65-sbi.svg", "images/clients/67-singinawa.webp",
+        "images/clients/29.svg", "images/clients/62.svg"
       ];
       const track = document.getElementById('ctaTrack');
       const html = people.map((p, i) => `
@@ -1816,12 +1900,16 @@
       const track = document.getElementById('trainersTrack');
       const cards = track.children.length;
       const dotsWrap = document.getElementById('trDots');
-      let per = 3, pages = 1, idx = 0;
+      let per = 3, pages = 1, idx = 0, built = false;
 
       const perView = () => window.innerWidth <= 600 ? 1 : (window.innerWidth <= 960 ? 2 : 3);
 
       function buildDots() {
         dotsWrap.innerHTML = '';
+        // a lone dot says nothing about position, so show the pager only when
+        // there is more than one page to move between
+        dotsWrap.style.display = pages > 1 ? '' : 'none';
+        if (pages < 2) return;
         for (let i = 0; i < pages; i++) {
           const s = document.createElement('span');
           s.addEventListener('click', () => go(i));
@@ -1838,8 +1926,9 @@
       }
       function layout() {
         const next = perView();
-        if (next === per && dotsWrap.children.length) return;
+        if (next === per && built) return;
         per = next;
+        built = true;
         pages = Math.max(1, Math.ceil(cards / per));
         buildDots();
         go(Math.min(idx, pages - 1));

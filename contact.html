@@ -839,6 +839,8 @@
             <a href="kmt.html"><b>KMT</b><span>Chefs, sous chefs, kitchen supervisors</span></a>
             <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Whole Property</div>
             <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Every hotel role &mdash; F&amp;B to security</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Villas &amp; Homestays</div>
+            <a href="cup.html"><b>CUP</b><span>Caretakers of villas, homestays, guesthouses</span></a>
             <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Grooming &amp; Management</div>
             <a href="class.html"><b>CLASS</b><span>Guest-facing &amp; corporate professionals</span></a>
             <a href="mdp.html"><b>MDP</b><span>Newly promoted &amp; mid-level managers</span></a>
@@ -849,7 +851,6 @@
         <div class="nav-item">Offices &amp; Retail<span class="caret"></span>
           <div class="dropdown">
             <a href="post.html"><b>POST</b><span>Corporate pantry staff &amp; attendants</span></a>
-            <a href="cup.html"><b>CUP</b><span>Caretakers of villas, homestays, guesthouses</span></a>
             <a href="top.html"><b>TOP</b><span>Peons, office boys, support staff</span></a>
             <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
             <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
@@ -857,6 +858,8 @@
         </div>
         <div class="nav-item">More<span class="caret"></span>
           <div class="dropdown">
+            <a href="brands.html"><b>Our Brands</b><span>HTI, Woosh Biz, Star, Lead, Dox &amp; T3</span></a>
+            <a href="lead.html"><b>Lead by HTI</b><span>Train the trainer, presentation &amp; soft skills</span></a>
             <a href="leadership-development.html"><b>Leadership Development</b><span>Senior managers &amp; future leaders</span></a>
             <a href="professional-etiquette.html"><b>Professional Etiquette</b><span>Corporate &amp; client-facing professionals</span></a>
             <a href="posh-training.html"><b>POSH Training</b><span>All employees, managers &amp; ICC members</span></a>
@@ -1034,7 +1037,9 @@
         </div>
         <div class="footer-col">
           <h4>More</h4>
+          <a href="brands.html">Our Brands</a>
           <a href="https://wooshbiz.com/" target="_blank" rel="noopener">Team Building</a>
+          <a href="lead.html">Lead by HTI</a>
           <a href="leadership-development.html">Leadership Development</a>
           <a href="professional-etiquette.html">Professional Etiquette</a>
           <a href="posh-training.html">POSH Training</a>
@@ -1081,35 +1086,45 @@
   <script>
     /* ---------- Logo marquee (duplicate for seamless loop) ---------- */
     const logos = [
-      "images/clients/1.webp",
-      "images/clients/2.webp",
-      "images/clients/3.webp",
-      "images/clients/4.webp",
-      "images/clients/5.webp",
-      "images/clients/6.webp",
-      "images/clients/7.webp",
-      "images/clients/8.webp",
-      "images/clients/9.webp",
-      "images/clients/10.webp",
-      "images/clients/11.webp",
-      "images/clients/12.webp",
-      "images/clients/13.webp",
-      "images/clients/14.webp",
-      "images/clients/15.webp",
-      "images/clients/16.webp",
-      "images/clients/17.webp",
-      "images/clients/18.webp",
-      "images/clients/19.webp",
-      "images/clients/20.webp",
-      "images/clients/21.webp",
-      "images/clients/22.webp",
-      "images/clients/23.webp",
-      "images/clients/24.webp"
+      ["images/clients/1.webp", "Bhagat Tarachand"],
+      ["images/clients/2.webp", "Mamagoto"],
+      ["images/clients/3.webp", "The Yellow Chilli"],
+      ["images/clients/4.webp", "Prasad Food Divine"],
+      ["images/clients/5.webp", "Copper Chimney"],
+      ["images/clients/6.webp", "VITS Select Hotels"],
+      ["images/clients/7.webp", "Mainland China"],
+      ["images/clients/8.webp", "CinCin"],
+      ["images/clients/9.webp", "Bhagat Tarachand"],
+      ["images/clients/10.webp", "Ginger Hotels"],
+      ["images/clients/11.webp", "Hakkasan"],
+      ["images/clients/12.webp", "Sahara Star"],
+      ["images/clients/13.webp", "Yauatcha"],
+      ["images/clients/14.webp", "OYO"],
+      ["images/clients/15.webp", "Tata Motors"],
+      ["images/clients/16.webp", "Club Mahindra, Mahindra Holidays & Resorts"],
+      ["images/clients/17.webp", "Air India"],
+      ["images/clients/18.webp", "Pidilite Industries"],
+      ["images/clients/19.webp", "Foxtrot"],
+      ["images/clients/20.webp", "Hindustan Petroleum"],
+      ["images/clients/21.webp", "Goa Portuguesa"],
+      ["images/clients/22.webp", "India Pavilion"],
+      ["images/clients/23.webp", "Invisible Restaurant Bar"],
+      ["images/clients/24.webp", "Miraj Cinemas"],
+      /* white-on-dark variants of the newly added brands */
+      ["images/clients/64-hilton-white.svg", "Hilton Hotels & Resorts"],
+      ["images/clients/65-sbi-white.svg", "State Bank of India"],
+      ["images/clients/66-pugdundee-safaris-white.webp", "Pugdundee Safaris"],
+      ["images/clients/67-singinawa-white.webp", "Singinawa Jungle Lodge, Kanha"]
     ];
     (function () {
       const track = document.getElementById('logoTrack');
-      const html = logos.map(u => `<img src="${u}" alt="" loading="lazy">`).join('');
-      track.innerHTML = html + html;
+      // second copy exists only to make the loop seamless, so hide it from
+      // assistive tech and search engines rather than repeating every brand name
+      const row = isDupe => logos.map(([src, name]) => {
+        const a = isDupe ? 'alt="" aria-hidden="true"' : `alt="${name}"`;
+        return `<img src="${src}" ${a} loading="lazy">`;
+      }).join('');
+      track.innerHTML = row(false) + row(true);
     })();
 
     /* ---------- Mobile nav ---------- */

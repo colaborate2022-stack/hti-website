@@ -406,3 +406,84 @@ summary:focus-visible,
     transform: none;
   }
 }
+
+/* ---------------------------------------------------------------
+   SECTION CALL TO ACTION
+   ---------------------------------------------------------------
+   One button per content section, always pointing at contact.html.
+   Injected as the last child of a <section>, so it has to survive
+   whatever display mode that section uses: the flex-basis and
+   grid-column below make it take a full row instead of squeezing in
+   beside the cards when the parent is a flex or grid container.
+
+   Self-styled on purpose. Button classes differ from page to page
+   (.btn-red here, .cta-btn there), so this one does not inherit any
+   of them and looks identical everywhere.
+   --------------------------------------------------------------- */
+.sec-cta {
+  width: 100%;
+  flex-basis: 100%;
+  grid-column: 1 / -1;
+  text-align: center;
+  margin: 38px auto 0;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.sec-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  background: #e31e24;
+  color: #fff;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 14px 30px;
+  box-shadow: 0 8px 22px rgba(227, 30, 36, .28);
+  transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+
+.sec-cta-btn:hover,
+.sec-cta-btn:focus-visible {
+  background: #c4161c;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(227, 30, 36, .36);
+}
+
+.sec-cta-btn span {
+  transition: transform .18s ease;
+}
+
+.sec-cta-btn:hover span {
+  transform: translateX(4px);
+}
+
+@media (max-width: 600px) {
+  .sec-cta {
+    margin-top: 30px;
+  }
+
+  .sec-cta-btn {
+    width: 100%;
+    max-width: 340px;
+    padding: 15px 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sec-cta-btn,
+  .sec-cta-btn span {
+    transition: none;
+  }
+
+  .sec-cta-btn:hover {
+    transform: none;
+  }
+}
