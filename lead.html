@@ -601,6 +601,34 @@
       box-sizing: border-box;
     }
 
+    /* the card body is a link to that trainer's profile page - it gets a
+       lift and a red edge on hover so the carousel reads as clickable */
+    a.tc-inner {
+      display: block;
+      transition: transform .3s cubic-bezier(.16, .84, .34, 1), border-color .3s ease, background .3s ease;
+    }
+
+    a.tc-inner:hover {
+      transform: translateY(-6px);
+      border-color: var(--hti-red, #e31e24);
+      background: #151515;
+    }
+
+    a.tc-inner:focus-visible {
+      outline: 2px solid var(--hti-red, #e31e24);
+      outline-offset: 3px;
+    }
+
+    a.tc-inner .tc-go {
+      display: block;
+      margin-top: 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #ff5257;
+    }
+
     .tc-inner {
       height: 100%;
       background: #111;
@@ -1381,6 +1409,7 @@
         </div>
         <div class="nav-item">More<span class="caret"></span>
           <div class="dropdown">
+            <a href="trainers.html"><b>Our Trainers</b><span>The people who run the sessions</span></a>
             <a href="brands.html"><b>Our Brands</b><span>HTI, Woosh Biz, Star, Lead, Dox &amp; T3</span></a>
             <a href="lead.html"><b>Lead by HTI</b><span>Train the trainer, presentation &amp; soft skills</span></a>
             <a href="leadership-development.html"><b>Leadership Development</b><span>Senior managers &amp; future leaders</span></a>
@@ -1654,34 +1683,37 @@
         <div class="trainers-slider">
           <div class="trainers-track" id="trainersTrack">
             <article class="trainer-card">
-              <div class="tc-inner">
+              <a class="tc-inner" href="dominic-costabir.html">
                 <img src="images/trainers/dominic-costabir.jpg" width="300" height="300" loading="lazy"
                   alt="Dominic CostaBir, Founder & Director, HTI India Pvt Ltd" />
                 <div class="tc-body">
                   <h3>Dominic CostaBir</h3>
                   <p>Founder &amp; Director, HTI India Pvt Ltd</p>
+                  <span class="tc-go">View profile &rarr;</span>
                 </div>
-              </div>
+              </a>
             </article>
             <article class="trainer-card">
-              <div class="tc-inner">
+              <a class="tc-inner" href="kaushal-dutta.html">
                 <img src="images/trainers/kaushal-dutta.jpg" width="300" height="300" loading="lazy"
                   alt="Kaushal Dutta, CEO, HTI India Pvt Ltd" />
                 <div class="tc-body">
                   <h3>Kaushal Dutta</h3>
                   <p>CEO, HTI India Pvt Ltd</p>
+                  <span class="tc-go">View profile &rarr;</span>
                 </div>
-              </div>
+              </a>
             </article>
             <article class="trainer-card">
-              <div class="tc-inner">
+              <a class="tc-inner" href="ketaki-ponde.html">
                 <img src="images/trainers/ketaki-ponde.jpg" width="300" height="300" loading="lazy"
                   alt="Ketaki Ponde, Strategic Business Partner & Senior Trainer" />
                 <div class="tc-body">
                   <h3>Ketaki Ponde</h3>
                   <p>Strategic Business Partner &amp; Senior Trainer</p>
+                  <span class="tc-go">View profile &rarr;</span>
                 </div>
-              </div>
+              </a>
             </article>
           </div>
         </div>
@@ -1802,6 +1834,7 @@
         <div class="footer-col">
           <h4>HTI</h4>
           <a href="about.html">About Us</a>
+          <a href="trainers.html">Our Trainers</a>
           <a href="contact.html">Contact Us</a>
           <a href="training-needs-survey.html">Training Needs Survey</a>
         </div>
