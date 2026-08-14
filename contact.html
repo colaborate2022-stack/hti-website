@@ -327,7 +327,7 @@
       margin: 0 auto;
       padding: 40px 24px 60px;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
 
@@ -398,6 +398,341 @@
 
     .contact-btn:hover {
       background: #c40f10;
+    }
+
+    /* ============ ON-PAGE ENQUIRY FORM (saves to Supabase) ============ */
+    .contact-card--form {
+      grid-column: 1 / -1;
+    }
+
+    .ef {
+      width: 100%;
+      max-width: 920px;
+      margin: 6px auto 26px;
+      text-align: left;
+    }
+
+    .ef-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px 20px;
+    }
+
+    .ef-field {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .ef-fieldset {
+      margin-top: 22px;
+    }
+
+    .ef-field > label,
+    .ef-legend {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .ef-req {
+      color: #e31e24;
+    }
+
+    .ef-opt {
+      font-weight: 600;
+      color: #999;
+    }
+
+    .ef-input,
+    .ef-textarea {
+      font-family: inherit;
+      font-size: 15px;
+      color: #111;
+      background: #fff;
+      width: 100%;
+      border: 1.5px solid #dcd8d2;
+      border-radius: 8px;
+      padding: 12px 14px;
+      transition: border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .ef-input::placeholder,
+    .ef-textarea::placeholder {
+      color: #aaa;
+    }
+
+    .ef-input:focus,
+    .ef-textarea:focus {
+      outline: none;
+      border-color: #e31e24;
+      box-shadow: 0 0 0 3px rgba(227, 30, 36, .14);
+    }
+
+    .ef-textarea {
+      min-height: 112px;
+      line-height: 1.5;
+      resize: vertical;
+    }
+
+    .ef-checks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    /* tap targets stay at 48px+ so the groups are usable on a phone */
+    .ef-check {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-height: 48px;
+      padding: 10px 14px;
+      background: #fff;
+      border: 1.5px solid #dcd8d2;
+      border-radius: 8px;
+      font-size: 14.5px;
+      line-height: 1.3;
+      cursor: pointer;
+      transition: border-color .18s ease, background .18s ease;
+    }
+
+    .ef-check input {
+      flex: 0 0 20px;
+      width: 20px;
+      height: 20px;
+      margin: 0;
+      accent-color: #e31e24;
+      cursor: pointer;
+    }
+
+    .ef-check:hover {
+      border-color: #bdb8b1;
+    }
+
+    .ef-check:focus-within {
+      box-shadow: 0 0 0 3px rgba(227, 30, 36, .14);
+    }
+
+    .ef-check:has(input:checked) {
+      border-color: #e31e24;
+      background: #fff5f5;
+    }
+
+    .ef-field.invalid .ef-input,
+    .ef-field.invalid .ef-textarea {
+      border-color: #e31e24;
+      background: #fff7f7;
+    }
+
+    .ef-field.invalid .ef-checks {
+      outline: 1.5px solid #e31e24;
+      outline-offset: 7px;
+      border-radius: 4px;
+    }
+
+    .ef-err {
+      display: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: #c40f10;
+      margin-top: 7px;
+    }
+
+    .ef-field.invalid .ef-err {
+      display: block;
+    }
+
+    .ef-hp {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .ef-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 18px;
+      margin-top: 24px;
+    }
+
+    .ef-submit {
+      font-family: inherit;
+      font-size: 15.5px;
+      font-weight: 700;
+      color: #fff;
+      background: #e31e24;
+      border: 0;
+      border-radius: 8px;
+      padding: .85rem 1.9rem;
+      min-height: 48px;
+      cursor: pointer;
+      transition: background .2s ease, opacity .2s ease;
+    }
+
+    .ef-submit:hover:not(:disabled) {
+      background: #c40f10;
+    }
+
+    .ef-submit:disabled {
+      opacity: .6;
+      cursor: default;
+    }
+
+    .ef-note {
+      font-size: 13px;
+      color: #777;
+      margin: 0;
+    }
+
+    .ef-msg {
+      display: none;
+      margin-top: 16px;
+      padding: 13px 15px;
+      border-radius: 8px;
+      background: #fff3f3;
+      border: 1px solid #f0c3c3;
+      color: #8d1114;
+      font-size: 14.5px;
+      line-height: 1.55;
+    }
+
+    .ef-msg.show {
+      display: block;
+    }
+
+    /* ---------- thank you ---------- */
+    .ef-thanks {
+      display: none;
+      width: 100%;
+      max-width: 920px;
+      margin: 6px auto 26px;
+      padding: 30px 26px;
+      background: #fff;
+      border: 1.5px solid #e31e24;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .ef-thanks.show {
+      display: block;
+    }
+
+    .ef-tick {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      background: #e31e24;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ef-tick svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .ef-thanks h4 {
+      font-size: 21px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 10px;
+    }
+
+    .ef-thanks p {
+      color: #666;
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 560px;
+      margin: 0 auto 20px;
+    }
+
+    .ef-thanks-btns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .ef-thanks-btn {
+      display: inline-block;
+      background: #e31e24;
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      border-radius: 8px;
+      padding: .75rem 1.6rem;
+      transition: all .2s ease;
+    }
+
+    .ef-thanks-btn:hover {
+      background: #c40f10;
+    }
+
+    .ef-thanks-btn--ghost {
+      background: transparent;
+      color: #111;
+      border: 1.5px solid #111;
+    }
+
+    .ef-thanks-btn--ghost:hover {
+      background: #111;
+      color: #fff;
+    }
+
+    /* divider that keeps the Google Form button clearly separate */
+    .ef-alt {
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto 16px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #999;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .ef-alt::before,
+    .ef-alt::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e0ddd8;
+    }
+
+    @media(max-width:760px) {
+      .ef-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ef-checks {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .ef-submit {
+        width: 100%;
+      }
+
+      .ef-actions {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+    @media(max-width:460px) {
+      .ef-checks {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ============ SURVEY BANNER ============ */
@@ -929,7 +1264,7 @@
       <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kaushal@hti-india.com" target="_blank" class="contact-btn">Send an email</a>
     </div>
 
-    <div class="contact-card">
+    <div class="contact-card contact-card--form">
       <div class="c-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
           stroke-linejoin="round">
@@ -943,6 +1278,114 @@
       <h3>Contact form</h3>
       <p>Prefer to write it out? Fill our quick form and we'll get back to you.</p>
       <div class="c-detail">Takes under 2 minutes</div>
+
+      <!-- ---------- On-page enquiry form: saves to Supabase (contact_enquiries) ---------- -->
+      <form class="ef" id="efForm" novalidate>
+        <div class="ef-grid">
+          <div class="ef-field" data-required data-label="Name">
+            <label for="ef-name">Name <span class="ef-req">*</span></label>
+            <input class="ef-input" type="text" id="ef-name" name="name" autocomplete="name"
+              placeholder="Your full name" />
+            <span class="ef-err">Please tell us your name.</span>
+          </div>
+
+          <div class="ef-field" data-required data-label="Organization">
+            <label for="ef-company">Organization <span class="ef-req">*</span></label>
+            <input class="ef-input" type="text" id="ef-company" name="company" autocomplete="organization"
+              placeholder="Hotel, restaurant or company name" />
+            <span class="ef-err">Please tell us where you work.</span>
+          </div>
+
+          <div class="ef-field" data-required data-label="Email">
+            <label for="ef-email">Email <span class="ef-req">*</span></label>
+            <input class="ef-input" type="email" id="ef-email" name="email" autocomplete="email"
+              placeholder="you@company.com" />
+            <span class="ef-err">Please enter a valid email address.</span>
+          </div>
+
+          <div class="ef-field" data-required data-label="Phone">
+            <label for="ef-phone">Phone <span class="ef-req">*</span></label>
+            <input class="ef-input" type="tel" id="ef-phone" name="phone" autocomplete="tel" inputmode="tel"
+              placeholder="10-digit mobile number" />
+            <span class="ef-err">Please enter a valid phone number.</span>
+          </div>
+        </div>
+
+        <div class="ef-field ef-fieldset" role="group" aria-labelledby="ef-staff-legend" data-required
+          data-group="staff_type" data-label="Type of staff to be trained">
+          <div class="ef-legend" id="ef-staff-legend">Type Of Staff To Be Trained <span class="ef-req">*</span></div>
+          <div class="ef-checks">
+            <label class="ef-check"><input type="checkbox" name="staff_type" value="F&amp;B Service" /><span>F&amp;B
+                Service</span></label>
+            <label class="ef-check"><input type="checkbox" name="staff_type"
+                value="Housekeeping" /><span>Housekeeping</span></label>
+            <label class="ef-check"><input type="checkbox" name="staff_type" value="Managers / Supervisors" /><span>Managers
+                / Supervisors</span></label>
+            <label class="ef-check"><input type="checkbox" name="staff_type" value="Front Desk" /><span>Front
+                Desk</span></label>
+            <label class="ef-check"><input type="checkbox" name="staff_type" value="Kitchen" /><span>Kitchen</span></label>
+            <label class="ef-check"><input type="checkbox" name="staff_type"
+                value="Corporate" /><span>Corporate</span></label>
+          </div>
+          <span class="ef-err">Please tick at least one type of staff.</span>
+        </div>
+
+        <div class="ef-field ef-fieldset" role="group" aria-labelledby="ef-training-legend" data-required
+          data-group="training_needed" data-label="Training needed">
+          <div class="ef-legend" id="ef-training-legend">Training Needed <span class="ef-req">*</span></div>
+          <div class="ef-checks">
+            <label class="ef-check"><input type="checkbox" name="training_needed" value="Soft Skills" /><span>Soft
+                Skills</span></label>
+            <label class="ef-check"><input type="checkbox" name="training_needed" value="Job Skills" /><span>Job
+                Skills</span></label>
+            <label class="ef-check"><input type="checkbox" name="training_needed" value="Train the Trainer" /><span>Train
+                the Trainer</span></label>
+            <label class="ef-check"><input type="checkbox" name="training_needed" value="Tech &amp; AI" /><span>Tech &amp;
+                AI</span></label>
+            <label class="ef-check"><input type="checkbox" name="training_needed"
+                value="Leadership Development" /><span>Leadership Development</span></label>
+            <label class="ef-check"><input type="checkbox" name="training_needed" value="POSH Training" /><span>POSH
+                Training</span></label>
+            <label class="ef-check"><input type="checkbox" name="training_needed" value="FSSAI / Food Safety" /><span>FSSAI
+                / Food Safety</span></label>
+          </div>
+          <span class="ef-err">Please tick at least one training area.</span>
+        </div>
+
+        <div class="ef-field ef-fieldset">
+          <label for="ef-message">Notes <span class="ef-opt">(optional)</span></label>
+          <textarea class="ef-textarea" id="ef-message" name="message"
+            placeholder="Team size, city, timelines - anything that helps us prepare."></textarea>
+        </div>
+
+        <!-- honeypot: hidden from people, catches bots -->
+        <div class="ef-hp" aria-hidden="true">
+          <label for="ef-website">Website</label>
+          <input type="text" id="ef-website" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="ef-actions">
+          <button type="submit" class="ef-submit" id="efSubmit">Send enquiry</button>
+          <p class="ef-note">We reply within one working day, Monday to Saturday.</p>
+        </div>
+
+        <div class="ef-msg" id="efMsg" role="alert"></div>
+      </form>
+
+      <div class="ef-thanks" id="efThanks" role="status">
+        <div class="ef-tick">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h4>Thank you &mdash; your enquiry is in.</h4>
+        <p>A training consultant is reading it now and will come back to you within one working day. In a hurry? Reach
+          us straight away.</p>
+        <div class="ef-thanks-btns" id="efThanksBtns"></div>
+      </div>
+
+      <div class="ef-alt">Or use our Google Form</div>
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSdFpuK_F7WErP4QiuqFchgH2Wjx8dh5rRqth9yT8zpiaQ0CMw/viewform" target="_blank" class="contact-btn">Fill the form</a>
     </div>
   </section>
@@ -1207,6 +1650,166 @@
       }
       window.addEventListener('load', update);
       update();
+    })();
+  </script>
+
+  <script>
+    /* =========================================================
+       CONTACT ENQUIRY FORM
+       Enquiries go to Supabase (table: contact_enquiries).
+       Same REST pattern and anon key as training-needs-survey.html.
+       ========================================================= */
+    (function () {
+      const SUPABASE_URL = "https://ytthcgdsbfagvwcopoaj.supabase.co";
+      const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0dGhjZ2RzYmZhZ3Z3Y29wb2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzMjk5MTMsImV4cCI6MjA5ODkwNTkxM30.JIDahcRTu3VbFpZ55Ti5hHg_JrHobk0zh8PSaj9lWLc";
+      const TABLE = "contact_enquiries";
+
+      const form = document.getElementById('efForm');
+      if (!form) return;
+      const btn = document.getElementById('efSubmit');
+      const msg = document.getElementById('efMsg');
+      const thanks = document.getElementById('efThanks');
+
+      /* ---------- thank-you buttons reuse the links already on this page ---------- */
+      (function buildThanksButtons() {
+        const box = document.getElementById('efThanksBtns');
+        if (!box) return;
+        const wa = document.querySelector('.contact-cards a[href*="wa.me/"]');
+        const tel = document.querySelector('.contact-cards a[href^="tel:"]');
+        const telCard = tel && tel.closest('.contact-card');
+        const telNumber = telCard && telCard.querySelector('.c-detail');
+        let html = '';
+        if (wa) {
+          html += '<a class="ef-thanks-btn" href="' + wa.getAttribute('href') +
+            '" target="_blank" rel="noopener">Chat on WhatsApp</a>';
+        }
+        if (tel) {
+          html += '<a class="ef-thanks-btn ef-thanks-btn--ghost" href="' + tel.getAttribute('href') + '">Call ' +
+            (telNumber ? telNumber.textContent.trim() : 'us') + '</a>';
+        }
+        box.innerHTML = html;
+      })();
+
+      /* ---------- helpers ---------- */
+      const val = n => ((form.elements[n] && form.elements[n].value) || '').trim();
+      const pickedAll = n =>
+        Array.from(form.querySelectorAll('input[name="' + n + '"]:checked')).map(el => el.value);
+
+      const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+      /* Indian mobiles, tolerant of +91, a leading 0, spaces and dashes.
+         Strip the country code by length, not by prefix - plenty of real
+         numbers start with 91 themselves. */
+      const phoneOk = function (v) {
+        const d = v.replace(/\D/g, '');
+        if (d.length === 10) return /^[6-9]/.test(d);
+        if (d.length === 11) return d[0] === '0' && /^[6-9]/.test(d.slice(1));
+        if (d.length === 12) return d.slice(0, 2) === '91' && /^[6-9]/.test(d.slice(2));
+        return false;
+      };
+
+      const required = Array.from(form.querySelectorAll('.ef-field[data-required]'));
+
+      function isFilled(field) {
+        const group = field.dataset.group;
+        if (group) {
+          return form.querySelectorAll('input[name="' + group + '"]:checked').length > 0;
+        }
+        const input = field.querySelector('input, textarea');
+        if (!input) return true;
+        const v = input.value.trim();
+        if (!v) return false;
+        if (input.type === 'email') return emailOk(v);
+        if (input.type === 'tel') return phoneOk(v);
+        return true;
+      }
+
+      /* clear a field's error the moment it is put right */
+      function clearIfFixed(e) {
+        const field = e.target.closest('.ef-field');
+        if (field && field.classList.contains('invalid') && isFilled(field)) {
+          field.classList.remove('invalid');
+        }
+      }
+      form.addEventListener('input', clearIfFixed);
+      form.addEventListener('change', clearIfFixed);
+
+      /* ---------- answers -> row ---------- */
+      function collect() {
+        return {
+          name: val('name'),
+          company: val('company'),
+          phone: val('phone'),
+          email: val('email'),
+          staff_type: pickedAll('staff_type').join(', '),
+          training_needed: pickedAll('training_needed').join(', '),
+          message: val('message')
+        };
+      }
+
+      /* ---------- submit ---------- */
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        msg.classList.remove('show');
+
+        /* bots fill hidden fields; people don't */
+        if (val('website')) return;
+
+        const missing = [];
+        let firstBad = null;
+        required.forEach(field => {
+          const ok = isFilled(field);
+          field.classList.toggle('invalid', !ok);
+          if (!ok) {
+            missing.push(field.dataset.label);
+            if (!firstBad) firstBad = field;
+          }
+        });
+
+        if (firstBad) {
+          msg.innerHTML = '<b>Almost there.</b> Please check: ' + missing.join(', ') + '.';
+          msg.classList.add('show');
+          window.scrollTo({ top: firstBad.getBoundingClientRect().top + window.scrollY - 150, behavior: 'smooth' });
+          const focusable = firstBad.querySelector('input:not([type=checkbox]), textarea');
+          if (focusable) setTimeout(() => focusable.focus({ preventScroll: true }), 400);
+          return;
+        }
+
+        const answers = collect();
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+
+        try {
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLE}`, {
+            method: 'POST',
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(answers)
+          });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+
+          if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', {
+              event_category: 'contact',
+              event_label: 'contact_enquiry_form'
+            });
+          }
+
+          form.style.display = 'none';
+          thanks.classList.add('show');
+          window.scrollTo({ top: thanks.getBoundingClientRect().top + window.scrollY - 140, behavior: 'smooth' });
+        } catch (err) {
+          /* nothing the visitor typed is touched - they can simply press again */
+          msg.innerHTML = "<b>We couldn't send that just now.</b> Everything you typed is still here - please press " +
+            "Try again. If it keeps failing, use the WhatsApp, call or email buttons above and we'll pick it up there.";
+          msg.classList.add('show');
+          btn.disabled = false;
+          btn.textContent = 'Try again';
+        }
+      });
     })();
   </script>
 </body>
