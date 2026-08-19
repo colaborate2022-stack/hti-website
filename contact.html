@@ -415,7 +415,9 @@
     .ef-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 18px 20px;
+      /* no row gap - the reserved error slot below each field is the gap */
+      gap: 0 20px;
+      align-items: start;
     }
 
     .ef-field {
@@ -424,8 +426,22 @@
       min-width: 0;
     }
 
+    /* Every field that can show an error keeps a permanent slot for it, so the
+       message appearing or clearing never reflows the form under the person
+       typing. Only [data-required] fields carry an .ef-err. */
+    .ef-field[data-required] {
+      position: relative;
+      padding-bottom: 30px;
+    }
+
+    /* the checkbox groups outline themselves when invalid - the slot has to
+       clear that outline as well as the message */
+    .ef-fieldset[data-required] {
+      padding-bottom: 36px;
+    }
+
     .ef-fieldset {
-      margin-top: 22px;
+      margin-top: 0;
     }
 
     .ef-field > label,
@@ -528,20 +544,27 @@
 
     .ef-field.invalid .ef-checks {
       outline: 1.5px solid #e31e24;
-      outline-offset: 7px;
+      outline-offset: 5px;
       border-radius: 4px;
     }
 
     .ef-err {
-      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 7px;
       font-size: 13px;
+      line-height: 1.35;
       font-weight: 600;
       color: #c40f10;
-      margin-top: 7px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .18s ease;
     }
 
     .ef-field.invalid .ef-err {
-      display: block;
+      opacity: 1;
+      visibility: visible;
     }
 
     .ef-hp {
@@ -1644,6 +1667,11 @@
       const msg = document.getElementById('efMsg');
       const thanks = document.getElementById('efThanks');
 
+      /* an auto-scroll is exactly what "reduce motion" is meant to switch off */
+      const scrollMode = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+      const scrollToY = y => window.scrollTo({ top: Math.max(0, y), behavior: scrollMode });
+
       /* ---------- thank-you buttons reuse the links already on this page ---------- */
       (function buildThanksButtons() {
         const box = document.getElementById('efThanksBtns');
@@ -1742,9 +1770,16 @@
         if (firstBad) {
           msg.innerHTML = '<b>Almost there.</b> Please check: ' + missing.join(', ') + '.';
           msg.classList.add('show');
-          window.scrollTo({ top: firstBad.getBoundingClientRect().top + window.scrollY - 150, behavior: 'smooth' });
           const focusable = firstBad.querySelector('input:not([type=checkbox]), textarea');
-          if (focusable) setTimeout(() => focusable.focus({ preventScroll: true }), 400);
+          const box = firstBad.getBoundingClientRect();
+          /* only move the page if the first problem is off-screen - scrolling
+             under someone who can already see the field is the jarring bit */
+          if (box.top < 140 || box.bottom > window.innerHeight - 20) {
+            scrollToY(box.top + window.scrollY - 150);
+            if (focusable) setTimeout(() => focusable.focus({ preventScroll: true }), 400);
+          } else if (focusable) {
+            focusable.focus({ preventScroll: true });
+          }
           return;
         }
 
@@ -1774,7 +1809,7 @@
 
           form.style.display = 'none';
           thanks.classList.add('show');
-          window.scrollTo({ top: thanks.getBoundingClientRect().top + window.scrollY - 140, behavior: 'smooth' });
+          scrollToY(thanks.getBoundingClientRect().top + window.scrollY - 140);
         } catch (err) {
           /* nothing the visitor typed is touched - they can simply press again */
           msg.innerHTML = "<b>We couldn't send that just now.</b> Everything you typed is still here - please press " +
