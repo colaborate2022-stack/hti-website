@@ -2150,17 +2150,16 @@
         x0 = null;
       }, { passive: true });
 
-      let timer = setInterval(() => go(idx + 1), 5000);
-      /* don't keep sliding while the visitor is reading it or the tab is hidden */
+      /* no auto-advance: the reader moves this with the dots, the arrow keys
+         or a swipe, so nothing slides out from under them mid-read */
       const carousel = document.querySelector('.trainers-carousel');
-      const stop = () => { clearInterval(timer); timer = null; };
-      const start = () => { if (!timer) timer = setInterval(() => go(idx + 1), 5000); };
       if (carousel) {
-        carousel.addEventListener('mouseenter', stop);
-        carousel.addEventListener('mouseleave', start);
-        carousel.addEventListener('touchstart', stop, { passive: true });
+        carousel.addEventListener('keydown', e => {
+          if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+          e.preventDefault();
+          go(idx + (e.key === 'ArrowRight' ? 1 : -1));
+        });
       }
-      document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
     })();
 
     /* ---------- Mobile nav ---------- */

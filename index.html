@@ -585,6 +585,9 @@
 
     .trainers-slider {
       overflow: hidden;
+      /* the browser keeps vertical scrolling; the script takes horizontal
+         swipes, so a drag on a card never fights the page scroll */
+      touch-action: pan-y;
     }
 
     .trainers-track {
@@ -699,16 +702,47 @@
       margin-top: 22px;
     }
 
-    .tr-dots span {
+    /* real buttons, so the pager is reachable by keyboard and announced */
+    .tr-dots button {
       width: 11px;
       height: 11px;
+      padding: 0;
+      border: 0;
+      appearance: none;
       border-radius: 50%;
       background: #555;
       cursor: pointer;
+      transition: background .25s ease, transform .25s ease;
     }
 
-    .tr-dots span.active {
+    .tr-dots button:hover {
+      background: #8a8a8a;
+    }
+
+    .tr-dots button.active {
       background: #fff;
+      transform: scale(1.15);
+    }
+
+    .tr-dots button:focus-visible,
+    .tr-arrow:focus-visible {
+      outline: 2px solid var(--hti-red, #e31e24);
+      outline-offset: 3px;
+    }
+
+    /* greyed rather than removed, so the end of the row is visible
+       without the arrow jumping out of the layout */
+    .tr-arrow[aria-disabled="true"] {
+      opacity: .28;
+      cursor: default;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .trainers-track,
+      .tr-dots button {
+        transition: none;
+      }
     }
 
     /* ============ LEADERS scroll (black) ============ */
@@ -1494,7 +1528,7 @@
   <section class="trainers">
     <div class="wrap">
       <h2>Our Trainers</h2>
-      <div class="trainers-carousel">
+      <div class="trainers-carousel" role="group" aria-roledescription="carousel" aria-label="Our trainers">
         <div class="trainers-slider">
           <div class="trainers-track" id="trainersTrack">
             <article class="trainer-card">
@@ -1946,12 +1980,21 @@
     </div>`).join('');
     })();
 
-    /* ---------- Trainers slider ---------- */
+    /* ---------- Trainers slider ----------
+       Reader-driven only. The old build auto-advanced every 5s whether or not
+       the section was on screen, which pulled a card away mid-read and kept a
+       transform animating in the background. Arrows, dots, arrow keys and
+       swipe now do all the moving, and the pages no longer wrap so the ends
+       of the row are a real stop. */
     (function () {
       const track = document.getElementById('trainersTrack');
-      const cards = track.children.length;
+      const carousel = document.querySelector('.trainers-carousel');
+      const slider = document.querySelector('.trainers-slider');
       const dotsWrap = document.getElementById('trDots');
-      let per = 3, pages = 1, idx = 0, built = false;
+      const prevBtn = document.getElementById('trPrev');
+      const nextBtn = document.getElementById('trNext');
+      const cards = track.children.length;
+      let per = 3, pages = 1, idx = 0, built = false, pct = 0;
 
       const perView = () => window.innerWidth <= 600 ? 1 : (window.innerWidth <= 960 ? 2 : 3);
 
@@ -1962,33 +2005,104 @@
         dotsWrap.style.display = pages > 1 ? '' : 'none';
         if (pages < 2) return;
         for (let i = 0; i < pages; i++) {
-          const s = document.createElement('span');
-          s.addEventListener('click', () => go(i));
-          dotsWrap.appendChild(s);
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.setAttribute('aria-label', 'Show trainers ' + (i + 1) + ' of ' + pages);
+          b.addEventListener('click', () => go(i));
+          dotsWrap.appendChild(b);
         }
       }
+
+      /* aria-disabled, not the disabled attribute: a button that really
+         disables drops keyboard focus the moment you reach the last page */
+      function setOff(btn, off) {
+        btn.setAttribute('aria-disabled', off ? 'true' : 'false');
+      }
+      const isOff = btn => btn.getAttribute('aria-disabled') === 'true';
+
       function go(i) {
-        idx = (i + pages) % pages;
+        idx = Math.max(0, Math.min(i, pages - 1));
         // clamp so the final page ends flush with the last card instead of showing gaps
         const offset = Math.max(0, Math.min(idx * per, cards - per));
         // the track box is exactly one page wide, so shift in page-fractions
-        track.style.transform = `translateX(-${offset / per * 100}%)`;
-        [...dotsWrap.children].forEach((d, j) => d.className = j === idx ? 'active' : '');
+        pct = offset / per * 100;
+        track.style.transform = `translateX(-${pct}%)`;
+        [...dotsWrap.children].forEach((d, j) => {
+          d.className = j === idx ? 'active' : '';
+          d.setAttribute('aria-current', j === idx ? 'true' : 'false');
+        });
+        setOff(prevBtn, idx === 0);
+        setOff(nextBtn, idx === pages - 1);
       }
+
       function layout() {
         const next = perView();
         if (next === per && built) return;
         per = next;
         built = true;
         pages = Math.max(1, Math.ceil(cards / per));
+        const single = pages < 2;
+        prevBtn.style.display = single ? 'none' : '';
+        nextBtn.style.display = single ? 'none' : '';
         buildDots();
         go(Math.min(idx, pages - 1));
       }
       layout();
       window.addEventListener('resize', layout);
-      document.getElementById('trPrev').addEventListener('click', () => go(idx - 1));
-      document.getElementById('trNext').addEventListener('click', () => go(idx + 1));
-      setInterval(() => go(idx + 1), 5000);
+
+      prevBtn.addEventListener('click', () => { if (!isOff(prevBtn)) go(idx - 1); });
+      nextBtn.addEventListener('click', () => { if (!isOff(nextBtn)) go(idx + 1); });
+
+      /* arrow keys work whenever focus is anywhere inside the carousel */
+      carousel.addEventListener('keydown', e => {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        e.preventDefault();
+        go(idx + (e.key === 'ArrowRight' ? 1 : -1));
+      });
+
+      /* pointer drag: one code path covers touch swipe and mouse drag, and
+         the track follows the finger instead of only snapping on release */
+      let dragging = false, startX = 0, dx = 0, moved = false, pid = null;
+
+      slider.addEventListener('dragstart', e => e.preventDefault());
+
+      slider.addEventListener('pointerdown', e => {
+        if (pages < 2 || (e.pointerType === 'mouse' && e.button !== 0)) return;
+        dragging = true; moved = false; startX = e.clientX; dx = 0; pid = e.pointerId;
+        track.style.transition = 'none';
+      });
+
+      /* the move/up pair is watched on window rather than through
+         setPointerCapture: capturing the pointer retargets the click that
+         follows to the slider, which stops the card links from opening */
+      window.addEventListener('pointermove', e => {
+        if (!dragging || e.pointerId !== pid) return;
+        dx = e.clientX - startX;
+        if (Math.abs(dx) > 8) moved = true;
+        // resist past either end so the edges feel like edges
+        const d = ((idx === 0 && dx > 0) || (idx === pages - 1 && dx < 0)) ? dx * .35 : dx;
+        track.style.transform = `translateX(calc(-${pct}% + ${d}px))`;
+      });
+
+      function endDrag(e) {
+        if (!dragging || (e && e.pointerId !== pid)) return;
+        dragging = false; pid = null;
+        track.style.transition = '';
+        // a pull past a tenth of the viewport turns the page
+        const threshold = Math.min(60, (slider.clientWidth || 600) * .1);
+        go(Math.abs(dx) > threshold ? idx + (dx < 0 ? 1 : -1) : idx);
+        dx = 0;
+      }
+      window.addEventListener('pointerup', endDrag);
+      window.addEventListener('pointercancel', endDrag);
+
+      // a drag that happens to end on a card must not follow that card's link
+      slider.addEventListener('click', e => {
+        if (!moved) return;
+        moved = false;
+        e.preventDefault();
+        e.stopPropagation();
+      }, true);
     })();
 
     /* ---------- Mobile nav ---------- */
