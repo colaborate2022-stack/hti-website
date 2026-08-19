@@ -1,0 +1,2188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Food Cost Calculator | Work Out Your Food Cost % | HTI India</title>
+  <meta name="description" content="Free food cost calculator for restaurants and hotels. Add your ingredients, enter your menu price, and see your food cost % and profit per plate instantly." />
+  <link rel="canonical" href="https://www.hti-india.com/food-cost-calculator.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Food Cost Calculator | HTI India" />
+  <meta property="og:description" content="Free food cost calculator for restaurants and hotels. Add your ingredients, enter your menu price, and see your food cost % and profit per plate instantly." />
+  <meta property="og:url" content="https://www.hti-india.com/food-cost-calculator.html" />
+  <meta property="og:site_name" content="HTI India" />
+  <meta property="og:image" content="https://www.hti-india.com/images/brand/hti-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Food Cost Calculator | HTI India" />
+  <meta name="twitter:description" content="Free food cost calculator for restaurants and hotels. Add your ingredients, enter your menu price, and see your food cost % and profit per plate instantly." />
+  <meta name="twitter:image" content="https://www.hti-india.com/images/brand/hti-logo.png" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"HTI India","url":"https://www.hti-india.com","logo":"images/brand/hti-logo.png","contactPoint":{"@type":"ContactPoint","telephone":"+91-77380-60902","contactType":"customer service"},"sameAs":["https://www.facebook.com/hti.india/","https://www.instagram.com/hti.india/","https://www.linkedin.com/company/hospitality-training-institute-india-pvt-ltd","https://www.youtube.com/c/Hti-india"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is food cost, in one line?","acceptedAnswer":{"@type":"Answer","text":"It is the money you spend on ingredients, shown as a share of what you charge. If a dish costs you ₹120 to make and you sell it at ₹400, your food cost is 30%. The other 70% pays for staff, rent, gas, electricity and your profit."}},{"@type":"Question","name":"Do I include gas, staff salary and rent?","acceptedAnswer":{"@type":"Answer","text":"No. Food cost is only the ingredients. Gas, salaries and rent are separate costs and are counted differently. Keeping them out is what makes this number useful to compare dish to dish."}},{"@type":"Question","name":"Should I use the price with GST or without?","acceptedAnswer":{"@type":"Answer","text":"Without GST. GST is not your money — you collect it and pass it on. Using the price with GST will make your food cost look better than it really is."}},{"@type":"Question","name":"My food cost is too high. What do I do?","acceptedAnswer":{"@type":"Answer","text":"You have four levers. Buy better: negotiate rates or change supplier. Waste less: check trimming, spoilage and over-portioning. Portion tighter: weigh instead of guessing. Or raise the price. Most kitchens find the fastest win in wastage, not in price."}},{"@type":"Question","name":"Does this calculator save my data?","acceptedAnswer":{"@type":"Answer","text":"No. Everything stays in your browser. Nothing is stored and nothing is sent anywhere. Close the page and it is gone."}}]}</script>
+  <link rel="icon" href="images/brand/hti-favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+  <style>
+    :root {
+      --hti-bg: #f3f2ef;
+      --hti-black: #000;
+      --hti-red: #e32129;
+      --hti-red2: #ff0000;
+      --hti-text: #111;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      background: var(--hti-bg);
+      color: var(--hti-text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .btn-red {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--hti-red2);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 12px 26px;
+      font-size: 17px;
+      line-height: 1;
+      transition: transform .15s ease, background .15s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-red:hover {
+      background: #d40f0f;
+      transform: translateY(-2px);
+    }
+
+    /* ============ NAVBAR ============ */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--hti-bg);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #000, transparent);
+      transition: opacity .25s ease;
+    }
+
+    /* static line hides once the scroll progress line takes over */
+    .navbar.scrolled::after {
+      opacity: 0;
+    }
+
+    /* ---------- Scroll progress line (sits under the navbar) ---------- */
+    .scroll-progress {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, var(--hti-red, #e32129), var(--hti-red2, #ff0000));
+      transform: scaleX(0);
+      transform-origin: left center;
+      opacity: 0;
+      transition: opacity .25s ease;
+      will-change: transform;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .navbar.scrolled .scroll-progress {
+      opacity: 1;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 72px;
+    }
+
+    .nav-logo img {
+      width: 52px;
+      height: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-item {
+      position: relative;
+      font-weight: 600;
+      font-size: 15px;
+      color: #111;
+      cursor: pointer;
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-item .caret {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #333;
+      border-bottom: 2px solid #333;
+      transform: rotate(45deg);
+      margin-top: -3px;
+      transition: transform .2s;
+    }
+
+    .nav-item:hover .caret {
+      transform: rotate(-135deg);
+      margin-top: 3px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .14);
+      padding: 10px;
+      min-width: 230px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all .2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 120;
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      padding: 9px 12px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #222;
+    }
+
+    .dropdown a:hover {
+      background: var(--hti-bg);
+      color: var(--hti-red);
+    }
+
+    .dropdown a b {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .dropdown a span {
+      font-size: 12px;
+      color: #777;
+      font-weight: 400;
+    }
+
+    .nav-contact {
+      background: var(--hti-red2);
+      color: #fff;
+      border-radius: 8px;
+      padding: 11px 22px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .nav-contact:hover {
+      background: #d40f0f;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      width: 26px;
+      height: 2px;
+      background: #000;
+      display: block;
+      transition: transform .25s ease, opacity .2s ease;
+    }
+
+    /* while the menu is open the hamburger becomes a cross, so there is an
+       obvious way to close it - and it sits in the sticky header, so it stays
+       reachable even when the menu panel is scrolled */
+    .nav-toggle.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ============ FOOTER (black) ============ */
+    .footer {
+      background: #000;
+      color: #fff;
+      padding: 60px 30px 30px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .footer-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 17px;
+      color: #fff;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 14.5px;
+      color: #c7c7c7;
+      margin-bottom: 11px;
+      font-weight: 400;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-div {
+      height: 1px;
+      background: #2a2a2a;
+      margin: 40px 0 30px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 26px;
+      height: 26px;
+      color: #fff;
+      opacity: .85;
+    }
+
+    .footer-social a:hover {
+      opacity: 1;
+      color: var(--hti-red);
+    }
+
+    .footer-contact h3 {
+      font-size: 20px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .footer-contact span {
+      color: var(--hti-red);
+    }
+
+    .footer-brand img {
+      width: 70px;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: #8a8a8a;
+      font-size: 13px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    /* ============ CALCULATOR TOKENS ============
+       This page's own palette. It is NOT a duplicate of the site :root above:
+       these names (--red, --ink, --line, --good/--warn/--bad) do not exist there.
+       --hti-red / --hti-red2 are re-pointed to #e31e24, the same value every
+       programme page uses, so one red runs through the whole page. */
+    :root {
+      --hti-red: #e31e24;
+      --hti-red2: #e31e24;
+
+      --red: var(--hti-red);
+      --ink: #111;
+      --muted: #6b6b6b;
+      --line: #e2e0dc;
+      --card: #fff;
+      --good: #1a7f4b;
+      --warn: #c47a00;
+      --bad: #c62828;
+      --ease-out: cubic-bezier(.22, 1, .36, 1);
+    }
+
+    /* ============ PAGE SHELL ============ */
+    .fcc-wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .sec-head {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+
+    .sec-head h2 {
+      font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+      color: var(--ink);
+      letter-spacing: -.4px;
+    }
+
+    .sec-head h2 em {
+      font-style: normal;
+      color: var(--red);
+    }
+
+    /* ============ INTRO ============ */
+    .fcc-intro {
+      padding: 54px 0 34px;
+    }
+
+    .fcc-eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 14px;
+    }
+
+    .fcc-intro h1 {
+      font-size: clamp(2rem, 5.4vw, 3rem);
+      letter-spacing: -1px;
+      color: var(--ink);
+    }
+
+    .fcc-lede {
+      max-width: 620px;
+      margin: 16px 0 26px;
+      font-size: 16.5px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .fcc-formula {
+      display: inline-block;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--red);
+      border-radius: 10px;
+      padding: 14px 20px;
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .fcc-formula span {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ============ CARDS ============ */
+    .fcc-calc {
+      padding-bottom: 20px;
+    }
+
+    /* deliberately NOT given a motion card class: these hold text inputs, and a
+       panel that tilts under the cursor while someone types numbers is unusable */
+    .fcc-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .fcc-step {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(227, 30, 36, .08);
+      border: 1px solid rgba(227, 30, 36, .2);
+      border-radius: 30px;
+      padding: 5px 13px;
+      margin-bottom: 14px;
+    }
+
+    .fcc-card h2 {
+      font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+      color: var(--ink);
+    }
+
+    .fcc-note {
+      margin: 10px 0 22px;
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    /* ============ INGREDIENT ROWS ============ */
+    .fcc-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .fcc-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr 38px;
+      gap: 12px;
+      align-items: end;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    /* every field keeps its own label at every width - a header row would
+       scroll out of sight on a phone and leave a bare number behind */
+    .fcc-field label,
+    .fcc-lab {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .9px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .fcc-in {
+      width: 100%;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+      background: #fbfaf8;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 11px 12px;
+      min-height: 44px;
+    }
+
+    .fcc-in:focus {
+      outline: none;
+      border-color: var(--red);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(227, 30, 36, .12);
+    }
+
+    .fcc-money {
+      position: relative;
+    }
+
+    .fcc-money .fcc-rupee {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .fcc-money .fcc-in {
+      padding-left: 30px;
+    }
+
+    /* the spinners are a nuisance on a costing sheet and clash with the ₹ */
+    .fcc-in[type=number]::-webkit-outer-spin-button,
+    .fcc-in[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .fcc-in[type=number] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+
+    .fcc-del {
+      width: 38px;
+      height: 44px;
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      transition: color .2s ease, border-color .2s ease;
+    }
+
+    .fcc-del:hover {
+      color: var(--bad);
+      border-color: var(--bad);
+    }
+
+    .fcc-row-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .fcc-btn {
+      font-family: inherit;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #fff;
+      background: var(--ink);
+      border: 1px solid var(--ink);
+      border-radius: 9px;
+      padding: 12px 20px;
+      min-height: 44px;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    .fcc-btn:hover {
+      background: #000;
+    }
+
+    .fcc-btn.ghost {
+      background: none;
+      color: var(--muted);
+      border-color: var(--line);
+    }
+
+    .fcc-btn.ghost:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .fcc-btn[disabled] {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    /* ============ UNIT HELPER ============ */
+    .fcc-helper {
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fbfaf8;
+    }
+
+    .fcc-helper summary {
+      cursor: pointer;
+      padding: 16px 18px;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--ink);
+      list-style: none;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .fcc-helper summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .fcc-helper summary::before {
+      content: "\2304";
+      color: var(--red);
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.1;
+      flex: 0 0 auto;
+      transition: transform .3s var(--ease-out);
+    }
+
+    .fcc-helper[open] summary::before {
+      transform: rotate(180deg);
+    }
+
+    .fcc-helper-body {
+      padding: 0 18px 18px;
+    }
+
+    .fcc-helper-body>p {
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .fcc-qs {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      counter-reset: fccq;
+    }
+
+    .fcc-q {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .fcc-q::before {
+      counter-increment: fccq;
+      content: counter(fccq) ".";
+      font-weight: 800;
+      color: var(--red);
+      font-size: 15px;
+      padding-top: 22px;
+    }
+
+    .fcc-q-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .fcc-q-fields .fcc-in {
+      width: auto;
+      flex: 1 1 120px;
+      min-width: 0;
+    }
+
+    .fcc-q-fields .fcc-money {
+      flex: 1 1 140px;
+    }
+
+    .fcc-q-fields select.fcc-in {
+      flex: 0 0 auto;
+      width: auto;
+      cursor: pointer;
+    }
+
+    .fcc-helper-out {
+      margin: 20px 0 14px;
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    .fcc-helper-out b {
+      color: var(--red);
+      font-weight: 800;
+    }
+
+    .fcc-helper-out.bad {
+      color: var(--bad);
+    }
+
+    /* ============ SUBTOTAL ============ */
+    .fcc-subtotal {
+      margin-top: 26px;
+      background: #000;
+      color: #fff;
+      border-radius: 14px;
+      padding: 20px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .fcc-subtotal span {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #d8d8d8;
+    }
+
+    .fcc-subtotal strong {
+      font-family: 'Gilroy', 'Montserrat', sans-serif;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    /* ============ MODE PICKER ============ */
+    .fcc-modes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .fcc-mode {
+      text-align: left;
+      font-family: inherit;
+      background: #fbfaf8;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      cursor: pointer;
+      display: block;
+      transition: border-color .25s ease, background .25s ease;
+    }
+
+    .fcc-mode b {
+      display: block;
+      font-size: 16.5px;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .fcc-mode span {
+      display: block;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    /* state lives on aria-pressed, so what a screen reader is told and what the
+       eye sees can never drift apart */
+    .fcc-mode[aria-pressed="true"] {
+      border-color: var(--red);
+      background: #fff;
+    }
+
+    .fcc-mode[aria-pressed="true"] b {
+      color: var(--red);
+    }
+
+    /* ============ RESULT PANELS ============ */
+    .fcc-panel[hidden] {
+      display: none;
+    }
+
+    .fcc-panel .fcc-field {
+      max-width: 260px;
+    }
+
+    .fcc-hint {
+      margin-top: 8px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .fcc-out {
+      margin-top: 26px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .fcc-big {
+      font-family: 'Gilroy', 'Montserrat', sans-serif;
+      font-size: clamp(3rem, 9vw, 4.4rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -2px;
+      color: var(--ink);
+    }
+
+    /* nothing to show yet: the em-dash reads as "waiting", not as an answer */
+    .fcc-big.empty {
+      color: var(--muted);
+    }
+
+    .fcc-big.good {
+      color: var(--good);
+    }
+
+    .fcc-big.warn {
+      color: var(--warn);
+    }
+
+    .fcc-big.bad {
+      color: var(--bad);
+    }
+
+    .fcc-verdict {
+      margin-top: 12px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .fcc-verdict.good {
+      color: var(--good);
+    }
+
+    .fcc-verdict.warn {
+      color: var(--warn);
+    }
+
+    .fcc-verdict.bad {
+      color: var(--bad);
+    }
+
+    .fcc-subnote {
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    /* ---- one plate's price, split into what it buys ---- */
+    .fcc-barwrap {
+      margin-top: 26px;
+    }
+
+    .fcc-bar {
+      position: relative;
+      display: flex;
+      height: 30px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #efeeea;
+    }
+
+    .fcc-bar i {
+      display: block;
+      height: 100%;
+      transition: width .4s var(--ease-out);
+    }
+
+    .fcc-bar .seg-red {
+      background: var(--red);
+    }
+
+    .fcc-bar .seg-green {
+      background: var(--good);
+    }
+
+    .fcc-mark {
+      position: absolute;
+      top: -5px;
+      bottom: -5px;
+      left: 35%;
+      width: 0;
+      border-left: 2px dashed #111;
+      pointer-events: none;
+    }
+
+    .fcc-key {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .fcc-key span {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .fcc-key i {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      display: block;
+    }
+
+    .fcc-key .k-red {
+      background: var(--red);
+    }
+
+    .fcc-key .k-green {
+      background: var(--good);
+    }
+
+    .fcc-key .k-mark {
+      width: 0;
+      height: 14px;
+      border-radius: 0;
+      border-left: 2px dashed #111;
+    }
+
+    .fcc-lines {
+      margin-top: 26px;
+      border-top: 1px solid var(--line);
+    }
+
+    .fcc-lines>div {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .fcc-lines dt {
+      font-size: 14.5px;
+      color: var(--muted);
+    }
+
+    .fcc-lines dd {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    /* ============ HEALTHY RANGES ============ */
+    .fcc-bands {
+      padding: 60px 0;
+    }
+
+    .fcc-band-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .fcc-band {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--line);
+      border-radius: 14px;
+      padding: 22px 20px;
+    }
+
+    .fcc-band.b-good {
+      border-top-color: var(--good);
+    }
+
+    .fcc-band.b-warn {
+      border-top-color: var(--warn);
+    }
+
+    .fcc-band.b-bad {
+      border-top-color: var(--bad);
+    }
+
+    .fcc-band h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 9px;
+    }
+
+    .fcc-band p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    /* ============ FAQ (same pattern as the programme pages) ============ */
+    .faq-band {
+      background: #e6e1d9;
+      padding: 70px 0;
+    }
+
+    .faq-list {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: #fff;
+      border: 1px solid #e4ded6;
+      border-radius: 14px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .05);
+      transition: box-shadow .35s var(--ease-out), border-color .35s ease;
+    }
+
+    .faq-item.open {
+      border-color: rgba(227, 30, 36, .35);
+      box-shadow: 0 22px 44px -22px rgba(0, 0, 0, .3);
+    }
+
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 20px 24px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      color: #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      min-height: 44px;
+    }
+
+    .faq-q .sign {
+      color: var(--red);
+      font-size: 24px;
+      font-weight: 800;
+      flex: 0 0 auto;
+      line-height: 1;
+      transition: transform .3s var(--ease-out);
+    }
+
+    .faq-item.open .faq-q .sign {
+      transform: rotate(180deg);
+    }
+
+    /* grid-template-rows animates to the answer's real height, so a long
+       answer is never clipped the way a fixed max-height would clip it */
+    .faq-answer {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .35s var(--ease-out);
+    }
+
+    .faq-item.open .faq-answer {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-answer>div {
+      overflow: hidden;
+    }
+
+    .faq-answer p {
+      padding: 0 24px 22px;
+      font-size: 15px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    /* ============ CLOSING CTA ============ */
+    .fcc-cta-band {
+      padding: 70px 0;
+    }
+
+    .fcc-cta {
+      background: #000;
+      color: #fff;
+      border-radius: 20px;
+      padding: 54px 40px;
+      text-align: center;
+    }
+
+    .fcc-cta h2 {
+      font-size: clamp(1.5rem, 3.4vw, 2.2rem);
+      letter-spacing: -.6px;
+    }
+
+    .fcc-cta p {
+      max-width: 620px;
+      margin: 16px auto 28px;
+      font-size: 15.5px;
+      line-height: 1.7;
+      color: #c9c9c9;
+    }
+    /* ============ RESPONSIVE ============ */
+    @media(max-width:960px) {
+      .nav-menu {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 16px 24px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+        display: none;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .nav-item {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: 4px 0 4px 14px;
+        min-width: auto;
+        width: 100%;
+        display: none;
+      }
+
+      .nav-item.open .dropdown {
+        display: flex;
+      }
+
+      /* a tap leaves :hover stuck on touch devices, which used to point the
+         caret up while the panel stayed shut - drive it from the real state */
+      .nav-item:hover .caret {
+        transform: rotate(45deg);
+        margin-top: -3px;
+      }
+
+      .nav-item.open .caret {
+        transform: rotate(-135deg);
+        margin-top: 3px;
+      }
+
+      /* touch targets: every dropdown link is at least 44px tall */
+      .dropdown a {
+        min-height: 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .footer-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:600px) {
+      .footer-cols {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media(max-width:820px) {
+      .fcc-card {
+        padding: 22px 18px;
+      }
+
+      /* one field per line, each still carrying its own label, and the delete
+         button lifted out of the flow so it never eats a field's width */
+      .fcc-row {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding-right: 46px;
+        padding-bottom: 18px;
+      }
+
+      .fcc-del {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+
+      .fcc-modes {
+        grid-template-columns: 1fr;
+      }
+
+      .fcc-band-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .fcc-subtotal strong {
+        font-size: 28px;
+      }
+
+      .fcc-big {
+        font-size: clamp(2.4rem, 13vw, 3rem);
+      }
+
+      .fcc-cta {
+        padding: 40px 22px;
+      }
+
+      .fcc-panel .fcc-field {
+        max-width: none;
+      }
+
+      .fcc-q-fields .fcc-in {
+        flex: 1 1 100%;
+      }
+
+      .faq-q {
+        font-size: 15px;
+        padding: 18px;
+      }
+    }
+
+    /* anything this page animates itself is switched off here; the shared
+       motion layer already bails out on its own */
+    @media (prefers-reduced-motion: reduce) {
+
+      .fcc-bar i,
+      .fcc-mode,
+      .fcc-btn,
+      .fcc-del,
+      .faq-item,
+      .faq-answer,
+      .faq-q .sign,
+      .fcc-helper summary::before {
+        transition: none;
+      }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBKJQQRP0N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SBKJQQRP0N');
+  </script>
+  <!-- shared motion layer: progressive enhancement, see assets/motion.css -->
+  <script>document.documentElement.className += ' mo';</script>
+  <link rel="stylesheet" href="assets/motion.css" />
+  <link rel="stylesheet" href="assets/polish.css" />
+  <script src="assets/motion.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img width="2374" height="1801"
+          src="images/brand/hti-logo.png"
+          alt="HTI Logo" /></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+      <nav class="nav-menu" id="navMenu">
+        <div class="nav-item">Restaurants &amp; QSRs<span class="caret"></span>
+          <div class="dropdown">
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Service Team</div>
+            <a href="super.html"><b>SUPER</b><span>Waiters, stewards, captains, hostess</span></a>
+            <a href="support.html"><b>SUPPORT</b><span>Same roles &mdash; pre-opening restaurant</span></a>
+            <a href="icedt.html"><b>ICEDT</b><span>Counter executives, sales boys, servers</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Guest Experience</div>
+            <a href="icare.html"><b>iCARE</b><span>Customer service execs, supervisors</span></a>
+            <a href="vow.html"><b>Vow to Wow</b><span>Frontline reps, team leaders</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Managers</div>
+            <a href="ramp.html"><b>RAMP</b><span>Restaurant managers &amp; supervisors</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
+            <a href="restaurants.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Hotels<span class="caret"></span>
+          <div class="dropdown">
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Rooms &amp; Front Desk</div>
+            <a href="fort.html"><b>FORT</b><span>Receptionists, FO executives, GRE, bell boys</span></a>
+            <a href="hotcar.html"><b>HOT-CAR</b><span>Housekeeping attendants &amp; supervisors</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Kitchen</div>
+            <a href="kmt.html"><b>KMT</b><span>Chefs, sous chefs, kitchen supervisors</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Whole Property</div>
+            <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Every hotel role &mdash; F&amp;B to security</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Villas &amp; Homestays</div>
+            <a href="cup.html"><b>CUP</b><span>Caretakers of villas, homestays, guesthouses</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Grooming &amp; Management</div>
+            <a href="class.html"><b>CLASS</b><span>Guest-facing &amp; corporate professionals</span></a>
+            <a href="mdp.html"><b>MDP</b><span>Newly promoted &amp; mid-level managers</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
+            <a href="hotels.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Offices &amp; Retail<span class="caret"></span>
+          <div class="dropdown">
+            <a href="post.html"><b>POST</b><span>Corporate pantry staff &amp; attendants</span></a>
+            <a href="top.html"><b>TOP</b><span>Peons, office boys, support staff</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
+            <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">More<span class="caret"></span>
+          <div class="dropdown">
+            <a href="trainers.html"><b>Our Trainers</b><span>The people who run the sessions</span></a>
+            <a href="brands.html"><b>Our Brands</b><span>HTI, Woosh Biz, Star, Lead, Dox &amp; T3</span></a>
+            <a href="lead.html"><b>Lead by HTI</b><span>Train the trainer, presentation &amp; soft skills</span></a>
+            <a href="leadership-development.html"><b>Leadership Development</b><span>Senior managers &amp; future leaders</span></a>
+            <a href="professional-etiquette.html"><b>Professional Etiquette</b><span>Corporate &amp; client-facing professionals</span></a>
+            <a href="posh-training.html"><b>POSH Training</b><span>All employees, managers &amp; ICC members</span></a>
+            <a href="fssai-training.html"><b>FSSAI Training</b><span>Food handlers &amp; food safety supervisors</span></a>
+            <a href="https://wooshbiz.com/" target="_blank" rel="noopener"><b>Team Building</b><span>Group activities for any team</span></a>
+            <a href="dox.html"><b>Develop SOPs &amp; How-To Videos</b><span>Owners &amp; operations heads</span></a>
+            <a href="blog.html"><b>Blogs</b><span>Hospitality insights &amp; guides</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
+          </div>
+        </div>
+        <a href="contact.html" class="nav-contact">Contact Us</a>
+      </nav>
+    </div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+  </header>
+
+  <main>
+
+    <!-- ============ INTRO ============ -->
+    <section class="fcc-intro">
+      <div class="fcc-wrap">
+        <span class="fcc-eyebrow">Free tool from HTI India</span>
+        <h1>Food Cost Calculator</h1>
+        <p class="fcc-lede">Find out how much of your menu price is going into ingredients — and whether you are
+          actually making money on a dish.</p>
+        <div class="fcc-formula">Ingredient cost ÷ Menu price × 100 <span>= your food cost %</span></div>
+      </div>
+    </section>
+
+    <!-- ============ THE CALCULATOR ============ -->
+    <section class="fcc-calc">
+      <div class="fcc-wrap">
+
+        <!-- ---------- Step 1: the recipe ---------- -->
+        <div class="fcc-card">
+          <span class="fcc-step">Step 1 of 2</span>
+          <h2>List what goes into one plate</h2>
+          <p class="fcc-note">A butter chicken is filled in as an example. Change it, or clear it and add your own.</p>
+
+          <div class="fcc-rows" id="fccRows">
+            <div class="fcc-row">
+              <div class="fcc-field">
+                <label for="fcc-n1">Ingredient</label>
+                <input type="text" id="fcc-n1" class="fcc-in fcc-name" placeholder="e.g. Chicken" value="Chicken" />
+              </div>
+              <div class="fcc-field">
+                <label for="fcc-q1">How much you used</label>
+                <input type="text" id="fcc-q1" class="fcc-in" placeholder="e.g. 250 g" value="250 g" />
+              </div>
+              <div class="fcc-field">
+                <label for="fcc-c1">What it costs you</label>
+                <div class="fcc-money"><span class="fcc-rupee">₹</span><input type="number" id="fcc-c1"
+                    class="fcc-in fcc-cost" placeholder="0" value="70" min="0" step="any" inputmode="decimal" /></div>
+              </div>
+              <button type="button" class="fcc-del" aria-label="Remove this ingredient">×</button>
+            </div>
+            <div class="fcc-row">
+              <div class="fcc-field">
+                <label for="fcc-n2">Ingredient</label>
+                <input type="text" id="fcc-n2" class="fcc-in fcc-name" placeholder="e.g. Chicken"
+                  value="Butter &amp; cream" />
+              </div>
+              <div class="fcc-field">
+                <label for="fcc-q2">How much you used</label>
+                <input type="text" id="fcc-q2" class="fcc-in" placeholder="e.g. 250 g" value="60 g" />
+              </div>
+              <div class="fcc-field">
+                <label for="fcc-c2">What it costs you</label>
+                <div class="fcc-money"><span class="fcc-rupee">₹</span><input type="number" id="fcc-c2"
+                    class="fcc-in fcc-cost" placeholder="0" value="28" min="0" step="any" inputmode="decimal" /></div>
+              </div>
+              <button type="button" class="fcc-del" aria-label="Remove this ingredient">×</button>
+            </div>
+            <div class="fcc-row">
+              <div class="fcc-field">
+                <label for="fcc-n3">Ingredient</label>
+                <input type="text" id="fcc-n3" class="fcc-in fcc-name" placeholder="e.g. Chicken"
+                  value="Tomato, onion, cashew" />
+              </div>
+              <div class="fcc-field">
+                <label for="fcc-q3">How much you used</label>
+                <input type="text" id="fcc-q3" class="fcc-in" placeholder="e.g. 250 g" value="150 g" />
+              </div>
+              <div class="fcc-field">
+                <label for="fcc-c3">What it costs you</label>
+                <div class="fcc-money"><span class="fcc-rupee">₹</span><input type="number" id="fcc-c3"
+                    class="fcc-in fcc-cost" placeholder="0" value="15" min="0" step="any" inputmode="decimal" /></div>
+              </div>
+              <button type="button" class="fcc-del" aria-label="Remove this ingredient">×</button>
+            </div>
+            <div class="fcc-row">
+              <div class="fcc-field">
+                <label for="fcc-n4">Ingredient</label>
+                <input type="text" id="fcc-n4" class="fcc-in fcc-name" placeholder="e.g. Chicken"
+                  value="Spices, oil, garnish" />
+              </div>
+              <div class="fcc-field">
+                <label for="fcc-q4">How much you used</label>
+                <input type="text" id="fcc-q4" class="fcc-in" placeholder="e.g. 250 g" value="" />
+              </div>
+              <div class="fcc-field">
+                <label for="fcc-c4">What it costs you</label>
+                <div class="fcc-money"><span class="fcc-rupee">₹</span><input type="number" id="fcc-c4"
+                    class="fcc-in fcc-cost" placeholder="0" value="7" min="0" step="any" inputmode="decimal" /></div>
+              </div>
+              <button type="button" class="fcc-del" aria-label="Remove this ingredient">×</button>
+            </div>
+          </div>
+
+          <div class="fcc-row-btns">
+            <button type="button" class="fcc-btn" id="fccAdd">+ Add ingredient</button>
+            <button type="button" class="fcc-btn ghost" id="fccClear">Clear and start fresh</button>
+          </div>
+
+          <!-- ---------- kilo-to-gram helper ---------- -->
+          <details class="fcc-helper">
+            <summary>You buy in kilos but cook in grams — work out the cost of what you used</summary>
+            <div class="fcc-helper-body">
+              <p>Say you buy chicken at ₹400 a kilo but only use 250 g in the dish. You need the cost of that 250 g,
+                not the whole kilo. Answer three questions and this works it out for you.</p>
+              <ol class="fcc-qs">
+                <li class="fcc-q">
+                  <div>
+                    <label class="fcc-lab" for="fccBuyQty">How much did you buy?</label>
+                    <div class="fcc-q-fields">
+                      <input type="number" id="fccBuyQty" class="fcc-in" value="1" min="0" step="any"
+                        inputmode="decimal" />
+                      <select id="fccBuyUnit" class="fcc-in" aria-label="Unit you bought in">
+                        <option value="kg" selected>kg</option>
+                        <option value="g">g</option>
+                        <option value="litre">litre</option>
+                        <option value="ml">ml</option>
+                        <option value="piece">piece</option>
+                      </select>
+                    </div>
+                  </div>
+                </li>
+                <li class="fcc-q">
+                  <div>
+                    <label class="fcc-lab" for="fccBuyPaid">What did you pay for it?</label>
+                    <div class="fcc-q-fields">
+                      <div class="fcc-money"><span class="fcc-rupee">₹</span><input type="number" id="fccBuyPaid"
+                          class="fcc-in" value="400" min="0" step="any" inputmode="decimal" /></div>
+                    </div>
+                  </div>
+                </li>
+                <li class="fcc-q">
+                  <div>
+                    <label class="fcc-lab" for="fccUseQty">How much did you use in this dish?</label>
+                    <div class="fcc-q-fields">
+                      <input type="number" id="fccUseQty" class="fcc-in" value="250" min="0" step="any"
+                        inputmode="decimal" />
+                      <select id="fccUseUnit" class="fcc-in" aria-label="Unit you used">
+                        <option value="g" selected>g</option>
+                        <option value="kg">kg</option>
+                        <option value="litre">litre</option>
+                        <option value="ml">ml</option>
+                        <option value="piece">piece</option>
+                      </select>
+                    </div>
+                  </div>
+                </li>
+              </ol>
+              <p class="fcc-helper-out" id="fccHelperOut" aria-live="polite">250 g of this costs you <b>₹100.00</b></p>
+              <button type="button" class="fcc-btn" id="fccHelperAdd">Add to my list</button>
+            </div>
+          </details>
+
+          <div class="fcc-subtotal hero-card">
+            <span>Total cost of ingredients for one plate</span>
+            <strong id="fccPlate">—</strong>
+          </div>
+        </div>
+
+        <!-- ---------- Step 2: what you want to know ---------- -->
+        <div class="fcc-card">
+          <span class="fcc-step">Step 2 of 2</span>
+          <h2>Pick what you want to find out</h2>
+          <p class="fcc-note">Two different ways to use the same recipe. Tap one.</p>
+
+          <div class="fcc-modes">
+            <button type="button" class="fcc-mode use-card" id="fccModeA" aria-pressed="true" aria-controls="fccPanelA">
+              <b>I already have a price</b>
+              <span>Check whether what you charge today is healthy.</span>
+            </button>
+            <button type="button" class="fcc-mode use-card" id="fccModeB" aria-pressed="false"
+              aria-controls="fccPanelB">
+              <b>I need to set a price</b>
+              <span>Get a price to charge, based on the profit you want.</span>
+            </button>
+          </div>
+
+          <!-- PANEL A: price known, find the percentage -->
+          <div class="fcc-panel" id="fccPanelA">
+            <div class="fcc-field">
+              <label for="fccMenuPrice">What do you charge for this dish?</label>
+              <div class="fcc-money"><span class="fcc-rupee">₹</span><input type="number" id="fccMenuPrice"
+                  class="fcc-in" value="400" min="0" step="any" inputmode="decimal" /></div>
+              <p class="fcc-hint">Use the price before GST.</p>
+            </div>
+
+            <div class="fcc-out">
+              <div class="fcc-big" id="fccPct">—</div>
+              <div class="fcc-verdict" id="fccVerdictA">Add ingredients and a price to begin.</div>
+              <div class="fcc-subnote" id="fccNoteA"></div>
+
+              <div class="fcc-barwrap">
+                <div class="fcc-bar">
+                  <i class="seg-red" id="fccSegRed" style="width:0%"></i>
+                  <i class="seg-green" id="fccSegGreen" style="width:0%"></i>
+                  <span class="fcc-mark" aria-hidden="true"></span>
+                </div>
+                <div class="fcc-key">
+                  <span><i class="k-red"></i>Ingredients</span>
+                  <span><i class="k-green"></i>Left for you</span>
+                  <span><i class="k-mark"></i>35% limit</span>
+                </div>
+              </div>
+
+              <dl class="fcc-lines">
+                <div>
+                  <dt>Ingredients cost you</dt>
+                  <dd id="fccALineCost">—</dd>
+                </div>
+                <div>
+                  <dt>You charge</dt>
+                  <dd id="fccALinePrice">—</dd>
+                </div>
+                <div>
+                  <dt>Left on every plate</dt>
+                  <dd id="fccALineProfit">—</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+
+          <!-- PANEL B: percentage known, find the price -->
+          <div class="fcc-panel" id="fccPanelB" hidden>
+            <div class="fcc-field">
+              <label for="fccTarget">What food cost % are you aiming for?</label>
+              <input type="number" id="fccTarget" class="fcc-in" value="30" min="1" max="100" step="any"
+                inputmode="decimal" />
+              <p class="fcc-hint">Most restaurants aim for 28% to 35%. Lower means more profit, but check your price is
+                still fair.</p>
+            </div>
+
+            <div class="fcc-out">
+              <div class="fcc-big" id="fccSuggest">—</div>
+              <div class="fcc-verdict" id="fccVerdictB">Add ingredients and a price to begin.</div>
+              <div class="fcc-subnote" id="fccNoteB"></div>
+
+              <dl class="fcc-lines">
+                <div>
+                  <dt>Ingredients cost you</dt>
+                  <dd id="fccBLineCost">—</dd>
+                </div>
+                <div>
+                  <dt>Left on every plate</dt>
+                  <dd id="fccBLineProfit">—</dd>
+                </div>
+                <div>
+                  <dt>Rounded to a menu-friendly price</dt>
+                  <dd id="fccBLineRound">—</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ HEALTHY RANGES ============ -->
+    <section class="fcc-bands">
+      <div class="fcc-wrap">
+        <div class="sec-head">
+          <h2>What counts as a good food cost?</h2>
+        </div>
+        <div class="fcc-band-grid">
+          <div class="why-item fcc-band b-good">
+            <h3>Under 25%</h3>
+            <p>Very profitable. Check your portions are not too small.</p>
+          </div>
+          <div class="why-item fcc-band b-good">
+            <h3>25–35%</h3>
+            <p>The normal, healthy range for most restaurants.</p>
+          </div>
+          <div class="why-item fcc-band b-warn">
+            <h3>35–40%</h3>
+            <p>Tight. Watch your wastage and supplier rates.</p>
+          </div>
+          <div class="why-item fcc-band b-bad">
+            <h3>Over 40%</h3>
+            <p>You are barely making money on this dish.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="faq-band">
+      <div class="fcc-wrap">
+        <div class="sec-head">
+          <h2>Frequently asked <em>questions</em></h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">What is food cost, in one line?<span
+                class="sign">&#8964;</span></button>
+            <div class="faq-answer">
+              <div>
+                <p>It is the money you spend on ingredients, shown as a share of what you charge. If a dish costs you
+                  ₹120 to make and you sell it at ₹400, your food cost is 30%. The other 70% pays for staff, rent, gas,
+                  electricity and your profit.</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">Do I include gas, staff salary and rent?<span
+                class="sign">&#8964;</span></button>
+            <div class="faq-answer">
+              <div>
+                <p>No. Food cost is only the ingredients. Gas, salaries and rent are separate costs and are counted
+                  differently. Keeping them out is what makes this number useful to compare dish to dish.</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">Should I use the price with GST or without?<span
+                class="sign">&#8964;</span></button>
+            <div class="faq-answer">
+              <div>
+                <p>Without GST. GST is not your money — you collect it and pass it on. Using the price with GST will
+                  make your food cost look better than it really is.</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">My food cost is too high. What do I do?<span
+                class="sign">&#8964;</span></button>
+            <div class="faq-answer">
+              <div>
+                <p>You have four levers. Buy better: negotiate rates or change supplier. Waste less: check trimming,
+                  spoilage and over-portioning. Portion tighter: weigh instead of guessing. Or raise the price. Most
+                  kitchens find the fastest win in wastage, not in price.</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">Does this calculator save my data?<span
+                class="sign">&#8964;</span></button>
+            <div class="faq-answer">
+              <div>
+                <p>No. Everything stays in your browser. Nothing is stored and nothing is sent anywhere. Close the page
+                  and it is gone.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CLOSING CTA ============ -->
+    <section class="fcc-cta-band">
+      <div class="fcc-wrap">
+        <div class="fcc-cta na-card">
+          <h2>Your team can learn to do this every single day</h2>
+          <p>HTI trains kitchen and restaurant teams in costing, portion control and wastage — on your property, in
+            your language.</p>
+          <a href="contact.html" class="btn-red">Speak with our team</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>HTI</h4>
+          <a href="about.html">About Us</a>
+          <a href="trainers.html">Our Trainers</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="training-needs-survey.html">Training Needs Survey</a>
+        </div>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <a href="restaurants.html">Restaurants &amp; QSRs</a>
+          <a href="hotels.html">Hotels</a>
+          <a href="offices.html">Offices</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="brands.html">Our Brands</a>
+          <a href="https://wooshbiz.com/" target="_blank" rel="noopener">Team Building</a>
+          <a href="lead.html">Lead by HTI</a>
+          <a href="leadership-development.html">Leadership Development</a>
+          <a href="professional-etiquette.html">Professional Etiquette</a>
+          <a href="posh-training.html">POSH Training</a>
+          <a href="fssai-training.html">FSSAI Training</a>
+          <a href="dox.html">Develop SOPs &amp; How-To Videos</a>
+          <a href="blog.html">Blogs</a>
+        </div>
+      </div>
+      <div class="footer-div"></div>
+      <div class="footer-bottom">
+        <div class="footer-social">
+          <a href="https://www.facebook.com/hti.india/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg></a>
+          <a href="https://www.instagram.com/hti.india/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M12 2c-2.716 0-3.056.012-4.123.06c-1.064.049-1.791.218-2.427.465a4.901 4.901 0 0 0-1.772 1.153A4.902 4.902 0 0 0 2.525 5.45c-.247.636-.416 1.363-.465 2.427C2.011 8.944 2 9.284 2 12s.011 3.056.06 4.123c.049 1.064.218 1.791.465 2.427a4.903 4.903 0 0 0 1.153 1.772a4.903 4.903 0 0 0 1.772 1.153c.636.247 1.363.416 2.427.465c1.067.048 1.407.06 4.123.06s3.056-.012 4.123-.06c1.064-.049 1.791-.218 2.427-.465a4.902 4.902 0 0 0 1.772-1.153a4.902 4.902 0 0 0 1.153-1.772c.247-.636.416-1.363.465-2.427c.048-1.067.06-1.407.06-4.123s-.012-3.056-.06-4.123c-.049-1.064-.218-1.791-.465-2.427a4.902 4.902 0 0 0-1.153-1.772a4.901 4.901 0 0 0-1.772-1.153c-.636-.247-1.363-.416-2.427-.465C15.056 2.012 14.716 2 12 2m0 1.802c2.67 0 2.986.01 4.04.058c.976.045 1.505.207 1.858.344c.466.182.8.399 1.15.748c.35.35.566.684.748 1.15c.136.353.3.882.344 1.857c.048 1.055.058 1.37.058 4.041c0 2.67-.01 2.986-.058 4.04c-.045.976-.208 1.505-.344 1.858a3.1 3.1 0 0 1-.748 1.15c-.35.35-.684.566-1.15.748c-.353.136-.882.3-1.857.344c-1.054.048-1.37.058-4.041.058c-2.67 0-2.987-.01-4.04-.058c-.976-.045-1.505-.208-1.858-.344a3.098 3.098 0 0 1-1.15-.748a3.098 3.098 0 0 1-.748-1.15c-.137-.353-.3-.882-.344-1.857c-.048-1.055-.058-1.37-.058-4.041c0-2.67.01-2.986.058-4.04c.045-.976.207-1.505.344-1.858c.182-.466.399-.8.748-1.15c.35-.35.684-.566 1.15-.748c.353-.137.882-.3 1.857-.344c1.055-.048 1.37-.058 4.041-.058m0 11.531a3.333 3.333 0 1 1 0-6.666a3.333 3.333 0 0 1 0 6.666m0-8.468a5.135 5.135 0 1 0 0 10.27a5.135 5.135 0 0 0 0-10.27m6.538-.203a1.2 1.2 0 1 1-2.4 0a1.2 1.2 0 0 1 2.4 0" />
+            </svg></a>
+          <a href="https://www.linkedin.com/company/hospitality-training-institute-india-pvt-ltd" target="_blank"
+            aria-label="LinkedIn"><svg viewBox="0 0 32 32" fill="currentColor">
+              <path
+                d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+            </svg></a>
+          <a href="https://www.youtube.com/c/Hti-india" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg></a>
+        </div>
+        <div class="footer-contact"><a href="contact.html">
+            <h3>Contact Us: <span>+91 77380 60902</span></h3>
+          </a></div>
+        <a href="index.html" class="footer-brand"><img width="2374" height="1801"
+            src="images/brand/hti-logo.png"
+            alt="HTI" /></a>
+      </div>
+      <div class="footer-copy">&#169;&#65039; HOSPITALITY TRAINING INSTITUTE INDIA PRIVATE. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    /* ---------- Mobile nav ---------- */
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const menu = document.getElementById('navMenu');
+
+      /* one source of truth for the open state, so the panel, the
+         hamburger-to-cross animation and the ARIA state always agree */
+      function setNav(open) {
+        menu.classList.toggle('open', open);
+        toggle.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        if (!open) {
+          menu.querySelectorAll('.nav-item.open').forEach(i => i.classList.remove('open'));
+        }
+      }
+
+      toggle.addEventListener('click', () => setNav(!menu.classList.contains('open')));
+
+      /* Escape, or a tap outside the panel, also closes it */
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu.classList.contains('open')) setNav(false);
+      });
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 960 && menu.classList.contains('open') &&
+          !menu.contains(e.target) && !toggle.contains(e.target)) setNav(false);
+      });
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          if (window.innerWidth <= 960 && (e.target === item || e.target.classList.contains('caret'))) {
+            item.classList.toggle('open');
+          }
+        });
+      });
+      /* tapping any nav link closes the menu - matters for links that open
+         in a new tab and so never navigate this page away */
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          setNav(false);
+        });
+      });
+    })();
+
+    /* ---------- Scroll progress line under the navbar ---------- */
+    (function () {
+      const bar = document.getElementById('scrollProgress');
+      const navbar = document.querySelector('.navbar');
+      let ticking = false;
+
+      function update() {
+        ticking = false;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const y = window.scrollY || window.pageYOffset;
+        const ratio = max > 0 ? Math.min(Math.max(y / max, 0), 1) : 0;
+        bar.style.transform = `scaleX(${ratio})`;
+        navbar.classList.toggle('scrolled', y > 4);
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      }, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      window.addEventListener('orientationchange', update);
+      /* mobile browsers resize the viewport when the URL bar hides/shows */
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', update);
+      }
+      window.addEventListener('load', update);
+      update();
+    })();
+
+    /* ---------- FAQ accordion ----------
+       Single-open. The answers are real HTML, so they are readable — and
+       crawlable — with JS off; this only wires the open/close behaviour. */
+    (function () {
+      const list = document.querySelector('.faq-list');
+      if (!list) return;
+      list.querySelectorAll('.faq-q').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.parentElement;
+          const wasOpen = item.classList.contains('open');
+          list.querySelectorAll('.faq-item').forEach(i => {
+            i.classList.remove('open');
+            i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+          });
+          if (!wasOpen) {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    })();
+
+    /* ---------- Food cost calculator ----------
+       Everything happens in this tab. Nothing is stored, nothing is sent:
+       no storage APIs, no fetch, no form submit. Close the page and the
+       numbers are gone, which is exactly what the FAQ promises. */
+    (function () {
+      const rowsEl = document.getElementById('fccRows');
+      if (!rowsEl) return;
+
+      const DASH = '—';
+      const EMPTY_MSG = 'Add ingredients and a price to begin.';
+
+      const $ = id => document.getElementById(id);
+      const plateOut = $('fccPlate');
+      const priceEl = $('fccMenuPrice');
+      const targetEl = $('fccTarget');
+
+      const money = n => '₹' + Math.round(n).toLocaleString('en-IN');
+      /* a percentage the user typed: 30 stays "30", 32.5 stays "32.5" */
+      const pctText = n => String(Math.round(n * 10) / 10);
+
+      function tone(el, name) {
+        el.classList.remove('good', 'warn', 'bad', 'empty');
+        if (name) el.classList.add(name);
+      }
+
+      /* ---------- the ingredient list ---------- */
+      let seq = 4; /* four rows ship in the markup, so new ids start at 5 */
+
+      function makeRow(name, qty, cost) {
+        const id = ++seq;
+        const row = document.createElement('div');
+        row.className = 'fcc-row';
+        row.innerHTML =
+          '<div class="fcc-field">' +
+          '<label for="fcc-n' + id + '">Ingredient</label>' +
+          '<input type="text" id="fcc-n' + id + '" class="fcc-in fcc-name" placeholder="e.g. Chicken" />' +
+          '</div>' +
+          '<div class="fcc-field">' +
+          '<label for="fcc-q' + id + '">How much you used</label>' +
+          '<input type="text" id="fcc-q' + id + '" class="fcc-in fcc-qty" placeholder="e.g. 250 g" />' +
+          '</div>' +
+          '<div class="fcc-field">' +
+          '<label for="fcc-c' + id + '">What it costs you</label>' +
+          '<div class="fcc-money"><span class="fcc-rupee">₹</span>' +
+          '<input type="number" id="fcc-c' + id + '" class="fcc-in fcc-cost" placeholder="0" min="0" step="any" ' +
+          'inputmode="decimal" /></div>' +
+          '</div>' +
+          '<button type="button" class="fcc-del" aria-label="Remove this ingredient">×</button>';
+        /* set through .value rather than into the HTML string, so a stray
+           quote in an ingredient name can never break the markup */
+        row.querySelector('.fcc-name').value = name || '';
+        row.querySelector('.fcc-qty').value = qty || '';
+        row.querySelector('.fcc-cost').value = cost == null ? '' : cost;
+        return row;
+      }
+
+      function plateCost() {
+        let total = 0;
+        rowsEl.querySelectorAll('.fcc-cost').forEach(input => {
+          const v = parseFloat(input.value);
+          if (isFinite(v) && v > 0) total += v;
+        });
+        return total;
+      }
+
+      /* ---------- panel A: they have a price, find the percentage ---------- */
+      function drawA(cost) {
+        const big = $('fccPct'), verdict = $('fccVerdictA'), note = $('fccNoteA');
+        const price = parseFloat(priceEl.value);
+        const ready = cost > 0 && isFinite(price) && price > 0;
+
+        if (!ready) {
+          big.textContent = DASH;
+          tone(big, 'empty');
+          verdict.textContent = EMPTY_MSG;
+          tone(verdict, null);
+          note.textContent = '';
+          $('fccSegRed').style.width = '0%';
+          $('fccSegGreen').style.width = '0%';
+          $('fccALineCost').textContent = DASH;
+          $('fccALinePrice').textContent = DASH;
+          $('fccALineProfit').textContent = DASH;
+          return;
+        }
+
+        const pct = cost / price * 100;
+        const profit = price - cost;
+        let colour, line, sub;
+
+        if (pct < 25) {
+          colour = 'good';
+          line = 'Very profitable.';
+          sub = 'Just check your portion is not too small for the price you charge.';
+        } else if (pct <= 35) {
+          colour = 'good';
+          line = 'Healthy. This is the normal range.';
+          sub = 'Keep an eye on wastage and supplier rates to hold it here.';
+        } else if (pct <= 40) {
+          colour = 'warn';
+          line = 'A bit high.';
+          sub = 'Look at portion size and wastage before you raise the price.';
+        } else {
+          colour = 'bad';
+          line = 'Too high.';
+          sub = 'At this level the dish is barely paying for itself.';
+        }
+        /* selling under cost beats every band above it */
+        if (profit < 0) {
+          colour = 'bad';
+          line = 'You are losing money on this dish.';
+          sub = 'The ingredients cost more than you charge for it.';
+        }
+
+        big.textContent = pct.toFixed(1) + '%';
+        tone(big, colour);
+        verdict.textContent = line;
+        tone(verdict, colour);
+        note.textContent = sub;
+
+        const red = Math.min(Math.max(pct, 0), 100);
+        $('fccSegRed').style.width = red + '%';
+        $('fccSegGreen').style.width = (100 - red) + '%';
+        $('fccALineCost').textContent = money(cost);
+        $('fccALinePrice').textContent = money(price);
+        $('fccALineProfit').textContent = money(profit);
+      }
+
+      /* ---------- panel B: they have a target, find the price ---------- */
+      function drawB(cost) {
+        const big = $('fccSuggest'), verdict = $('fccVerdictB'), note = $('fccNoteB');
+        const target = parseFloat(targetEl.value);
+        const ready = cost > 0 && isFinite(target) && target > 0;
+
+        if (!ready) {
+          big.textContent = DASH;
+          tone(big, 'empty');
+          verdict.textContent = EMPTY_MSG;
+          note.textContent = '';
+          $('fccBLineCost').textContent = DASH;
+          $('fccBLineProfit').textContent = DASH;
+          $('fccBLineRound').textContent = DASH;
+          return;
+        }
+
+        const suggested = cost / (target / 100);
+        const rounded = Math.ceil(suggested / 10) * 10 - 1;
+
+        big.textContent = money(suggested);
+        tone(big, null);
+        verdict.textContent = 'Charge about this to keep food cost at ' + pctText(target) + '%.';
+        note.textContent = 'Charge this and your food cost lands on the number you picked.';
+        $('fccBLineCost').textContent = money(cost);
+        $('fccBLineProfit').textContent = money(suggested - cost);
+        $('fccBLineRound').textContent = money(rounded);
+      }
+
+      function recalc() {
+        const cost = plateCost();
+        plateOut.textContent = cost > 0 ? money(cost) : DASH;
+        drawA(cost);
+        drawB(cost);
+      }
+
+      /* ---------- the kilo-to-gram helper ---------- */
+      const FAMILY = { kg: 'weight', g: 'weight', litre: 'volume', ml: 'volume', piece: 'count' };
+      const FACTOR = { kg: 1000, g: 1, litre: 1000, ml: 1, piece: 1 };
+
+      const buyQty = $('fccBuyQty'), buyUnit = $('fccBuyUnit'), buyPaid = $('fccBuyPaid');
+      const useQty = $('fccUseQty'), useUnit = $('fccUseUnit');
+      const helperOut = $('fccHelperOut'), helperAdd = $('fccHelperAdd');
+
+      /* null = the two units are from different families, so there is no
+         honest conversion. NaN = something is still blank. */
+      function helperCost() {
+        if (FAMILY[buyUnit.value] !== FAMILY[useUnit.value]) return null;
+        const bought = parseFloat(buyQty.value) * FACTOR[buyUnit.value];
+        const paid = parseFloat(buyPaid.value);
+        const used = parseFloat(useQty.value) * FACTOR[useUnit.value];
+        if (!(bought > 0) || !(paid > 0) || !(used > 0)) return NaN;
+        return (paid / bought) * used;
+      }
+
+      function drawHelper() {
+        const cost = helperCost();
+
+        if (cost === null) {
+          helperOut.textContent = 'Those two units do not match. Use kg with g, or litre with ml.';
+          helperOut.classList.add('bad');
+          helperAdd.disabled = true;
+          return;
+        }
+        helperOut.classList.remove('bad');
+
+        if (!isFinite(cost)) {
+          helperOut.textContent = 'Answer all three questions and the cost appears here.';
+          helperAdd.disabled = true;
+          return;
+        }
+
+        const amount = document.createElement('b');
+        amount.textContent = '₹' + cost.toFixed(2);
+        helperOut.textContent = useQty.value + ' ' + useUnit.value + ' of this costs you ';
+        helperOut.appendChild(amount);
+        helperAdd.disabled = false;
+      }
+
+      helperAdd.addEventListener('click', () => {
+        const cost = helperCost();
+        if (cost === null || !isFinite(cost)) return;
+        const row = makeRow('', useQty.value + ' ' + useUnit.value, cost.toFixed(2));
+        rowsEl.appendChild(row);
+        recalc();
+        row.querySelector('.fcc-name').focus();
+      });
+
+      [buyQty, buyUnit, buyPaid, useQty, useUnit].forEach(el => {
+        el.addEventListener('input', drawHelper);
+        el.addEventListener('change', drawHelper);
+      });
+
+      /* ---------- list controls ---------- */
+      $('fccAdd').addEventListener('click', () => {
+        const row = makeRow('', '', '');
+        rowsEl.appendChild(row);
+        row.querySelector('.fcc-name').focus();
+        recalc();
+      });
+
+      $('fccClear').addEventListener('click', () => {
+        rowsEl.textContent = '';
+        for (let i = 0; i < 3; i++) rowsEl.appendChild(makeRow('', '', ''));
+        priceEl.value = '';
+        recalc();
+      });
+
+      rowsEl.addEventListener('click', e => {
+        const btn = e.target.closest('.fcc-del');
+        if (!btn) return;
+        const row = btn.closest('.fcc-row');
+        /* never leave the list empty - there would be nothing to type into */
+        if (rowsEl.children.length > 1) {
+          row.remove();
+        } else {
+          row.querySelectorAll('input').forEach(i => { i.value = ''; });
+        }
+        recalc();
+      });
+
+      rowsEl.addEventListener('input', recalc);
+      priceEl.addEventListener('input', recalc);
+      targetEl.addEventListener('input', recalc);
+
+      /* ---------- which question they are asking ---------- */
+      const modeA = $('fccModeA'), modeB = $('fccModeB');
+      const panelA = $('fccPanelA'), panelB = $('fccPanelB');
+
+      function setMode(wantA) {
+        modeA.setAttribute('aria-pressed', wantA ? 'true' : 'false');
+        modeB.setAttribute('aria-pressed', wantA ? 'false' : 'true');
+        panelA.hidden = !wantA;
+        panelB.hidden = wantA;
+      }
+
+      modeA.addEventListener('click', () => setMode(true));
+      modeB.addEventListener('click', () => setMode(false));
+
+      drawHelper();
+      recalc();
+    })();
+  </script>
+</body>
+
+</html>
