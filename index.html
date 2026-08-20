@@ -26,7 +26,40 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
     rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin />
+    <!-- Gilroy, limited to the three approved cuts: Light, Medium, Bold.
+         The cdnfonts stylesheet declared five separate families (Bold, Heavy,
+         Light, Medium, Regular) each pinned at weight 400, so asking a
+         'Gilroy-Bold' element for 700 or 800 made the browser smear a synthetic
+         bold over the real Bold cut - that thickened stroke was the Heavy look.
+         Declaring the three cuts as one family at their true weights means 700
+         picks the genuine Bold, 500 the Medium and 300 the Light, with no
+         synthesis, no Heavy face fetched, and one less blocking stylesheet. -->
+    <style>
+      @font-face {
+        font-family: 'Gilroy';
+        font-style: normal;
+        font-weight: 300;
+        font-display: swap;
+        src: local('Gilroy-Light'), url('https://fonts.cdnfonts.com/s/16219/Gilroy-Light.woff') format('woff');
+      }
+
+      @font-face {
+        font-family: 'Gilroy';
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: local('Gilroy-Medium'), url('https://fonts.cdnfonts.com/s/16219/Gilroy-Medium.woff') format('woff');
+      }
+
+      @font-face {
+        font-family: 'Gilroy';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: local('Gilroy-Bold'), url('https://fonts.cdnfonts.com/s/16219/Gilroy-Bold.woff') format('woff');
+      }
+    </style>
   <style>
     :root {
       --hti-bg: #f3f2ef;
@@ -305,26 +338,20 @@
       padding: 80px 40px 60px 80px;
     }
 
-    /* The Gilroy-Bold webfont ships as a single face declared at weight 400, so
-       asking for 700/800 here made the browser synthesise a faux-bold on top of
-       it — that smeared stroke is what read as Gilroy Heavy. Requesting 400 and
-       switching synthesis off renders the genuine Bold cut. */
     .clients-left h1 {
       font-size: 50px;
       line-height: 1.05;
       color: #000;
-      font-weight: 400;
-      font-synthesis-weight: none;
-      -webkit-font-synthesis: none;
-      font-family: 'Gilroy-Bold', 'Gilroy', sans-serif;
+      font-weight: 700;
+      font-family: 'Gilroy', sans-serif;
       white-space: nowrap;
     }
 
     /* Red animated typing line: fixed height so text below never shifts */
     .type-line {
       font-size: 36px;
-      /* inherits Gilroy-Bold from the h1 — see the note above on why 400 */
-      font-weight: 400;
+      /* inherits Gilroy from the h1 */
+      font-weight: 700;
       width: 100%;
       min-height: 60px;
       height: 60px;
@@ -339,7 +366,7 @@
 
     .cursor {
       color: var(--hti-red2);
-      font-weight: 400;
+      font-weight: 700;
       animation: blink 1s step-end infinite;
     }
 
@@ -1596,6 +1623,17 @@
                 <div class="tc-body">
                   <h3>Atul Mishra</h3>
                   <p>T3 App Developer &amp; Associate Trainer</p>
+                  <span class="tc-go">View profile &rarr;</span>
+                </div>
+              </a>
+            </article>
+            <article class="trainer-card">
+              <a class="tc-inner" href="pushpa-chatterjee.html">
+                <img src="images/trainers/pushpa-chatterjee.jpg" width="300" height="300" loading="lazy"
+                  alt="Pushpa Chatterjee, Senior Trainer at HTI India Pvt Ltd" />
+                <div class="tc-body">
+                  <h3>Pushpa Chatterjee</h3>
+                  <p>Senior Trainer, HTI India Pvt Ltd</p>
                   <span class="tc-go">View profile &rarr;</span>
                 </div>
               </a>
