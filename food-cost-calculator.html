@@ -635,6 +635,7 @@
   /* ---------- account + auth ---------- */
   .acct{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
     padding:12px 20px;background:#f6f5f3;border-bottom:1px solid var(--line);font-size:13.5px}
+  .acct{border:1px solid var(--line);border-bottom:none;border-radius:14px 14px 0 0}
   .acct-msg{font-weight:600;color:var(--muted)}
   .acct-msg b{color:var(--ink);font-weight:800}
   .btn-link{background:none;border:none;font-family:inherit;font-size:13.5px;font-weight:800;
@@ -643,6 +644,8 @@
   .acct-btns{display:flex;gap:14px}
 
   .authbox{padding:24px 32px;border-bottom:1px solid var(--line);background:#fff}
+  /* standalone now, so it carries its own sides; the card below draws the line under it */
+  .authbox{border:1px solid var(--line);border-bottom:none}
   .authbox .tabs{margin-top:0;margin-bottom:18px}
   .rb-title{font-size:19px;font-weight:800;margin-bottom:16px}
   .afld{margin-bottom:14px;max-width:420px}
@@ -655,6 +658,8 @@
   .hint.tiny{font-size:12.5px}
   /* ---------- my dishes ---------- */
   .home{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px 32px;margin-bottom:22px}
+  /* the account strip supplies the rounded top now, so the cards below it are square */
+  .wiz,.home{border-top-left-radius:0;border-top-right-radius:0}
   .home-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:22px}
   .home-head h2{font-size:26px;font-weight:800;letter-spacing:-.01em}
   .home-head .lead{font-size:15px;color:var(--muted);font-weight:500;margin-top:6px}
@@ -894,21 +899,6 @@
   </section>
 
   <!-- ============ WIZARD ============ -->
-  <!-- ============ MY DISHES ============ -->
-  <section class="home" id="home" hidden>
-    <div class="home-head">
-      <div>
-        <h2 id="homeTitle">My dishes</h2>
-        <p class="lead" id="homeLead">Open one to update its costing, or start a new dish.</p>
-      </div>
-      <button class="btn btn-red" id="btnNewDish" type="button">+ New dish</button>
-    </div>
-    <div id="homeList"></div>
-  </section>
-
-  <section class="wiz" id="wiz">
-
-
     <!-- account strip -->
     <div class="acct" id="acct">
       <div class="acct-msg" id="acctMsg">Not signed in &mdash; dishes save to this device only.</div>
@@ -958,6 +948,20 @@
       <p class="err" id="rsErr"></p>
       <div class="actions"><button class="btn btn-red" id="btnResetGo" type="button">Save new password</button></div>
     </div>
+
+  <!-- ============ MY DISHES ============ -->
+  <section class="home" id="home" hidden>
+    <div class="home-head">
+      <div>
+        <h2 id="homeTitle">My dishes</h2>
+        <p class="lead" id="homeLead">Open one to update its costing, or start a new dish.</p>
+      </div>
+      <button class="btn btn-red" id="btnNewDish" type="button">+ New dish</button>
+    </div>
+    <div id="homeList"></div>
+  </section>
+
+  <section class="wiz" id="wiz">
 
     <!-- progress -->
     <ol class="steps" id="stepBar">
@@ -1894,7 +1898,15 @@
 
       function afterSignIn(u) {
         user = u;
-        store(false, []);   /* device dishes are unreachable once signed in - clear them */
+        var pending = store(true).length;
+        store(false, []);
+        if (pending) {
+          var note = el('saveNote');
+          note.className = 'hint';
+          note.textContent = pending + (pending === 1 ? ' dish' : ' dishes') +
+            ' saved on this browser before you signed in ' +
+            (pending === 1 ? 'was' : 'were') + ' cleared. Saved dishes now go to your account.';
+        }
         paintAccount();
         authOpen(false);
         renderSaved();
