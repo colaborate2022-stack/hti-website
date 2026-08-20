@@ -518,10 +518,7 @@
   }
   .fcc-wrap{max-width:940px;margin:0 auto;padding:0 24px}
 
-  .intro{padding:52px 0 26px}
-  .eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
-  .intro h1{font-size:42px;font-weight:800;letter-spacing:-.02em}
-  .intro .lede{font-size:18px;color:#333;max-width:52ch;margin-top:14px;font-weight:500}
+  /* the intro is now the .hero band further down */
 
   /* ---------- wizard shell ---------- */
   .wiz{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:0;overflow:hidden}
@@ -755,13 +752,6 @@
   .sec-head h2 em{font-style:normal;color:var(--red)}
   .sec-head p{margin:12px auto 0;color:var(--muted);font-size:15.5px;line-height:1.7;font-weight:500}
 
-  /* intro: the eyebrow becomes the same pill the section tags use */
-  .intro{padding:58px 0 30px}
-  .eyebrow{display:inline-block;font-size:10.5px;letter-spacing:.14em;margin-bottom:16px;
-    background:rgba(227,30,36,.08);border:1px solid rgba(227,30,36,.22);
-    border-radius:30px;padding:6px 15px}
-  .intro h1{font-size:clamp(2.1rem,5.4vw,3rem);line-height:1.04}
-  .intro .lede{font-size:17.5px;line-height:1.6;margin-top:16px}
 
   /* benchmark cards: same four, given room to breathe */
   .learn{padding-top:64px}
@@ -796,6 +786,101 @@
     .faq-band{margin-top:56px;padding:52px 0}
     .fcc-cta{padding:30px 22px;margin:48px 0 60px}
     .sec-head{margin-bottom:26px}
+  }
+
+  /* ---------- the dark opening, borrowed from the POSH page ----------
+     Same three ingredients that page uses: an ink band, one soft red radial
+     bloom behind the type, and a faint grid masked off at the edges so it
+     fades out instead of stopping at a hard line. */
+  .hero{position:relative;background:var(--ink);color:#fff;overflow:hidden;isolation:isolate;
+    padding:74px 24px 86px;margin-bottom:38px}
+  .hero::before{content:"";position:absolute;top:42%;left:26%;width:760px;height:760px;
+    transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(227,33,41,.34),transparent 62%);
+    filter:blur(52px);z-index:-1;pointer-events:none}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+    background-size:60px 60px;
+    -webkit-mask-image:radial-gradient(ellipse 75% 70% at 35% 45%,#000,transparent 78%);
+    mask-image:radial-gradient(ellipse 75% 70% at 35% 45%,#000,transparent 78%)}
+  .hero-inner{max-width:940px;margin:0 auto;padding:0 24px}
+
+  /* filled gradient pill with a glow under it, not the outline pill */
+  .hero-tag{display:inline-block;background:linear-gradient(135deg,var(--red),#ff4a51);color:#fff;
+    font-size:10.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;
+    padding:7px 15px;border-radius:30px;margin-bottom:20px;
+    box-shadow:0 10px 26px -8px rgba(227,33,41,.85)}
+
+  .hero h1{font-size:clamp(2.2rem,5.6vw,3.4rem);font-weight:800;line-height:1.06;
+    letter-spacing:-.03em;color:#fff;text-wrap:balance}
+  /* the accent word carries the gradient rather than a flat red */
+  .hero h1 em{font-style:normal;background:linear-gradient(120deg,#ff5a60,var(--red) 45%,#ff8a8f);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--red)}
+  .hero-lede{font-size:17.5px;line-height:1.7;color:rgba(255,255,255,.78);max-width:56ch;margin-top:16px}
+
+  /* the pull-plate: the formula the whole tool is built on */
+  .hero-kicker{display:inline-block;margin-top:26px;padding:15px 24px;
+    font-size:clamp(15px,1.9vw,18px);font-weight:700;color:#fff;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);
+    border-left:3px solid var(--red);border-radius:4px 12px 12px 4px;
+    box-shadow:0 22px 44px -22px rgba(0,0,0,.9)}
+  .hero-kicker span{color:rgba(255,255,255,.5);font-weight:600}
+
+  /* Transform-only, so the heading is painted at first frame: this is the
+     LCP element and fading it in would push Largest Contentful Paint out. */
+  @keyframes heroRise{from{transform:translateY(16px)}to{transform:none}}
+  @keyframes heroFade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .hero-inner{animation:heroRise .55s var(--ease-out) both}
+  .hero-kicker{animation:heroFade .6s var(--ease-out) .22s both}
+
+  /* ---------- primary buttons get the gradient and the glow ---------- */
+  .btn-red{background:linear-gradient(135deg,var(--red),#ff4a51);color:#fff;
+    box-shadow:0 14px 30px -12px rgba(227,33,41,.9);
+    transition:transform .25s var(--ease-out),box-shadow .25s var(--ease-out)}
+  .btn-red:hover{transform:translateY(-2px);box-shadow:0 22px 44px -14px rgba(227,33,41,1)}
+
+  /* ---------- wizard progress: gradient badge with a glow on the live step ---------- */
+  .steps li.on i{background:linear-gradient(135deg,var(--red),#ff5a60);
+    box-shadow:0 10px 20px -10px rgba(227,33,41,.95)}
+  .steps li.done i{background:linear-gradient(135deg,#1a7f4b,#25a862);
+    box-shadow:0 10px 20px -12px rgba(26,127,75,.9)}
+
+  /* ---------- benchmark cards: the whole card carries its verdict ---------- */
+  .bands{gap:16px}
+  .band{position:relative;padding:24px 20px 22px;border-radius:14px;border:1px solid var(--line);
+    border-top:5px solid;transition:box-shadow .3s var(--ease-out),border-color .3s ease}
+  .band i{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;
+    font-style:normal;font-size:15px;font-weight:800;color:#fff;margin-bottom:13px}
+  .band b{display:block;font-size:22px;font-weight:800;letter-spacing:-.01em;margin-bottom:6px}
+  .band span{font-size:14px;line-height:1.55;font-weight:600;color:var(--muted)}
+  .band.t-good{border-top-color:var(--good);background:linear-gradient(#f2faf5,#fff 62%)}
+  .band.t-good i{background:linear-gradient(135deg,var(--good),#25a862);
+    box-shadow:0 10px 18px -10px rgba(26,127,75,.9)}
+  .band.t-warn{border-top-color:var(--warn);background:linear-gradient(#fdf7ea,#fff 62%)}
+  .band.t-warn i{background:linear-gradient(135deg,var(--warn),#e0a52b);
+    box-shadow:0 10px 18px -10px rgba(196,122,0,.9)}
+  .band.t-bad{border-top-color:var(--bad);background:linear-gradient(#fdf2f2,#fff 62%)}
+  .band.t-bad i{background:linear-gradient(135deg,var(--bad),#e04b4b);
+    box-shadow:0 10px 18px -10px rgba(198,40,40,.9)}
+  /* no transform on hover - motion.js owns transform on .why-item, !important */
+  .band:hover{box-shadow:0 18px 34px -20px rgba(48,30,18,.5)}
+
+  /* ---------- closing CTA gets the same bloom as the hero ---------- */
+  .fcc-cta{position:relative;overflow:hidden;isolation:isolate}
+  .fcc-cta::before{content:"";position:absolute;top:50%;left:50%;width:620px;height:620px;
+    transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(227,33,41,.28),transparent 62%);
+    filter:blur(46px);z-index:-1;pointer-events:none}
+
+  @media (prefers-reduced-motion:reduce){
+    .hero-inner,.hero-kicker{animation:none}
+    .btn-red,.band{transition:none}
+    .btn-red:hover{transform:none}
+  }
+
+  @media(max-width:820px){
+    .hero{padding:52px 20px 62px;margin-bottom:28px}
+    .hero-inner{padding:0}
+    .hero-kicker{padding:13px 18px}
   }
 
   /* ---------- print ---------- */
@@ -946,13 +1031,16 @@
 
 <main>
 
-<div class="fcc-wrap">
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">Free tool from HTI India</span>
+    <h1>Food Cost <em>Calculator</em></h1>
+    <p class="hero-lede">Four steps. Name your dish, add what goes in it, set your price, get your costing.</p>
+    <div class="hero-kicker">Ingredient cost &divide; Menu price &times; 100 <span>= your food cost %</span></div>
+  </div>
+</section>
 
-  <section class="intro">
-    <div class="eyebrow">Free tool from HTI India</div>
-    <h1>Food Cost Calculator</h1>
-    <p class="lede">Four steps. Name your dish, add what goes in it, set your price, get your costing.</p>
-  </section>
+<div class="fcc-wrap">
 
   <!-- ============ WIZARD ============ -->
     <!-- account strip -->
@@ -1163,10 +1251,10 @@
       <p>Where your number should land, and what it is telling you if it does not.</p>
     </div>
     <div class="bands">
-      <div class="band why-item" style="border-top-color:var(--good)"><b>Under 25%</b><span>Very profitable. Check your portions are not too small.</span></div>
-      <div class="band why-item" style="border-top-color:var(--good)"><b>25&ndash;35%</b><span>The normal, healthy range for most restaurants.</span></div>
-      <div class="band why-item" style="border-top-color:var(--warn)"><b>35&ndash;40%</b><span>Tight. Watch your wastage and supplier rates.</span></div>
-      <div class="band why-item" style="border-top-color:var(--bad)"><b>Over 40%</b><span>You are barely making money on this dish.</span></div>
+      <div class="band why-item t-good"><i>&#10003;</i><b>Under 25%</b><span>Very profitable. Check your portions are not too small.</span></div>
+      <div class="band why-item t-good"><i>&#10003;</i><b>25&ndash;35%</b><span>The normal, healthy range for most restaurants.</span></div>
+      <div class="band why-item t-warn"><i>!</i><b>35&ndash;40%</b><span>Tight. Watch your wastage and supplier rates.</span></div>
+      <div class="band why-item t-bad"><i>&#10005;</i><b>Over 40%</b><span>You are barely making money on this dish.</span></div>
     </div>
   </section>
 </div>
@@ -1385,6 +1473,9 @@
       var rowsEl = document.getElementById('rows');
       var stepBar = document.getElementById('stepBar');
       var current = 1, LAST = 4;
+      /* the first go(1)/showHome() run while the page is still booting; scrolling
+         then would jump the reader straight past the hero they just landed on */
+      var booted = false;
 
       function money(n) {
         if (!isFinite(n)) n = 0;
@@ -1771,7 +1862,7 @@
       function showHome() {
         el('home').hidden = false;
         el('wiz').hidden = true;
-        el('home').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (booted) el('home').scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
 
       function showWiz() {
@@ -1838,7 +1929,7 @@
         el('btnBack').hidden = current === 1;
         el('btnNext').hidden = current === LAST;
         el('btnRestart').hidden = current !== LAST;
-        el('wiz').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (booted) el('wiz').scrollIntoView({ behavior: 'smooth', block: 'start' });
         calc();
       }
 
@@ -2084,6 +2175,7 @@
       renderSaved();
       go(1);
       if (!user && store(true).length) showHome();
+      booted = true;
     })();
   </script>
 </body>
