@@ -741,6 +741,63 @@
   .fcc-cta h2{font-size:26px;font-weight:800;max-width:22ch}
   .fcc-cta p{color:#bdbdbd;font-size:15.5px;margin-top:10px;max-width:46ch;font-weight:500}
 
+  /* ---------- look & motion: brought in line with the programme pages ----------
+     The section heads below reuse .sec-head / .sec-tag, which is what every
+     programme page uses. That is not only for consistency: .sec-head is one of
+     the selectors assets/motion.css already animates, so both headings now rise
+     and fade on scroll the way the rest of the site does. The FAQ heading
+     previously matched no motion selector at all and simply snapped in. */
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 32px}
+  .sec-tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--red);background:rgba(227,30,36,.08);
+    border:1px solid rgba(227,30,36,.22);border-radius:30px;padding:6px 15px;margin-bottom:14px}
+  .sec-head h2{font-size:clamp(1.6rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+  .sec-head h2 em{font-style:normal;color:var(--red)}
+  .sec-head p{margin:12px auto 0;color:var(--muted);font-size:15.5px;line-height:1.7;font-weight:500}
+
+  /* intro: the eyebrow becomes the same pill the section tags use */
+  .intro{padding:58px 0 30px}
+  .eyebrow{display:inline-block;font-size:10.5px;letter-spacing:.14em;margin-bottom:16px;
+    background:rgba(227,30,36,.08);border:1px solid rgba(227,30,36,.22);
+    border-radius:30px;padding:6px 15px}
+  .intro h1{font-size:clamp(2.1rem,5.4vw,3rem);line-height:1.04}
+  .intro .lede{font-size:17.5px;line-height:1.6;margin-top:16px}
+
+  /* benchmark cards: same four, given room to breathe */
+  .learn{padding-top:64px}
+  .learn h2{margin:0}
+  .bands{gap:16px}
+  .band{padding:22px 20px;border-radius:12px;border-top-width:5px;
+    transition:box-shadow .3s var(--ease-out),border-color .3s ease}
+  .band b{font-size:22px;letter-spacing:-.01em;margin-bottom:6px}
+  .band span{font-size:14px;line-height:1.55}
+  /* no transform here on purpose - motion.js owns transform on .why-item
+     and declares it !important, so a hover transform would never apply */
+  .band:hover{box-shadow:0 16px 30px -20px rgba(48,30,18,.45)}
+
+  .faq-band{margin-top:72px;padding:64px 0}
+  .fcc-cta{padding:44px;border-radius:16px;margin:64px 0 76px}
+  .fcc-cta h2{font-size:clamp(1.35rem,2.8vw,1.7rem);letter-spacing:-.01em}
+
+  /* The wizard holds text inputs, so it deliberately gets NO motion.js card
+     class - a panel that tilts under the cursor while someone is typing rates
+     is horrible to use. It gets this one-shot CSS entrance instead: the strip
+     and the card share it, so the whole stack rises as a single object. */
+  .acct,.wiz,.home{animation:fccRise .5s var(--ease-out) both}
+  @keyframes fccRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  @media (prefers-reduced-motion:reduce){
+    .acct,.wiz,.home{animation:none}
+    .band{transition:none}
+  }
+
+  @media(max-width:820px){
+    .learn{padding-top:48px}
+    .faq-band{margin-top:56px;padding:52px 0}
+    .fcc-cta{padding:30px 22px;margin:48px 0 60px}
+    .sec-head{margin-bottom:26px}
+  }
+
   /* ---------- print ---------- */
   @media print{
     .navbar,.footer,.faq-band,.learn,.fcc-cta,.intro,.steps,.wiz-nav,.actions,
@@ -1100,7 +1157,11 @@
 
 <div class="fcc-wrap">
   <section class="learn">
-    <h2>What counts as a good food cost?</h2>
+    <div class="sec-head">
+      <span class="sec-tag">Benchmarks</span>
+      <h2>What counts as a <em>good food cost</em>?</h2>
+      <p>Where your number should land, and what it is telling you if it does not.</p>
+    </div>
     <div class="bands">
       <div class="band why-item" style="border-top-color:var(--good)"><b>Under 25%</b><span>Very profitable. Check your portions are not too small.</span></div>
       <div class="band why-item" style="border-top-color:var(--good)"><b>25&ndash;35%</b><span>The normal, healthy range for most restaurants.</span></div>
@@ -1112,7 +1173,10 @@
 
 <section class="faq-band">
   <div class="fcc-wrap">
-    <h2>Frequently asked <em>questions</em></h2>
+    <div class="sec-head">
+      <span class="sec-tag">Questions</span>
+      <h2>Frequently asked <em>questions</em></h2>
+    </div>
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q" type="button" aria-expanded="false">What is food cost, in one line?<span class="sign">&#8964;</span></button>
