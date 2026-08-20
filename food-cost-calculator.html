@@ -657,6 +657,29 @@
     background:#fdf6e8;border:1px solid #f0dfba;border-radius:9px;margin-top:10px;
     font-size:13.5px;font-weight:600}
 
+  /* ---------- my dishes ---------- */
+  .home{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px 32px;margin-bottom:22px}
+  .home-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:22px}
+  .home-head h2{font-size:26px;font-weight:800;letter-spacing:-.01em}
+  .home-head .lead{font-size:15px;color:var(--muted);font-weight:500;margin-top:6px}
+  .dish{display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center;
+    padding:16px 18px;border:1px solid var(--line);border-radius:10px;background:#fbfaf9;margin-bottom:10px}
+  .dish-name{min-width:0}
+  .dish-name b{display:block;font-size:16.5px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .dish-name span{font-size:13px;color:var(--muted);font-weight:600}
+  .dish-figs{display:flex;gap:22px;text-align:right}
+  .dish-figs div span{display:block;font-size:10.5px;font-weight:800;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+  .dish-figs div b{font-size:17px;font-weight:800;white-space:nowrap}
+  .dish-acts{display:flex;gap:8px;align-items:center}
+  .dish-acts button{font-family:inherit;font-size:13.5px;font-weight:700;padding:9px 15px;border-radius:8px;
+    border:1.5px solid var(--line);background:#fff;cursor:pointer;white-space:nowrap}
+  .dish-acts button:hover{border-color:#bdbab4}
+  .dish-acts button.rm{border:none;color:#b3aea6;font-size:19px;padding:5px 9px}
+  .dish-acts button.rm:hover{color:var(--bad)}
+  .home-empty{padding:22px;border:1px dashed var(--line);border-radius:10px;text-align:center;
+    color:var(--muted);font-weight:600;font-size:15px}
+
   /* ---------- report ---------- */
   .report{margin-top:22px;border:1px solid var(--line);border-radius:10px;padding:24px;background:#fff}
   .rep-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
@@ -760,6 +783,12 @@
   }
 
   @media(max-width:820px){
+    .home{padding:20px 18px}
+    .home-head{flex-direction:column;align-items:stretch}
+    .home-head .btn{width:100%}
+    .dish{grid-template-columns:1fr;gap:12px}
+    .dish-figs{justify-content:flex-start;text-align:left;gap:26px}
+    .dish-acts button:first-child{flex:1}
     .acct{padding:11px 16px;font-size:12.5px}
     .authbox{padding:18px}
     .afld{max-width:none}
@@ -866,6 +895,22 @@
   </section>
 
   <!-- ============ WIZARD ============ -->
+  <!-- ============ MY DISHES ============ -->
+  <section class="home" id="home" hidden>
+    <div class="home-head">
+      <div>
+        <h2 id="homeTitle">My dishes</h2>
+        <p class="lead" id="homeLead">Open one to update its costing, or start a new dish.</p>
+      </div>
+      <button class="btn btn-red" id="btnNewDish" type="button">+ New dish</button>
+    </div>
+    <div id="homeList"></div>
+    <div class="migrate" id="migrateBox" hidden>
+      <span id="migrateMsg"></span>
+      <button class="btn btn-ghost sm" id="btnMigrate" type="button">Add them to my account</button>
+    </div>
+  </section>
+
   <section class="wiz" id="wiz">
 
 
@@ -944,11 +989,6 @@
         <p class="hint">Add the whole batch in the next step. We work out the cost of one plate.</p>
       </div>
 
-      <div class="saved" id="savedWrap" hidden>
-        <h3 id="savedTitle">Your saved dishes</h3>
-        <div id="savedList"></div>
-        <div class="migrate" id="migrateBox" hidden><span id="migrateMsg"></span><button class="btn btn-ghost sm" id="btnMigrate" type="button">Add them to my account</button></div>
-      </div>
     </div>
 
     <!-- ---------- STEP 2 ---------- -->
@@ -1044,12 +1084,14 @@
         <button class="btn btn-ghost" id="btnPrint" type="button">Print or save as PDF</button>
         <button class="btn btn-ghost" id="btnWhats" type="button">Send on WhatsApp</button>
         <button class="btn btn-ghost" id="btnCopy" type="button">Copy as text</button>
+        <button class="btn btn-ghost" id="btnDone" type="button" hidden>Back to my dishes</button>
       </div>
       <p class="hint" id="saveNote"></p>
     </div>
 
     <!-- nav -->
     <div class="wiz-nav">
+      <button class="btn btn-ghost" id="btnHome" type="button" hidden>&larr; My dishes</button>
       <button class="btn btn-ghost" id="btnBack" type="button">Back</button>
       <button class="btn btn-red" id="btnNext" type="button">Next</button>
       <button class="btn btn-ghost" id="btnRestart" type="button" hidden>Start another dish</button>
@@ -1541,7 +1583,6 @@
           el('btnAuthOpen').hidden = false;
           el('btnSignOut').hidden = true;
         }
-        el('savedTitle').textContent = user ? 'Your saved dishes' : 'Saved on this device';
       }
 
       /* ---- cloud storage ---- */
@@ -1584,10 +1625,10 @@
       function renderSaved() {
         paintMigrate();
         if (user && sb) {
-          cloudList().then(function (list) { paintSaved(list, true); },
-                           function () { paintSaved(store(true), false); });
+          cloudList().then(function (list) { paintHome(list, true); },
+                           function () { paintHome(store(true), false); });
         } else {
-          paintSaved(store(true), false);
+          paintHome(store(true), false);
         }
       }
 
@@ -1601,28 +1642,88 @@
           local.length + (local.length === 1 ? ' dish is' : ' dishes are') + ' still saved on this device.';
       }
 
-      function paintSaved(list, isCloud) {
-        var wrap = el('savedWrap'), box = el('savedList');
+      var savedCount = 0;
+
+      function paintHome(list, isCloud) {
+        savedCount = list.length;
+        var box = el('homeList');
         box.innerHTML = '';
-        var pending = !!(user && sb && store(true).length);   /* device dishes waiting to move up */
-        wrap.hidden = (!list.length && !pending);
-        if (wrap.hidden) return;
+
+        el('homeTitle').textContent = user ? 'My dishes' : 'Dishes saved on this device';
+        el('homeLead').textContent = list.length
+          ? 'Open one to update its costing, or start a new dish.'
+          : (user ? 'Nothing saved yet. Start a dish and it will appear here.'
+                  : 'Nothing saved on this device yet.');
+
+        if (!list.length) {
+          var e = document.createElement('div');
+          e.className = 'home-empty';
+          e.textContent = user ? 'No saved dishes yet.' : 'No saved dishes on this device yet.';
+          box.appendChild(e);
+        }
+
         list.forEach(function (d, i) {
+          var n = d.n || 1;
+          var plate = (d.plate != null) ? d.plate : 0;
+          var pct = (d.price && plate) ? (plate / d.price * 100) : null;
+
           var row = document.createElement('div');
-          row.className = 'sv';
-          var b = document.createElement('b'); b.textContent = d.dish || 'Untitled dish';
-          var em = document.createElement('em'); em.textContent = money(d.plate || 0) + ' a plate';
+          row.className = 'dish';
+
+          var nm = document.createElement('div');
+          nm.className = 'dish-name';
+          var b1 = document.createElement('b'); b1.textContent = d.dish || 'Untitled dish';
+          var s1 = document.createElement('span');
+          s1.textContent = 'Makes ' + n + (n === 1 ? ' plate' : ' plates') +
+                           (d.rows && d.rows.length ? ' \u00B7 ' + d.rows.length + ' ingredients' : '');
+          nm.appendChild(b1); nm.appendChild(s1);
+
+          var figs = document.createElement('div');
+          figs.className = 'dish-figs';
+          function fig(label, val, col) {
+            var w = document.createElement('div');
+            var l = document.createElement('span'); l.textContent = label;
+            var v = document.createElement('b'); v.textContent = val;
+            if (col) v.style.color = col;
+            w.appendChild(l); w.appendChild(v); return w;
+          }
+          figs.appendChild(fig('Per plate', money(plate)));
+          if (pct !== null) {
+            var col = pct <= 35 ? 'var(--good)' : (pct <= 40 ? 'var(--warn)' : 'var(--bad)');
+            figs.appendChild(fig('Food cost', pct.toFixed(1) + '%', col));
+          }
+
+          var acts = document.createElement('div');
+          acts.className = 'dish-acts';
           var open = document.createElement('button'); open.type = 'button'; open.textContent = 'Open';
           var rm = document.createElement('button'); rm.type = 'button'; rm.className = 'rm';
-          rm.textContent = '\u00D7'; rm.setAttribute('aria-label', 'Delete ' + (d.dish || 'dish'));
+          rm.innerHTML = '&times;';
+          rm.setAttribute('aria-label', 'Delete ' + (d.dish || 'dish'));
           open.addEventListener('click', function () { loadDish(d); });
           rm.addEventListener('click', function () {
             if (isCloud) { cloudDelete(d.id).then(renderSaved, renderSaved); }
             else { var all = store(true); all.splice(i, 1); store(false, all); renderSaved(); }
           });
-          row.appendChild(b); row.appendChild(em); row.appendChild(open); row.appendChild(rm);
+          acts.appendChild(open); acts.appendChild(rm);
+
+          row.appendChild(nm); row.appendChild(figs); row.appendChild(acts);
           box.appendChild(row);
         });
+
+        el('btnHome').hidden = !(savedCount || (user && sb));
+        el('btnDone').hidden = el('btnHome').hidden;
+      }
+
+      /* ---- switching between the list and the wizard ---- */
+      function showHome() {
+        el('home').hidden = false;
+        el('wiz').hidden = true;
+        el('home').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function showWiz() {
+        el('home').hidden = true;
+        el('wiz').hidden = false;
       }
 
       function loadDish(d) {
@@ -1630,7 +1731,8 @@
         el('portions').value = d.n || 1;
         el('sellPrice').value = (d.price != null ? d.price : '');
         loadRows(d.rows || []);
-        go(2);
+        showWiz();
+        go(1);
       }
 
       function saveDish() {
@@ -1768,6 +1870,16 @@
       })();
 
 
+      el('btnNewDish').addEventListener('click', function () {
+        el('dishName').value = ''; el('portions').value = 4; el('sellPrice').value = '';
+        el('errDish').textContent = ''; el('errRows').textContent = ''; el('saveNote').textContent = '';
+        loadRows([{}, {}, {}]);
+        showWiz(); go(1);
+        el('dishName').focus();
+      });
+      el('btnHome').addEventListener('click', showHome);
+      el('btnDone').addEventListener('click', function () { showHome(); renderSaved(); });
+
       /* ---------------- auth UI ---------------- */
       var mode = 'login';
 
@@ -1799,6 +1911,7 @@
         paintAccount();
         authOpen(false);
         renderSaved();
+        showHome();
       }
 
       el('btnAuthGo').addEventListener('click', function () {
@@ -1860,7 +1973,7 @@
       el('btnSignOut').addEventListener('click', function () {
         if (!sb) return;
         sb.auth.signOut().then(function () {
-          user = null; paintAccount(); renderSaved();
+          user = null; paintAccount(); renderSaved(); showWiz(); go(1);
         });
       });
 
@@ -1908,7 +2021,12 @@
         sb.auth.getSession().then(function (r) {
           user = (r.data && r.data.session) ? r.data.session.user : null;
           paintAccount();
-          renderSaved();
+          if (user && sb) {
+            cloudList().then(function (list) {
+              paintHome(list, true); paintMigrate();
+              if (list.length) showHome();
+            }, function () { renderSaved(); });
+          } else { renderSaved(); }
         });
       } else {
         el('btnAuthOpen').textContent = 'Accounts unavailable';
@@ -1921,6 +2039,7 @@
       paintAccount();
       renderSaved();
       go(1);
+      if (!user && store(true).length) showHome();
     })();
   </script>
 </body>
