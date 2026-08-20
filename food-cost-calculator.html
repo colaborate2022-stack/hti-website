@@ -653,10 +653,6 @@
     font-weight:600;color:var(--ink);padding:12px;border:1.5px solid var(--line);border-radius:8px;background:#fff}
   input[type=email]:focus,input[type=password]:focus,input[type=tel]:focus{border-color:var(--red);outline:none}
   .hint.tiny{font-size:12.5px}
-  .migrate{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 16px;
-    background:#fdf6e8;border:1px solid #f0dfba;border-radius:9px;margin-top:10px;
-    font-size:13.5px;font-weight:600}
-
   /* ---------- my dishes ---------- */
   .home{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px 32px;margin-bottom:22px}
   .home-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:22px}
@@ -908,10 +904,6 @@
       <button class="btn btn-red" id="btnNewDish" type="button">+ New dish</button>
     </div>
     <div id="homeList"></div>
-    <div class="migrate" id="migrateBox" hidden>
-      <span id="migrateMsg"></span>
-      <button class="btn btn-ghost sm" id="btnMigrate" type="button">Add them to my account</button>
-    </div>
   </section>
 
   <section class="wiz" id="wiz">
@@ -1628,23 +1620,12 @@
       }
 
       function renderSaved() {
-        paintMigrate();
         if (user && sb) {
           cloudList().then(function (list) { paintHome(list, true); },
                            function () { paintHome(store(true), false); });
         } else {
           paintHome(store(true), false);
         }
-      }
-
-      function paintMigrate() {
-        var box = el('migrateBox');
-        if (!user || !sb) { box.hidden = true; return; }
-        var local = store(true);
-        if (!local.length) { box.hidden = true; return; }
-        box.hidden = false;
-        el('migrateMsg').textContent =
-          local.length + (local.length === 1 ? ' dish is' : ' dishes are') + ' still saved on this device.';
       }
 
       var savedCount = 0;
@@ -1913,6 +1894,7 @@
 
       function afterSignIn(u) {
         user = u;
+        store(false, []);   /* device dishes are unreachable once signed in - clear them */
         paintAccount();
         authOpen(false);
         renderSaved();
@@ -1978,26 +1960,8 @@
       el('btnSignOut').addEventListener('click', function () {
         if (!sb) return;
         sb.auth.signOut().then(function () {
-          user = null; paintAccount(); renderSaved(); showWiz(); go(1);
-        });
-      });
-
-      el('btnMigrate').addEventListener('click', function () {
-        if (!user || !sb) return;
-        var local = store(true);
-        if (!local.length) return;
-        var btn = el('btnMigrate');
-        btn.disabled = true; btn.textContent = 'Adding\u2026';
-        var jobs = local.map(function (d) {
-          return cloudSave({ dish: d.dish, n: d.n || 1, price: d.price,
-                             plate: d.plate, rows: d.rows || [] });
-        });
-        Promise.all(jobs).then(function () {
           store(false, []);
-          btn.disabled = false; btn.textContent = 'Add them to my account';
-          renderSaved();
-        }, function () {
-          btn.disabled = false; btn.textContent = 'Try again';
+          user = null; paintAccount(); renderSaved(); showWiz(); go(1);
         });
       });
 
@@ -2028,7 +1992,7 @@
           paintAccount();
           if (user && sb) {
             cloudList().then(function (list) {
-              paintHome(list, true); paintMigrate();
+              paintHome(list, true);
               if (list.length) showHome();
             }, function () { renderSaved(); });
           } else { renderSaved(); }
