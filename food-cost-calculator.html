@@ -18,12 +18,60 @@
   <meta name="twitter:description" content="Add your ingredients, enter your menu price, and see your food cost % and profit per plate instantly." />
   <meta name="twitter:image" content="https://www.hti-india.com/images/brand/hti-logo.png" />
   <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"What is food cost, in one line?","acceptedAnswer":{"@type":"Answer","text":"It is the money you spend on ingredients, shown as a share of what you charge. If a dish costs you Rs 120 to make and you sell it at Rs 400, your food cost is 30%. The other 70% pays for staff, rent, gas, electricity and your profit."}},
-{"@type":"Question","name":"Do I include gas, staff salary and rent?","acceptedAnswer":{"@type":"Answer","text":"No. Food cost is only the ingredients. Gas, salaries and rent are separate costs and are counted differently. Keeping them out is what makes this number useful to compare dish to dish."}},
-{"@type":"Question","name":"Should I use the price with GST or without?","acceptedAnswer":{"@type":"Answer","text":"Without GST. GST is not your money, you collect it and pass it on. Using the price with GST will make your food cost look better than it really is."}},
-{"@type":"Question","name":"My food cost is too high. What do I do?","acceptedAnswer":{"@type":"Answer","text":"You have four levers. Buy better: negotiate rates or change supplier. Waste less: check trimming, spoilage and over-portioning. Portion tighter: weigh instead of guessing. Or raise the price. Most kitchens find the fastest win in wastage, not in price."}},
-{"@type":"Question","name":"Does this calculator save my data?","acceptedAnswer":{"@type":"Answer","text":"No. Everything stays in your browser. Nothing is stored and nothing is sent anywhere. Close the page and it is gone."}}]}
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is food cost, in one line?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is the money you spend on ingredients, shown as a share of what you charge. If a plate costs you \u20B9120 to make and you sell it at \u20B9400, your food cost is 30%. The other 70% pays for staff, rent, gas, electricity and your profit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I enter an ingredient I buy by the kilo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Enter the rate you buy at \u2014 say \u20B9400 per kg \u2014 then how much you actually use, say 1 kg for the batch. The calculator works out the cost itself. You can mix units freely: buy per kg and use grams, buy per litre and use millilitres."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My recipe makes a batch, not one plate. What do I enter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Enter the whole batch \u2014 all the chicken, all the butter, everything that goes in the pot. Then tell us in Step 1 how many plates it serves. We divide it and show the cost of one plate. This is how professional kitchens cost, and it is far more accurate than guessing a single portion."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I include gas, staff salary and rent?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Food cost is only the ingredients. Gas, salaries and rent are separate costs and are counted differently. Keeping them out is what makes this number useful to compare dish to dish."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use the price with GST or without?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Without GST. GST is not your money \u2014 you collect it and pass it on. Using the price with GST will make your food cost look better than it really is."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where are my saved dishes kept?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If you are signed in, they are saved to your account and you can open them on any device. Only your own account can read them \u2014 our database is set up so one account cannot see another account's dishes. If you are not signed in, they stay in this browser on this device only: we never receive them and cannot see them, and clearing your browser data will remove them."
+      }
+    }
+  ]
+}
 </script>
   <link rel="icon" href="images/brand/hti-favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1048,7 +1096,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" type="button" aria-expanded="false">Where are my saved dishes kept?<span class="sign">&#8964;</span></button>
-        <div class="faq-answer"><div><p>On this device only, in this browser. We do not send them anywhere and we cannot see them. That means they will not appear on your phone if you saved them on a computer, and clearing your browser data will remove them. Accounts that sync your dishes across devices are coming.</p></div></div>
+        <div class="faq-answer"><div><p>If you are signed in, they are saved to your account and you can open them on any device. Only your own account can read them &mdash; our database is set up so one account cannot see another account&rsquo;s dishes. If you are not signed in, they stay in this browser on this device only: we never receive them and cannot see them, and clearing your browser data will remove them.</p></div></div>
       </div>
     </div>
   </div>
