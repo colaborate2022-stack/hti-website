@@ -347,16 +347,20 @@
       white-space: nowrap;
     }
 
-    /* Red animated typing line: fixed height so text below never shifts */
+    /* Red animated typing line: fixed height so text below never shifts.
+       Sized to its own text rather than the 45% column - the column is narrower
+       than the longest phrase on a 1280px laptop, and a 100% width plus
+       overflow:hidden chopped the end off it. The headline above already
+       spills into the gutter by design, so the typed line matches it. */
     .type-line {
       font-size: 36px;
       /* inherits Gilroy from the h1 */
       font-weight: 700;
-      width: 100%;
+      width: max-content;
+      max-width: 100vw;
       min-height: 60px;
       height: 60px;
       line-height: 60px;
-      overflow: hidden;
       display: block;
     }
 
@@ -1353,8 +1357,29 @@
         grid-template-columns: 1fr;
       }
     }
-  
 
+    /* The base .clients-left h1 is white-space:nowrap, which suits the wide
+       desktop hero but ran the headline off the side of a phone. Let it wrap.
+       The typed line keeps nowrap so a phrase never breaks mid-way, and its
+       size is tied to the viewport instead of a fixed 36px - the longest
+       phrase ("increase customer retention!") is about 13.2x the font size
+       wide, so 6.4vw keeps it inside the 24px gutters all the way down to a
+       320px screen. min-height in em reserves the line, so the copy below
+       never jumps as the word types and deletes. */
+    @media(max-width:960px) {
+      .clients-left h1 {
+        white-space: normal;
+        overflow-wrap: break-word;
+      }
+
+      .type-line {
+        font-size: clamp(18px, 6.4vw, 30px);
+        line-height: 1.25;
+        height: auto;
+        min-height: 1.25em;
+        white-space: nowrap;
+      }
+    }
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBKJQQRP0N"></script>
