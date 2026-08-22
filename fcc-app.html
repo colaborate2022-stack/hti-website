@@ -239,7 +239,7 @@
       height: 56px;
       z-index: 40;
       display: grid;
-      grid-template-columns: 44px 1fr 44px;
+      grid-template-columns: 64px 1fr 44px;
       align-items: center;
       gap: 8px;
       padding: 0 12px;
@@ -247,7 +247,30 @@
       backdrop-filter: saturate(140%) blur(10px);
       border-bottom: 1px solid var(--line);
     }
-    .topbar .mark { width: 34px; }
+    /* Not decoration: a chevron plus the mark, in a pill, so it reads as a way
+       out of the app. 64x44 keeps it above the 44px minimum tap target. */
+    .homelink {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      width: 64px;
+      height: 44px;
+      padding: 0 7px 0 3px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--bg);
+      transition: background .15s ease, border-color .15s ease, transform .1s ease;
+    }
+    .homelink:hover { background: #e9e6e1; border-color: #d6d1c9; }
+    .homelink:active { transform: scale(.94); }
+    .homelink:focus-visible { outline: 0; box-shadow: 0 0 0 3px rgba(227,30,36,.3); }
+    .homelink svg {
+      flex: 0 0 auto; width: 15px; height: 15px;
+      fill: none; stroke: var(--muted); stroke-width: 2.6;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .homelink .mark { width: 27px; }
     .topbar .title {
       text-align: center;
       font-size: 15px;
@@ -628,6 +651,12 @@
     }
     .sheetlist button:active, .sheetlist a:active { background: var(--bg); }
     .sheetlist .who { font-weight: 600; color: var(--muted); font-size: 13px; cursor: default; word-break: break-all; }
+    /* the icon sits after the label and is pushed to the row end */
+    .sheetlist svg {
+      margin-left: auto; flex: 0 0 auto; width: 17px; height: 17px;
+      fill: none; stroke: currentColor; stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round; opacity: .55;
+    }
 
     .breakdown { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
     .breakdown th {
@@ -991,7 +1020,10 @@
   <div class="app" id="app">
 
     <header class="topbar">
-      <img class="mark" src="images/brand/hti-logo.png" alt="HTI India" width="2374" height="1801" />
+      <a class="homelink" href="index.html" aria-label="Back to HTI website" title="Back to HTI website">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+        <img class="mark" src="images/brand/hti-logo.png" alt="" width="2374" height="1801" />
+      </a>
       <div class="title" id="viewTitle">My dishes</div>
       <button class="avatar" id="avatar" type="button" aria-label="Your account">?</button>
     </header>
@@ -1161,7 +1193,7 @@
         <div class="card">
           <div class="sheetlist" style="margin-top:0;border-top:0">
             <button id="btnExport" type="button">Export all dishes as CSV</button>
-            <a href="https://www.hti-india.com/">Back to hti-india.com</a>
+            <a href="index.html">Back to hti-india.com<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" /></svg></a>
             <button id="btnSignOut2" type="button" style="color:var(--bad)">Sign out</button>
           </div>
           <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:14px;font-weight:500">
@@ -1207,7 +1239,7 @@
     <h3>Your account</h3>
     <div class="sheetlist">
       <div class="who" id="sheetEmail">&mdash;</div>
-      <a href="https://www.hti-india.com/">Back to website</a>
+      <a href="index.html">Back to website<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" /></svg></a>
       <button type="button" id="btnSignOut" style="color:var(--bad)">Sign out</button>
     </div>
   </div>
