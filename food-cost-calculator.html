@@ -4,6 +4,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    /* Someone who has signed in to the app on this device gets the app, not the
+       marketing page. Read synchronously so nothing paints first. Password-reset
+       links land here with a token in the hash and must be left alone. */
+    (function () {
+      try {
+        if (localStorage.getItem('hti_fcc_app_mode') !== '1') return;
+        if (/access_token|type=recovery/.test(location.hash)) return;
+        if (!localStorage.getItem('sb-ytthcgdsbfagvwcopoaj-auth-token')) return;
+        location.replace('fcc-app.html');
+      } catch (e) {}
+    })();
+  </script>
   <title>Food Cost Calculator | Work Out Your Food Cost % | HTI India</title>
   <meta name="description" content="Free food cost calculator for restaurants and hotels. Add your ingredients, enter your menu price, and see your food cost % and profit per plate instantly." />
   <link rel="canonical" href="https://www.hti-india.com/food-cost-calculator.html" />
@@ -825,6 +838,13 @@
     border-left:3px solid var(--red);border-radius:4px 12px 12px 4px;
     box-shadow:0 22px 44px -22px rgba(0,0,0,.9)}
   .hero-kicker span{color:rgba(255,255,255,.5);font-weight:600}
+  .hero-app{display:block;margin-top:24px}
+  .hero-app a{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:10px;
+    background:#fff;color:var(--ink);font-weight:800;font-size:15.5px;letter-spacing:-.01em;
+    transition:transform .15s ease,box-shadow .2s ease}
+  .hero-app a:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.34)}
+  .hero-app a:active{transform:translateY(0)}
+  .hero-app b{display:block;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);margin-top:10px}
 
   /* Transform-only, so the heading is painted at first frame: this is the
      LCP element and fading it in would push Largest Contentful Paint out. */
@@ -1038,6 +1058,10 @@
     <h1>Food Cost <em>Calculator</em></h1>
     <p class="hero-lede">Four steps. Name your dish, add what goes in it, set your price, get your costing.</p>
     <div class="hero-kicker">Ingredient cost &divide; Menu price &times; 100 <span>= your food cost %</span></div>
+    <div class="hero-app">
+      <a href="fcc-app.html">Open the app &rarr;</a>
+      <b>Sign in to save your dishes, track your margins and install it on your phone.</b>
+    </div>
   </div>
 </section>
 
@@ -2046,7 +2070,7 @@
         if (open) { authMode('login'); el('auEmail').focus(); }
       }
 
-      el('btnAuthOpen').addEventListener('click', function () { authOpen(true); });
+      el('btnAuthOpen').addEventListener('click', function () { window.location.href = 'fcc-app.html'; });
       el('btnAuthCancel').addEventListener('click', function () { authOpen(false); });
       el('tabLogin').addEventListener('click', function () { authMode('login'); });
       el('tabSignup').addEventListener('click', function () { authMode('signup'); });

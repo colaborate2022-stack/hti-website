@@ -1,0 +1,2423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Food Cost App | HTI India</title>
+  <meta name="robots" content="noindex, follow" />
+  <meta name="description" content="The HTI Food Cost app for signed-in users. Cost your dishes, track your food cost % and see where your margin is going." />
+
+  <meta name="theme-color" content="#e31e24" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Food Cost" />
+  <link rel="apple-touch-icon" href="images/app/icon-192.png" />
+  <link rel="icon" href="images/brand/hti-favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBKJQQRP0N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SBKJQQRP0N');
+  </script>
+
+  <style>
+    :root {
+      --bg: #f3f2ef;
+      --card: #fff;
+      --ink: #111;
+      --muted: #6b6560;
+      --line: #e6e3de;
+      --red: #e31e24;
+      --red2: #ff0000;
+      --good: #0f9d58;
+      --warn: #d98600;
+      --bad: #e31e24;
+      --rail: 84px;
+      --tabh: 62px;
+      --safe: env(safe-area-inset-bottom, 0px);
+      --shadow: 0 1px 2px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.06);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* several things below set display on classes that also get toggled with the
+       hidden attribute, and a class rule beats the UA sheet. This keeps hidden
+       meaning hidden. */
+    [hidden] { display: none !important; }
+
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-weight: 500;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior-y: none;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    /* height:auto matters: the logo carries width/height attributes, which are
+       presentational hints, so without it the CSS width is honoured and the
+       attribute height (1801px) is kept. */
+    img { display: block; max-width: 100%; height: auto; }
+    button, input, select { font: inherit; color: inherit; }
+    h1, h2, h3, h4 { font-weight: 800; line-height: 1.2; }
+
+    input, select, textarea { font-size: 16px; } /* stops iOS zooming on focus */
+
+    /* ================= splash ================= */
+    .splash {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      background: var(--bg);
+    }
+    .splash img { width: 96px; }
+    .splash .pulse {
+      width: 120px; height: 4px; border-radius: 4px;
+      background: var(--line); overflow: hidden; position: relative;
+    }
+    .splash .pulse::after {
+      content: ""; position: absolute; inset: 0;
+      background: var(--red); transform-origin: left;
+      animation: slide 1.1s ease-in-out infinite;
+    }
+    @keyframes slide {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* ================= sign in ================= */
+    .gate {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 18px calc(24px + var(--safe));
+      background: var(--bg);
+      overflow-y: auto;
+    }
+    .gate-card {
+      width: 100%;
+      max-width: 400px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px 22px;
+      box-shadow: var(--shadow);
+      margin: auto;
+    }
+    .gate-card .mark { width: 74px; margin-bottom: 20px; }
+    .gate-card h1 { font-size: 24px; letter-spacing: -.02em; }
+    .gate-card .sub { color: var(--muted); font-size: 14px; margin-top: 7px; line-height: 1.5; }
+
+    .tabs {
+      display: flex;
+      gap: 6px;
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 4px;
+      margin: 22px 0 18px;
+    }
+    .tabs .tab {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      border-radius: 7px;
+      padding: 9px 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background .16s ease, color .16s ease;
+    }
+    .tabs .tab.on { background: var(--card); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.09); }
+    .tabs .tab:active { transform: scale(.98); }
+
+    .fld { margin-bottom: 14px; }
+    .fld label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .fld label em { font-style: normal; text-transform: none; letter-spacing: 0; font-weight: 500; }
+    .fld input, .fld select {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 10px;
+      padding: 13px 14px;
+      font-weight: 600;
+      transition: border-color .15s ease, box-shadow .15s ease;
+    }
+    .fld input:focus, .fld select:focus {
+      outline: 0;
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(227,30,36,.13);
+    }
+    .fld .hint { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.45; font-weight: 500; }
+    .fld input.narrow { max-width: 160px; }
+
+    .err { color: var(--bad); font-size: 13px; font-weight: 600; margin: 4px 0 0; min-height: 1px; line-height: 1.45; }
+    .err:empty { margin: 0; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      padding: 13px 20px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .15s ease, transform .1s ease, border-color .15s ease;
+      background: var(--red);
+      color: #fff;
+    }
+    .btn:hover { background: #c8191e; }
+    .btn:active { transform: scale(.975); }
+    .btn:disabled { opacity: .55; cursor: default; transform: none; }
+    .btn.block { width: 100%; }
+    .btn.ghost { background: var(--card); color: var(--ink); border-color: var(--line); }
+    .btn.ghost:hover { background: var(--bg); }
+    .btn.danger { background: var(--card); color: var(--bad); border-color: rgba(227,30,36,.35); }
+    .btn.danger:hover { background: rgba(227,30,36,.06); }
+    .btn.sm { padding: 9px 14px; font-size: 13px; border-radius: 8px; }
+
+    .linkbtn {
+      background: none;
+      border: 0;
+      padding: 4px 0;
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .linkbtn:active { opacity: .6; }
+
+    .gate-foot { margin-top: 18px; text-align: center; }
+    .gate-foot .tiny { font-size: 11.5px; color: var(--muted); line-height: 1.5; margin-top: 12px; font-weight: 500; }
+    .gate-foot .tiny a { text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ================= app shell ================= */
+    .app { display: none; min-height: 100%; }
+    .app.on { display: block; }
+
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      z-index: 40;
+      display: grid;
+      grid-template-columns: 44px 1fr 44px;
+      align-items: center;
+      gap: 8px;
+      padding: 0 12px;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .mark { width: 34px; }
+    .topbar .title {
+      text-align: center;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .avatar {
+      width: 36px; height: 36px;
+      justify-self: end;
+      border: 0;
+      border-radius: 50%;
+      background: var(--red);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: transform .1s ease, box-shadow .15s ease;
+    }
+    .avatar:active { transform: scale(.92); }
+    .avatar:focus-visible { outline: 0; box-shadow: 0 0 0 3px rgba(227,30,36,.3); }
+
+    .bars { position: fixed; top: 56px; left: 0; right: 0; z-index: 39; }
+    .slimbar {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      font-size: 12.5px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .slimbar.on { display: flex; }
+    .slimbar.offline { background: #2b2724; color: #fff; }
+    .slimbar.install { background: #fff4d6; color: #6a4a00; border-bottom: 1px solid #eddcae; }
+    .slimbar.install span { flex: 1; }
+    .slimbar .x {
+      border: 0; background: transparent; cursor: pointer;
+      font-size: 20px; line-height: 1; padding: 2px 6px; color: inherit; opacity: .6;
+    }
+    .slimbar .x:active { opacity: 1; }
+
+    main.views {
+      padding: 56px 0 calc(var(--tabh) + var(--safe) + 20px);
+      min-height: 100vh;
+      /* swapping a whole view in and out changes the content above the
+         viewport, and scroll anchoring would drag the scroll position with it
+         right after we reset it */
+      overflow-anchor: none;
+    }
+
+    .view { display: none; padding: 18px 16px 8px; max-width: 900px; margin: 0 auto; }
+    .view.on { display: block; animation: viewIn .22s ease both; }
+    @keyframes viewIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ---- bottom tab bar (mobile) ---- */
+    .tabbar {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 45;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      height: calc(var(--tabh) + var(--safe));
+      padding-bottom: var(--safe);
+      background: rgba(255,255,255,.96);
+      backdrop-filter: saturate(140%) blur(10px);
+      border-top: 1px solid var(--line);
+    }
+    .tabbar button {
+      border: 0;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      transition: color .15s ease, background .15s ease;
+    }
+    .tabbar button svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+    .tabbar button.on { color: var(--red); }
+    .tabbar button:active { background: rgba(0,0,0,.05); }
+
+    .fab {
+      position: fixed;
+      right: 18px;
+      bottom: calc(var(--tabh) + var(--safe) + 18px);
+      z-index: 44;
+      width: 56px; height: 56px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--red);
+      color: #fff;
+      font-size: 30px;
+      font-weight: 400;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(227,30,36,.4);
+      display: none;
+      place-items: center;
+      transition: transform .12s ease;
+    }
+    .fab.on { display: grid; }
+    .fab:active { transform: scale(.9); }
+
+    /* ---- desktop rail ---- */
+    @media (min-width: 900px) {
+      .tabbar {
+        top: 0; bottom: 0; right: auto;
+        width: var(--rail);
+        height: auto;
+        padding-bottom: 0;
+        padding-top: 64px;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 76px);
+        align-content: start;
+        border-top: 0;
+        border-right: 1px solid var(--line);
+      }
+      .tabbar button { border-radius: 12px; margin: 0 10px; }
+      .tabbar button.on { background: rgba(227,30,36,.08); }
+      .topbar { left: var(--rail); }
+      main.views { padding: 56px 0 40px var(--rail); }
+      .bars { left: var(--rail); }
+      .fab { bottom: 28px; right: 28px; }
+      .view { padding: 26px 28px 20px; }
+    }
+
+    /* ================= section furniture ================= */
+    .vhead { margin-bottom: 16px; }
+    .vhead h2 { font-size: 22px; letter-spacing: -.02em; }
+    .vhead p { color: var(--muted); font-size: 13.5px; margin-top: 5px; line-height: 1.5; font-weight: 500; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    /* ================= dishes ================= */
+    .searchwrap {
+      position: sticky;
+      top: 56px;
+      z-index: 30;
+      margin: -18px -16px 12px;
+      padding: 12px 16px;
+      background: var(--bg);
+    }
+    @media (min-width: 900px) { .searchwrap { margin: -26px -28px 12px; padding: 16px 28px 12px; } }
+
+    .search {
+      position: relative;
+    }
+    .search input {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 12px;
+      padding: 12px 40px 12px 40px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+    .search input:focus { outline: 0; border-color: var(--red); box-shadow: 0 0 0 3px rgba(227,30,36,.13); }
+    .search svg {
+      position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+      width: 17px; height: 17px; stroke: var(--muted); fill: none; stroke-width: 2;
+      stroke-linecap: round; pointer-events: none;
+    }
+    .search .clear {
+      position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+      border: 0; background: transparent; cursor: pointer; color: var(--muted);
+      font-size: 20px; line-height: 1; padding: 6px 10px; display: none;
+    }
+    .search .clear.on { display: block; }
+
+    /* On a narrow phone the chips scroll sideways in their own strip and the
+       sort control drops to its own line, so both stay reachable without the
+       page itself ever scrolling horizontally. */
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .chips {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1 1 100%;
+      min-width: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+    .chips::-webkit-scrollbar { display: none; }
+    @media (min-width: 560px) { .chips { flex: 1 1 auto; } }
+    .chip {
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background .15s ease, color .15s ease, border-color .15s ease;
+    }
+    .chip.on { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .chip:active { transform: scale(.96); }
+    .controls select {
+      flex: 0 0 auto;
+      margin-left: auto;
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .controls select:focus { outline: 0; border-color: var(--red); }
+
+    .dishlist { display: grid; gap: 10px; }
+    @media (min-width: 640px) { .dishlist { grid-template-columns: 1fr 1fr; } }
+
+    .dishcard {
+      width: 100%;
+      text-align: left;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 15px;
+      cursor: pointer;
+      display: block;
+      transition: transform .12s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .dishcard:hover { border-color: #d6d1c9; box-shadow: var(--shadow); }
+    .dishcard:active { transform: scale(.985); }
+    .dishcard .top {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+    }
+    .dishcard .name { font-size: 16px; font-weight: 800; letter-spacing: -.01em; line-height: 1.25; word-break: break-word; }
+    .dishcard .meta { font-size: 11.5px; color: var(--muted); font-weight: 600; margin-top: 3px; }
+    .dishcard .figs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--line);
+    }
+    .dishcard .figs div span {
+      display: block; font-size: 10px; font-weight: 700; letter-spacing: .05em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 3px;
+    }
+    .dishcard .figs div b { font-size: 14px; font-weight: 800; white-space: nowrap; }
+
+    .pill {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .pill.good { background: rgba(15,157,88,.12); color: var(--good); }
+    .pill.warn { background: rgba(217,134,0,.14); color: var(--warn); }
+    .pill.bad  { background: rgba(227,30,36,.11); color: var(--bad); }
+    .pill.none { background: var(--bg); color: var(--muted); }
+
+    /* skeletons */
+    .sk {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 15px;
+    }
+    .sk i {
+      display: block;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #eeebe6 25%, #f7f5f2 37%, #eeebe6 63%);
+      background-size: 400% 100%;
+      animation: shimmer 1.3s ease infinite;
+    }
+    @keyframes shimmer { 0% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+    .sk .l1 { height: 15px; width: 55%; }
+    .sk .l2 { height: 10px; width: 32%; margin-top: 8px; }
+    .sk .l3 { height: 30px; width: 100%; margin-top: 16px; }
+
+    .empty {
+      text-align: center;
+      padding: 44px 20px;
+      background: var(--card);
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+    }
+    .empty h3 { font-size: 17px; margin-bottom: 8px; }
+    .empty p { color: var(--muted); font-size: 13.5px; line-height: 1.6; margin-bottom: 18px; font-weight: 500; }
+
+    /* ================= sheets ================= */
+    .scrim {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(20,17,15,.45);
+      display: none;
+      opacity: 0;
+      transition: opacity .2s ease;
+    }
+    .scrim.on { display: block; }
+    .scrim.shown { opacity: 1; }
+
+    .sheet {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 61;
+      max-height: 88vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: var(--card);
+      border-radius: 20px 20px 0 0;
+      padding: 8px 18px calc(24px + var(--safe));
+      transform: translateY(100%);
+      transition: transform .26s cubic-bezier(.22,.8,.3,1);
+      display: none;
+    }
+    .sheet.on { display: block; }
+    .sheet.shown { transform: none; }
+    .sheet .grab {
+      width: 40px; height: 4px; border-radius: 4px; background: var(--line);
+      margin: 6px auto 16px;
+    }
+    .sheet h3 { font-size: 19px; letter-spacing: -.02em; word-break: break-word; }
+    .sheet .sub { color: var(--muted); font-size: 12.5px; margin-top: 4px; font-weight: 600; }
+
+    @media (min-width: 900px) {
+      .sheet {
+        left: 50%; right: auto; bottom: auto; top: 50%;
+        width: 520px; max-width: calc(100vw - 40px);
+        border-radius: 18px;
+        padding-bottom: 24px;
+        transform: translate(-50%, -46%) scale(.97);
+        opacity: 0;
+        transition: transform .22s ease, opacity .22s ease;
+      }
+      .sheet.shown { transform: translate(-50%, -50%); opacity: 1; }
+      .sheet .grab { display: none; }
+    }
+
+    .sheetlist { margin-top: 18px; border-top: 1px solid var(--line); }
+    .sheetlist button, .sheetlist a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      text-align: left;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      padding: 15px 2px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .sheetlist button:active, .sheetlist a:active { background: var(--bg); }
+    .sheetlist .who { font-weight: 600; color: var(--muted); font-size: 13px; cursor: default; word-break: break-all; }
+
+    .breakdown { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
+    .breakdown th {
+      text-align: left; font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--muted); font-weight: 700; padding: 0 6px 7px 0; border-bottom: 1px solid var(--line);
+    }
+    .breakdown td { padding: 9px 6px 9px 0; border-bottom: 1px solid var(--line); font-weight: 600; }
+    .breakdown td.mut { color: var(--muted); font-weight: 500; }
+    .breakdown th.num, .breakdown td.num { text-align: right; padding-right: 0; white-space: nowrap; }
+
+    .totals { margin-top: 14px; }
+    .totals div {
+      display: flex; justify-content: space-between; gap: 12px;
+      padding: 8px 0; font-size: 13.5px; font-weight: 600;
+      border-bottom: 1px solid var(--line);
+    }
+    .totals div.head { font-weight: 800; font-size: 15px; }
+    .totals div:last-child { border-bottom: 0; }
+    .totals div span:first-child { color: var(--muted); font-weight: 600; }
+
+    .sheetacts { display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+    .sheetacts .btn { flex: 1 1 auto; min-width: 96px; }
+    .confirm {
+      margin-top: 14px;
+      background: rgba(227,30,36,.06);
+      border: 1px solid rgba(227,30,36,.28);
+      border-radius: 12px;
+      padding: 14px;
+      display: none;
+    }
+    .confirm.on { display: block; }
+    .confirm p { font-size: 13.5px; font-weight: 600; line-height: 1.5; margin-bottom: 12px; }
+
+    /* ================= wizard ================= */
+    .steps { list-style: none; display: flex; gap: 6px; margin-bottom: 20px; }
+    .steps li {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: .02em;
+    }
+    .steps li i {
+      display: block; height: 4px; border-radius: 4px; background: var(--line);
+      font-style: normal; font-size: 0; transition: background .2s ease;
+    }
+    .steps li.done i { background: rgba(227,30,36,.4); }
+    .steps li.on i { background: var(--red); }
+    .steps li.on { color: var(--ink); }
+    .steps li span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .step { display: none; }
+    .step.on { display: block; animation: viewIn .2s ease both; }
+    .step h2 { font-size: 21px; letter-spacing: -.02em; }
+    .step > .lead { color: var(--muted); font-size: 13.5px; margin: 6px 0 20px; line-height: 1.5; font-weight: 500; }
+
+    .rupee { position: relative; display: block; }
+    .rupee > span {
+      position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+      color: var(--muted); font-weight: 700; pointer-events: none;
+    }
+    .rupee input { padding-left: 30px !important; }
+
+    /* ingredient rows */
+    #rows { display: grid; gap: 10px; }
+    .row {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 13px 44px 13px 13px;
+      display: grid;
+      gap: 10px;
+    }
+    .row .sub {
+      display: block; font-size: 10px; font-weight: 700; letter-spacing: .05em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 5px;
+    }
+    .row input, .row select {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 10px;
+      padding: 11px 12px;
+      font-weight: 600;
+    }
+    .row input:focus, .row select:focus {
+      outline: 0; border-color: var(--red); box-shadow: 0 0 0 3px rgba(227,30,36,.13);
+    }
+    .row .duo { display: grid; grid-template-columns: 1fr 92px; gap: 8px; }
+    .row .duo .rupee input { width: 100%; }
+    .row .rowcost {
+      font-size: 13px; font-weight: 800; color: var(--ink);
+      padding-top: 2px;
+    }
+    .row .rowcost.bad { color: var(--bad); font-size: 12px; font-weight: 700; }
+    .row .del {
+      position: absolute; top: 8px; right: 8px;
+      width: 32px; height: 32px;
+      border: 0; border-radius: 50%;
+      background: var(--bg); color: var(--muted);
+      font-size: 19px; line-height: 1; cursor: pointer;
+      display: grid; place-items: center;
+      transition: background .15s ease, color .15s ease;
+    }
+    .row .del:hover { background: rgba(227,30,36,.1); color: var(--bad); }
+    .row .del:active { transform: scale(.9); }
+
+    @media (min-width: 700px) {
+      .row {
+        grid-template-columns: 1.3fr 1.2fr 1.2fr 88px;
+        align-items: end;
+        padding-right: 52px;
+      }
+      .row .rowcost { text-align: right; padding-bottom: 12px; }
+    }
+
+    .runtot {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .runtot div {
+      background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 13px 15px;
+    }
+    .runtot div span {
+      display: block; font-size: 10px; font-weight: 700; letter-spacing: .05em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 5px;
+    }
+    .runtot div b { font-size: 21px; font-weight: 800; letter-spacing: -.02em; }
+    .runtot .lead-fig { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .runtot .lead-fig span { color: rgba(255,255,255,.65); }
+
+    .pane { display: none; }
+    .pane.on { display: block; }
+
+    .suggest {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 14px; padding: 14px 15px; margin-top: 4px;
+    }
+    .suggest > span { font-size: 12.5px; color: var(--muted); font-weight: 600; }
+    .suggest > b { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+    .suggest .btn { margin-left: auto; }
+
+    .verdictbox {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 16px; padding: 20px 16px; margin-top: 18px; text-align: center;
+    }
+    .verdictbox .big { font-size: 46px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+    .verdictbox .big small { font-size: 20px; font-weight: 700; margin-left: 2px; }
+    .verdictbox .vtext { font-size: 14.5px; font-weight: 700; margin-top: 10px; }
+    .verdictbox .vnote { font-size: 12.5px; color: var(--muted); margin-top: 6px; line-height: 1.55; font-weight: 500; }
+    .verdictbox .bar {
+      position: relative; display: flex; height: 12px; border-radius: 999px;
+      overflow: hidden; background: var(--bg); margin-top: 18px;
+    }
+    .verdictbox .bar i { display: block; transition: width .3s ease; }
+    .verdictbox .bar .food { background: var(--red); }
+    .verdictbox .bar .profit { background: var(--good); }
+    .verdictbox .bar .marker {
+      position: absolute; left: 35%; top: -3px; bottom: -3px; width: 2px;
+      background: var(--ink); opacity: .55;
+    }
+    .verdictbox .bar-key {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+      margin-top: 12px; font-size: 11px; color: var(--muted); font-weight: 600;
+    }
+    .verdictbox .bar-key span { display: inline-flex; align-items: center; gap: 5px; }
+    .verdictbox .bar-key i { width: 10px; height: 10px; border-radius: 3px; display: block; }
+    .verdictbox .bar-key i.dash { width: 2px; height: 12px; background: var(--ink); border-radius: 0; opacity: .55; }
+
+    .report {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 16px; padding: 18px 16px;
+    }
+    .rep-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+    .rep-label { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+    .rep-head h3 { font-size: 19px; margin-top: 4px; letter-spacing: -.02em; word-break: break-word; }
+    .rep-sub { font-size: 12px; color: var(--muted); margin-top: 3px; font-weight: 600; }
+    .rep-brand { font-size: 12px; font-weight: 800; color: var(--red); letter-spacing: .04em; }
+    .rep-foot { font-size: 11px; color: var(--muted); margin-top: 14px; line-height: 1.5; font-weight: 500; }
+
+    .wizbar {
+      position: fixed;
+      left: 0; right: 0; bottom: calc(var(--tabh) + var(--safe));
+      z-index: 43;
+      display: none;
+      gap: 8px;
+      padding: 10px 16px;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: saturate(140%) blur(10px);
+      border-top: 1px solid var(--line);
+    }
+    .wizbar.on { display: flex; }
+    .wizbar .btn { flex: 1; }
+    .wizbar .btn.wide { flex: 2; }
+    @media (min-width: 900px) {
+      .wizbar { left: var(--rail); bottom: 0; padding: 12px 28px; }
+      .wizbar .inner { max-width: 900px; margin: 0 auto; display: flex; gap: 8px; width: 100%; }
+    }
+    .view#view-add.on { padding-bottom: 84px; }
+    @media (min-width: 900px) { .view#view-add.on { padding-bottom: 96px; } }
+
+    /* ================= insights ================= */
+    .statgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+    .stat { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 15px; }
+    .stat span {
+      display: block; font-size: 10px; font-weight: 700; letter-spacing: .05em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+    }
+    .stat b { font-size: 27px; font-weight: 800; letter-spacing: -.03em; display: block; line-height: 1.05; }
+    .stat .pill { display: inline-block; margin-top: 8px; }
+
+    .bandrow {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; font-weight: 600;
+    }
+    .bandrow:last-child { border-bottom: 0; }
+    .bandrow .k { display: flex; align-items: center; gap: 9px; }
+    .bandrow .dot { width: 9px; height: 9px; border-radius: 50%; }
+    .bandrow b { font-weight: 800; }
+
+    .worst { margin-top: 4px; }
+    .worst .w {
+      padding: 11px 0; border-bottom: 1px solid var(--line);
+    }
+    .worst .w:last-child { border-bottom: 0; }
+    .worst .wtop { display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; font-weight: 700; margin-bottom: 7px; }
+    .worst .wtop span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .worst .track { height: 8px; border-radius: 999px; background: var(--bg); overflow: hidden; }
+    .worst .track i { display: block; height: 100%; border-radius: 999px; transition: width .4s ease; }
+
+    .named { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+    .named:last-child { border-bottom: 0; }
+    .named .l { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 700; }
+    .named .n { font-size: 14.5px; font-weight: 800; margin-top: 3px; word-break: break-word; }
+    .named .v { font-size: 15px; font-weight: 800; white-space: nowrap; text-align: right; }
+
+    .subhead {
+      font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--muted); font-weight: 800; margin: 22px 0 10px;
+    }
+
+    /* ================= toasts ================= */
+    .toasts {
+      position: fixed;
+      left: 50%;
+      bottom: calc(var(--tabh) + var(--safe) + 78px);
+      transform: translateX(-50%);
+      z-index: 70;
+      width: calc(100% - 32px);
+      max-width: 400px;
+      display: grid;
+      gap: 8px;
+      pointer-events: none;
+    }
+    @media (min-width: 900px) { .toasts { bottom: 28px; left: calc(50% + var(--rail) / 2); } }
+    .toast {
+      background: #211d1a;
+      color: #fff;
+      border-radius: 12px;
+      padding: 13px 15px;
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.45;
+      box-shadow: 0 10px 30px rgba(0,0,0,.28);
+      animation: toastIn .24s ease both;
+    }
+    .toast.bad { background: var(--red); }
+    .toast.good { background: #14523a; }
+    .toast.out { animation: toastOut .22s ease both; }
+    @keyframes toastIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    @keyframes toastOut { to { opacity: 0; transform: translateY(8px); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+      .sheet { transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ splash while we check the session ============ -->
+  <div class="splash" id="splash">
+    <img src="images/brand/hti-logo.png" alt="HTI India" width="2374" height="1801" />
+    <div class="pulse"></div>
+  </div>
+
+  <!-- ============ sign in ============ -->
+  <div class="gate" id="gate" hidden>
+    <div class="gate-card">
+      <img class="mark" src="images/brand/hti-logo.png" alt="HTI India" width="2374" height="1801" />
+      <h1>Food Cost</h1>
+      <p class="sub">Sign in to cost your dishes and keep them on every device.</p>
+
+      <div class="tabs">
+        <button class="tab on" id="tabLogin" type="button" aria-pressed="true">Log in</button>
+        <button class="tab" id="tabSignup" type="button" aria-pressed="false">Create account</button>
+      </div>
+
+      <div class="fld">
+        <label for="auEmail">Email</label>
+        <input type="email" id="auEmail" autocomplete="email" placeholder="you@restaurant.com" />
+      </div>
+      <div class="fld">
+        <label for="auPass">Password</label>
+        <input type="password" id="auPass" autocomplete="current-password" placeholder="At least 8 characters" />
+      </div>
+
+      <div id="signupOnly" hidden>
+        <div class="fld">
+          <label for="auName">Your name</label>
+          <input type="text" id="auName" autocomplete="name" placeholder="e.g. Rahul Sharma" />
+        </div>
+        <div class="fld">
+          <label for="auBiz">Restaurant or hotel <em>(optional)</em></label>
+          <input type="text" id="auBiz" placeholder="e.g. Spice Garden, Andheri" />
+        </div>
+        <div class="fld">
+          <label for="auPhone">Phone <em>(optional)</em></label>
+          <input type="tel" id="auPhone" autocomplete="tel" placeholder="Your mobile number" />
+        </div>
+      </div>
+
+      <p class="err" id="auErr" role="alert"></p>
+
+      <button class="btn block" id="btnAuthGo" type="button" style="margin-top:8px">Log in</button>
+
+      <div class="gate-foot">
+        <button class="linkbtn" id="btnForgot" type="button">Forgot your password?</button>
+        <p class="tiny">By creating an account you agree to our <a href="privacy-policy.html">privacy policy</a>. We never share your costings.<br /><a href="food-cost-calculator.html">Use it without an account &rarr;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ set a new password (after a reset email) ============ -->
+  <div class="gate" id="resetGate" hidden>
+    <div class="gate-card">
+      <h1>Choose a new password</h1>
+      <p class="sub">Pick something you will remember. At least 8 characters.</p>
+      <div class="fld" style="margin-top:20px">
+        <label for="rsPass">New password</label>
+        <input type="password" id="rsPass" autocomplete="new-password" placeholder="At least 8 characters" />
+      </div>
+      <p class="err" id="rsErr" role="alert"></p>
+      <button class="btn block" id="btnResetGo" type="button" style="margin-top:8px">Save new password</button>
+    </div>
+  </div>
+
+  <!-- ============ the app ============ -->
+  <div class="app" id="app">
+
+    <header class="topbar">
+      <img class="mark" src="images/brand/hti-logo.png" alt="HTI India" width="2374" height="1801" />
+      <div class="title" id="viewTitle">My dishes</div>
+      <button class="avatar" id="avatar" type="button" aria-label="Your account">?</button>
+    </header>
+
+    <div class="bars">
+      <div class="slimbar offline" id="offlineBar" role="status">Offline &mdash; showing your last saved dishes.</div>
+      <div class="slimbar install" id="installBar">
+        <span id="installText">Add Food Cost to your home screen</span>
+        <button class="btn sm" id="btnInstall" type="button">Install</button>
+        <button class="x" id="btnInstallX" type="button" aria-label="Dismiss">&times;</button>
+      </div>
+    </div>
+
+    <main class="views">
+
+      <!-- ---------- VIEW 1: DISHES ---------- -->
+      <section class="view on" id="view-dishes">
+        <div class="searchwrap">
+          <div class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+            <input type="search" id="q" placeholder="Search your dishes" autocomplete="off" aria-label="Search your dishes" />
+            <button class="clear" id="qClear" type="button" aria-label="Clear search">&times;</button>
+          </div>
+          <div class="controls">
+            <div class="chips">
+              <button class="chip on" data-band="all" type="button">All</button>
+              <button class="chip" data-band="good" type="button">Healthy</button>
+              <button class="chip" data-band="warn" type="button">Watch</button>
+              <button class="chip" data-band="bad" type="button">Problem</button>
+            </div>
+            <select id="sort" aria-label="Sort dishes">
+              <option value="name">Name A&ndash;Z</option>
+              <option value="pct">Food cost % high to low</option>
+              <option value="margin">Margin low to high</option>
+            </select>
+          </div>
+        </div>
+        <div id="dishList"></div>
+      </section>
+
+      <!-- ---------- VIEW 2: ADD / EDIT ---------- -->
+      <section class="view" id="view-add">
+        <ol class="steps" id="stepBar">
+          <li data-s="1"><i>1</i><span>Dish</span></li>
+          <li data-s="2"><i>2</i><span>Ingredients</span></li>
+          <li data-s="3"><i>3</i><span>Price</span></li>
+          <li data-s="4"><i>4</i><span>Report</span></li>
+        </ol>
+
+        <!-- STEP 1 -->
+        <div class="step on" data-step="1">
+          <h2>What are you costing?</h2>
+          <p class="lead">Give the dish a name so you can find it again later.</p>
+          <div class="fld">
+            <label for="dishName">Dish name</label>
+            <input type="text" id="dishName" placeholder="e.g. Butter Chicken" autocomplete="off" />
+            <p class="err" id="errDish"></p>
+          </div>
+          <div class="fld">
+            <label for="portions">How many plates does this recipe make?</label>
+            <input type="number" id="portions" value="4" min="1" step="1" class="narrow" />
+            <p class="hint">Add the whole batch in the next step. We work out the cost of one plate.</p>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step" data-step="2">
+          <h2>What goes into it?</h2>
+          <p class="lead">Enter the rate you buy at, then how much you use in the whole batch. We do the maths.</p>
+          <div id="rows"></div>
+          <p class="err" id="errRows"></p>
+          <div style="margin-top:12px">
+            <button class="btn ghost" id="addRow" type="button">+ Add ingredient</button>
+          </div>
+          <div class="runtot">
+            <div><span>Whole batch</span><b id="batchCost">&#8377;0</b></div>
+            <div class="lead-fig"><span>One plate</span><b id="plateCost">&#8377;0</b></div>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step" data-step="3">
+          <h2>What do you charge?</h2>
+          <p class="lead">Enter your menu price per plate, or ask us what to charge.</p>
+          <div class="tabs">
+            <button class="tab on" id="tabA" type="button" aria-pressed="true">I have a price</button>
+            <button class="tab" id="tabB" type="button" aria-pressed="false">Suggest a price</button>
+          </div>
+          <div class="pane on" id="paneA">
+            <div class="fld">
+              <label for="sellPrice">Menu price for one plate</label>
+              <div class="rupee"><span>&#8377;</span><input type="number" id="sellPrice" value="400" min="0" step="any" placeholder="0" class="narrow" /></div>
+              <p class="hint">Use the price before GST.</p>
+            </div>
+          </div>
+          <div class="pane" id="paneB">
+            <div class="fld">
+              <label for="targetPct">Food cost % you are aiming for</label>
+              <input type="number" id="targetPct" value="30" min="1" max="99" step="any" class="narrow" />
+              <p class="hint">Most restaurants aim for 28% to 35%.</p>
+            </div>
+            <div class="suggest">
+              <span>Charge about</span>
+              <b id="suggPrice">&#8377;0</b>
+              <button class="btn ghost sm" id="useSugg" type="button">Use this price</button>
+            </div>
+          </div>
+          <div class="verdictbox">
+            <div class="big" id="fcPct">&mdash;</div>
+            <div class="vtext" id="fcVerdict">Enter a price to see your food cost.</div>
+            <div class="vnote" id="fcSub"></div>
+            <div class="bar">
+              <i class="food" id="barFood" style="width:0%"></i>
+              <i class="profit" id="barProfit" style="width:0%"></i>
+              <span class="marker"></span>
+            </div>
+            <div class="bar-key">
+              <span><i style="background:var(--red)"></i>Ingredients</span>
+              <span><i style="background:var(--good)"></i>Left for you</span>
+              <span><i class="dash"></i>35% limit</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step" data-step="4">
+          <h2>Your costing</h2>
+          <p class="lead">Check it over, then save it to your account.</p>
+          <div class="report">
+            <div class="rep-head">
+              <div>
+                <div class="rep-label">Recipe costing</div>
+                <h3 id="repDish">&mdash;</h3>
+                <div class="rep-sub" id="repYield"></div>
+              </div>
+              <div class="rep-brand">HTI India</div>
+            </div>
+            <table class="breakdown">
+              <thead><tr><th>Ingredient</th><th>Rate</th><th>Used</th><th class="num">Cost</th></tr></thead>
+              <tbody id="repRows"></tbody>
+            </table>
+            <div class="totals" id="repTotals"></div>
+            <p class="rep-foot">Costed with the HTI Food Cost app &mdash; prices exclude GST.</p>
+          </div>
+          <div class="sheetacts">
+            <button class="btn ghost" id="btnCopy" type="button">Copy as text</button>
+            <button class="btn ghost" id="btnWhats" type="button">Send on WhatsApp</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- VIEW 3: INSIGHTS ---------- -->
+      <section class="view" id="view-insights">
+        <div class="vhead">
+          <h2>Insights</h2>
+          <p>Worked out from the dishes you have costed. Nothing is sent anywhere.</p>
+        </div>
+        <div id="insights"></div>
+      </section>
+
+      <!-- ---------- VIEW 4: ACCOUNT ---------- -->
+      <section class="view" id="view-account">
+        <div class="vhead">
+          <h2>Account</h2>
+          <p>Signed in as <b id="acctEmail">&mdash;</b></p>
+        </div>
+        <div class="card">
+          <div class="sheetlist" style="margin-top:0;border-top:0">
+            <button id="btnExport" type="button">Export all dishes as CSV</button>
+            <a href="https://www.hti-india.com/">Back to hti-india.com</a>
+            <button id="btnSignOut2" type="button" style="color:var(--bad)">Sign out</button>
+          </div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:14px;font-weight:500">
+            Your dishes are saved to your HTI account and sync across devices.
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- sticky wizard bar, only while the Add view is open -->
+    <div class="wizbar" id="wizBar">
+      <div class="inner" style="display:contents">
+        <button class="btn ghost" id="btnBack" type="button">Back</button>
+        <button class="btn wide" id="btnNext" type="button">Next</button>
+        <button class="btn wide" id="btnSave" type="button" hidden>Save dish</button>
+      </div>
+    </div>
+
+    <button class="fab on" id="fab" type="button" aria-label="Cost a new dish">+</button>
+
+    <nav class="tabbar" id="tabbar">
+      <button data-view="dishes" type="button" class="on">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h12" /></svg>Dishes
+      </button>
+      <button data-view="add" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>Add
+      </button>
+      <button data-view="insights" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></svg>Insights
+      </button>
+      <button data-view="account" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6" /></svg>Account
+      </button>
+    </nav>
+  </div>
+
+  <!-- ============ overlays ============ -->
+  <div class="scrim" id="scrim"></div>
+
+  <div class="sheet" id="sheetAccount" role="dialog" aria-label="Your account">
+    <div class="grab"></div>
+    <h3>Your account</h3>
+    <div class="sheetlist">
+      <div class="who" id="sheetEmail">&mdash;</div>
+      <a href="https://www.hti-india.com/">Back to website</a>
+      <button type="button" id="btnSignOut" style="color:var(--bad)">Sign out</button>
+    </div>
+  </div>
+
+  <div class="sheet" id="sheetDish" role="dialog" aria-label="Dish detail">
+    <div class="grab"></div>
+    <h3 id="dsName">&mdash;</h3>
+    <div class="sub" id="dsSub"></div>
+    <table class="breakdown">
+      <thead><tr><th>Ingredient</th><th>Rate</th><th>Used</th><th class="num">Cost</th></tr></thead>
+      <tbody id="dsRows"></tbody>
+    </table>
+    <div class="totals" id="dsTotals"></div>
+    <div class="sheetacts">
+      <button class="btn ghost" id="dsEdit" type="button">Edit</button>
+      <button class="btn ghost" id="dsDup" type="button">Duplicate</button>
+      <button class="btn danger" id="dsDel" type="button">Delete</button>
+    </div>
+    <div class="confirm" id="dsConfirm">
+      <p>Delete this dish for good? This cannot be undone.</p>
+      <div class="sheetacts" style="margin-top:0">
+        <button class="btn ghost" id="dsCancel" type="button">Keep it</button>
+        <button class="btn" id="dsReally" type="button">Yes, delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      function el(id) { return document.getElementById(id); }
+
+      /* ================= units and maths =================
+         Lifted unchanged from food-cost-calculator.html. The numbers this app
+         shows have to be the same numbers the public page shows. */
+      var UNITS = {
+        kg:    ['w', 1000], g:  ['w', 1],
+        litre: ['v', 1000], ml: ['v', 1],
+        piece: ['c', 1],    dozen: ['c', 12]
+      };
+      var UNIT_NAMES = ['kg', 'g', 'litre', 'ml', 'piece', 'dozen'];
+
+      var rowsEl = el('rows');
+      var stepBar = el('stepBar');
+      var current = 1, LAST = 4;
+
+      function money(n) {
+        if (!isFinite(n)) n = 0;
+        return '₹' + Math.round(n).toLocaleString('en-IN');
+      }
+      function money2(n) {
+        if (!isFinite(n)) n = 0;
+        return '₹' + n.toFixed(2);
+      }
+
+      function unitSelect(cls, sel) {
+        var s = '<select class="' + cls + '">';
+        for (var i = 0; i < UNIT_NAMES.length; i++) {
+          var u = UNIT_NAMES[i];
+          s += '<option' + (u === sel ? ' selected' : '') + '>' + u + '</option>';
+        }
+        return s + '</select>';
+      }
+
+      function makeRow(d) {
+        /* Defaults are filled in field by field. `d || {...}` is not enough:
+           a blank row is passed as {} , which is truthy, so rUnit/qUnit came
+           through undefined, the unit <select> landed on selectedIndex -1, and
+           UNITS[''] blew up in rowCost the moment a rate was typed. */
+        d = d || {};
+        d = {
+          name:  d.name  != null ? d.name  : '',
+          rate:  d.rate  != null ? d.rate  : '',
+          rUnit: UNITS[d.rUnit] ? d.rUnit : 'kg',
+          qty:   d.qty   != null ? d.qty   : '',
+          qUnit: UNITS[d.qUnit] ? d.qUnit : 'g'
+        };
+        var r = document.createElement('div');
+        r.className = 'row';
+        r.innerHTML =
+          '<div class="f-name"><span class="sub">Ingredient</span>' +
+            '<input class="i-name" type="text" placeholder="e.g. Chicken"></div>' +
+          '<div><span class="sub">Rate you buy at</span><div class="duo">' +
+            '<div class="rupee"><span>₹</span><input class="i-rate" type="number" min="0" step="any" placeholder="0"></div>' +
+            unitSelect('i-runit', d.rUnit) + '</div></div>' +
+          '<div><span class="sub">How much you used</span><div class="duo">' +
+            '<input class="i-qty" type="number" min="0" step="any" placeholder="0">' +
+            unitSelect('i-qunit', d.qUnit) + '</div></div>' +
+          '<div class="rowcost">—</div>' +
+          '<button class="del" type="button" aria-label="Remove this ingredient">&times;</button>';
+
+        r.querySelector('.i-name').value = d.name;
+        r.querySelector('.i-rate').value = d.rate;
+        r.querySelector('.i-qty').value = d.qty;
+        r.querySelector('.i-runit').value = d.rUnit;
+        r.querySelector('.i-qunit').value = d.qUnit;
+
+        r.querySelector('.del').addEventListener('click', function () {
+          r.remove();
+          if (!rowsEl.children.length) rowsEl.appendChild(makeRow());
+          calc();
+        });
+        r.addEventListener('input', calc);
+        r.addEventListener('change', calc);
+        return r;
+      }
+
+      /* cost of one row, or null if the units cannot be compared */
+      function rowCost(r) {
+        var rate = parseFloat(r.querySelector('.i-rate').value),
+            qty  = parseFloat(r.querySelector('.i-qty').value),
+            ru   = UNITS[r.querySelector('.i-runit').value],
+            qu   = UNITS[r.querySelector('.i-qunit').value];
+        if (!isFinite(rate) || !isFinite(qty) || rate < 0 || qty <= 0) return 0;
+        if (ru[0] !== qu[0]) return null;
+        return (rate / ru[1]) * (qty * qu[1]);
+      }
+
+      function readRows() {
+        var out = [];
+        rowsEl.querySelectorAll('.row').forEach(function (r) {
+          var c = rowCost(r);
+          out.push({
+            el: r,
+            name: r.querySelector('.i-name').value.trim(),
+            rate: parseFloat(r.querySelector('.i-rate').value),
+            rUnit: r.querySelector('.i-runit').value,
+            qty: parseFloat(r.querySelector('.i-qty').value),
+            qUnit: r.querySelector('.i-qunit').value,
+            cost: c
+          });
+        });
+        return out;
+      }
+
+      function loadRows(list) {
+        rowsEl.innerHTML = '';
+        (list && list.length ? list : [{}]).forEach(function (d) { rowsEl.appendChild(makeRow(d)); });
+        calc();
+      }
+
+      function portions() {
+        var p = parseInt(el('portions').value, 10);
+        return (isFinite(p) && p > 0) ? p : 1;
+      }
+      function dishName() {
+        return (el('dishName').value || '').trim();
+      }
+
+      function calc() {
+        var list = readRows(), batch = 0, mismatch = false;
+
+        list.forEach(function (it) {
+          var cell = it.el.querySelector('.rowcost');
+          if (it.cost === null) {
+            mismatch = true;
+            cell.className = 'rowcost bad';
+            cell.textContent = 'Units do not match';
+          } else {
+            cell.className = 'rowcost';
+            cell.textContent = it.cost > 0 ? money2(it.cost) : '—';
+            batch += it.cost;
+          }
+        });
+
+        var n = portions(), plate = batch / n;
+        el('batchCost').textContent = money(batch);
+        el('plateCost').textContent = money(plate);
+
+        var price = parseFloat(el('sellPrice').value);
+        var pctEl = el('fcPct'), vEl = el('fcVerdict'), sEl = el('fcSub'),
+            food = el('barFood'), prof = el('barProfit');
+
+        if (batch > 0 && isFinite(price) && price > 0) {
+          var pct = plate / price * 100, profit = price - plate, col, msg, note;
+          if (pct < 25)       { col = 'var(--good)'; msg = 'Very profitable.'; note = 'Just check your portion is not too small for the price you charge.'; }
+          else if (pct <= 35) { col = 'var(--good)'; msg = 'Healthy. This is the normal range.'; note = 'Keep an eye on wastage and supplier rates to hold it here.'; }
+          else if (pct <= 40) { col = 'var(--warn)'; msg = 'A bit high.'; note = 'Look at portion size and wastage before you raise the price.'; }
+          else                { col = 'var(--bad)';  msg = 'Too high.'; note = 'At this level the dish is barely paying for itself.'; }
+          if (profit < 0)     { col = 'var(--bad)';  msg = 'You are losing money on this dish.'; note = 'The ingredients cost more than you charge for it.'; }
+
+          pctEl.innerHTML = pct.toFixed(1) + '<small>%</small>';
+          pctEl.style.color = col;
+          vEl.style.color = col;
+          vEl.textContent = msg;
+          sEl.textContent = note;
+          var f = Math.max(0, Math.min(100, pct));
+          food.style.width = f + '%';
+          prof.style.width = (100 - f) + '%';
+        } else {
+          pctEl.textContent = '—';
+          pctEl.style.color = 'var(--ink)';
+          vEl.style.color = 'var(--muted)';
+          vEl.textContent = 'Enter a price to see your food cost.';
+          sEl.textContent = '';
+          food.style.width = '0%';
+          prof.style.width = '0%';
+        }
+
+        var tgt = parseFloat(el('targetPct').value);
+        el('suggPrice').textContent =
+          (batch > 0 && isFinite(tgt) && tgt > 0 && tgt < 100) ? money(plate / (tgt / 100)) : '₹0';
+
+        buildReport(list, batch, n, plate, price);
+        return { list: list, batch: batch, n: n, plate: plate, price: price, mismatch: mismatch };
+      }
+
+      /* shared renderer for the step 4 report and the dish detail sheet */
+      function paintBreakdown(tbody, totalsBox, rows, batch, n, plate, price) {
+        tbody.innerHTML = '';
+        var real = rows.filter(function (i) { return i.cost && i.cost > 0; });
+        if (!real.length) {
+          tbody.innerHTML = '<tr><td colspan="4" class="mut">No ingredients added yet.</td></tr>';
+        } else {
+          real.forEach(function (it) {
+            var tr = document.createElement('tr');
+            function td(t, cls) { var d = document.createElement('td'); d.textContent = t; if (cls) d.className = cls; return d; }
+            tr.appendChild(td(it.name || 'Ingredient'));
+            tr.appendChild(td(money(it.rate) + ' / ' + it.rUnit, 'mut'));
+            tr.appendChild(td(it.qty + ' ' + it.qUnit, 'mut'));
+            tr.appendChild(td(money2(it.cost), 'num'));
+            tbody.appendChild(tr);
+          });
+        }
+
+        var list = [['Whole batch', money(batch)], ['Plates from this batch', String(n)],
+                    ['Cost of one plate', money(plate), 'head']];
+        if (isFinite(price) && price > 0 && batch > 0) {
+          list.push(['Menu price per plate', money(price)]);
+          list.push(['Food cost', (plate / price * 100).toFixed(1) + '%']);
+          list.push(['Profit per plate', money(price - plate)]);
+          list.push(['Profit on the batch', money((price - plate) * n)]);
+        }
+        totalsBox.innerHTML = '';
+        list.forEach(function (r) {
+          var d = document.createElement('div');
+          if (r[2]) d.className = r[2];
+          var a = document.createElement('span'); a.textContent = r[0];
+          var b = document.createElement('span'); b.textContent = r[1];
+          d.appendChild(a); d.appendChild(b); totalsBox.appendChild(d);
+        });
+      }
+
+      function buildReport(list, batch, n, plate, price) {
+        el('repDish').textContent = dishName() || 'Untitled dish';
+        el('repYield').textContent = 'Makes ' + n + (n === 1 ? ' plate' : ' plates');
+        paintBreakdown(el('repRows'), el('repTotals'), list, batch, n, plate, price);
+      }
+
+      function reportText() {
+        var s = calc();
+        var L = [(dishName() || 'Untitled dish').toUpperCase(),
+                 'Makes ' + s.n + (s.n === 1 ? ' plate' : ' plates'), ''];
+        s.list.forEach(function (it) {
+          if (it.cost && it.cost > 0) {
+            L.push('- ' + (it.name || 'Ingredient') + ': ' + it.qty + ' ' + it.qUnit +
+                   ' at ' + money(it.rate) + '/' + it.rUnit + ' = ' + money2(it.cost));
+          }
+        });
+        L.push('');
+        L.push('Whole batch: ' + money(s.batch));
+        L.push('Cost of one plate: ' + money(s.plate));
+        if (isFinite(s.price) && s.price > 0 && s.batch > 0) {
+          L.push('Menu price: ' + money(s.price));
+          L.push('Food cost: ' + (s.plate / s.price * 100).toFixed(1) + '%');
+          L.push('Profit per plate: ' + money(s.price - s.plate));
+        }
+        L.push('');
+        L.push('Costed free at hti-india.com/food-cost-calculator.html');
+        return L.join('\n');
+      }
+
+      /* ================= data layer =================
+         Same project, same anon key, same table and columns as the public page.
+         Row Level Security (auth.uid() = user_id) is what keeps one account
+         from reading another's dishes; this key is meant to be public. */
+      var SB_URL = 'https://ytthcgdsbfagvwcopoaj.supabase.co';
+      var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0dGhjZ2RzYmZhZ3Z3Y29wb2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzMjk5MTMsImV4cCI6MjA5ODkwNTkxM30.JIDahcRTu3VbFpZ55Ti5hHg_JrHobk0zh8PSaj9lWLc';
+      var sb = null, user = null;
+
+      function initSupabase() {
+        try {
+          if (window.supabase && window.supabase.createClient) {
+            sb = window.supabase.createClient(SB_URL, SB_KEY);
+            return true;
+          }
+        } catch (e) {}
+        return false;
+      }
+
+      function friendly(msg) {
+        msg = (msg || '').toLowerCase();
+        if (msg.indexOf('invalid login') > -1) return 'That email and password do not match. Try again, or reset your password.';
+        if (msg.indexOf('already registered') > -1 || msg.indexOf('already been registered') > -1) return 'That email already has an account. Try logging in instead.';
+        if (msg.indexOf('password should be') > -1) return 'Password needs to be at least 8 characters.';
+        if (msg.indexOf('invalid email') > -1 || msg.indexOf('unable to validate') > -1) return 'That does not look like a valid email address.';
+        if (msg.indexOf('rate limit') > -1 || msg.indexOf('too many') > -1) return 'Too many tries. Please wait a minute and try again.';
+        if (msg.indexOf('failed to fetch') > -1 || msg.indexOf('network') > -1) return 'No connection. Check your internet and try again.';
+        return msg ? (msg.charAt(0).toUpperCase() + msg.slice(1)) : 'Something went wrong. Please try again.';
+      }
+
+      function cloudList() {
+        return sb.from('fcc_dishes').select('*').order('updated_at', { ascending: false })
+          .then(function (r) {
+            if (r.error) throw r.error;
+            return (r.data || []).map(function (d) {
+              return { id: d.id, dish: d.dish, n: d.portions, price: d.menu_price,
+                       plate: d.plate_cost, rows: d.ingredients || [] };
+            });
+          });
+      }
+
+      function cloudSave(rec) {
+        return sb.from('fcc_dishes').upsert({
+          user_id: user.id, dish: rec.dish, portions: rec.n,
+          menu_price: rec.price, plate_cost: rec.plate, ingredients: rec.rows,
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'user_id,dish' })
+          .then(function (r) { if (r.error) throw r.error; return true; });
+      }
+
+      function cloudDelete(id) {
+        return sb.from('fcc_dishes').delete().eq('id', id)
+          .then(function (r) { if (r.error) throw r.error; });
+      }
+
+      /* last-known dishes, so an offline launch still has something to show */
+      var CACHE_KEY = 'hti_fcc_app_cache_v1';
+      function cacheDishes(list) {
+        try { localStorage.setItem(CACHE_KEY, JSON.stringify(list)); } catch (e) {}
+      }
+      function cachedDishes() {
+        try { return JSON.parse(localStorage.getItem(CACHE_KEY) || '[]'); } catch (e) { return []; }
+      }
+
+      /* ================= toasts ================= */
+      function toast(msg, kind) {
+        var t = document.createElement('div');
+        t.className = 'toast' + (kind ? ' ' + kind : '');
+        t.textContent = msg;
+        el('toasts').appendChild(t);
+        setTimeout(function () {
+          t.className += ' out';
+          setTimeout(function () { if (t.parentNode) t.parentNode.removeChild(t); }, 240);
+        }, 3200);
+      }
+
+      /* ================= overlays (sheets) =================
+         Opening a sheet pushes a history entry so the hardware/browser back
+         button closes the sheet instead of leaving the view. */
+      var openSheet = null, closingByBack = false;
+
+      function showSheet(id) {
+        if (openSheet) hideSheet(true);
+        openSheet = id;
+        var s = el(id), sc = el('scrim');
+        s.classList.add('on'); sc.classList.add('on');
+        requestAnimationFrame(function () {
+          s.classList.add('shown'); sc.classList.add('shown');
+        });
+        history.pushState({ sheet: id, h: location.hash }, '', location.hash);
+      }
+
+      function hideSheet(immediate) {
+        if (!openSheet) return;
+        var s = el(openSheet), sc = el('scrim');
+        openSheet = null;
+        s.classList.remove('shown'); sc.classList.remove('shown');
+        var done = function () { s.classList.remove('on'); sc.classList.remove('on'); };
+        if (immediate) done(); else setTimeout(done, 260);
+      }
+
+      /* Close via the scrim or a Close button: walk history back, so the entry
+         the sheet pushed does not linger. */
+      function dismissSheet() {
+        if (!openSheet) return;
+        if (history.state && history.state.sheet) { closingByBack = true; history.back(); }
+        else hideSheet();
+      }
+
+      /* Close because we are navigating somewhere else (Edit, Duplicate, Delete).
+         history.back() cannot be used here: it is asynchronous and would race the
+         setView() that follows, landing the user back where they started. Instead
+         overwrite the sheet's entry in place, so back from the destination returns
+         to this view exactly once. */
+      function leaveSheet() {
+        if (history.state && history.state.sheet) {
+          history.replaceState({ h: location.hash }, '', location.hash);
+        }
+        hideSheet();
+      }
+
+      el('scrim').addEventListener('click', dismissSheet);
+
+      /* ================= routing ================= */
+      var VIEWS = { dishes: 'My dishes', add: 'Cost a dish', insights: 'Insights', account: 'Account' };
+      var view = 'dishes';
+
+      function setView(name, skipHash) {
+        if (!VIEWS[name]) name = 'dishes';
+        if (openSheet) hideSheet(true);
+        view = name;
+        Object.keys(VIEWS).forEach(function (k) {
+          el('view-' + k).classList.toggle('on', k === name);
+        });
+        el('tabbar').querySelectorAll('button').forEach(function (b) {
+          b.classList.toggle('on', b.getAttribute('data-view') === name);
+        });
+        el('viewTitle').textContent = name === 'add'
+          ? (editingId ? 'Edit dish' : 'Cost a dish')
+          : VIEWS[name];
+        el('fab').classList.toggle('on', name === 'dishes');
+        el('wizBar').classList.toggle('on', name === 'add');
+        if (name === 'insights') paintInsights();
+        if (name === 'account') el('acctEmail').textContent = user ? user.email : '—';
+        window.scrollTo(0, 0);
+        /* again after the new view has been laid out, so a taller previous view
+           cannot leave us part-way down the page */
+        requestAnimationFrame(function () { window.scrollTo(0, 0); });
+        if (!skipHash && location.hash !== '#' + name) location.hash = name;
+      }
+
+      function route() {
+        var h = (location.hash || '').replace('#', '');
+        if (!VIEWS[h]) h = 'dishes';
+        if (h !== view) setView(h, true);
+      }
+
+      window.addEventListener('hashchange', route);
+
+      window.addEventListener('popstate', function (e) {
+        var st = e.state || {};
+        /* stepped back past a sheet entry -> close the sheet, stay put */
+        if (openSheet && !st.sheet) { hideSheet(); closingByBack = false; }
+        route();
+      });
+
+      el('tabbar').addEventListener('click', function (e) {
+        var b = e.target.closest('button[data-view]');
+        if (!b) return;
+        var v = b.getAttribute('data-view');
+        if (v === 'add' && view !== 'add') startNew();
+        setView(v);
+      });
+
+      el('fab').addEventListener('click', function () { startNew(); setView('add'); });
+
+      /* ================= dishes view ================= */
+      var dishes = [], loaded = false, band = 'all', sortBy = 'name', query = '';
+
+      function pctOf(d) {
+        if (!d.price || !isFinite(d.price) || d.price <= 0) return null;
+        var plate = (d.plate != null) ? d.plate : 0;
+        if (!plate) return null;
+        return plate / d.price * 100;
+      }
+      function marginOf(d) {
+        if (!d.price || !isFinite(d.price)) return null;
+        return d.price - ((d.plate != null) ? d.plate : 0);
+      }
+      function bandOf(pct) {
+        if (pct === null) return 'none';
+        if (pct <= 35) return 'good';
+        if (pct <= 40) return 'warn';
+        return 'bad';
+      }
+
+      function skeletons(n) {
+        var h = '';
+        for (var i = 0; i < n; i++) {
+          h += '<div class="sk"><i class="l1"></i><i class="l2"></i><i class="l3"></i></div>';
+        }
+        return '<div class="dishlist">' + h + '</div>';
+      }
+
+      function visibleDishes() {
+        var out = dishes.filter(function (d) {
+          if (query && (d.dish || '').toLowerCase().indexOf(query) === -1) return false;
+          if (band !== 'all' && bandOf(pctOf(d)) !== band) return false;
+          return true;
+        });
+        out.sort(function (a, b) {
+          if (sortBy === 'pct') {
+            var pa = pctOf(a), pb = pctOf(b);
+            if (pa === null && pb === null) return 0;
+            if (pa === null) return 1;
+            if (pb === null) return -1;
+            return pb - pa;
+          }
+          if (sortBy === 'margin') {
+            var ma = marginOf(a), mb = marginOf(b);
+            if (ma === null && mb === null) return 0;
+            if (ma === null) return 1;
+            if (mb === null) return -1;
+            return ma - mb;
+          }
+          return (a.dish || '').localeCompare(b.dish || '', 'en', { sensitivity: 'base' });
+        });
+        return out;
+      }
+
+      function paintDishes() {
+        var box = el('dishList');
+        if (!loaded) { box.innerHTML = skeletons(4); return; }
+
+        if (!dishes.length) {
+          box.innerHTML = '';
+          var e0 = document.createElement('div');
+          e0.className = 'empty';
+          e0.innerHTML = '<h3>No dishes yet</h3><p>Cost your first dish and you will see its food cost %, ' +
+            'your margin per plate, and where it sits against the healthy range.</p>';
+          var b0 = document.createElement('button');
+          b0.className = 'btn'; b0.type = 'button'; b0.textContent = 'Cost your first dish';
+          b0.addEventListener('click', function () { startNew(); setView('add'); });
+          e0.appendChild(b0);
+          box.appendChild(e0);
+          return;
+        }
+
+        var list = visibleDishes();
+        box.innerHTML = '';
+        if (!list.length) {
+          var e1 = document.createElement('div');
+          e1.className = 'empty';
+          e1.innerHTML = '<h3>Nothing matches</h3><p>No dish matches that search or filter. Try a different word, or tap All.</p>';
+          box.appendChild(e1);
+          return;
+        }
+
+        var grid = document.createElement('div');
+        grid.className = 'dishlist';
+
+        list.forEach(function (d) {
+          var pct = pctOf(d), mg = marginOf(d), bd = bandOf(pct);
+
+          var card = document.createElement('button');
+          card.className = 'dishcard';
+          card.type = 'button';
+
+          var top = document.createElement('div');
+          top.className = 'top';
+          var nm = document.createElement('div');
+          var h = document.createElement('div'); h.className = 'name'; h.textContent = d.dish || 'Untitled dish';
+          var m = document.createElement('div'); m.className = 'meta';
+          var n = d.n || 1;
+          var ni = (d.rows && d.rows.length) || 0;
+          m.textContent = 'Makes ' + n + (n === 1 ? ' plate' : ' plates') +
+            (ni ? ' · ' + ni + (ni === 1 ? ' ingredient' : ' ingredients') : '');
+          nm.appendChild(h); nm.appendChild(m);
+
+          var pill = document.createElement('span');
+          pill.className = 'pill ' + bd;
+          pill.textContent = pct === null ? 'No price' : pct.toFixed(1) + '%';
+          top.appendChild(nm); top.appendChild(pill);
+
+          var figs = document.createElement('div');
+          figs.className = 'figs';
+          function fig(label, val) {
+            var w = document.createElement('div');
+            var l = document.createElement('span'); l.textContent = label;
+            var v = document.createElement('b'); v.textContent = val;
+            w.appendChild(l); w.appendChild(v); return w;
+          }
+          figs.appendChild(fig('Per portion', money(d.plate != null ? d.plate : 0)));
+          figs.appendChild(fig('Sells at', d.price ? money(d.price) : '—'));
+          figs.appendChild(fig('Margin', mg === null ? '—' : money(mg)));
+
+          card.appendChild(top); card.appendChild(figs);
+          card.addEventListener('click', function () { openDish(d); });
+          grid.appendChild(card);
+        });
+
+        box.appendChild(grid);
+      }
+
+      el('q').addEventListener('input', function () {
+        query = (this.value || '').trim().toLowerCase();
+        el('qClear').classList.toggle('on', !!this.value);
+        paintDishes();
+      });
+      el('qClear').addEventListener('click', function () {
+        el('q').value = ''; query = '';
+        this.classList.remove('on');
+        paintDishes();
+        el('q').focus();
+      });
+      el('sort').addEventListener('change', function () { sortBy = this.value; paintDishes(); });
+      document.querySelectorAll('.chip[data-band]').forEach(function (c) {
+        c.addEventListener('click', function () {
+          band = c.getAttribute('data-band');
+          document.querySelectorAll('.chip[data-band]').forEach(function (o) {
+            o.classList.toggle('on', o === c);
+          });
+          paintDishes();
+        });
+      });
+
+      /* ---- dish detail sheet ---- */
+      var sheetDish = null;
+
+      function openDish(d) {
+        sheetDish = d;
+        el('dsName').textContent = d.dish || 'Untitled dish';
+        var n = d.n || 1, plate = (d.plate != null) ? d.plate : 0;
+        el('dsSub').textContent = 'Makes ' + n + (n === 1 ? ' plate' : ' plates');
+
+        /* rebuild per-ingredient costs from the stored rows, same maths as the wizard */
+        var rows = (d.rows || []).map(function (r) {
+          var ru = UNITS[r.rUnit], qu = UNITS[r.qUnit];
+          var rate = parseFloat(r.rate), qty = parseFloat(r.qty);
+          var cost = 0;
+          if (ru && qu && isFinite(rate) && isFinite(qty) && rate >= 0 && qty > 0) {
+            cost = (ru[0] !== qu[0]) ? null : (rate / ru[1]) * (qty * qu[1]);
+          }
+          return { name: r.name, rate: rate, rUnit: r.rUnit, qty: r.qty, qUnit: r.qUnit, cost: cost };
+        });
+        var batch = plate * n;
+        paintBreakdown(el('dsRows'), el('dsTotals'), rows, batch, n, plate, d.price);
+
+        el('dsConfirm').classList.remove('on');
+        showSheet('sheetDish');
+      }
+
+      el('dsEdit').addEventListener('click', function () {
+        var d = sheetDish;
+        leaveSheet();
+        loadIntoWizard(d, false);
+        setView('add');
+      });
+      el('dsDup').addEventListener('click', function () {
+        var d = sheetDish;
+        leaveSheet();
+        loadIntoWizard(d, true);
+        setView('add');
+        toast('Copy ready. Give it a new name and save.');
+      });
+      el('dsDel').addEventListener('click', function () { el('dsConfirm').classList.add('on'); });
+      el('dsCancel').addEventListener('click', function () { el('dsConfirm').classList.remove('on'); });
+      el('dsReally').addEventListener('click', function () {
+        var d = sheetDish;
+        leaveSheet();
+        removeDish(d);
+      });
+
+      function removeDish(d) {
+        var snapshot = dishes.slice();
+        dishes = dishes.filter(function (x) { return x !== d; });
+        paintDishes();
+        cacheDishes(dishes);
+        toast('Deleted “' + (d.dish || 'dish') + '”.');
+        if (!d.id) return;
+        cloudDelete(d.id).catch(function (e) {
+          dishes = snapshot;
+          paintDishes();
+          cacheDishes(dishes);
+          toast('Could not delete: ' + friendly(e && e.message), 'bad');
+        });
+      }
+
+      /* ================= wizard ================= */
+      var editingId = null, editingName = null;
+
+      function go(n) {
+        current = Math.max(1, Math.min(LAST, n));
+        document.querySelectorAll('#view-add .step').forEach(function (s) {
+          s.classList.toggle('on', +s.getAttribute('data-step') === current);
+        });
+        stepBar.querySelectorAll('li').forEach(function (li) {
+          var i = +li.getAttribute('data-s');
+          li.classList.toggle('on', i === current);
+          li.classList.toggle('done', i < current);
+        });
+        el('btnBack').disabled = current === 1;
+        el('btnNext').hidden = current === LAST;
+        el('btnSave').hidden = current !== LAST;
+        window.scrollTo(0, 0);
+        calc();
+      }
+
+      function validate(step) {
+        if (step === 1) {
+          if (!dishName()) { el('errDish').textContent = 'Please give the dish a name.'; el('dishName').focus(); return false; }
+          el('errDish').textContent = '';
+        }
+        if (step === 2) {
+          var s = calc();
+          if (s.mismatch) { el('errRows').textContent = 'One row has units that do not match. Use kg with g, or litre with ml.'; return false; }
+          if (!(s.batch > 0)) { el('errRows').textContent = 'Add at least one ingredient with a rate and a quantity.'; return false; }
+          el('errRows').textContent = '';
+        }
+        return true;
+      }
+
+      function startNew() {
+        editingId = null; editingName = null;
+        el('dishName').value = '';
+        el('portions').value = 4;
+        el('sellPrice').value = '';
+        el('targetPct').value = 30;
+        el('errDish').textContent = ''; el('errRows').textContent = '';
+        tab(true);
+        loadRows([{}, {}, {}]);
+        go(1);
+      }
+
+      function loadIntoWizard(d, asCopy) {
+        editingId = asCopy ? null : (d.id || null);
+        editingName = asCopy ? null : (d.dish || null);
+        el('dishName').value = asCopy ? ((d.dish || 'Dish') + ' (copy)') : (d.dish || '');
+        el('portions').value = d.n || 1;
+        el('sellPrice').value = (d.price != null ? d.price : '');
+        el('errDish').textContent = ''; el('errRows').textContent = '';
+        tab(true);
+        loadRows(d.rows || []);
+        go(1);
+      }
+
+      el('btnNext').addEventListener('click', function () { if (validate(current)) go(current + 1); });
+      el('btnBack').addEventListener('click', function () {
+        if (current > 1) go(current - 1); else setView('dishes');
+      });
+      el('addRow').addEventListener('click', function () {
+        rowsEl.appendChild(makeRow());
+        rowsEl.lastChild.querySelector('.i-name').focus();
+      });
+
+      function tab(a) {
+        el('tabA').classList.toggle('on', a); el('tabA').setAttribute('aria-pressed', a);
+        el('tabB').classList.toggle('on', !a); el('tabB').setAttribute('aria-pressed', !a);
+        el('paneA').classList.toggle('on', a); el('paneB').classList.toggle('on', !a);
+      }
+      el('tabA').addEventListener('click', function () { tab(true); });
+      el('tabB').addEventListener('click', function () { tab(false); });
+      el('useSugg').addEventListener('click', function () {
+        var s = calc(), t = parseFloat(el('targetPct').value);
+        if (s.batch > 0 && isFinite(t) && t > 0 && t < 100) {
+          el('sellPrice').value = Math.round(s.plate / (t / 100));
+          tab(true); calc();
+        }
+      });
+
+      ['dishName', 'portions', 'sellPrice', 'targetPct'].forEach(function (id) {
+        el(id).addEventListener('input', calc);
+      });
+
+      el('btnWhats').addEventListener('click', function () {
+        window.open('https://wa.me/?text=' + encodeURIComponent(reportText()), '_blank', 'noopener');
+      });
+      el('btnCopy').addEventListener('click', function () {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(reportText()).then(
+            function () { toast('Copied. Paste it wherever you need it.', 'good'); },
+            function () { toast('Could not copy on this browser.', 'bad'); });
+        } else { toast('Could not copy on this browser.', 'bad'); }
+      });
+
+      /* ---- save ---- */
+      el('btnSave').addEventListener('click', function () {
+        if (!validate(1)) { go(1); return; }
+        if (!validate(2)) { go(2); return; }
+
+        var s = calc();
+        var rec = {
+          dish: dishName(), n: s.n, plate: s.plate,
+          price: isFinite(s.price) ? s.price : null,
+          rows: s.list.filter(function (i) { return i.name || i.rate || i.qty; })
+                      .map(function (i) { return { name: i.name, rate: i.rate, rUnit: i.rUnit, qty: i.qty, qUnit: i.qUnit }; })
+        };
+
+        if (!user || !sb) { toast('You are signed out. Sign in again to save.', 'bad'); return; }
+
+        var snapshot = dishes.slice();
+        var wasEditing = editingId, oldName = editingName;
+
+        /* optimistic: show it straight away, reconcile with the server after */
+        var localRec = { id: wasEditing, dish: rec.dish, n: rec.n, price: rec.price, plate: rec.plate, rows: rec.rows };
+        var at = -1;
+        for (var i = 0; i < dishes.length; i++) {
+          if ((wasEditing && dishes[i].id === wasEditing) ||
+              (dishes[i].dish || '').toLowerCase() === rec.dish.toLowerCase()) { at = i; break; }
+        }
+        if (at >= 0) dishes.splice(at, 1);
+        dishes.unshift(localRec);
+        cacheDishes(dishes);
+
+        el('btnSave').disabled = true;
+        setView('dishes');
+        paintDishes();
+
+        cloudSave(rec).then(function () {
+          /* renamed while editing: the upsert made a new row, drop the old one */
+          if (wasEditing && oldName && oldName !== rec.dish) return cloudDelete(wasEditing);
+        }).then(function () {
+          return cloudList();
+        }).then(function (list) {
+          dishes = list;
+          cacheDishes(dishes);
+          loaded = true;
+          paintDishes();
+          el('btnSave').disabled = false;
+          toast('Saved “' + rec.dish + '” to your account.', 'good');
+          editingId = null; editingName = null;
+        }).catch(function (e) {
+          dishes = snapshot;
+          cacheDishes(dishes);
+          paintDishes();
+          el('btnSave').disabled = false;
+          toast('Could not save: ' + friendly(e && e.message), 'bad');
+        });
+      });
+
+      /* ================= insights ================= */
+      function paintInsights() {
+        var box = el('insights');
+        box.innerHTML = '';
+
+        if (dishes.length < 2) {
+          var e0 = document.createElement('div');
+          e0.className = 'empty';
+          e0.innerHTML = '<h3>Not enough to compare yet</h3><p>Cost at least two dishes and this page will show your average food cost, ' +
+            'which dishes are healthy, and which ones are eating your margin.</p>';
+          var b0 = document.createElement('button');
+          b0.className = 'btn'; b0.type = 'button'; b0.textContent = 'Cost another dish';
+          b0.addEventListener('click', function () { startNew(); setView('add'); });
+          e0.appendChild(b0);
+          box.appendChild(e0);
+          return;
+        }
+
+        var priced = dishes.filter(function (d) { return pctOf(d) !== null; });
+        var avg = priced.length
+          ? priced.reduce(function (a, d) { return a + pctOf(d); }, 0) / priced.length
+          : null;
+        var counts = { good: 0, warn: 0, bad: 0 };
+        priced.forEach(function (d) { counts[bandOf(pctOf(d))]++; });
+
+        var withMargin = dishes.filter(function (d) { return marginOf(d) !== null; });
+        var best = null, worst = null;
+        withMargin.forEach(function (d) {
+          if (!best || marginOf(d) > marginOf(best)) best = d;
+          if (!worst || marginOf(d) < marginOf(worst)) worst = d;
+        });
+
+        function frag(html) {
+          var t = document.createElement('div');
+          t.innerHTML = html;
+          return t;
+        }
+
+        var avgBand = avg === null ? 'none' : bandOf(avg);
+        var g = frag(
+          '<div class="statgrid">' +
+            '<div class="stat"><span>Dishes costed</span><b>' + dishes.length + '</b></div>' +
+            '<div class="stat"><span>Average food cost</span><b>' +
+              (avg === null ? '—' : avg.toFixed(1) + '%') + '</b>' +
+              (avg === null ? '' : '<span class="pill ' + avgBand + '">' +
+                (avgBand === 'good' ? 'Healthy' : avgBand === 'warn' ? 'Watch it' : 'Problem') + '</span>') +
+            '</div>' +
+          '</div>');
+        box.appendChild(g);
+
+        var bands = frag(
+          '<div class="subhead">Where your dishes sit</div>' +
+          '<div class="card">' +
+            '<div class="bandrow"><span class="k"><i class="dot" style="background:var(--good)"></i>Healthy &mdash; 35% or under</span><b>' + counts.good + '</b></div>' +
+            '<div class="bandrow"><span class="k"><i class="dot" style="background:var(--warn)"></i>Watch &mdash; 35% to 40%</span><b>' + counts.warn + '</b></div>' +
+            '<div class="bandrow"><span class="k"><i class="dot" style="background:var(--bad)"></i>Problem &mdash; over 40%</span><b>' + counts.bad + '</b></div>' +
+            (priced.length < dishes.length
+              ? '<div class="bandrow"><span class="k"><i class="dot" style="background:var(--line)"></i>No menu price set</span><b>' + (dishes.length - priced.length) + '</b></div>'
+              : '') +
+          '</div>');
+        box.appendChild(bands);
+
+        if (best && worst) {
+          var nb = document.createElement('div');
+          nb.innerHTML = '<div class="subhead">Margin per plate</div>';
+          var card = document.createElement('div');
+          card.className = 'card';
+          function named(label, d) {
+            var w = document.createElement('div');
+            w.className = 'named';
+            var a = document.createElement('div');
+            var l = document.createElement('div'); l.className = 'l'; l.textContent = label;
+            var n = document.createElement('div'); n.className = 'n'; n.textContent = d.dish || 'Untitled dish';
+            a.appendChild(l); a.appendChild(n);
+            var v = document.createElement('div'); v.className = 'v'; v.textContent = money(marginOf(d));
+            w.appendChild(a); w.appendChild(v);
+            return w;
+          }
+          card.appendChild(named('Highest margin', best));
+          card.appendChild(named('Lowest margin', worst));
+          nb.appendChild(card);
+          box.appendChild(nb);
+        }
+
+        var five = priced.slice().sort(function (a, b) { return pctOf(b) - pctOf(a); }).slice(0, 5);
+        if (five.length) {
+          var wb = document.createElement('div');
+          wb.innerHTML = '<div class="subhead">Worst food cost %</div>';
+          var wc = document.createElement('div');
+          wc.className = 'card worst';
+          five.forEach(function (d) {
+            var pct = pctOf(d), bd = bandOf(pct);
+            var col = bd === 'good' ? 'var(--good)' : bd === 'warn' ? 'var(--warn)' : 'var(--bad)';
+            var w = document.createElement('div');
+            w.className = 'w';
+            var top = document.createElement('div');
+            top.className = 'wtop';
+            var a = document.createElement('span'); a.textContent = d.dish || 'Untitled dish';
+            var b = document.createElement('span'); b.textContent = pct.toFixed(1) + '%'; b.style.color = col;
+            top.appendChild(a); top.appendChild(b);
+            var tr = document.createElement('div');
+            tr.className = 'track';
+            var i = document.createElement('i');
+            i.style.width = Math.max(3, Math.min(100, pct)) + '%';
+            i.style.background = col;
+            tr.appendChild(i);
+            w.appendChild(top); w.appendChild(tr);
+            wc.appendChild(w);
+          });
+          wb.appendChild(wc);
+          box.appendChild(wb);
+        }
+      }
+
+      /* ================= account ================= */
+      function csvCell(v) {
+        var s = (v === null || v === undefined) ? '' : String(v);
+        return '"' + s.replace(/"/g, '""') + '"';
+      }
+
+      el('btnExport').addEventListener('click', function () {
+        if (!dishes.length) { toast('Nothing to export yet.', 'bad'); return; }
+        var head = ['Dish', 'Plates per batch', 'Cost per portion', 'Menu price', 'Margin per plate', 'Food cost %', 'Ingredients'];
+        var lines = [head.map(csvCell).join(',')];
+        dishes.forEach(function (d) {
+          var pct = pctOf(d), mg = marginOf(d);
+          var ing = (d.rows || []).map(function (r) {
+            return (r.name || 'Ingredient') + ' ' + r.qty + r.qUnit + ' @ ' + r.rate + '/' + r.rUnit;
+          }).join('; ');
+          lines.push([
+            d.dish || 'Untitled dish',
+            d.n || 1,
+            (d.plate != null ? Number(d.plate).toFixed(2) : ''),
+            (d.price != null ? d.price : ''),
+            (mg === null ? '' : mg.toFixed(2)),
+            (pct === null ? '' : pct.toFixed(1)),
+            ing
+          ].map(csvCell).join(','));
+        });
+        var blob = new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'hti-food-cost-dishes.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+        toast('CSV downloaded.', 'good');
+      });
+
+      el('avatar').addEventListener('click', function () {
+        el('sheetEmail').textContent = user ? user.email : '—';
+        showSheet('sheetAccount');
+      });
+
+      function signOut() {
+        if (!sb) return;
+        sb.auth.signOut().then(function () {
+          try { localStorage.removeItem('hti_fcc_app_mode'); } catch (e) {}
+          try { localStorage.removeItem(CACHE_KEY); } catch (e) {}
+          user = null; dishes = []; loaded = false;
+          if (openSheet) hideSheet(true);
+          el('app').classList.remove('on');
+          el('gate').hidden = false;
+          el('auPass').value = '';
+          el('auErr').textContent = '';
+        });
+      }
+      el('btnSignOut').addEventListener('click', signOut);
+      el('btnSignOut2').addEventListener('click', signOut);
+
+      /* ================= offline ================= */
+      function paintOnline() {
+        el('offlineBar').classList.toggle('on', !navigator.onLine);
+      }
+      window.addEventListener('online', function () { paintOnline(); refresh(); });
+      window.addEventListener('offline', paintOnline);
+
+      /* ================= auth ================= */
+      var mode = 'login';
+
+      function authMode(m) {
+        mode = m;
+        var login = (m === 'login');
+        el('tabLogin').classList.toggle('on', login);
+        el('tabLogin').setAttribute('aria-pressed', login);
+        el('tabSignup').classList.toggle('on', !login);
+        el('tabSignup').setAttribute('aria-pressed', !login);
+        el('signupOnly').hidden = login;
+        el('btnAuthGo').textContent = login ? 'Log in' : 'Create my account';
+        el('auPass').setAttribute('autocomplete', login ? 'current-password' : 'new-password');
+        el('auErr').textContent = '';
+        el('auErr').style.color = '';
+      }
+      el('tabLogin').addEventListener('click', function () { authMode('login'); });
+      el('tabSignup').addEventListener('click', function () { authMode('signup'); });
+
+      el('btnAuthGo').addEventListener('click', function () {
+        var err = el('auErr'), btn = el('btnAuthGo');
+        var email = (el('auEmail').value || '').trim();
+        var pass = el('auPass').value || '';
+        err.textContent = '';
+        err.style.color = '';
+
+        if (!sb) { err.textContent = 'Accounts are unavailable right now. Please try again in a moment.'; return; }
+        if (!email) { err.textContent = 'Please enter your email.'; el('auEmail').focus(); return; }
+        if (pass.length < 8) { err.textContent = 'Password needs to be at least 8 characters.'; el('auPass').focus(); return; }
+
+        btn.disabled = true;
+        var was = btn.textContent;
+        btn.textContent = 'Please wait…';
+        function done() { btn.disabled = false; btn.textContent = was; }
+
+        if (mode === 'login') {
+          sb.auth.signInWithPassword({ email: email, password: pass }).then(function (r) {
+            done();
+            if (r.error) { err.textContent = friendly(r.error.message); return; }
+            enterApp(r.data.user);
+          }, function (e) { done(); err.textContent = friendly(e && e.message); });
+        } else {
+          var name = (el('auName').value || '').trim();
+          if (!name) { done(); err.textContent = 'Please tell us your name.'; el('auName').focus(); return; }
+          sb.auth.signUp({
+            email: email, password: pass,
+            options: { data: {
+              name: name,
+              business: (el('auBiz').value || '').trim(),
+              phone: (el('auPhone').value || '').trim()
+            } }
+          }).then(function (r) {
+            done();
+            if (r.error) { err.textContent = friendly(r.error.message); return; }
+            if (r.data.session) { enterApp(r.data.user); }
+            else {
+              err.style.color = 'var(--good)';
+              err.textContent = 'Account created. Check your email to confirm it, then log in.';
+            }
+          }, function (e) { done(); err.textContent = friendly(e && e.message); });
+        }
+      });
+
+      el('btnForgot').addEventListener('click', function () {
+        var err = el('auErr'), email = (el('auEmail').value || '').trim();
+        if (!sb) { err.textContent = 'Accounts are unavailable right now.'; return; }
+        if (!email) { err.textContent = 'Type your email above first, then tap this again.'; el('auEmail').focus(); return; }
+        sb.auth.resetPasswordForEmail(email, {
+          redirectTo: window.location.origin + window.location.pathname
+        }).then(function (r) {
+          err.style.color = r.error ? 'var(--bad)' : 'var(--good)';
+          err.textContent = r.error ? friendly(r.error.message)
+            : 'Reset link sent. Check your email, including the spam folder.';
+        });
+      });
+
+      el('btnResetGo').addEventListener('click', function () {
+        var err = el('rsErr'), pass = el('rsPass').value || '';
+        if (pass.length < 8) { err.textContent = 'Password needs to be at least 8 characters.'; return; }
+        sb.auth.updateUser({ password: pass }).then(function (r) {
+          if (r.error) { err.textContent = friendly(r.error.message); return; }
+          el('resetGate').hidden = true;
+          enterApp(r.data.user);
+        });
+      });
+
+      function initials(u) {
+        var nm = (u && u.user_metadata && u.user_metadata.name) || (u && u.email) || '?';
+        return nm.trim().charAt(0).toUpperCase() || '?';
+      }
+
+      function enterApp(u) {
+        user = u;
+        try { localStorage.setItem('hti_fcc_app_mode', '1'); } catch (e) {}
+        el('splash').style.display = 'none';
+        el('gate').hidden = true;
+        el('resetGate').hidden = true;
+        el('app').classList.add('on');
+        el('avatar').textContent = initials(u);
+        el('acctEmail').textContent = u.email;
+        paintOnline();
+
+        /* show whatever we had last time straight away, then go and refresh */
+        var cached = cachedDishes();
+        if (cached.length) { dishes = cached; loaded = true; }
+        else { loaded = false; }
+        paintDishes();
+
+        if (!location.hash || !VIEWS[location.hash.replace('#', '')]) {
+          history.replaceState(null, '', location.pathname + location.search + '#dishes');
+        }
+        setView(location.hash.replace('#', '') || 'dishes', true);
+        startNew();
+        setView(location.hash.replace('#', '') || 'dishes', true);
+
+        refresh();
+      }
+
+      function showGate() {
+        el('splash').style.display = 'none';
+        el('app').classList.remove('on');
+        el('gate').hidden = false;
+      }
+
+      function refresh() {
+        if (!user || !sb) return;
+        cloudList().then(function (list) {
+          dishes = list;
+          loaded = true;
+          cacheDishes(dishes);
+          paintDishes();
+          if (view === 'insights') paintInsights();
+        }, function (e) {
+          loaded = true;
+          paintDishes();
+          if (!navigator.onLine) return;
+          toast('Could not load your dishes: ' + friendly(e && e.message), 'bad');
+        });
+      }
+
+      /* ================= install prompt ================= */
+      var deferredPrompt = null;
+      var INSTALL_KEY = 'hti_fcc_install_dismissed';
+
+      function installDismissed() {
+        try { return localStorage.getItem(INSTALL_KEY) === '1'; } catch (e) { return false; }
+      }
+      function dismissInstall() {
+        try { localStorage.setItem(INSTALL_KEY, '1'); } catch (e) {}
+        el('installBar').classList.remove('on');
+      }
+      el('btnInstallX').addEventListener('click', dismissInstall);
+
+      var standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        deferredPrompt = e;
+        if (installDismissed() || standalone) return;
+        el('installText').textContent = 'Add Food Cost to your home screen';
+        el('btnInstall').hidden = false;
+        el('installBar').classList.add('on');
+      });
+
+      el('btnInstall').addEventListener('click', function () {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function () {
+          deferredPrompt = null;
+          dismissInstall();
+        });
+      });
+
+      window.addEventListener('appinstalled', function () { dismissInstall(); });
+
+      /* iOS gets no beforeinstallprompt, so it gets a one-liner instead */
+      (function () {
+        var iOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+        if (!iOS || standalone || installDismissed()) return;
+        el('installText').textContent = 'Tap Share, then Add to Home Screen.';
+        el('btnInstall').hidden = true;
+        el('installBar').classList.add('on');
+      })();
+
+      /* ================= service worker ================= */
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('sw.js').catch(function () {});
+        });
+      }
+
+      /* ================= boot ================= */
+      loadRows([{}, {}, {}]);
+      go(1);
+      paintOnline();
+
+      if (initSupabase()) {
+        sb.auth.onAuthStateChange(function (event, session) {
+          if (event === 'PASSWORD_RECOVERY') {
+            el('splash').style.display = 'none';
+            el('app').classList.remove('on');
+            el('gate').hidden = true;
+            el('resetGate').hidden = false;
+            el('rsPass').focus();
+          }
+        });
+        sb.auth.getSession().then(function (r) {
+          var u = (r.data && r.data.session) ? r.data.session.user : null;
+          if (u) enterApp(u); else showGate();
+        }, function () { showGate(); });
+      } else {
+        showGate();
+        el('auErr').textContent = 'Accounts are unavailable right now. Please check your connection.';
+      }
+    })();
+  </script>
+</body>
+
+</html>
