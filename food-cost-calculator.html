@@ -807,6 +807,30 @@
     .fcc-cta{padding:26px}
   }
 
+  /* ---------- from the blog: the food cost post, English and Hindi ----------
+     Two cards, one article. They sit under the FAQ so the page answers the
+     query first and only then offers the longer read. */
+  .fcc-blog{padding-top:8px}
+  .fcc-blog-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .fcc-blog-card{display:flex;flex-direction:column;background:var(--card);
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;color:inherit;
+    transition:transform .22s var(--ease-out),box-shadow .22s var(--ease-out)}
+  .fcc-blog-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,0,0,.10)}
+  .fcc-blog-card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+  .fcc-blog-body{padding:20px 20px 22px}
+  .fcc-blog-lang{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--red);margin-bottom:9px}
+  /* Devanagari does not take letter-spacing or casing the way Latin does */
+  .fcc-blog-lang[lang=hi]{letter-spacing:normal;text-transform:none;font-size:12px}
+  .fcc-blog-card h3{font-size:18px;font-weight:800;letter-spacing:-.01em;line-height:1.35;
+    color:var(--ink);margin-bottom:9px}
+  .fcc-blog-card p{color:var(--muted);font-size:14.5px;line-height:1.65;font-weight:500}
+  .fcc-blog-more{display:inline-block;margin-top:14px;font-size:13.5px;font-weight:700;color:var(--red)}
+
+  @media(max-width:760px){
+    .fcc-blog-grid{grid-template-columns:1fr}
+  }
+
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBKJQQRP0N"></script>
@@ -1029,6 +1053,40 @@
     </div>
   </div>
 </section>
+
+<div class="fcc-wrap">
+  <section class="fcc-blog">
+    <div class="sec-head">
+      <span class="sec-tag">From the blog</span>
+      <h2>What a plate of <em>butter chicken</em> really costs</h2>
+      <p>The same worked example in English and in Hindi &mdash; ingredient by ingredient in rupees, and the three costing errors that make most food cost numbers wrong.</p>
+    </div>
+    <div class="fcc-blog-grid">
+      <a class="fcc-blog-card" href="how-to-calculate-food-cost-percentage.html">
+        <img src="images/blog/food-cost-percentage/01-butter-chicken-plate-food-cost.jpg"
+          alt="A plate of butter chicken, the dish costed line by line in the blog"
+          width="1400" height="788" loading="lazy" decoding="async" />
+        <div class="fcc-blog-body">
+          <span class="fcc-blog-lang">English</span>
+          <h3>What Your Butter Chicken Actually Costs You</h3>
+          <p>&#8377;172 of ingredients, four percent of chutney and trim nobody costs, and the five point gap between your recipe card and your P&amp;L.</p>
+          <span class="fcc-blog-more">Read the blog &rarr;</span>
+        </div>
+      </a>
+      <a class="fcc-blog-card" href="food-cost-kaise-nikale.html" hreflang="hi">
+        <img src="images/blog/food-cost-percentage/04-ladle-portion-control-kitchen.jpg"
+          alt="A cook pouring gravy from a ladle on a busy kitchen pass"
+          width="1376" height="768" loading="lazy" decoding="async" />
+        <div class="fcc-blog-body">
+          <span class="fcc-blog-lang" lang="hi">&#2361;&#2367;&#2306;&#2342;&#2368;</span>
+          <h3 lang="hi">&#2310;&#2346;&#2325;&#2368; &#2348;&#2335;&#2352; &#2330;&#2367;&#2325;&#2344; &#2309;&#2360;&#2354; &#2350;&#2375;&#2306; &#2310;&#2346;&#2325;&#2379; &#2325;&#2367;&#2340;&#2344;&#2375; &#2325;&#2368; &#2346;&#2337;&#2364;&#2340;&#2368; &#2361;&#2376;?</h3>
+          <p lang="hi">&#2357;&#2361;&#2368; &#2361;&#2367;&#2360;&#2366;&#2348;, &#2361;&#2367;&#2306;&#2342;&#2368; &#2350;&#2375;&#2306;&#2404; &#8377;172 &#2325;&#2375; ingredients, &#2330;&#2366;&#2352; &#2346;&#2381;&#2352;&#2340;&#2367;&#2358;&#2340; &#2330;&#2335;&#2344;&#2368; &#2324;&#2352; &#2331;&#2368;&#2354;&#2344;, &#2324;&#2352; recipe &#2324;&#2352; P&amp;L &#2325;&#2375; &#2348;&#2368;&#2330; &#2325;&#2366; &#2346;&#2366;&#2305;&#2330; &#2346;&#2381;&#2352;&#2340;&#2367;&#2358;&#2340; &#2325;&#2366; &#2347;&#2364;&#2352;&#2381;&#2325;&#2364;&#2404;</p>
+          <span class="fcc-blog-more" lang="hi">&#2348;&#2381;&#2354;&#2377;&#2327; &#2346;&#2338;&#2364;&#2375;&#2306; &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </section>
+</div>
 
 <div class="fcc-wrap">
   <section class="app-gate ag-slim">
