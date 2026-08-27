@@ -124,33 +124,61 @@ h1:has(.pe-h1-lead) {
   margin-top: 26px;
 }
 
+/* One button carries the weight, the other stays quiet. Two saturated fills
+   side by side fight each other and neither reads as "press me first". */
+
 .pe-direct a {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  padding: 13px 20px;
-  border-radius: 9px;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;              /* comfortable thumb target */
+  padding: 0 22px;
+  border-radius: 10px;
   font-weight: 700;
   font-size: 15.5px;
   line-height: 1;
+  letter-spacing: .005em;
   text-decoration: none;
-  transition: transform .15s ease, background .15s ease;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: transform .16s ease, background-color .16s ease,
+              border-color .16s ease, box-shadow .16s ease;
 }
 
-.pe-direct a:hover { transform: translateY(-2px); }
+/* WhatsApp leads: in Indian hospitality it is the channel people actually use.
+   White on the brand green, not the dark green that muddied it before. */
+.pe-wa {
+  background: #21bf5b;
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(14, 70, 38, .18), 0 6px 16px -10px rgba(14, 70, 38, .55);
+}
 
-.pe-wa { background: #25D366; color: #08301a; }
-.pe-wa:hover { background: #1fbc59; }
+.pe-wa:hover { background: #1aa94f; transform: translateY(-1px); }
+.pe-wa:active { background: #179546; transform: translateY(0); box-shadow: 0 1px 2px rgba(14, 70, 38, .22); }
 
+/* Calling is the quieter alternative, so it looks like one. */
 .pe-tel {
   background: #fff;
-  color: #111;
-  border: 2px solid #111;
+  color: #1b1512;
+  border-color: rgba(27, 21, 18, .22);
+  box-shadow: 0 1px 2px rgba(22, 18, 15, .05);
 }
 
-.pe-tel:hover { background: #111; color: #fff; }
+.pe-tel:hover {
+  background: #fbf9f7;
+  border-color: rgba(27, 21, 18, .45);
+  transform: translateY(-1px);
+}
 
-.pe-direct svg { width: 19px; height: 19px; flex: none; }
+.pe-tel:active { background: #f2ede9; transform: translateY(0); }
+
+.pe-direct a:focus-visible {
+  outline: 3px solid var(--hti-red, #e32129);
+  outline-offset: 3px;
+}
+
+.pe-direct svg { width: 18px; height: 18px; flex: none; }
 
 /* --- the form ------------------------------------------------------------- */
 
@@ -223,17 +251,30 @@ h1:has(.pe-h1-lead) {
   font: inherit;
   font-weight: 700;
   font-size: 16.5px;
-  padding: 14px 22px;
+  min-height: 50px;
+  padding: 0 24px;
   border: none;
-  border-radius: 9px;
+  border-radius: 10px;
   background: var(--hti-red, #e32129);
   color: #fff;
   cursor: pointer;
-  transition: transform .15s ease, background .15s ease;
+  letter-spacing: .005em;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 1px 2px rgba(140, 16, 20, .22), 0 8px 20px -12px rgba(140, 16, 20, .7);
+  transition: transform .16s ease, filter .16s ease, box-shadow .16s ease;
 }
 
-.pe-submit:hover:not(:disabled) { transform: translateY(-2px); }
-.pe-submit:disabled { opacity: .65; cursor: default; }
+.pe-submit:hover:not(:disabled) { filter: brightness(.94); transform: translateY(-1px); }
+
+.pe-submit:active:not(:disabled) {
+  filter: brightness(.88);
+  transform: translateY(0) scale(.99);
+  box-shadow: 0 1px 2px rgba(140, 16, 20, .26);
+}
+
+.pe-submit:focus-visible { outline: 3px solid #1b1512; outline-offset: 3px; }
+
+.pe-submit:disabled { opacity: .6; cursor: progress; box-shadow: none; transform: none; }
 
 .pe-privacy { font-size: 12.5px; color: #777; margin: 0; line-height: 1.45; }
 .pe-privacy a { color: inherit; text-decoration: underline; }
@@ -283,46 +324,83 @@ h1:has(.pe-h1-lead) {
 /* ------------------------------------------------- sticky mobile contact -- */
 
 /* Below 860px the header's Contact button collapses into the hamburger, so
-   without this there is no way to reach us without opening a menu. */
+   without this there is no way to reach us without opening a menu.
+
+   It has to sit on the screen the whole time someone is reading, which means
+   it has to be easy to ignore. Two saturated blocks were not: bright green
+   against HTI red, both shouting, is tiring over a long page. So one button
+   leads and the other recedes, the bar sits on a soft near-white rather than
+   pure white, and the whole thing is slimmer than it was. */
 .pe-bar { display: none; }
 
 @media (max-width: 860px) {
   .pe-bar {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 9px;
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: 999;
-    padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
-    background: rgba(255, 255, 255, .96);
-    backdrop-filter: blur(8px);
-    border-top: 1px solid rgba(0, 0, 0, .1);
-    box-shadow: 0 -6px 22px -12px rgba(0, 0, 0, .4);
+    padding: 9px 12px calc(9px + env(safe-area-inset-bottom, 0px));
+    background: rgba(252, 251, 250, .92);
+    -webkit-backdrop-filter: saturate(1.4) blur(14px);
+    backdrop-filter: saturate(1.4) blur(14px);
+    border-top: 1px solid rgba(27, 21, 18, .09);
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, .7) inset,
+                0 -10px 26px -18px rgba(27, 21, 18, .5);
   }
 
   .pe-bar a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 14px 10px;
-    border-radius: 10px;
+    gap: 9px;
+    padding: 0 12px;
+    border-radius: 11px;
     font-weight: 700;
-    font-size: 15.5px;
+    font-size: 15px;
+    letter-spacing: .005em;
     line-height: 1;
     text-decoration: none;
-    min-height: 48px;
+    min-height: 46px;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform .14s ease, background-color .14s ease, border-color .14s ease;
   }
 
-  .pe-bar svg { width: 18px; height: 18px; flex: none; }
-  .pe-bar .pe-bar-wa { background: #25D366; color: #08301a; }
-  .pe-bar .pe-bar-tel { background: var(--hti-red, #e32129); color: #fff; }
+  .pe-bar a:active { transform: scale(.975); }
+
+  .pe-bar a:focus-visible {
+    outline: 3px solid var(--hti-red, #e32129);
+    outline-offset: 2px;
+  }
+
+  .pe-bar svg { width: 17px; height: 17px; flex: none; }
+
+  /* WhatsApp is the one people actually use, so it is the one that leads. */
+  .pe-bar .pe-bar-wa {
+    background: #21bf5b;
+    color: #fff;
+    box-shadow: 0 1px 2px rgba(14, 70, 38, .2), 0 5px 14px -9px rgba(14, 70, 38, .6);
+  }
+
+  .pe-bar .pe-bar-wa:active { background: #179546; }
+
+  /* Calling is the alternative, so it looks like the alternative. */
+  .pe-bar .pe-bar-tel {
+    background: #fff;
+    color: #1b1512;
+    border-color: rgba(27, 21, 18, .2);
+    box-shadow: 0 1px 2px rgba(22, 18, 15, .05);
+  }
+
+  .pe-bar .pe-bar-tel:active { background: #f2ede9; }
 
   /* keep the footer clear of the bar */
-  body { padding-bottom: 76px; }
+  body { padding-bottom: 72px; }
 
   .pe-inner { grid-template-columns: 1fr; gap: 30px; }
   .pe { padding: 48px 20px; }
@@ -381,7 +459,8 @@ h1:has(.pe-h1-lead) {
   min-width: 0;
   font: inherit;
   font-size: 15.5px;
-  padding: 13px 14px;
+  padding: 0 15px;
+  min-height: 48px;
   border: 1.5px solid rgba(128, 120, 114, .5);
   border-radius: 8px;
   background: #fff;
@@ -398,16 +477,30 @@ h1:has(.pe-h1-lead) {
   font: inherit;
   font-weight: 700;
   font-size: 15.5px;
-  padding: 13px 22px;
+  min-height: 48px;
+  padding: 0 24px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--hti-red, #e32129);
   color: #fff;
   cursor: pointer;
   white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 1px 2px rgba(140, 16, 20, .22), 0 8px 20px -12px rgba(140, 16, 20, .7);
+  transition: transform .16s ease, filter .16s ease, box-shadow .16s ease;
 }
 
-.sub-btn:disabled { opacity: .65; cursor: default; }
+.sub-btn:hover:not(:disabled) { filter: brightness(.94); transform: translateY(-1px); }
+
+.sub-btn:active:not(:disabled) {
+  filter: brightness(.88);
+  transform: translateY(0) scale(.99);
+  box-shadow: 0 1px 2px rgba(140, 16, 20, .26);
+}
+
+.sub-btn:focus-visible { outline: 3px solid #1b1512; outline-offset: 3px; }
+
+.sub-btn:disabled { opacity: .6; cursor: progress; box-shadow: none; transform: none; }
 
 .sub-msg { display: none; font-size: 14px; margin: 0; grid-column: 1 / -1; }
 .sub-msg.show { display: block; }
@@ -425,4 +518,29 @@ h1:has(.pe-h1-lead) {
 
 @media (max-width: 860px) {
   .sub-box { grid-template-columns: 1fr; padding: 28px 20px; }
+}
+
+/* ------------------------------------------------------- motion & pointer -- */
+
+/* Everything above uses a small lift on hover and a slight press on tap. That
+   is the feedback that makes a button feel like a button - but it is also
+   exactly what someone who has asked their device to reduce motion does not
+   want, so the colour change carries the whole job for them instead. */
+@media (prefers-reduced-motion: reduce) {
+  .pe-direct a,
+  .pe-submit,
+  .pe-bar a,
+  .sub-btn {
+    transition: background-color .16s ease, border-color .16s ease, filter .16s ease;
+  }
+
+  .pe-direct a:hover,
+  .pe-direct a:active,
+  .pe-submit:hover:not(:disabled),
+  .pe-submit:active:not(:disabled),
+  .pe-bar a:active,
+  .sub-btn:hover:not(:disabled),
+  .sub-btn:active:not(:disabled) {
+    transform: none;
+  }
 }

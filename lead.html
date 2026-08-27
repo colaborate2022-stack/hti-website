@@ -365,12 +365,13 @@
     /* The typing line used to start empty, so the H1 Google indexed read
        "We help your staff become|" - an unfinished sentence - and every keystroke rewrapped
        the heading, sliding the hero CTA down the page on a loop. The first
-       phrase now ships in the HTML, and .type-sizer reserves the width of the
+       phrase now ships in the HTML. .type-sizer reserves the width of the
        longest phrase via a pseudo-element (not real text, so the heading is not
-       read twice) which pins the layout still. */
+       read twice) so the heading never rewraps mid-animation. It stays a block,
+       so the coloured line sits on its own row exactly as it always did. */
     .type-line {
       position: relative;
-      display: inline-block;
+      display: block;
     }
 
     .type-sizer {
