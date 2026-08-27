@@ -405,12 +405,33 @@
       grid-column: 1 / -1;
     }
 
+    /* The programme pages link straight here with #efForm. The navbar is
+       sticky, so without this the jump parks the header over the first
+       thing the form has to say. */
     .ef {
+      scroll-margin-top: 92px;
       width: 100%;
       max-width: 920px;
       margin: 6px auto 26px;
       text-align: left;
     }
+
+    /* The line that shows which programme brought someone here. It sits above
+       the first field so it reads as context for the form, not as a field of
+       its own - there is nothing to fill in, it is already recorded. */
+    .ef-about {
+      margin: 0 0 18px;
+      padding: 12px 16px;
+      border-left: 3px solid var(--hti-red);
+      background: #faf6f2;
+      border-radius: 0 8px 8px 0;
+      font-size: 14.5px;
+      line-height: 1.5;
+      color: #3a3a3a;
+      text-align: left;
+    }
+
+    .ef-about b { color: #111; }
 
     .ef-grid {
       display: grid;
@@ -1285,6 +1306,10 @@
 
       <!-- ---------- On-page enquiry form: saves to Supabase (contact_enquiries) ---------- -->
       <form class="ef" id="efForm" novalidate>
+        <!-- Filled in by the programme block in the script below when someone
+             arrives from a programme page carrying ?programme=. Empty and
+             hidden for everybody else. -->
+        <p class="ef-about" id="efAbout" hidden></p>
         <div class="ef-grid">
           <div class="ef-field" data-required data-label="Name">
             <label for="ef-name">Name <span class="ef-req">*</span></label>
@@ -1717,6 +1742,58 @@
         return false;
       };
 
+      /* ---------- which programme sent them here ----------
+         The 15 programme pages hand over with ?programme=<slug>. The slug is
+         looked up in this table rather than printed as it arrives: a query
+         string is a stranger's text, and it would otherwise land in the page
+         and in the sales inbox verbatim. An unknown slug simply does nothing.
+
+         Matching it also lifts the "Training needed" requirement - they have
+         already told us, by the page they came from - while leaving the
+         checkboxes there for anyone who wants to add to it. */
+      const PROGRAMMES = {
+        'class': ['CLASS', 'Cultural Lessons And Social Skills'],
+        'cup': ['CUP', 'Caretakers Upgradation Program'],
+        'fort': ['FORT', 'Frontdesk Operations & Receptionist Training'],
+        'hotcar': ['HOT-CAR', 'Housekeeping Operations & Training'],
+        'hotel-shot': ['HOTel SHOT', 'Systems in Hospitality Operations & Training'],
+        'icare': ['iCARE', 'Customer Affinity & Relationship Enhancement'],
+        'icedt': ['ICEDT', 'Interactive Counter Executives Development & Training'],
+        'kmt': ['KMT', 'Kitchen Management Training'],
+        'mdp': ['MDP', 'Management Development Program'],
+        'post': ['POST', 'Pantry Operations Systems & Training'],
+        'ramp': ['RAMP', 'Restaurant Administration & Management Program'],
+        'super': ['SUPER', 'Skill Upgradation Program for Employees of Restaurants'],
+        'support': ['SUPPORT', 'Skill Upgradation Program for Pre-Opening Restaurant Teams'],
+        'top': ['TOP', 'Training & Operations for Peons'],
+        'vow': ['Vow to Wow', 'Customer Experience Training']
+      };
+
+      const programme = (function () {
+        let slug = '';
+        try {
+          slug = (new URLSearchParams(location.search).get('programme') || '').toLowerCase();
+        } catch (e) { return null; }
+        const hit = Object.prototype.hasOwnProperty.call(PROGRAMMES, slug) && PROGRAMMES[slug];
+        if (!hit) return null;
+
+        const about = document.getElementById('efAbout');
+        if (about) {
+          /* textContent, not innerHTML: the strings are ours, and keeping it
+             that way is what makes the table above worth having */
+          const b = document.createElement('b');
+          b.textContent = hit[0];
+          about.append('You are enquiring about ', b, ' — ' + hit[1] +
+            '. That is already noted, so just leave us your details below.');
+          about.hidden = false;
+        }
+
+        const group = form.querySelector('.ef-field[data-group="training_needed"]');
+        if (group) group.removeAttribute('data-required');
+
+        return hit[0];
+      })();
+
       const required = Array.from(form.querySelectorAll('.ef-field[data-required]'));
 
       function isFilled(field) {
@@ -1751,7 +1828,10 @@
           phone: val('phone'),
           email: val('email'),
           staff_type: pickedAll('staff_type').join(', '),
-          training_needed: pickedAll('training_needed').join(', '),
+          /* the programme leads the list: it is the specific thing they read
+             about, the ticks are the general areas */
+          training_needed: (programme ? [programme + ' (programme page)'] : [])
+            .concat(pickedAll('training_needed')).join(', '),
           message: val('message')
         };
       }

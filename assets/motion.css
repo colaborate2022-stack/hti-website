@@ -270,7 +270,10 @@
     transition: transform .55s var(--mo-ease);
   }
 
-  .mo .mo-card:hover :is(img, .mfh-card-img, .blog-cover) {
+  /* Blog thumbnails are banners with the headline drawn into the artwork,
+     so any zoom crops the words. .blog-cover and .mfh-card-img sit this one
+     out - the card still lifts on hover, the words stay whole. */
+  .mo .mo-card:hover img:not(.blog-cover):not(.mfh-card-img) {
     transform: scale(1.05);
   }
 }

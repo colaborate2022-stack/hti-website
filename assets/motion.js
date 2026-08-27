@@ -305,8 +305,12 @@
         el.classList.add('mo-solid');
       }
 
-      /* a card whose first child is a photo gets the parallax frame */
-      var img = el.querySelector('img');
+      /* A card whose first child is a photo gets the parallax frame. Blog
+         covers are excluded: those thumbnails have the headline baked into
+         the image, and a 6% zoom plus a vertical drift slices the first and
+         last lines of it off - which is what a reader sees, not a photo
+         moving. Real photographs still drift. */
+      var img = el.querySelector('img:not(.blog-cover):not(.mfh-card-img)');
       if (img && img.parentElement) {
         img.parentElement.classList.add('mo-parallax');
         el._moPar = img.parentElement;

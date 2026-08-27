@@ -1320,70 +1320,21 @@
         </div>
       </div>
 
-      <div class="pe-form-wrap">
+      <!-- The enquiry hand-off. This used to be a second, programme-specific
+           form posting straight to Supabase; it now sends the visitor to
+           contact.html, which is the form the office actually watches. The
+           slug in the query string is what keeps the programme attached to
+           the lead - see the programme block in contact.html. -->
+      <div class="pe-cta-wrap">
         <h3>Ask about MDP</h3>
-        <p class="pe-form-note">Four details, and we will call you back. Mon&ndash;Sat.</p>
-
-        <form class="pe-form" id="peForm" novalidate
-          data-programme="MDP"
-          data-programme-full="Management Development Program"
-          data-roles="Newly promoted managers, supervisors, team leads and mid-level managers">
-          <div class="pe-field">
-            <label for="pe-name">Your name <span class="req">*</span></label>
-            <input class="pe-input" type="text" id="pe-name" name="name" autocomplete="name" placeholder="Full name" />
-            <span class="pe-err">Please tell us your name.</span>
-          </div>
-          <div class="pe-field">
-            <label for="pe-company">Hotel / restaurant / company <span class="req">*</span></label>
-            <input class="pe-input" type="text" id="pe-company" name="company" autocomplete="organization" placeholder="Where you work" />
-            <span class="pe-err">Please tell us where you work.</span>
-          </div>
-          <div class="pe-row">
-            <div class="pe-field">
-              <label for="pe-phone">Phone <span class="req">*</span></label>
-              <input class="pe-input" type="tel" id="pe-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="10-digit mobile" />
-              <span class="pe-err">Please enter a valid mobile number.</span>
-            </div>
-            <div class="pe-field">
-              <label for="pe-city">City <span class="req">*</span></label>
-              <input class="pe-input" type="text" id="pe-city" name="city" autocomplete="address-level2" placeholder="e.g. Mumbai" />
-              <span class="pe-err">Please tell us your city.</span>
-            </div>
-          </div>
-          <div class="pe-row">
-            <div class="pe-field">
-              <label for="pe-email">Email <span class="pe-opt">(optional)</span></label>
-              <input class="pe-input" type="email" id="pe-email" name="email" autocomplete="email" placeholder="you@company.com" />
-            </div>
-            <div class="pe-field">
-              <label for="pe-team">Team size <span class="pe-opt">(optional)</span></label>
-              <input class="pe-input" type="text" id="pe-team" name="team_size" inputmode="numeric" placeholder="e.g. 25" />
-            </div>
-          </div>
-          <div class="pe-field">
-            <label for="pe-message">Anything else <span class="pe-opt">(optional)</span></label>
-            <input class="pe-input" type="text" id="pe-message" name="message" placeholder="Timelines, languages, specific gaps" />
-          </div>
-
-          <div class="pe-hp" aria-hidden="true">
-            <label for="pe-website">Website</label>
-            <input type="text" id="pe-website" name="website" tabindex="-1" autocomplete="off" />
-          </div>
-
-          <button type="submit" class="pe-submit" id="peSubmit">Request a call back</button>
-          <div class="pe-msg" id="peMsg" role="alert"></div>
-          <p class="pe-privacy">We use these details only to answer your enquiry. See our <a href="privacy-policy.html">privacy policy</a>.</p>
-        </form>
-
-        <div class="pe-thanks" id="peThanks" role="status">
-          <div class="pe-tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-          <h3>Thank you &mdash; that is with us.</h3>
-          <p>A training consultant will call you within one working day. In a hurry?</p>
-          <div class="pe-direct" style="justify-content:center">
-            <a class="pe-wa" href="https://wa.me/917738060902" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24a8.19 8.19 0 0 1 5.82 2.42 8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.23 8.23z"/></svg> WhatsApp us</a>
-            <a class="pe-tel" href="tel:+917738060902"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +91 77380 60902</a>
-          </div>
-        </div>
+        <p class="pe-cta-note">One short form, about a minute. It reaches the same desk as every other enquiry, so nothing gets lost on the way.</p>
+        <a class="pe-cta-btn" href="contact.html?programme=mdp#efForm">Enquire about MDP <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <ul class="pe-cta-steps">
+          <li>The form opens already marked MDP &mdash; you will not have to explain which programme you read about</li>
+          <li>A training consultant calls you back within one working day, Mon&ndash;Sat</li>
+          <li>You get dates, group sizes and what it costs for a team your size</li>
+        </ul>
+        <p class="pe-privacy">We use your details only to answer your enquiry. See our <a href="privacy-policy.html">privacy policy</a>.</p>
       </div>
     </div>
   </section>
@@ -1737,7 +1688,6 @@
     <a class="pe-bar-wa" href="https://wa.me/917738060902" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24a8.19 8.19 0 0 1 5.82 2.42 8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.23 8.23z"/></svg> WhatsApp</a>
     <a class="pe-bar-tel" href="tel:+917738060902"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call us</a>
   </div>
-  <script src="assets/enquiry.js" defer></script>
   <script src="assets/subscribe.js" defer></script>
 </body>
 

@@ -3,8 +3,9 @@
    ----------------------------------------------------------------------------
    Every programme page used to send a ready buyer to contact.html to start
    again, and the lead arrived without saying which programme it was about.
-   These two components let someone enquire, WhatsApp or call from the page they
-   are already reading.
+   These components put WhatsApp, a phone number and a one-press route into
+   the main enquiry form on the page someone is already reading, with the
+   programme carried across so the lead never arrives anonymous.
 
    Loaded by the 15 programme pages. Colours come from the page's own
    --hti-red / --hti-bg variables, which differ slightly per programme, with
@@ -180,146 +181,101 @@ h1:has(.pe-h1-lead) {
 
 .pe-direct svg { width: 18px; height: 18px; flex: none; }
 
-/* --- the form ------------------------------------------------------------- */
+/* --- the enquiry hand-off ------------------------------------------------- */
 
-.pe-form-wrap {
+/* This panel used to hold a second, programme-specific form that posted
+   straight to Supabase. It now hands the visitor to contact.html instead:
+   that is the form the office watches, and one inbox with one shape of lead
+   beats two forms that have to be checked separately. The programme travels
+   in the query string, so the enquiry still arrives saying what it is about.
+   Everything that made that form work - the fields, the inputs, the submit
+   button, the thank-you panel, the honeypot - went with it. */
+
+.pe-cta-wrap {
   background: var(--hti-bg, #f3f2ef);
   border: 1px solid rgba(0, 0, 0, .08);
   border-radius: 14px;
   padding: 26px;
 }
 
-.pe-form-wrap h3 {
+.pe-cta-wrap h3 {
   font-size: 19px;
-  margin: 0 0 4px;
+  margin: 0 0 6px;
   color: #111;
 }
 
-.pe-form-note {
-  font-size: 13.5px;
-  color: #666;
-  margin: 0 0 18px;
-  line-height: 1.45;
+.pe-cta-note {
+  font-size: 14.5px;
+  color: #5a5a5a;
+  margin: 0 0 20px;
+  line-height: 1.55;
 }
 
-.pe-form { display: flex; flex-direction: column; gap: 14px; }
-
-.pe-field { display: flex; flex-direction: column; gap: 6px; }
-
-.pe-field label {
-  font-size: 13px;
-  font-weight: 700;
-  color: #333;
-  letter-spacing: .01em;
-}
-
-.pe-field .req { color: var(--hti-red, #e32129); }
-
-.pe-input {
-  width: 100%;
-  font: inherit;
-  font-size: 15.5px;
-  padding: 12px 13px;
-  border: 1.5px solid #d8d3cc;
-  border-radius: 8px;
-  background: #fff;
-  color: #111;
-}
-
-.pe-input::placeholder { color: #9d968e; }
-
-.pe-input:focus {
-  outline: none;
-  border-color: var(--hti-red, #e32129);
-  box-shadow: 0 0 0 3px rgba(227, 33, 41, .14);
-}
-
-.pe-field.invalid .pe-input { border-color: var(--hti-red, #e32129); }
-
-.pe-err {
-  display: none;
-  font-size: 12.5px;
-  color: var(--hti-red, #e32129);
-  font-weight: 600;
-}
-
-.pe-field.invalid .pe-err { display: block; }
-
-.pe-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
-.pe-submit {
-  font: inherit;
-  font-weight: 700;
-  font-size: 16.5px;
+/* the one thing to press on this panel, so it takes the full width of it */
+.pe-cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   min-height: 50px;
-  padding: 0 24px;
-  border: none;
+  padding: 12px 24px;
   border-radius: 10px;
   background: var(--hti-red, #e32129);
   color: #fff;
-  cursor: pointer;
-  letter-spacing: .005em;
+  font-weight: 700;
+  font-size: 16.5px;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
   -webkit-tap-highlight-color: transparent;
   box-shadow: 0 1px 2px rgba(140, 16, 20, .22), 0 8px 20px -12px rgba(140, 16, 20, .7);
   transition: transform .16s ease, filter .16s ease, box-shadow .16s ease;
 }
 
-.pe-submit:hover:not(:disabled) { filter: brightness(.94); transform: translateY(-1px); }
+.pe-cta-btn:hover { filter: brightness(.94); transform: translateY(-1px); }
 
-.pe-submit:active:not(:disabled) {
+.pe-cta-btn:active {
   filter: brightness(.88);
   transform: translateY(0) scale(.99);
   box-shadow: 0 1px 2px rgba(140, 16, 20, .26);
 }
 
-.pe-submit:focus-visible { outline: 3px solid #1b1512; outline-offset: 3px; }
+.pe-cta-btn:focus-visible { outline: 3px solid #1b1512; outline-offset: 3px; }
 
-.pe-submit:disabled { opacity: .6; cursor: progress; box-shadow: none; transform: none; }
+.pe-cta-btn svg { width: 17px; height: 17px; flex: none; }
+
+/* what happens after the press, so the extra click is not a leap of faith */
+.pe-cta-steps {
+  list-style: none;
+  margin: 20px 0 18px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #444;
+}
+
+.pe-cta-steps li {
+  position: relative;
+  padding-left: 26px;
+}
+
+.pe-cta-steps li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 14px;
+  height: 8px;
+  border-left: 2.5px solid var(--hti-red, #e32129);
+  border-bottom: 2.5px solid var(--hti-red, #e32129);
+  transform: rotate(-45deg);
+}
 
 .pe-privacy { font-size: 12.5px; color: #777; margin: 0; line-height: 1.45; }
 .pe-privacy a { color: inherit; text-decoration: underline; }
-
-/* the honeypot: off-screen rather than display:none, because some bots skip
-   anything that is not rendered */
-.pe-hp {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
-.pe-msg {
-  display: none;
-  font-size: 14.5px;
-  line-height: 1.5;
-  color: #8a1114;
-  background: #fdecec;
-  border: 1px solid #f6c9c9;
-  border-radius: 8px;
-  padding: 12px 14px;
-}
-
-.pe-msg.show { display: block; }
-
-.pe-thanks { display: none; text-align: center; padding: 12px 4px; }
-.pe-thanks.show { display: block; }
-
-.pe-thanks h3 { font-size: 20px; margin: 0 0 8px; }
-.pe-thanks p { font-size: 15px; color: #444; line-height: 1.55; margin: 0 0 18px; }
-
-.pe-tick {
-  width: 52px;
-  height: 52px;
-  margin: 0 auto 14px;
-  border-radius: 50%;
-  background: #e8f7ee;
-  color: #1a8a4a;
-  display: grid;
-  place-items: center;
-}
-
-.pe-tick svg { width: 26px; height: 26px; }
 
 /* ------------------------------------------------- sticky mobile contact -- */
 
@@ -404,19 +360,15 @@ h1:has(.pe-h1-lead) {
 
   .pe-inner { grid-template-columns: 1fr; gap: 30px; }
   .pe { padding: 48px 20px; }
-  .pe-form-wrap { padding: 22px 18px; }
-}
-
-@media (max-width: 460px) {
-  .pe-row { grid-template-columns: 1fr; }
+  .pe-cta-wrap { padding: 22px 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .pe-direct a,
-  .pe-submit { transition: none; }
+  .pe-cta-btn { transition: none; }
 
   .pe-direct a:hover,
-  .pe-submit:hover:not(:disabled) { transform: none; }
+  .pe-cta-btn:hover { transform: none; }
 }
 
 /* ---------------------------------------------------- email capture (subscribe.js) -- */
@@ -528,7 +480,7 @@ h1:has(.pe-h1-lead) {
    want, so the colour change carries the whole job for them instead. */
 @media (prefers-reduced-motion: reduce) {
   .pe-direct a,
-  .pe-submit,
+  .pe-cta-btn,
   .pe-bar a,
   .sub-btn {
     transition: background-color .16s ease, border-color .16s ease, filter .16s ease;
@@ -536,8 +488,8 @@ h1:has(.pe-h1-lead) {
 
   .pe-direct a:hover,
   .pe-direct a:active,
-  .pe-submit:hover:not(:disabled),
-  .pe-submit:active:not(:disabled),
+  .pe-cta-btn:hover,
+  .pe-cta-btn:active,
   .pe-bar a:active,
   .sub-btn:hover:not(:disabled),
   .sub-btn:active:not(:disabled) {

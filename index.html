@@ -1476,6 +1476,22 @@
         white-space: nowrap;
       }
     }
+
+    /* The lead line was still wrapping on a phone, leaving a one-word orphan
+       ("to") on its own row above the typed line and pushing the CTA down the
+       page. Keep it on one line and let the type size follow the viewport
+       instead: "Train your staff in ways to" measures 11.7x its font size in
+       Gilroy Bold, so (100vw - the 48px of gutters) / 11.7 is the largest size
+       that still fits. 8.2vw - 4px sits about 4% under that, which is the
+       margin a fallback sans needs, and the 30px cap means nothing grows past
+       the size it already was. nowrap is the guarantee; the sizing is what
+       keeps that guarantee from spilling off the side. */
+    @media(max-width:600px) {
+      .clients-left h1 {
+        font-size: min(30px, calc(8.2vw - 4px));
+        white-space: nowrap;
+      }
+    }
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBKJQQRP0N"></script>
