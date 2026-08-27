@@ -1,0 +1,428 @@
+/* ============================================================================
+   enquiry.css — the on-page enquiry block and the sticky mobile contact bar
+   ----------------------------------------------------------------------------
+   Every programme page used to send a ready buyer to contact.html to start
+   again, and the lead arrived without saying which programme it was about.
+   These two components let someone enquire, WhatsApp or call from the page they
+   are already reading.
+
+   Loaded by the 15 programme pages. Colours come from the page's own
+   --hti-red / --hti-bg variables, which differ slightly per programme, with
+   fallbacks so the block still looks right if a page has not declared them.
+   ========================================================================== */
+
+/* ------------------------------------------------------- programme heading -- */
+
+/* The H1 used to be the bare acronym - "SUPER", "ICEDT", "V2W" - which is the
+   strongest on-page signal in search spent on a word nobody searches for. The
+   searched phrase now leads the heading and the acronym follows it in the
+   markup; these two rules put the acronym back on top visually, so the page
+   looks the way it always did. */
+
+.pe-h1-lead,
+.pe-h1-acr {
+  display: block;
+}
+
+h1 .pe-h1-lead {
+  font-size: .46em;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #2b2b2b;
+  line-height: 1.3;
+  margin-bottom: .35em;
+  order: 2;
+}
+
+h1 .pe-h1-acr {
+  order: 1;
+}
+
+h1:has(.pe-h1-lead) {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fallback for browsers without :has() - the heading simply reads
+   descriptor-then-acronym, which is still correct, just a different order. */
+@supports not (selector(:has(*))) {
+  h1 .pe-h1-lead { margin-bottom: .2em; }
+}
+
+/* ---------------------------------------------------------------- enquiry -- */
+
+.pe {
+  background: #fff;
+  padding: 64px 24px;
+}
+
+.pe-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.pe-lead h2 {
+  font-size: clamp(26px, 3.4vw, 34px);
+  line-height: 1.15;
+  margin: 0 0 14px;
+  color: #111;
+}
+
+.pe-lead h2 em {
+  font-style: normal;
+  color: var(--hti-red, #e32129);
+}
+
+.pe-lead p {
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: #444;
+  margin: 0 0 12px;
+  max-width: 46ch;
+}
+
+.pe-points {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.pe-points li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.pe-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 16px;
+  height: 9px;
+  border-left: 2.5px solid var(--hti-red, #e32129);
+  border-bottom: 2.5px solid var(--hti-red, #e32129);
+  transform: rotate(-45deg);
+}
+
+/* --- direct contact: WhatsApp and phone, above the form, not below it ------ */
+
+.pe-direct {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.pe-direct a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 20px;
+  border-radius: 9px;
+  font-weight: 700;
+  font-size: 15.5px;
+  line-height: 1;
+  text-decoration: none;
+  transition: transform .15s ease, background .15s ease;
+}
+
+.pe-direct a:hover { transform: translateY(-2px); }
+
+.pe-wa { background: #25D366; color: #08301a; }
+.pe-wa:hover { background: #1fbc59; }
+
+.pe-tel {
+  background: #fff;
+  color: #111;
+  border: 2px solid #111;
+}
+
+.pe-tel:hover { background: #111; color: #fff; }
+
+.pe-direct svg { width: 19px; height: 19px; flex: none; }
+
+/* --- the form ------------------------------------------------------------- */
+
+.pe-form-wrap {
+  background: var(--hti-bg, #f3f2ef);
+  border: 1px solid rgba(0, 0, 0, .08);
+  border-radius: 14px;
+  padding: 26px;
+}
+
+.pe-form-wrap h3 {
+  font-size: 19px;
+  margin: 0 0 4px;
+  color: #111;
+}
+
+.pe-form-note {
+  font-size: 13.5px;
+  color: #666;
+  margin: 0 0 18px;
+  line-height: 1.45;
+}
+
+.pe-form { display: flex; flex-direction: column; gap: 14px; }
+
+.pe-field { display: flex; flex-direction: column; gap: 6px; }
+
+.pe-field label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: .01em;
+}
+
+.pe-field .req { color: var(--hti-red, #e32129); }
+
+.pe-input {
+  width: 100%;
+  font: inherit;
+  font-size: 15.5px;
+  padding: 12px 13px;
+  border: 1.5px solid #d8d3cc;
+  border-radius: 8px;
+  background: #fff;
+  color: #111;
+}
+
+.pe-input::placeholder { color: #9d968e; }
+
+.pe-input:focus {
+  outline: none;
+  border-color: var(--hti-red, #e32129);
+  box-shadow: 0 0 0 3px rgba(227, 33, 41, .14);
+}
+
+.pe-field.invalid .pe-input { border-color: var(--hti-red, #e32129); }
+
+.pe-err {
+  display: none;
+  font-size: 12.5px;
+  color: var(--hti-red, #e32129);
+  font-weight: 600;
+}
+
+.pe-field.invalid .pe-err { display: block; }
+
+.pe-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.pe-submit {
+  font: inherit;
+  font-weight: 700;
+  font-size: 16.5px;
+  padding: 14px 22px;
+  border: none;
+  border-radius: 9px;
+  background: var(--hti-red, #e32129);
+  color: #fff;
+  cursor: pointer;
+  transition: transform .15s ease, background .15s ease;
+}
+
+.pe-submit:hover:not(:disabled) { transform: translateY(-2px); }
+.pe-submit:disabled { opacity: .65; cursor: default; }
+
+.pe-privacy { font-size: 12.5px; color: #777; margin: 0; line-height: 1.45; }
+.pe-privacy a { color: inherit; text-decoration: underline; }
+
+/* the honeypot: off-screen rather than display:none, because some bots skip
+   anything that is not rendered */
+.pe-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.pe-msg {
+  display: none;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #8a1114;
+  background: #fdecec;
+  border: 1px solid #f6c9c9;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.pe-msg.show { display: block; }
+
+.pe-thanks { display: none; text-align: center; padding: 12px 4px; }
+.pe-thanks.show { display: block; }
+
+.pe-thanks h3 { font-size: 20px; margin: 0 0 8px; }
+.pe-thanks p { font-size: 15px; color: #444; line-height: 1.55; margin: 0 0 18px; }
+
+.pe-tick {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: #e8f7ee;
+  color: #1a8a4a;
+  display: grid;
+  place-items: center;
+}
+
+.pe-tick svg { width: 26px; height: 26px; }
+
+/* ------------------------------------------------- sticky mobile contact -- */
+
+/* Below 860px the header's Contact button collapses into the hamburger, so
+   without this there is no way to reach us without opening a menu. */
+.pe-bar { display: none; }
+
+@media (max-width: 860px) {
+  .pe-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: rgba(255, 255, 255, .96);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    box-shadow: 0 -6px 22px -12px rgba(0, 0, 0, .4);
+  }
+
+  .pe-bar a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 15.5px;
+    line-height: 1;
+    text-decoration: none;
+    min-height: 48px;
+  }
+
+  .pe-bar svg { width: 18px; height: 18px; flex: none; }
+  .pe-bar .pe-bar-wa { background: #25D366; color: #08301a; }
+  .pe-bar .pe-bar-tel { background: var(--hti-red, #e32129); color: #fff; }
+
+  /* keep the footer clear of the bar */
+  body { padding-bottom: 76px; }
+
+  .pe-inner { grid-template-columns: 1fr; gap: 30px; }
+  .pe { padding: 48px 20px; }
+  .pe-form-wrap { padding: 22px 18px; }
+}
+
+@media (max-width: 460px) {
+  .pe-row { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pe-direct a,
+  .pe-submit { transition: none; }
+
+  .pe-direct a:hover,
+  .pe-submit:hover:not(:disabled) { transform: none; }
+}
+
+/* ---------------------------------------------------- email capture (subscribe.js) -- */
+
+/* Rendered by assets/subscribe.js, and only once the newsletter_subscribers
+   table exists - see the migration at the top of that file. */
+
+.sub-box {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 34px 24px;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 22px 40px;
+  align-items: center;
+}
+
+.sub-copy h3 {
+  font-size: 21px;
+  margin: 0 0 6px;
+  color: inherit;
+}
+
+.sub-copy p {
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 0;
+  opacity: .82;
+  max-width: 52ch;
+}
+
+.sub-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sub-input {
+  flex: 1 1 220px;
+  min-width: 0;
+  font: inherit;
+  font-size: 15.5px;
+  padding: 13px 14px;
+  border: 1.5px solid rgba(128, 120, 114, .5);
+  border-radius: 8px;
+  background: #fff;
+  color: #111;
+}
+
+.sub-input:focus {
+  outline: none;
+  border-color: var(--hti-red, #e32129);
+  box-shadow: 0 0 0 3px rgba(227, 33, 41, .16);
+}
+
+.sub-btn {
+  font: inherit;
+  font-weight: 700;
+  font-size: 15.5px;
+  padding: 13px 22px;
+  border: none;
+  border-radius: 8px;
+  background: var(--hti-red, #e32129);
+  color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sub-btn:disabled { opacity: .65; cursor: default; }
+
+.sub-msg { display: none; font-size: 14px; margin: 0; grid-column: 1 / -1; }
+.sub-msg.show { display: block; }
+.sub-msg.good { color: #1a8a4a; font-weight: 600; }
+.sub-msg.bad { color: var(--hti-red, #e32129); font-weight: 600; }
+
+.sub-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  .sub-box { grid-template-columns: 1fr; padding: 28px 20px; }
+}
