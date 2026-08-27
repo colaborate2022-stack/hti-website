@@ -17,7 +17,12 @@
   <meta name="twitter:title" content="Hospitality Training Institute India | HTI India" />
   <meta name="twitter:description" content="Train your hotel & restaurant staff with India's leading hospitality training institute. Certified programs in Mumbai & across India. Book now." />
   <meta name="twitter:image" content="https://www.hti-india.com/images/brand/hti-logo.png" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"HTI India","url":"https://www.hti-india.com","logo":"images/brand/hti-logo.png","contactPoint":{"@type":"ContactPoint","telephone":"+91-77380-60902","contactType":"customer service"},"sameAs":["https://www.facebook.com/hti.india/","https://www.instagram.com/hti.india/","https://www.linkedin.com/company/hospitality-training-institute-india-pvt-ltd","https://www.youtube.com/c/Hti-india"]}</script>
+  <!-- LocalBusiness, not a bare Organization: the address and service area are
+       what let HTI appear for "hospitality training institute in Mumbai" and
+       similar local searches. Name, address and phone must match the Google
+       Business Profile character for character. Opening hours are deliberately
+       absent - add openingHoursSpecification once the exact hours are confirmed. -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":["LocalBusiness","EducationalOrganization"],"@id":"https://www.hti-india.com/#organisation","name":"HTI India","legalName":"Hospitality Training Institute India Pvt Ltd","alternateName":"Hospitality Training Institute India","url":"https://www.hti-india.com","logo":"https://www.hti-india.com/images/brand/hti-logo.png","image":"https://www.hti-india.com/images/brand/hti-logo.png","description":"Hospitality training institute delivering on-site staff training for hotels, resorts, restaurants, QSRs and offices across India in 13+ languages.","telephone":"+91-77380-60902","email":"kaushal@hti-india.com","foundingDate":"2002","address":{"@type":"PostalAddress","streetAddress":"A433 Vashi Plaza, Sector 17, Sion Panvel Highway","addressLocality":"Vashi, Navi Mumbai","addressRegion":"Maharashtra","postalCode":"400703","addressCountry":"IN"},"areaServed":[{"@type":"Country","name":"India"},{"@type":"Country","name":"United Arab Emirates"},{"@type":"Country","name":"Saudi Arabia"},{"@type":"Country","name":"Maldives"},{"@type":"Country","name":"Mauritius"}],"contactPoint":{"@type":"ContactPoint","telephone":"+91-77380-60902","contactType":"sales","areaServed":"IN","availableLanguage":["en","hi","mr"]},"sameAs":["https://www.facebook.com/hti.india/","https://www.instagram.com/hti.india/","https://www.linkedin.com/company/hospitality-training-institute-india-pvt-ltd","https://www.youtube.com/c/Hti-india"]}</script>
   <link rel="icon"
     href="images/brand/hti-favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -364,6 +369,32 @@
       display: block;
     }
 
+    /* The typing line used to start empty, so the H1 Google indexed read
+       "Train your staff in ways to|" - an unfinished sentence - and every keystroke rewrapped
+       the heading, sliding the hero CTA down the page on a loop. The first
+       phrase now ships in the HTML, and .type-sizer reserves the width of the
+       longest phrase via a pseudo-element (not real text, so the heading is not
+       read twice) which pins the layout still. */
+    .type-line {
+      position: relative;
+      display: inline-block;
+    }
+
+    .type-sizer {
+      visibility: hidden;
+    }
+
+    .type-sizer::before {
+      content: "increase customer retention!";
+    }
+
+    .type-live {
+      position: absolute;
+      left: 0;
+      top: 0;
+      white-space: nowrap;
+    }
+
     .typer {
       color: var(--hti-red2);
     }
@@ -378,6 +409,47 @@
       50% {
         opacity: 0;
       }
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px 18px;
+      margin-top: 26px;
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 2px solid #111;
+      background: transparent;
+      color: #111;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.2;
+      transition: background .15s ease, color .15s ease, transform .15s ease;
+    }
+
+    .btn-ghost:hover {
+      background: #111;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost-note {
+      font-weight: 500;
+      font-size: 12.5px;
+      opacity: .72;
+      letter-spacing: .01em;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .btn-ghost { transition: none; }
+      .btn-ghost:hover { transform: none; }
     }
 
     .hero-sub {
@@ -1393,6 +1465,7 @@
   <script>document.documentElement.className += ' mo';</script>
   <link rel="stylesheet" href="assets/motion.css" />
   <link rel="stylesheet" href="assets/polish.css" />
+  <link rel="stylesheet" href="assets/enquiry.css" />
   <script src="assets/motion.js" defer></script>
 </head>
 
@@ -1401,7 +1474,7 @@
   <!-- ============ NAVBAR ============ -->
   <header class="navbar">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo"><img width="2374" height="1801"
+      <a href="index.html" class="nav-logo"><img fetchpriority="high" width="2374" height="1801"
           src="images/brand/hti-logo.png"
           alt="HTI Logo" /></a>
       <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
@@ -1451,6 +1524,7 @@
           <div class="dropdown">
             <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8a857d;padding:4px 0 6px;">Free Tools</div>
             <a href="food-cost-calculator.html"><b>Food Cost Calculator</b><span>Free tool &mdash; work out your food cost %</span></a>
+            <a href="restaurant-cost-calculator.html"><b>Restaurant Cost Calculator</b><span>Free tool &mdash; prime cost, profit &amp; break-even</span></a>
             <div style="border-top:1px solid #eee;margin:8px 0 6px;"></div>
             <a href="trainers.html"><b>Our Trainers</b><span>The people who run the sessions</span></a>
             <a href="brands.html"><b>Our Brands</b><span>HTI, Woosh Biz, Star, Lead, Dox &amp; T3</span></a>
@@ -1474,12 +1548,20 @@
   <!-- ============ HERO + CLIENTS (split: text left, scrolling logo columns right) ============ -->
   <section class="clients-hero">
     <div class="clients-left">
-      <h1>Train your staff in ways to <span class="type-line"><span class="typer" id="typer"></span><span class="cursor">|</span></span></h1>
+      <h1>Train your staff in ways to <span class="type-line"><span class="type-sizer" aria-hidden="true"></span><span class="type-live"><span class="typer" id="typer">increase customer retention!</span><span class="cursor">|</span></span></span></h1>
       <div class="hero-sub">
         <h2>Hospitality businesses use HTI to train, monitor progress &amp; certify their front-end personnel!</h2>
         <p class="lang">And oh, we have conducted trainings in <em>13 different languages.</em></p>
-        <a href="contact.html" class="btn-red" style="margin-top:24px;">Speak with our
-          team</a>
+        <!-- Two CTAs, not one. Most first-time visitors are not ready to book a
+             call, but almost all of them will answer questions about their own
+             team - and the survey produces a far better qualified lead. -->
+        <div class="hero-ctas">
+          <a href="contact.html" class="btn-red">Speak with our team</a>
+          <a href="training-needs-survey.html" class="btn-ghost">
+            Take the free training needs survey
+            <span class="btn-ghost-note">3 minutes &middot; no obligation</span>
+          </a>
+        </div>
       </div>
     </div>
     <div class="clients-right">
@@ -1543,7 +1625,7 @@
         </div>
         <div class="why-list">
           <div class="why-item">
-            <img width="79" height="77" src="images/icons/interact.svg"
+            <img loading="lazy" decoding="async" width="79" height="77" src="images/icons/interact.svg"
               alt="" />
             <div>
               <h3>Learn by doing</h3>
@@ -1552,7 +1634,7 @@
             </div>
           </div>
           <div class="why-item">
-            <img width="76" height="75"
+            <img loading="lazy" decoding="async" width="76" height="75"
               src="images/icons/the-community.svg"
               alt="" />
             <div>
@@ -1562,7 +1644,7 @@
             </div>
           </div>
           <div class="why-item">
-            <img width="75" height="76"
+            <img loading="lazy" decoding="async" width="75" height="76"
               src="images/icons/learn-by-doing.svg"
               alt="" />
             <div>
@@ -1731,8 +1813,8 @@
       </div>
       <div class="track-row">
         <div class="track-phone">
-          <img width="1080" height="1920"
-            src="images/app/star-mobile-view.svg"
+          <img loading="lazy" decoding="async" width="1080" height="1920"
+            src="images/app/star-mobile-view.png"
             alt="Training Tsunami App" />
         </div>
         <div class="track-steps">
@@ -1778,6 +1860,7 @@
   </section>
 
   <!-- ============ FOOTER ============ -->
+  <div data-subscribe data-source="footer"></div>
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-cols">
@@ -1807,6 +1890,7 @@
           <a href="blog.html">Blogs</a>
           <a href="privacy-policy.html">Privacy Policy</a>
           <a href="food-cost-calculator.html">Food Cost Calculator</a>
+          <a href="restaurant-cost-calculator.html">Restaurant Cost Calculator</a>
         </div>
       </div>
       <div class="footer-div"></div>
@@ -1836,7 +1920,7 @@
         <div class="footer-contact"><a href="contact.html">
             <h3>Contact Us: <span>+91 77380 60902</span></h3>
           </a></div>
-        <a href="index.html" class="footer-brand"><img width="2374" height="1801"
+        <a href="index.html" class="footer-brand"><img loading="lazy" decoding="async" width="2374" height="1801"
             src="images/brand/hti-logo.png"
             alt="HTI" /></a>
       </div>
@@ -1884,29 +1968,29 @@
     }
 
     const brandLogos = [
-      "images/clients/1.svg", "images/clients/bbt-update-logo.avif",
-      "images/clients/3.svg", "images/clients/4.svg", "images/clients/5.svg",
-      "images/clients/6.svg", "images/clients/7.svg", "images/clients/8.svg",
-      "images/clients/9.svg", "images/clients/10.svg", "images/clients/11.svg",
-      "images/clients/12.svg", "images/clients/13.svg", "images/clients/15.svg",
-      "images/clients/imagicaa-add-new-logo.avif", "images/clients/16.svg",
-      "images/clients/17.svg", "images/clients/18.svg", "images/clients/19.svg",
-      "images/clients/48.svg", "images/clients/21.svg", "images/clients/22.svg",
-      "images/clients/23.svg", "images/clients/24.svg", "images/clients/25.svg",
-      "images/clients/26.svg", "images/clients/53-birla-opus.png",
+      "images/clients/1.png", "images/clients/bbt-update-logo.avif",
+      "images/clients/3.png", "images/clients/4.png", "images/clients/5.png",
+      "images/clients/6.png", "images/clients/7.png", "images/clients/8.png",
+      "images/clients/9.png", "images/clients/10.png", "images/clients/11.png",
+      "images/clients/12.png", "images/clients/13.png", "images/clients/15.png",
+      "images/clients/imagicaa-add-new-logo.avif", "images/clients/16.png",
+      "images/clients/17.png", "images/clients/18.png", "images/clients/19.png",
+      "images/clients/48.png", "images/clients/21.png", "images/clients/22.png",
+      "images/clients/23.png", "images/clients/24.png", "images/clients/25.png",
+      "images/clients/26.png", "images/clients/53-birla-opus.png",
       "images/clients/64-hilton.svg", "images/clients/65-sbi.svg",
-      "images/clients/68-burma-burma.svg",
+      "images/clients/68-burma-burma.png",
       "images/clients/66-pugdundee-safaris.webp", "images/clients/67-singinawa.webp",
       "images/clients/zomato-add-new-logo.avif", "images/clients/wet-n-joy-add-new-logo.avif",
       "images/clients/61e9cd5fc8676cdfb20ffdf362373a68-54-bpcl.png",
-      "images/clients/27.svg", "images/clients/29.svg", "images/clients/30.svg",
-      "images/clients/31.svg", "images/clients/32.svg", "images/clients/33.svg",
-      "images/clients/34.svg", "images/clients/35.svg", "images/clients/36.svg",
-      "images/clients/37.svg", "images/clients/38.svg", "images/clients/39.svg",
-      "images/clients/40.svg", "images/clients/42.svg", "images/clients/43.svg",
-      "images/clients/44.svg", "images/clients/45.svg", "images/clients/46.svg",
-      "images/clients/47.svg", "images/clients/49.svg", "images/clients/50.svg",
-      "images/clients/51.svg", "images/clients/52.svg"
+      "images/clients/27.png", "images/clients/29.png", "images/clients/30.png",
+      "images/clients/31.png", "images/clients/32.png", "images/clients/33.png",
+      "images/clients/34.png", "images/clients/35.png", "images/clients/36.png",
+      "images/clients/37.png", "images/clients/38.png", "images/clients/39.png",
+      "images/clients/40.png", "images/clients/42.png", "images/clients/43.png",
+      "images/clients/44.png", "images/clients/45.png", "images/clients/46.png",
+      "images/clients/47.png", "images/clients/49.png", "images/clients/50.png",
+      "images/clients/51.png", "images/clients/52.png"
     ];
     /* ---------- Vertical scrolling logo columns (duplicate list for seamless loop) ----------
        Led by the largest names we have trained, hospitality and corporate mixed through
@@ -1914,28 +1998,28 @@
     const colLogos1 = [
       ["images/clients/64-hilton.svg", "Hilton Hotels & Resorts"],
       ["images/clients/zomato-add-new-logo.avif", "Zomato"],
-      ["images/clients/7.svg", "Ginger Hotels"],
+      ["images/clients/7.png", "Ginger Hotels"],
       ["images/clients/65-sbi.svg", "State Bank of India"],
-      ["images/clients/4.svg", "Mainland China"],
+      ["images/clients/4.png", "Mainland China"],
       ["images/clients/66-pugdundee-safaris.webp", "Pugdundee Safaris"],
-      ["images/clients/21.svg", "Air India"],
-      ["images/clients/15.svg", "Sahara Star"],
-      ["images/clients/9.svg", "Hakkasan"],
-      ["images/clients/68-burma-burma.svg", "Burma Burma Restaurant & Tea Room"],
-      ["images/clients/3.svg", "Dhaba Estd 1986 Delhi"]
+      ["images/clients/21.png", "Air India"],
+      ["images/clients/15.png", "Sahara Star"],
+      ["images/clients/9.png", "Hakkasan"],
+      ["images/clients/68-burma-burma.png", "Burma Burma Restaurant & Tea Room"],
+      ["images/clients/3.png", "Dhaba Estd 1986 Delhi"]
     ];
     const colLogos2 = [
       ["images/clients/53-birla-opus.png", "Birla Opus"],
-      ["images/clients/27.svg", "Club Mahindra, Mahindra Holidays & Resorts"],
-      ["images/clients/29.svg", "Pidilite Industries"],
+      ["images/clients/27.png", "Club Mahindra, Mahindra Holidays & Resorts"],
+      ["images/clients/29.png", "Pidilite Industries"],
       ["images/clients/67-singinawa.webp", "Singinawa Jungle Lodge, Kanha"],
-      ["images/clients/13.svg", "OYO"],
-      ["images/clients/8.svg", "Copper Chimney"],
-      ["images/clients/17.svg", "Tata Motors"],
-      ["images/clients/10.svg", "VITS Select Hotels"],
+      ["images/clients/13.png", "OYO"],
+      ["images/clients/8.png", "Copper Chimney"],
+      ["images/clients/17.png", "Tata Motors"],
+      ["images/clients/10.png", "VITS Select Hotels"],
       ["images/clients/bbt-update-logo.avif", "Bhagat Tarachand"],
-      ["images/clients/46.svg", "OBLU by Atmosphere at Helengeli, Maldives"],
-      ["images/clients/22.svg", "Asia Kitchen"]
+      ["images/clients/46.png", "OBLU by Atmosphere at Helengeli, Maldives"],
+      ["images/clients/22.png", "Asia Kitchen"]
     ];
     function fillColumn(id, imgs) {
       const col = document.getElementById(id);
@@ -1977,7 +2061,7 @@
       ["images/clients/65-sbi-white.svg", "State Bank of India"],
       ["images/clients/66-pugdundee-safaris-white.webp", "Pugdundee Safaris"],
       ["images/clients/67-singinawa-white.webp", "Singinawa Jungle Lodge, Kanha"],
-      ["images/clients/68-burma-burma-white.svg", "Burma Burma Restaurant & Tea Room"],
+      ["images/clients/68-burma-burma-white.png", "Burma Burma Restaurant & Tea Room"],
       ["images/clients/46-oblu-white.webp", "OBLU by Atmosphere at Helengeli, Maldives"]
     ];
     fillMarquee('leadersTrack', leaderImgs);
@@ -2005,11 +2089,11 @@
         "images/participants/16.webp", "images/participants/17.webp", "images/participants/18.webp"
       ];
       const logos = [
-        "images/clients/64-hilton.svg", "images/clients/63.svg", "images/clients/26.svg",
+        "images/clients/64-hilton.svg", "images/clients/63.png", "images/clients/26.png",
         "images/clients/66-pugdundee-safaris.webp", "images/clients/b-bhagat-tarachand-logo.png",
-        "images/clients/27.svg", "images/clients/15.svg", "images/clients/23.svg",
+        "images/clients/27.png", "images/clients/15.png", "images/clients/23.png",
         "images/clients/65-sbi.svg", "images/clients/67-singinawa.webp",
-        "images/clients/29.svg", "images/clients/62.svg"
+        "images/clients/29.png", "images/clients/62.png"
       ];
       const track = document.getElementById('ctaTrack');
       const html = people.map((p, i) => `
@@ -2247,6 +2331,13 @@
       update();
     })();
   </script>
+  <!-- sticky contact bar: below 860px the header Contact button is hidden
+       behind the hamburger, so this is the only always-visible way to reach us -->
+  <div class="pe-bar">
+    <a class="pe-bar-wa" href="https://wa.me/917738060902" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24a8.19 8.19 0 0 1 5.82 2.42 8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.23 8.23z"/></svg> WhatsApp</a>
+    <a class="pe-bar-tel" href="tel:+917738060902"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call us</a>
+  </div>
+  <script src="assets/subscribe.js" defer></script>
 </body>
 
 </html>

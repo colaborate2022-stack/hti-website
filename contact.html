@@ -1147,7 +1147,7 @@
   <!-- ============ NAVBAR ============ -->
   <header class="navbar">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo"><img width="2374" height="1801"
+      <a href="index.html" class="nav-logo"><img fetchpriority="high" width="2374" height="1801"
           src="images/brand/hti-logo.png"
           alt="HTI Logo" /></a>
       <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
@@ -1197,6 +1197,7 @@
           <div class="dropdown">
             <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8a857d;padding:4px 0 6px;">Free Tools</div>
             <a href="food-cost-calculator.html"><b>Food Cost Calculator</b><span>Free tool &mdash; work out your food cost %</span></a>
+            <a href="restaurant-cost-calculator.html"><b>Restaurant Cost Calculator</b><span>Free tool &mdash; prime cost, profit &amp; break-even</span></a>
             <div style="border-top:1px solid #eee;margin:8px 0 6px;"></div>
             <a href="trainers.html"><b>Our Trainers</b><span>The people who run the sessions</span></a>
             <a href="brands.html"><b>Our Brands</b><span>HTI, Woosh Biz, Star, Lead, Dox &amp; T3</span></a>
@@ -1229,7 +1230,7 @@
   <section class="contact-cards">
     <div class="contact-card">
       <div class="c-icon">
-        <img width="512" height="512" src="images/brand/whatsapp.png"
+        <img loading="lazy" decoding="async" width="512" height="512" src="images/brand/whatsapp.png"
           alt="WhatsApp" />
       </div>
       <h3>WhatsApp</h3>
@@ -1466,6 +1467,7 @@
   </section>
 
   <!-- ============ FOOTER ============ -->
+  <div data-subscribe data-source="footer"></div>
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-cols">
@@ -1495,6 +1497,7 @@
           <a href="blog.html">Blogs</a>
           <a href="privacy-policy.html">Privacy Policy</a>
           <a href="food-cost-calculator.html">Food Cost Calculator</a>
+          <a href="restaurant-cost-calculator.html">Restaurant Cost Calculator</a>
         </div>
       </div>
       <div class="footer-div"></div>
@@ -1524,7 +1527,7 @@
         <div class="footer-contact"><a href="tel:+917738060902">
             <h3>Contact Us: <span>+91 77380 60902</span></h3>
           </a></div>
-        <a href="index.html" class="footer-brand"><img width="2374" height="1801"
+        <a href="index.html" class="footer-brand"><img loading="lazy" decoding="async" width="2374" height="1801"
             src="images/brand/hti-logo.png"
             alt="HTI" /></a>
       </div>
@@ -1564,7 +1567,7 @@
       ["images/clients/65-sbi-white.svg", "State Bank of India"],
       ["images/clients/66-pugdundee-safaris-white.webp", "Pugdundee Safaris"],
       ["images/clients/67-singinawa-white.webp", "Singinawa Jungle Lodge, Kanha"],
-      ["images/clients/68-burma-burma-white.svg", "Burma Burma Restaurant & Tea Room"],
+      ["images/clients/68-burma-burma-white.png", "Burma Burma Restaurant & Tea Room"],
       ["images/clients/46-oblu-white.webp", "OBLU by Atmosphere at Helengeli, Maldives"]
     ];
     (function () {
@@ -1826,6 +1829,7 @@
       });
     })();
   </script>
+  <script src="assets/subscribe.js" defer></script>
 </body>
 
 </html>

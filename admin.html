@@ -535,7 +535,7 @@
   <!-- ============ LOGIN SCREEN ============ -->
   <div class="login-screen" id="loginScreen">
     <div class="login-card">
-      <img
+      <img fetchpriority="high"
         src="images/brand/hti-logo.png"
         alt="HTI" />
       <h1>Blog Admin</h1>
@@ -553,7 +553,7 @@
   <div class="dashboard" id="dashboard">
     <header class="admin-header">
       <div class="brand">
-        <img
+        <img loading="lazy" decoding="async"
           src="images/brand/hti-logo.png"
           alt="HTI" />
         <h2>Blog <span>Admin</span></h2>
@@ -634,7 +634,7 @@
             <label for="coverInput">Cover Image URL</label>
             <input type="url" id="coverInput" placeholder="https://… (paste an image link)" />
             <div class="cover-preview" id="coverPreview">
-              <img id="coverPreviewImg" src="" alt="Cover preview" />
+              <img loading="lazy" decoding="async" id="coverPreviewImg" src="" alt="Cover preview" />
             </div>
           </div>
           <div class="field full">

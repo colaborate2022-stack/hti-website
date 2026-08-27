@@ -1145,6 +1145,7 @@
   <script>document.documentElement.className += ' mo';</script>
   <link rel="stylesheet" href="assets/motion.css" />
   <link rel="stylesheet" href="assets/polish.css" />
+  <link rel="stylesheet" href="assets/enquiry.css" />
   <script src="assets/motion.js" defer></script>
 </head>
 
@@ -1153,7 +1154,7 @@
   <!-- ============ NAVBAR ============ -->
   <header class="navbar">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo"><img width="2374" height="1801"
+      <a href="index.html" class="nav-logo"><img fetchpriority="high" width="2374" height="1801"
           src="images/brand/hti-logo.png"
           alt="HTI Logo" /></a>
       <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
@@ -1203,6 +1204,7 @@
           <div class="dropdown">
             <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8a857d;padding:4px 0 6px;">Free Tools</div>
             <a href="food-cost-calculator.html"><b>Food Cost Calculator</b><span>Free tool &mdash; work out your food cost %</span></a>
+            <a href="restaurant-cost-calculator.html"><b>Restaurant Cost Calculator</b><span>Free tool &mdash; prime cost, profit &amp; break-even</span></a>
             <div style="border-top:1px solid #eee;margin:8px 0 6px;"></div>
             <a href="trainers.html"><b>Our Trainers</b><span>The people who run the sessions</span></a>
             <a href="brands.html"><b>Our Brands</b><span>HTI, Woosh Biz, Star, Lead, Dox &amp; T3</span></a>
@@ -1643,6 +1645,7 @@
   </section>
 
   <!-- ============ FOOTER ============ -->
+  <div data-subscribe data-source="footer"></div>
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-cols">
@@ -1672,6 +1675,7 @@
           <a href="blog.html">Blogs</a>
           <a href="privacy-policy.html">Privacy Policy</a>
           <a href="food-cost-calculator.html">Food Cost Calculator</a>
+          <a href="restaurant-cost-calculator.html">Restaurant Cost Calculator</a>
         </div>
       </div>
       <div class="footer-div"></div>
@@ -1701,7 +1705,7 @@
         <div class="footer-contact"><a href="contact.html">
             <h3>Contact Us: <span>+91 77380 60902</span></h3>
           </a></div>
-        <a href="index.html" class="footer-brand"><img width="2374" height="1801" src="images/brand/hti-logo.png" alt="HTI" /></a>
+        <a href="index.html" class="footer-brand"><img loading="lazy" decoding="async" width="2374" height="1801" src="images/brand/hti-logo.png" alt="HTI" /></a>
       </div>
       <div class="footer-copy">&#169;&#65039; HOSPITALITY TRAINING INSTITUTE INDIA PRIVATE. All rights reserved.</div>
     </div>
@@ -1986,6 +1990,13 @@
       });
     })();
   </script>
+  <!-- sticky contact bar: below 860px the header Contact button is hidden
+       behind the hamburger, so this is the only always-visible way to reach us -->
+  <div class="pe-bar">
+    <a class="pe-bar-wa" href="https://wa.me/917738060902" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24a8.19 8.19 0 0 1 5.82 2.42 8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.23 8.23z"/></svg> WhatsApp</a>
+    <a class="pe-bar-tel" href="tel:+917738060902"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call us</a>
+  </div>
+  <script src="assets/subscribe.js" defer></script>
 </body>
 
 </html>
