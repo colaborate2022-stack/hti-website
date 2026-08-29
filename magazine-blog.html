@@ -1352,8 +1352,26 @@
     }
 
     // ============ MORE FROM HTI ============
+
+    /* Where a related card should point. Same precedence blog.html uses, and it
+       exists for the same reason: fourteen of these articles are duplicates of a
+       hand-built static page that is already in the sitemap and already faster.
+       This strip used to link every card at magazine-blog.html?id=..., which
+       sent readers and crawlers to the database copy and set the two versions
+       competing with each other in search. */
+    function resolveMfhHref(b) {
+      if (b.redirect_url) return b.redirect_url;
+      var twin = window.HTIBlogRoutes
+        ? window.HTIBlogRoutes.staticPageFor(b.id)
+        : null;
+      return twin || 'magazine-blog.html?id=' + encodeURIComponent(b.id);
+    }
+
     function loadMoreFromHti(currentId) {
-      fetch(SUPABASE_URL + '/rest/v1/blogs?layout=eq.magazine&select=id,title,thumbnail_url,category,date&limit=50', {
+      /* redirect_url is selected because the two cards below have to link where
+         blog.html links: at the article's real home, not at a database copy of
+         it. See the note over resolveMfhHref(). */
+      fetch(SUPABASE_URL + '/rest/v1/blogs?layout=eq.magazine&select=id,title,thumbnail_url,category,date,redirect_url&limit=50', {
         headers: SB_HEADERS
       })
         .then(function (r) { return r.json(); })
@@ -1378,10 +1396,20 @@
           }
           picks.forEach(function (b) {
             var card = document.createElement('a');
-            card.href = 'magazine-blog.html?id=' + encodeURIComponent(b.id);
+            card.href = resolveMfhHref(b);
             card.className = 'mfh-card';
-            var img = b.thumbnail_url
-              ? '<img class="mfh-card-img" src="' + esc(b.thumbnail_url) + '" alt="' + esc(b.title) + '" loading="lazy">'
+            /* coverFor() swaps the handful of oversized originals the `blogs`
+               table still names for their card-sized sibling - see the note over
+               ASSET_REWRITE in assets/blog-routes.js. It matters more here than
+               almost anywhere: .mfh-card-img is the same 1200/577 box the blog
+               listing uses, and the two cards drawn into it were loading files
+               of up to 1,051 KB apiece. The worst pair came to 2 MB where the
+               card versions are 105 KB. */
+            var cover = window.HTIBlogRoutes
+              ? window.HTIBlogRoutes.coverFor(b.thumbnail_url)
+              : String(b.thumbnail_url || '').replace(/^https?:\/\/(www\.)?hti-india\.com\//i, '');
+            var img = cover
+              ? '<img class="mfh-card-img" src="' + esc(cover) + '" alt="' + esc(b.title) + '" loading="lazy">'
               : '';
             card.innerHTML = img +
               '<div class="mfh-card-body">' +
