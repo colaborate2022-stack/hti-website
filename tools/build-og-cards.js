@@ -225,6 +225,47 @@ const CARDS = [
     alt: 'News and announcements from HTI India'
   },
 
+  // ---- the other two brands under HTI --------------------------------------
+  {
+    slug: 'lead',
+    bg: 'images/blog/hti-training-programs/06-hti-leadership-development-program.jpg',
+    head: 'Train The Trainer',
+    sub: 'Presentation skills, personality development and campus-to-corporate &mdash; Lead by HTI',
+    alt: 'Train The Trainer and soft skills training - Lead by HTI'
+  },
+  {
+    slug: 'dox',
+    bg: 'images/blog/hti-training-programs/04-hti-hotel-operations-training.jpg',
+    head: 'SOPs, How-To Videos &amp; Checklists',
+    sub: 'Dox by HTI puts your standards somewhere other than in people&rsquo;s heads',
+    alt: 'SOPs, how-to videos and checklists for hotels and restaurants - Dox by HTI'
+  },
+
+  /* The two article templates. Every database-rendered article is served
+     through one of these, and their og:image is rewritten by script once the
+     article loads - so what is set here is only what a crawler that does not
+     run JavaScript sees, which until now was the bare logo. fallbackOnly keeps
+     the <meta> tag and its id exactly as they are and changes only the URL
+     inside: the id is how the renderer finds the tag, and og:image:width and
+     :height would become a lie the moment script swapped in a different
+     picture. */
+  {
+    slug: 'blog-post',
+    fallbackOnly: true,
+    bg: 'images/blog/hti-training-programs/07-hti-apht-all-purpose-hospitality-training.jpg',
+    head: 'From the HTI Blog',
+    sub: 'Hospitality training, guest experience and kitchen operations',
+    alt: 'An article from the HTI India blog'
+  },
+  {
+    slug: 'immersive-blog',
+    fallbackOnly: true,
+    bg: 'images/blog/hti-training-programs/01-hti-hospitality-training-workshop.jpg',
+    head: 'HTI India Blog',
+    sub: 'Insights on hospitality, service excellence and training',
+    alt: 'An article from the HTI India blog'
+  },
+
   // ---- the two nobody shares on purpose, but which get shared anyway -------
   {
     slug: '404',
@@ -365,6 +406,19 @@ function wireOne(card) {
   const before = html;
   const url = `${SITE}/images/og/${card.slug}.jpg`;
 
+  /* An article template: swap the URL inside the existing tags and leave
+     everything else, ids included, alone. See the note on the entries. */
+  if (card.fallbackOnly) {
+    html = html.replace(
+      /(<meta property="og:image"[^>]*content=")[^"]*(")/i, `$1${url}$2`
+    ).replace(
+      /(<meta name="twitter:image"[^>]*content=")[^"]*(")/i, `$1${url}$2`
+    );
+    if (html === before) return { slug: card.slug, status: 'already pointed there' };
+    fs.writeFileSync(file, html);
+    return { slug: card.slug, status: 'wired (fallback only)' };
+  }
+
   /* Drop whatever og:image block is there now - the bare logo on these pages,
      or an earlier run's four lines - then write a fresh one in its place. */
   const IMAGE_META = /^[ \t]*<meta property="og:image(?::(?:width|height|alt|type|secure_url))?"[^>]*>\r?\n/gim;
@@ -409,7 +463,7 @@ function wire(cards) {
       continue;
     }
     const r = wireOne(c);
-    if (r.status === 'wired') changed++;
+    if (r.status.startsWith('wired')) changed++;
     console.log(`  ${r.slug}.html: ${r.status}`);
   }
   console.log(`\n${changed} page${changed === 1 ? '' : 's'} changed.`);
