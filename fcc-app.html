@@ -176,6 +176,7 @@
       font-weight: 600;
       transition: border-color .15s ease, box-shadow .15s ease;
     }
+    .fld input:disabled { background: var(--bg); color: var(--muted); }
     .fld input:focus, .fld select:focus {
       outline: 0;
       border-color: var(--red);
@@ -225,6 +226,30 @@
     }
     .linkbtn:active { opacity: .6; }
 
+    /* the gate is no longer a wall: it opens over a working app, so it needs a
+       way out that is as obvious as the way in */
+    .gate-x {
+      position: absolute;
+      top: 14px; right: 14px;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--muted);
+      font-size: 22px; line-height: 1;
+      cursor: pointer;
+      display: grid; place-items: center;
+    }
+    .gate-x:hover { background: var(--bg); color: var(--ink); }
+    .gate-x:focus-visible { outline: 0; box-shadow: 0 0 0 3px rgba(227,30,36,.3); }
+
+    .otpcode {
+      letter-spacing: .42em;
+      text-indent: .42em;
+      font-size: 20px; font-weight: 800;
+      text-align: center;
+    }
+
     .gate-foot { margin-top: 18px; text-align: center; }
     .gate-foot .tiny { font-size: 11.5px; color: var(--muted); line-height: 1.5; margin-top: 12px; font-weight: 500; }
     .gate-foot .tiny a { text-decoration: underline; text-underline-offset: 2px; }
@@ -239,7 +264,7 @@
       height: 56px;
       z-index: 40;
       display: grid;
-      grid-template-columns: 64px 1fr 44px;
+      grid-template-columns: 64px 1fr auto;
       align-items: center;
       gap: 8px;
       padding: 0 12px;
@@ -296,6 +321,39 @@
     }
     .avatar:active { transform: scale(.92); }
     .avatar:focus-visible { outline: 0; box-shadow: 0 0 0 3px rgba(227,30,36,.3); }
+    /* Signed out, the same slot carries the one thing we want always in view:
+       a way in. A word beats a mystery circle, so it grows into a pill. */
+    .avatar.guest {
+      width: auto; height: 36px; padding: 0 14px;
+      border-radius: 999px;
+      background: var(--card); color: var(--red);
+      border: 1px solid rgba(227,30,36,.35);
+      font-size: 13px; letter-spacing: -.01em;
+      display: inline-flex; align-items: center;
+    }
+    .avatar.guest:hover { background: rgba(227,30,36,.06); }
+
+    /* the free-for-everyone strip: static, so it pushes the view down rather
+       than sitting on top of it the way the fixed bars above do */
+    .guestwrap { display: none; padding: 14px 16px 0; }
+    .guestwrap.on { display: block; }
+    .guestnote {
+      display: flex; align-items: center; gap: 12px;
+      max-width: 900px; margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 13px;
+      box-shadow: var(--shadow);
+      font-size: 12.5px; font-weight: 600; line-height: 1.45; color: var(--muted);
+    }
+    .guestnote span { flex: 1; }
+    .guestnote b { color: var(--ink); font-weight: 800; }
+    .guestnote .btn { flex: 0 0 auto; }
+    @media (max-width: 460px) {
+      .guestnote { flex-direction: column; align-items: flex-start; gap: 11px; }
+    }
+    @media (min-width: 900px) { .guestwrap { padding: 22px 28px 0; } }
 
     .bars { position: fixed; top: 56px; left: 0; right: 0; z-index: 39; }
     .slimbar {
@@ -554,6 +612,16 @@
     .pill.warn { background: rgba(217,134,0,.14); color: var(--warn); }
     .pill.bad  { background: rgba(227,30,36,.11); color: var(--bad); }
     .pill.none { background: var(--bg); color: var(--muted); }
+
+    /* a dish costed while signed out lives in this browser and nowhere else,
+       and says so on its own card rather than in a footnote */
+    .unsaved {
+      display: inline-block; margin-top: 7px;
+      padding: 2px 7px; border-radius: 5px;
+      background: #fff4d6; color: #6a4a00;
+      font-size: 10px; font-weight: 800;
+      letter-spacing: .05em; text-transform: uppercase;
+    }
 
     /* skeletons */
     .sk {
@@ -955,49 +1023,64 @@
     <div class="pulse"></div>
   </div>
 
-  <!-- ============ sign in ============ -->
+  <!-- ============ log in (only ever to save) ============
+       Opens over a working app, never in front of it. Nothing behind this
+       card is locked; the card exists so a costing can outlive the browser. -->
   <div class="gate" id="gate" hidden>
+    <button class="gate-x" id="gateClose" type="button" aria-label="Close and carry on without an account">&times;</button>
     <div class="gate-card">
       <img loading="lazy" decoding="async" class="mark" src="images/brand/hti-logo.png" alt="HTI India" width="2374" height="1801" />
-      <h1>Food Cost</h1>
-      <p class="sub">Sign in to cost your dishes and keep them on every device.</p>
+      <h1 id="gateTitle">Log in to save your dishes</h1>
+      <p class="sub" id="gateSub">The calculator is free for everyone and always will be. Logging in is only how a costing gets saved to your account and follows you to any phone or laptop.</p>
 
       <div class="tabs">
-        <button class="tab on" id="tabLogin" type="button" aria-pressed="true">Log in</button>
-        <button class="tab" id="tabSignup" type="button" aria-pressed="false">Create account</button>
+        <button class="tab on" id="tabOtp" type="button" aria-pressed="true">Email me a code</button>
+        <button class="tab" id="tabPass" type="button" aria-pressed="false">Use a password</button>
       </div>
 
       <div class="fld">
         <label for="auEmail">Email</label>
         <input type="email" id="auEmail" autocomplete="email" placeholder="you@restaurant.com" />
       </div>
-      <div class="fld">
-        <label for="auPass">Password</label>
-        <input type="password" id="auPass" autocomplete="current-password" placeholder="At least 8 characters" />
+
+      <!-- ---- one-time code by email: the default, and the only way in a new
+           account is ever created ---- -->
+      <div id="paneOtp">
+        <div id="otpStep2" hidden>
+          <div class="fld">
+            <label for="auCode">Your 6-digit code</label>
+            <input type="text" id="auCode" class="otpcode" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" maxlength="6" placeholder="000000" />
+            <p class="hint">Sent to <b id="otpWho">your inbox</b>. It works for one hour. If the email shows a button instead of a code, tapping that button logs you in too.</p>
+          </div>
+        </div>
+
+        <p class="err" id="auErr" role="alert"></p>
+
+        <button class="btn block" id="btnOtpSend" type="button" style="margin-top:8px">Email me a login code</button>
+        <button class="btn block" id="btnOtpVerify" type="button" style="margin-top:8px" hidden>Log in</button>
+
+        <div class="gate-foot" id="otpFoot" hidden>
+          <button class="linkbtn" id="btnOtpAgain" type="button">Send another code</button>
+          <button class="linkbtn" id="btnOtpEdit" type="button" style="margin-left:14px">Use a different email</button>
+        </div>
       </div>
 
-      <div id="signupOnly" hidden>
+      <!-- ---- password, kept for accounts made before codes existed ---- -->
+      <div id="panePass" hidden>
         <div class="fld">
-          <label for="auName">Your name</label>
-          <input type="text" id="auName" autocomplete="name" placeholder="e.g. Rahul Sharma" />
+          <label for="auPass">Password</label>
+          <input type="password" id="auPass" autocomplete="current-password" placeholder="Your password" />
         </div>
-        <div class="fld">
-          <label for="auBiz">Restaurant or hotel <em>(optional)</em></label>
-          <input type="text" id="auBiz" placeholder="e.g. Spice Garden, Andheri" />
-        </div>
-        <div class="fld">
-          <label for="auPhone">Phone <em>(optional)</em></label>
-          <input type="tel" id="auPhone" autocomplete="tel" placeholder="Your mobile number" />
+        <p class="err" id="pwErr" role="alert"></p>
+        <button class="btn block" id="btnPassGo" type="button" style="margin-top:8px">Log in</button>
+        <div class="gate-foot">
+          <button class="linkbtn" id="btnForgot" type="button">Forgot your password?</button>
         </div>
       </div>
-
-      <p class="err" id="auErr" role="alert"></p>
-
-      <button class="btn block" id="btnAuthGo" type="button" style="margin-top:8px">Log in</button>
 
       <div class="gate-foot">
-        <button class="linkbtn" id="btnForgot" type="button">Forgot your password?</button>
-        <p class="tiny">By creating an account you agree to our <a href="privacy-policy.html">privacy policy</a>. We never share your costings.<br /><a href="food-cost-calculator.html">Use it without an account &rarr;</a></p>
+        <button class="linkbtn" id="btnGateSkip" type="button">Carry on without an account &rarr;</button>
+        <p class="tiny">New here? The code makes your account &mdash; there is no password to invent. By logging in you agree to our <a href="privacy-policy.html">privacy policy</a>. We never share your costings.</p>
       </div>
     </div>
   </div>
@@ -1038,6 +1121,15 @@
     </div>
 
     <main class="views">
+
+      <!-- shown to everyone who is not logged in, on every view, so the deal is
+           never a surprise: the tool is free, login only buys you saving -->
+      <div class="guestwrap" id="guestWrap">
+        <div class="guestnote">
+          <span><b>Free for everyone.</b> Cost as many dishes as you like without an account. Log in only when you want them saved and on every device.</span>
+          <button class="btn sm" id="btnGuestLogin" type="button">Log in</button>
+        </div>
+      </div>
 
       <!-- ---------- VIEW 1: DISHES ---------- -->
       <section class="view on" id="view-dishes">
@@ -1151,7 +1243,7 @@
         <!-- STEP 4 -->
         <div class="step" data-step="4">
           <h2>Your costing</h2>
-          <p class="lead">Check it over, then save it to your account.</p>
+          <p class="lead" id="repLead">Check it over, then save it to your account.</p>
           <div class="report">
             <div class="rep-head">
               <div>
@@ -1188,15 +1280,17 @@
       <section class="view" id="view-account">
         <div class="vhead">
           <h2>Account</h2>
-          <p>Signed in as <b id="acctEmail">&mdash;</b></p>
+          <p id="acctInLine">Signed in as <b id="acctEmail">&mdash;</b></p>
+          <p id="acctOutLine" hidden>You are not logged in, and the calculator works exactly the same either way. An account is only how your dishes get saved.</p>
         </div>
         <div class="card">
           <div class="sheetlist" style="margin-top:0;border-top:0">
+            <button id="btnAcctLogin" type="button" hidden style="color:var(--red)">Log in to save my dishes</button>
             <button id="btnExport" type="button">Export all dishes as CSV</button>
             <a href="index.html">Back to hti-india.com<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" /></svg></a>
             <button id="btnSignOut2" type="button" style="color:var(--bad)">Sign out</button>
           </div>
-          <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:14px;font-weight:500">
+          <p id="acctFoot" style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:14px;font-weight:500">
             Your dishes are saved to your HTI account and sync across devices.
           </p>
         </div>
@@ -1537,6 +1631,10 @@
       function friendly(msg) {
         msg = (msg || '').toLowerCase();
         if (msg.indexOf('invalid login') > -1) return 'That email and password do not match. Try again, or reset your password.';
+        if (msg.indexOf('token has expired') > -1 || msg.indexOf('otp_expired') > -1) return 'That code has expired. Tap “Send another code”.';
+        if (msg.indexOf('invalid') > -1 && msg.indexOf('token') > -1) return 'That code is not right. Check the email and try again.';
+        if (msg.indexOf('signups not allowed') > -1) return 'New accounts are switched off right now. Please try again later.';
+        if (msg.indexOf('email') > -1 && msg.indexOf('not confirmed') > -1) return 'Check your email and confirm the account first.';
         if (msg.indexOf('already registered') > -1 || msg.indexOf('already been registered') > -1) return 'That email already has an account. Try logging in instead.';
         if (msg.indexOf('password should be') > -1) return 'Password needs to be at least 8 characters.';
         if (msg.indexOf('invalid email') > -1 || msg.indexOf('unable to validate') > -1) return 'That does not look like a valid email address.';
@@ -1570,14 +1668,23 @@
           .then(function (r) { if (r.error) throw r.error; });
       }
 
-      /* last-known dishes, so an offline launch still has something to show */
+      /* Two drawers, one per state. CACHE_KEY is the signed-in mirror, so an
+         offline launch still has something to show. GUEST_KEY is everything a
+         logged-out visitor has costed: it lives in this browser only, and the
+         moment they log in it is pushed to their account and emptied. */
       var CACHE_KEY = 'hti_fcc_app_cache_v1';
+      var GUEST_KEY = 'hti_fcc_guest_v1';
+      function storeKey() { return user ? CACHE_KEY : GUEST_KEY; }
       function cacheDishes(list) {
-        try { localStorage.setItem(CACHE_KEY, JSON.stringify(list)); } catch (e) {}
+        try { localStorage.setItem(storeKey(), JSON.stringify(list)); } catch (e) {}
       }
       function cachedDishes() {
-        try { return JSON.parse(localStorage.getItem(CACHE_KEY) || '[]'); } catch (e) { return []; }
+        try { return JSON.parse(localStorage.getItem(storeKey()) || '[]'); } catch (e) { return []; }
       }
+      function guestDishes() {
+        try { return JSON.parse(localStorage.getItem(GUEST_KEY) || '[]'); } catch (e) { return []; }
+      }
+      function clearGuest() { try { localStorage.removeItem(GUEST_KEY); } catch (e) {} }
 
       /* ================= toasts ================= */
       function toast(msg, kind) {
@@ -1658,7 +1765,7 @@
         el('fab').classList.toggle('on', name === 'dishes');
         el('wizBar').classList.toggle('on', name === 'add');
         if (name === 'insights') paintInsights();
-        if (name === 'account') el('acctEmail').textContent = user ? user.email : '—';
+        if (name === 'account') paintAuthUI();
         window.scrollTo(0, 0);
         /* again after the new view has been laid out, so a taller previous view
            cannot leave us part-way down the page */
@@ -1754,7 +1861,8 @@
           var e0 = document.createElement('div');
           e0.className = 'empty';
           e0.innerHTML = '<h3>No dishes yet</h3><p>Cost your first dish and you will see its food cost %, ' +
-            'your margin per plate, and where it sits against the healthy range.</p>';
+            'your margin per plate, and where it sits against the healthy range.' +
+            (user ? '' : ' It is free, and it does not need an account.') + '</p>';
           var b0 = document.createElement('button');
           b0.className = 'btn'; b0.type = 'button'; b0.textContent = 'Cost your first dish';
           b0.addEventListener('click', function () { startNew(); setView('add'); });
@@ -1793,6 +1901,12 @@
           m.textContent = 'Makes ' + n + (n === 1 ? ' plate' : ' plates') +
             (ni ? ' · ' + ni + (ni === 1 ? ' ingredient' : ' ingredients') : '');
           nm.appendChild(h); nm.appendChild(m);
+          if (d.local) {
+            var un = document.createElement('span');
+            un.className = 'unsaved';
+            un.textContent = 'Not saved';
+            nm.appendChild(un);
+          }
 
           var pill = document.createElement('span');
           pill.className = 'pill ' + bd;
@@ -1894,7 +2008,7 @@
         paintDishes();
         cacheDishes(dishes);
         toast('Deleted “' + (d.dish || 'dish') + '”.');
-        if (!d.id) return;
+        if (d.local || !d.id) return;
         cloudDelete(d.id).catch(function (e) {
           dishes = snapshot;
           paintDishes();
@@ -1904,7 +2018,7 @@
       }
 
       /* ================= wizard ================= */
-      var editingId = null, editingName = null;
+      var editingId = null, editingName = null, editingLid = null;
 
       function go(n) {
         current = Math.max(1, Math.min(LAST, n));
@@ -1938,7 +2052,7 @@
       }
 
       function startNew() {
-        editingId = null; editingName = null;
+        editingId = null; editingName = null; editingLid = null;
         el('dishName').value = '';
         el('portions').value = 4;
         el('sellPrice').value = '';
@@ -1952,6 +2066,7 @@
       function loadIntoWizard(d, asCopy) {
         editingId = asCopy ? null : (d.id || null);
         editingName = asCopy ? null : (d.dish || null);
+        editingLid = asCopy ? null : (d.lid || null);
         el('dishName').value = asCopy ? ((d.dish || 'Dish') + ' (copy)') : (d.dish || '');
         el('portions').value = d.n || 1;
         el('sellPrice').value = (d.price != null ? d.price : '');
@@ -2013,7 +2128,31 @@
                       .map(function (i) { return { name: i.name, rate: i.rate, rUnit: i.rUnit, qty: i.qty, qUnit: i.qUnit }; })
         };
 
-        if (!user || !sb) { toast('You are signed out. Sign in again to save.', 'bad'); return; }
+        /* Signed out: the costing is real work, so it is kept in this browser
+           and clearly labelled as not saved, and the login card comes up asking
+           for the one thing login is for. Nothing is lost either way. */
+        if (!user || !sb) {
+          var lrec = {
+            local: true,
+            lid: editingLid || ('l' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7)),
+            dish: rec.dish, n: rec.n, price: rec.price, plate: rec.plate, rows: rec.rows
+          };
+          var gat = -1;
+          for (var gi = 0; gi < dishes.length; gi++) {
+            if ((editingLid && dishes[gi].lid === editingLid) ||
+                (dishes[gi].dish || '').toLowerCase() === rec.dish.toLowerCase()) { gat = gi; break; }
+          }
+          if (gat >= 0) dishes.splice(gat, 1);
+          dishes.unshift(lrec);
+          loaded = true;
+          cacheDishes(dishes);
+          editingId = null; editingName = null; editingLid = null;
+          setView('dishes');
+          paintDishes();
+          openGate('Log in to save “' + rec.dish + '”',
+            'It is on this device for now, and clearing your browser would lose it. Log in and we move it to your account, where it opens on any phone or laptop.');
+          return;
+        }
 
         var snapshot = dishes.slice();
         var wasEditing = editingId, oldName = editingName;
@@ -2207,9 +2346,12 @@
       });
 
       el('avatar').addEventListener('click', function () {
-        el('sheetEmail').textContent = user ? user.email : '—';
+        if (!user) { openGate(); return; }
+        el('sheetEmail').textContent = user.email;
         showSheet('sheetAccount');
       });
+      el('btnGuestLogin').addEventListener('click', function () { openGate(); });
+      el('btnAcctLogin').addEventListener('click', function () { openGate(); });
 
       function signOut() {
         if (!sb) return;
@@ -2218,10 +2360,10 @@
           try { localStorage.removeItem(CACHE_KEY); } catch (e) {}
           user = null; dishes = []; loaded = false;
           if (openSheet) hideSheet(true);
-          el('app').classList.remove('on');
-          el('gate').hidden = false;
           el('auPass').value = '';
           el('auErr').textContent = '';
+          enterGuest();
+          toast('Signed out. The calculator still works.');
         });
       }
       el('btnSignOut').addEventListener('click', signOut);
@@ -2234,71 +2376,173 @@
       window.addEventListener('online', function () { paintOnline(); refresh(); });
       window.addEventListener('offline', paintOnline);
 
+      /* ================= the login card =================
+         It is an overlay now, not a gate. Opening it never stops the calculator
+         underneath; closing it never costs the visitor their work. */
+      var gateOpen = false;
+
+      function openGate(title, sub) {
+        if (openSheet) hideSheet(true);
+        el('gateTitle').textContent = title || 'Log in to save your dishes';
+        el('gateSub').textContent = sub || 'The calculator is free for everyone and always will be. Logging in is only how a costing gets saved to your account and follows you to any phone or laptop.';
+        otpReset();
+        authMode('otp');
+        el('gate').hidden = false;
+        gateOpen = true;
+        document.body.style.overflow = 'hidden';
+        if (!sb) el('auErr').textContent = 'Accounts are unavailable right now. Check your connection and try again.';
+        setTimeout(function () { try { el('auEmail').focus(); } catch (e) {} }, 60);
+      }
+
+      function closeGate() {
+        el('gate').hidden = true;
+        gateOpen = false;
+        document.body.style.overflow = '';
+      }
+
+      el('gateClose').addEventListener('click', closeGate);
+      el('btnGateSkip').addEventListener('click', closeGate);
+      document.addEventListener('keydown', function (e) {
+        if (gateOpen && e.key === 'Escape') closeGate();
+      });
+
       /* ================= auth ================= */
-      var mode = 'login';
+      var mode = 'otp', otpEmail = '';
 
       function authMode(m) {
         mode = m;
-        var login = (m === 'login');
-        el('tabLogin').classList.toggle('on', login);
-        el('tabLogin').setAttribute('aria-pressed', login);
-        el('tabSignup').classList.toggle('on', !login);
-        el('tabSignup').setAttribute('aria-pressed', !login);
-        el('signupOnly').hidden = login;
-        el('btnAuthGo').textContent = login ? 'Log in' : 'Create my account';
-        el('auPass').setAttribute('autocomplete', login ? 'current-password' : 'new-password');
+        var otp = (m === 'otp');
+        el('tabOtp').classList.toggle('on', otp);
+        el('tabOtp').setAttribute('aria-pressed', otp);
+        el('tabPass').classList.toggle('on', !otp);
+        el('tabPass').setAttribute('aria-pressed', !otp);
+        el('paneOtp').hidden = !otp;
+        el('panePass').hidden = otp;
+        if (!otp) { el('auEmail').disabled = false; }
+        el('auErr').textContent = ''; el('auErr').style.color = '';
+        el('pwErr').textContent = ''; el('pwErr').style.color = '';
+      }
+      el('tabOtp').addEventListener('click', function () { authMode('otp'); });
+      el('tabPass').addEventListener('click', function () { otpReset(); authMode('pass'); });
+
+      /* ---- one-time code ---- */
+      function otpReset() {
+        el('otpStep2').hidden = true;
+        el('otpFoot').hidden = true;
+        el('btnOtpSend').hidden = false;
+        el('btnOtpVerify').hidden = true;
+        el('auCode').value = '';
+        el('auEmail').disabled = false;
         el('auErr').textContent = '';
         el('auErr').style.color = '';
       }
-      el('tabLogin').addEventListener('click', function () { authMode('login'); });
-      el('tabSignup').addEventListener('click', function () { authMode('signup'); });
 
-      el('btnAuthGo').addEventListener('click', function () {
-        var err = el('auErr'), btn = el('btnAuthGo');
+      function sendCode(btn) {
+        var err = el('auErr');
+        var email = (el('auEmail').value || '').trim();
+        err.textContent = ''; err.style.color = '';
+
+        if (!sb) { err.textContent = 'Accounts are unavailable right now. Please try again in a moment.'; return; }
+        if (!email || email.indexOf('@') < 1 || email.indexOf('.') < 2) {
+          err.textContent = 'Please type the email address you want the code sent to.';
+          el('auEmail').disabled = false; el('auEmail').focus(); return;
+        }
+
+        btn.disabled = true;
+        var was = btn.textContent;
+        btn.textContent = 'Sending…';
+        function done() { btn.disabled = false; btn.textContent = was; }
+
+        sb.auth.signInWithOtp({
+          email: email,
+          options: {
+            shouldCreateUser: true,
+            emailRedirectTo: window.location.origin + window.location.pathname
+          }
+        }).then(function (r) {
+          done();
+          if (r.error) { err.textContent = friendly(r.error.message); return; }
+          otpEmail = email;
+          el('otpWho').textContent = email;
+          el('otpStep2').hidden = false;
+          el('otpFoot').hidden = false;
+          el('btnOtpSend').hidden = true;
+          el('btnOtpVerify').hidden = false;
+          el('auEmail').disabled = true;
+          err.style.color = 'var(--good)';
+          err.textContent = 'Sent. Check your email, including the spam folder.';
+          setTimeout(function () { try { el('auCode').focus(); } catch (e) {} }, 80);
+        }, function (e) { done(); err.textContent = friendly(e && e.message); });
+      }
+
+      el('btnOtpSend').addEventListener('click', function () { sendCode(this); });
+      el('btnOtpAgain').addEventListener('click', function () { sendCode(this); });
+      el('btnOtpEdit').addEventListener('click', function () {
+        otpReset();
+        el('auEmail').focus();
+      });
+
+      el('auEmail').addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        if (mode === 'otp') el('btnOtpSend').click(); else el('btnPassGo').click();
+      });
+
+      el('auCode').addEventListener('input', function () {
+        var v = (this.value || '').replace(/[^0-9]/g, '').slice(0, 6);
+        if (v !== this.value) this.value = v;
+        if (v.length === 6 && !el('btnOtpVerify').disabled) el('btnOtpVerify').click();
+      });
+      el('auCode').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); el('btnOtpVerify').click(); }
+      });
+
+      el('btnOtpVerify').addEventListener('click', function () {
+        var err = el('auErr'), btn = el('btnOtpVerify');
+        var code = (el('auCode').value || '').replace(/[^0-9]/g, '');
+        err.textContent = ''; err.style.color = '';
+        if (!sb) { err.textContent = 'Accounts are unavailable right now.'; return; }
+        if (code.length !== 6) { err.textContent = 'Type the 6-digit code from the email.'; return; }
+
+        btn.disabled = true;
+        var was = btn.textContent;
+        btn.textContent = 'Checking…';
+        function done() { btn.disabled = false; btn.textContent = was; }
+
+        sb.auth.verifyOtp({ email: otpEmail, token: code, type: 'email' }).then(function (r) {
+          done();
+          if (r.error) { err.textContent = friendly(r.error.message); return; }
+          closeGate();
+          enterApp(r.data.user);
+        }, function (e) { done(); err.textContent = friendly(e && e.message); });
+      });
+
+      /* ---- password, for accounts made before codes existed ---- */
+      el('btnPassGo').addEventListener('click', function () {
+        var err = el('pwErr'), btn = el('btnPassGo');
         var email = (el('auEmail').value || '').trim();
         var pass = el('auPass').value || '';
-        err.textContent = '';
-        err.style.color = '';
+        err.textContent = ''; err.style.color = '';
 
         if (!sb) { err.textContent = 'Accounts are unavailable right now. Please try again in a moment.'; return; }
         if (!email) { err.textContent = 'Please enter your email.'; el('auEmail').focus(); return; }
-        if (pass.length < 8) { err.textContent = 'Password needs to be at least 8 characters.'; el('auPass').focus(); return; }
+        if (!pass) { err.textContent = 'Please enter your password.'; el('auPass').focus(); return; }
 
         btn.disabled = true;
         var was = btn.textContent;
         btn.textContent = 'Please wait…';
         function done() { btn.disabled = false; btn.textContent = was; }
 
-        if (mode === 'login') {
-          sb.auth.signInWithPassword({ email: email, password: pass }).then(function (r) {
-            done();
-            if (r.error) { err.textContent = friendly(r.error.message); return; }
-            enterApp(r.data.user);
-          }, function (e) { done(); err.textContent = friendly(e && e.message); });
-        } else {
-          var name = (el('auName').value || '').trim();
-          if (!name) { done(); err.textContent = 'Please tell us your name.'; el('auName').focus(); return; }
-          sb.auth.signUp({
-            email: email, password: pass,
-            options: { data: {
-              name: name,
-              business: (el('auBiz').value || '').trim(),
-              phone: (el('auPhone').value || '').trim()
-            } }
-          }).then(function (r) {
-            done();
-            if (r.error) { err.textContent = friendly(r.error.message); return; }
-            if (r.data.session) { enterApp(r.data.user); }
-            else {
-              err.style.color = 'var(--good)';
-              err.textContent = 'Account created. Check your email to confirm it, then log in.';
-            }
-          }, function (e) { done(); err.textContent = friendly(e && e.message); });
-        }
+        sb.auth.signInWithPassword({ email: email, password: pass }).then(function (r) {
+          done();
+          if (r.error) { err.textContent = friendly(r.error.message); return; }
+          closeGate();
+          enterApp(r.data.user);
+        }, function (e) { done(); err.textContent = friendly(e && e.message); });
       });
 
       el('btnForgot').addEventListener('click', function () {
-        var err = el('auErr'), email = (el('auEmail').value || '').trim();
+        var err = el('pwErr'), email = (el('auEmail').value || '').trim();
         if (!sb) { err.textContent = 'Accounts are unavailable right now.'; return; }
         if (!email) { err.textContent = 'Type your email above first, then tap this again.'; el('auEmail').focus(); return; }
         sb.auth.resetPasswordForEmail(email, {
@@ -2325,19 +2569,67 @@
         return nm.trim().charAt(0).toUpperCase() || '?';
       }
 
+      /* Everything that differs between logged in and logged out lives here, so
+         one call repaints the lot and nothing can drift out of step. */
+      function paintAuthUI() {
+        var inn = !!user;
+        var av = el('avatar');
+        av.classList.toggle('guest', !inn);
+        av.textContent = inn ? initials(user) : 'Log in';
+        av.setAttribute('aria-label', inn ? 'Your account' : 'Log in to save your dishes');
+        el('guestWrap').classList.toggle('on', !inn);
+        el('acctInLine').hidden = !inn;
+        el('acctOutLine').hidden = inn;
+        el('acctEmail').textContent = inn ? user.email : '—';
+        el('btnSignOut2').hidden = !inn;
+        el('btnAcctLogin').hidden = inn;
+        el('acctFoot').textContent = inn
+          ? 'Your dishes are saved to your HTI account and sync across devices.'
+          : 'Dishes you cost now stay in this browser. Log in and they move to your account, where clearing your browser cannot lose them.';
+        el('repLead').textContent = inn
+          ? 'Check it over, then save it to your account.'
+          : 'Copy it or send it on WhatsApp right now. Saving it is the one thing that needs an account.';
+      }
+
+      /* Anything costed while logged out is real work. On the way in it is
+         pushed to the account one at a time, then the local drawer is emptied. */
+      function syncGuest() {
+        var pending = guestDishes();
+        if (!pending.length) return Promise.resolve();
+        var chain = Promise.resolve();
+        pending.forEach(function (d) {
+          chain = chain.then(function () {
+            return cloudSave({ dish: d.dish, n: d.n, price: d.price, plate: d.plate, rows: d.rows });
+          });
+        });
+        return chain.then(function () {
+          clearGuest();
+          toast(pending.length === 1
+            ? 'Your dish is now saved to your account.'
+            : 'Your ' + pending.length + ' dishes are now saved to your account.', 'good');
+        }, function (e) {
+          toast('Could not save the dishes from this device: ' + friendly(e && e.message), 'bad');
+        });
+      }
+
       function enterApp(u) {
+        /* verifyOtp resolves AND fires SIGNED_IN, so this can be called twice for
+           the same person. Landing twice would push the browser-only dishes up
+           twice and toast twice; the second call is only ever a reload. */
+        if (user && u && user.id === u.id) { refresh(); return; }
+        var pending = guestDishes();
         user = u;
         try { localStorage.setItem('hti_fcc_app_mode', '1'); } catch (e) {}
         el('splash').style.display = 'none';
-        el('gate').hidden = true;
+        closeGate();
         el('resetGate').hidden = true;
         el('app').classList.add('on');
-        el('avatar').textContent = initials(u);
-        el('acctEmail').textContent = u.email;
+        paintAuthUI();
         paintOnline();
 
         /* show whatever we had last time straight away, then go and refresh */
         var cached = cachedDishes();
+        if (pending.length) cached = pending.concat(cached);
         if (cached.length) { dishes = cached; loaded = true; }
         else { loaded = false; }
         paintDishes();
@@ -2349,13 +2641,29 @@
         startNew();
         setView(location.hash.replace('#', '') || 'dishes', true);
 
-        refresh();
+        syncGuest().then(refresh, refresh);
       }
 
-      function showGate() {
+      /* No account: the app opens anyway, on whatever this browser has costed. */
+      function enterGuest() {
+        user = null;
         el('splash').style.display = 'none';
-        el('app').classList.remove('on');
-        el('gate').hidden = false;
+        closeGate();
+        el('resetGate').hidden = true;
+        el('app').classList.add('on');
+        paintAuthUI();
+        paintOnline();
+
+        dishes = guestDishes();
+        loaded = true;
+        paintDishes();
+
+        if (!location.hash || !VIEWS[location.hash.replace('#', '')]) {
+          history.replaceState(null, '', location.pathname + location.search + '#dishes');
+        }
+        setView(location.hash.replace('#', '') || 'dishes', true);
+        startNew();
+        setView(location.hash.replace('#', '') || 'dishes', true);
       }
 
       function refresh() {
@@ -2435,18 +2743,25 @@
           if (event === 'PASSWORD_RECOVERY') {
             el('splash').style.display = 'none';
             el('app').classList.remove('on');
-            el('gate').hidden = true;
+            closeGate();
             el('resetGate').hidden = false;
             el('rsPass').focus();
+            return;
+          }
+          /* someone tapped the link in the email instead of typing the code:
+             supabase-js picks the tokens out of the URL and lands here */
+          if (event === 'SIGNED_IN' && session && session.user &&
+              (!user || user.id !== session.user.id)) {
+            enterApp(session.user);
           }
         });
         sb.auth.getSession().then(function (r) {
           var u = (r.data && r.data.session) ? r.data.session.user : null;
-          if (u) enterApp(u); else showGate();
-        }, function () { showGate(); });
+          if (u) enterApp(u); else enterGuest();
+        }, function () { enterGuest(); });
       } else {
-        showGate();
-        el('auErr').textContent = 'Accounts are unavailable right now. Please check your connection.';
+        /* no accounts today, but the arithmetic never needed a server */
+        enterGuest();
       }
     })();
   </script>

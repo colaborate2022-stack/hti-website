@@ -17,7 +17,7 @@
    Do not add wildcards, extension matching, or a catch-all cache here.
    ========================================================================== */
 
-var CACHE_VERSION = 'v1';
+var CACHE_VERSION = 'v2';
 var CACHE_NAME = 'hti-fcc-app-' + CACHE_VERSION;
 
 var SCOPE = new URL(self.registration.scope);
