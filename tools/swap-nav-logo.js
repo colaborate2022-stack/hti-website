@@ -50,12 +50,9 @@ const NEW_SRC = 'images/brand/hti-logo-nav.webp';
 const OLD_DIMS = { width: '2374', height: '1801' };
 const NEW_DIMS = { width: '240', height: '182' };
 
-const SKIP = new Set([
-  'index.html', 'contact.html',
-  'class.html', 'cup.html', 'fort.html', 'hotcar.html', 'hotel-shot.html',
-  'icare.html', 'icedt.html', 'kmt.html', 'mdp.html', 'post.html',
-  'ramp.html', 'super.html', 'support.html', 'top.html', 'vow.html'
-]);
+/* Emptied: that other session landed its work, and these seventeen pages
+   have now been swapped too. Nothing is off limits any more. */
+const SKIP = new Set([]);
 
 // ---------------------------------------------------------------------------
 

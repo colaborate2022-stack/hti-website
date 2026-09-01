@@ -75,6 +75,26 @@ const EYEBROW = 'Hospitality Training Institute';
    alt      og:image:alt - read aloud by screen readers over the preview.
    lang     'hi' pulls in Devanagari and relaxes the letterspacing. */
 const CARDS = [
+  /* The last two pages on the bare logo. The home page card is the one most
+     likely to be pasted into a group chat cold, with no other context. Its
+     headline carries the promise, because the eyebrow above it already says
+     Hospitality Training Institute and a card should not say it twice. */
+  // ---- home and contact ----------------------------------------------------
+  {
+    slug: 'index',
+    bg: 'images/blog/hti-training-programs/02-hti-training-session-hospitality-team.jpg',
+    head: 'Train Your Hotel &amp; Restaurant Staff',
+    sub: 'Hotel, restaurant and office staff trained on your own floor',
+    alt: 'Train your hotel and restaurant staff with HTI India, on site across India'
+  },
+  {
+    slug: 'contact',
+    bg: 'images/blog/hti-training-programs/05-hti-guest-experience-training.jpg',
+    head: 'Talk to HTI India',
+    sub: 'WhatsApp, phone or email &mdash; we reply within a few hours',
+    alt: 'Contact HTI India - hospitality training enquiries answered within hours'
+  },
+
   // ---- section landing pages -----------------------------------------------
   {
     slug: 'hotels',
