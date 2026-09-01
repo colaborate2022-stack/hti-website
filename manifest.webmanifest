@@ -1,7 +1,7 @@
 {
-  "name": "HTI Food Cost",
+  "name": "HTI Food Cost Calculator",
   "short_name": "Food Cost",
-  "description": "Cost your dishes, track your food cost % and see where your margin is going.",
+  "description": "Free food cost calculator. Cost your dishes, track your food cost % and see where your margin is going.",
   "start_url": "/fcc-app.html",
   "scope": "/",
   "display": "standalone",

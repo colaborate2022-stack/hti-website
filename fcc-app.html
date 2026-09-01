@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Food Cost App | HTI India</title>
+  <title>Food Cost Calculator | HTI India</title>
   <meta name="robots" content="noindex, follow" />
-  <meta name="description" content="The HTI Food Cost app for signed-in users. Cost your dishes, track your food cost % and see where your margin is going." />
+  <meta name="description" content="The HTI Food Cost Calculator. Cost your dishes, track your food cost % and see where your margin is going. Free to use, log in only to save." />
 
   <meta name="theme-color" content="#e31e24" />
   <link rel="manifest" href="manifest.webmanifest" />
@@ -14,6 +14,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Food Cost" />
+  <link rel="canonical" href="https://www.hti-india.com/food-cost-calculator.html" />
   <link rel="apple-touch-icon" href="images/app/icon-192.png" />
   <link rel="icon" href="images/brand/hti-favicon.png" />
 
@@ -133,28 +134,44 @@
     .gate-card h1 { font-size: 24px; letter-spacing: -.02em; }
     .gate-card .sub { color: var(--muted); font-size: 14px; margin-top: 7px; line-height: 1.5; }
 
+    /* A two-way switch, so BOTH halves have to look pressable. The track was
+       var(--bg), the same colour as the page behind it, so on the wizard step
+       it disappeared: the selected half looked like a lone outlined button and
+       the other half looked like a stray line of grey text. The track is now
+       its own shade with a border, and the unselected half is a filled, darker
+       chip rather than bare text. */
     .tabs {
       display: flex;
-      gap: 6px;
-      background: var(--bg);
-      border-radius: 10px;
+      gap: 5px;
+      background: #e7e3dd;
+      border: 1px solid var(--line);
+      border-radius: 12px;
       padding: 4px;
       margin: 22px 0 18px;
     }
     .tabs .tab {
       flex: 1;
-      border: 0;
-      background: transparent;
-      border-radius: 7px;
-      padding: 9px 6px;
+      border: 1px solid transparent;
+      background: rgba(255, 255, 255, .5);
+      border-radius: 8px;
+      padding: 10px 6px;
+      min-height: 42px;
+      font-family: inherit;
       font-size: 13px;
       font-weight: 700;
-      color: var(--muted);
+      color: #4f4a45;
       cursor: pointer;
-      transition: background .16s ease, color .16s ease;
+      transition: background .16s ease, color .16s ease, box-shadow .16s ease, border-color .16s ease;
     }
-    .tabs .tab.on { background: var(--card); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.09); }
+    .tabs .tab:hover { background: rgba(255, 255, 255, .85); color: var(--ink); }
+    .tabs .tab.on {
+      background: var(--card); color: var(--ink);
+      border-color: var(--line);
+      box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 4px 10px rgba(0,0,0,.09);
+    }
     .tabs .tab:active { transform: scale(.98); }
+    .tabs .tab:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) { .tabs .tab { transition: none; } }
 
     .fld { margin-bottom: 14px; }
     .fld label {
@@ -369,6 +386,11 @@
     .slimbar.offline { background: #2b2724; color: #fff; }
     .slimbar.install { background: #fff4d6; color: #6a4a00; border-bottom: 1px solid #eddcae; }
     .slimbar.install span { flex: 1; }
+    /* The install bar is a one-off offer, not a status, so it fades itself out
+       instead of sitting over the app until somebody closes it. */
+    .slimbar.install { transition: opacity .28s ease, transform .28s ease; }
+    .slimbar.install.fade { opacity: 0; transform: translateY(-8px); pointer-events: none; }
+    @media (prefers-reduced-motion: reduce) { .slimbar.install { transition: none; } }
     .slimbar .x {
       border: 0; background: transparent; cursor: pointer;
       font-size: 20px; line-height: 1; padding: 2px 6px; color: inherit; opacity: .6;
@@ -791,6 +813,31 @@
     }
     .rupee input { padding-left: 30px !important; }
 
+    /* the mirror of .rupee for a percentage: the sign sits after the number */
+    .pct { position: relative; display: block; max-width: 160px; }
+    .pct > span {
+      position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
+      color: var(--muted); font-weight: 700; pointer-events: none;
+    }
+    .pct input { padding-right: 30px !important; }
+    /* the native spinner sits exactly where the % sign does, and stepping a
+       percentage one at a time is no use anyway */
+    .pct input::-webkit-outer-spin-button,
+    .pct input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .pct input { -moz-appearance: textfield; appearance: textfield; }
+
+    /* optional extras: present, but visibly not part of the required path */
+    .optfld {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 14px; padding: 14px 15px; margin-top: 14px;
+    }
+    .optfld .fld { margin-bottom: 0; }
+    .optfld label em {
+      display: inline-block; margin-left: 6px; padding: 2px 7px; border-radius: 20px;
+      background: var(--bg); color: var(--muted); font-size: 10px; font-weight: 700;
+      letter-spacing: .04em; text-transform: uppercase;
+    }
+
     /* ingredient rows */
     #rows { display: grid; gap: 10px; }
     .row {
@@ -888,6 +935,7 @@
     }
     .verdictbox .bar i { display: block; transition: width .3s ease; }
     .verdictbox .bar .food { background: var(--red); }
+    .verdictbox .bar .oh { background: var(--warn); }
     .verdictbox .bar .profit { background: var(--good); }
     .verdictbox .bar .marker {
       position: absolute; left: 35%; top: -3px; bottom: -3px; width: 2px;
@@ -1223,17 +1271,31 @@
               <button class="btn ghost sm" id="useSugg" type="button">Use this price</button>
             </div>
           </div>
+          <!-- Optional, and deliberately outside both panes: overhead applies
+               whether the price was typed in or suggested. It is a percentage
+               and never a rupee amount, because a fixed rupee figure would be
+               wrong the moment the menu price changes. -->
+          <div class="optfld">
+            <div class="fld">
+              <label for="ohPct">Overhead <em>optional</em></label>
+              <div class="pct"><input type="number" id="ohPct" min="0" max="99" step="any" placeholder="0" /><span>%</span></div>
+              <p class="hint">Electricity, gas or LPG, water, packaging &mdash; what it costs to <b>cook and serve</b> the dish on top of the ingredients, as a <b>percentage of the menu price</b>, not a rupee amount. Most kitchens sit around <b>4% to 8%</b>. Leave it blank to ignore it; your food cost % stays ingredients only and this comes off the profit.</p>
+            </div>
+          </div>
+
           <div class="verdictbox">
             <div class="big" id="fcPct">&mdash;</div>
             <div class="vtext" id="fcVerdict">Enter a price to see your food cost.</div>
             <div class="vnote" id="fcSub"></div>
             <div class="bar">
               <i class="food" id="barFood" style="width:0%"></i>
+              <i class="oh" id="barOh" style="width:0%"></i>
               <i class="profit" id="barProfit" style="width:0%"></i>
               <span class="marker"></span>
             </div>
             <div class="bar-key">
               <span><i style="background:var(--red)"></i>Ingredients</span>
+              <span id="keyOh" hidden><i style="background:var(--warn)"></i>Overhead</span>
               <span><i style="background:var(--good)"></i>Left for you</span>
               <span><i class="dash"></i>35% limit</span>
             </div>
@@ -1258,7 +1320,7 @@
               <tbody id="repRows"></tbody>
             </table>
             <div class="totals" id="repTotals"></div>
-            <p class="rep-foot">Costed with the HTI Food Cost app &mdash; prices exclude GST.</p>
+            <p class="rep-foot">Costed with the HTI Food Cost Calculator &mdash; prices exclude GST.</p>
           </div>
           <div class="sheetacts">
             <button class="btn ghost" id="btnCopy" type="button">Copy as text</button>
@@ -1483,6 +1545,17 @@
         var p = parseInt(el('portions').value, 10);
         return (isFinite(p) && p > 0) ? p : 1;
       }
+      /* Optional overhead, always a percentage of the menu price. Blank, zero,
+         rubbish and out-of-range all collapse to 0, which is "not using it". */
+      function overheadPct() {
+        var v = parseFloat(el('ohPct').value);
+        if (!isFinite(v) || v <= 0) return 0;
+        return Math.min(v, 99);
+      }
+      /* 6 not 6.0, but 7.5 stays 7.5 */
+      function pctText(v) {
+        return (Math.round(v * 10) / 10).toString();
+      }
       function dishName() {
         return (el('dishName').value || '').trim();
       }
@@ -1508,16 +1581,32 @@
         el('plateCost').textContent = money(plate);
 
         var price = parseFloat(el('sellPrice').value);
+        var ohPct = overheadPct();
         var pctEl = el('fcPct'), vEl = el('fcVerdict'), sEl = el('fcSub'),
-            food = el('barFood'), prof = el('barProfit');
+            food = el('barFood'), ohBar = el('barOh'), prof = el('barProfit');
+
+        el('keyOh').hidden = !(ohPct > 0);
 
         if (batch > 0 && isFinite(price) && price > 0) {
-          var pct = plate / price * 100, profit = price - plate, col, msg, note;
+          /* The headline stays the FOOD cost: ingredients over price, nothing
+             else folded in, so it can still be read against the 28-35% bands
+             and compared dish to dish. Overhead is charged to the profit. */
+          var pct = plate / price * 100;
+          var oh = price * ohPct / 100;
+          var gross = price - plate;
+          var profit = gross - oh;
+          var col, msg, note;
           if (pct < 25)       { col = 'var(--good)'; msg = 'Very profitable.'; note = 'Just check your portion is not too small for the price you charge.'; }
           else if (pct <= 35) { col = 'var(--good)'; msg = 'Healthy. This is the normal range.'; note = 'Keep an eye on wastage and supplier rates to hold it here.'; }
           else if (pct <= 40) { col = 'var(--warn)'; msg = 'A bit high.'; note = 'Look at portion size and wastage before you raise the price.'; }
           else                { col = 'var(--bad)';  msg = 'Too high.'; note = 'At this level the dish is barely paying for itself.'; }
-          if (profit < 0)     { col = 'var(--bad)';  msg = 'You are losing money on this dish.'; note = 'The ingredients cost more than you charge for it.'; }
+          if (gross < 0)      { col = 'var(--bad)';  msg = 'You are losing money on this dish.'; note = 'The ingredients cost more than you charge for it.'; }
+          else if (profit < 0){ col = 'var(--bad)';  msg = 'Nothing left once overhead is paid.'; note = 'Ingredients plus ' + pctText(ohPct) + '% overhead come to more than the menu price.'; }
+
+          if (ohPct > 0 && gross >= 0 && profit >= 0) {
+            note += ' Overhead at ' + pctText(ohPct) + '% takes ' + money2(oh) +
+                    ' a plate, leaving you ' + money2(profit) + '.';
+          }
 
           pctEl.innerHTML = pct.toFixed(1) + '<small>%</small>';
           pctEl.style.color = col;
@@ -1525,8 +1614,10 @@
           vEl.textContent = msg;
           sEl.textContent = note;
           var f = Math.max(0, Math.min(100, pct));
+          var o = Math.max(0, Math.min(100 - f, ohPct));
           food.style.width = f + '%';
-          prof.style.width = (100 - f) + '%';
+          ohBar.style.width = o + '%';
+          prof.style.width = (100 - f - o) + '%';
         } else {
           pctEl.textContent = '—';
           pctEl.style.color = 'var(--ink)';
@@ -1534,6 +1625,7 @@
           vEl.textContent = 'Enter a price to see your food cost.';
           sEl.textContent = '';
           food.style.width = '0%';
+          ohBar.style.width = '0%';
           prof.style.width = '0%';
         }
 
@@ -1541,12 +1633,12 @@
         el('suggPrice').textContent =
           (batch > 0 && isFinite(tgt) && tgt > 0 && tgt < 100) ? money(plate / (tgt / 100)) : '₹0';
 
-        buildReport(list, batch, n, plate, price);
-        return { list: list, batch: batch, n: n, plate: plate, price: price, mismatch: mismatch };
+        buildReport(list, batch, n, plate, price, ohPct);
+        return { list: list, batch: batch, n: n, plate: plate, price: price, oh: ohPct, mismatch: mismatch };
       }
 
       /* shared renderer for the step 4 report and the dish detail sheet */
-      function paintBreakdown(tbody, totalsBox, rows, batch, n, plate, price) {
+      function paintBreakdown(tbody, totalsBox, rows, batch, n, plate, price, ohPct) {
         tbody.innerHTML = '';
         var real = rows.filter(function (i) { return i.cost && i.cost > 0; });
         if (!real.length) {
@@ -1568,8 +1660,16 @@
         if (isFinite(price) && price > 0 && batch > 0) {
           list.push(['Menu price per plate', money(price)]);
           list.push(['Food cost', (plate / price * 100).toFixed(1) + '%']);
-          list.push(['Profit per plate', money(price - plate)]);
-          list.push(['Profit on the batch', money((price - plate) * n)]);
+          var ohp = (isFinite(ohPct) && ohPct > 0) ? ohPct : 0;
+          if (ohp > 0) {
+            var ohRs = price * ohp / 100;
+            list.push(['Overhead at ' + pctText(ohp) + '% of the price', money2(ohRs)]);
+            list.push(['Profit per plate after overhead', money(price - plate - ohRs)]);
+            list.push(['Profit on the batch after overhead', money((price - plate - ohRs) * n)]);
+          } else {
+            list.push(['Profit per plate', money(price - plate)]);
+            list.push(['Profit on the batch', money((price - plate) * n)]);
+          }
         }
         totalsBox.innerHTML = '';
         list.forEach(function (r) {
@@ -1581,10 +1681,10 @@
         });
       }
 
-      function buildReport(list, batch, n, plate, price) {
+      function buildReport(list, batch, n, plate, price, ohPct) {
         el('repDish').textContent = dishName() || 'Untitled dish';
         el('repYield').textContent = 'Makes ' + n + (n === 1 ? ' plate' : ' plates');
-        paintBreakdown(el('repRows'), el('repTotals'), list, batch, n, plate, price);
+        paintBreakdown(el('repRows'), el('repTotals'), list, batch, n, plate, price, ohPct);
       }
 
       function reportText() {
@@ -1603,7 +1703,13 @@
         if (isFinite(s.price) && s.price > 0 && s.batch > 0) {
           L.push('Menu price: ' + money(s.price));
           L.push('Food cost: ' + (s.plate / s.price * 100).toFixed(1) + '%');
-          L.push('Profit per plate: ' + money(s.price - s.plate));
+          if (s.oh > 0) {
+            var ohRs = s.price * s.oh / 100;
+            L.push('Overhead (' + pctText(s.oh) + '% of price): ' + money2(ohRs));
+            L.push('Profit per plate after overhead: ' + money(s.price - s.plate - ohRs));
+          } else {
+            L.push('Profit per plate: ' + money(s.price - s.plate));
+          }
         }
         L.push('');
         L.push('Costed free at hti-india.com/food-cost-calculator.html');
@@ -1643,13 +1749,35 @@
         return msg ? (msg.charAt(0).toUpperCase() + msg.slice(1)) : 'Something went wrong. Please try again.';
       }
 
+      /* The fcc_dishes table has no overhead column, so the overhead % rides
+         along as a tagged object on the end of the ingredients array. Dishes
+         saved before overhead existed simply have no such entry and read back
+         as 0, and any reader that does not know about it sees one extra row
+         with no name, rate or quantity, which it already skips. */
+      function packRows(rows, oh) {
+        return (oh > 0) ? rows.concat([{ __meta: 1, oh: oh }]) : rows.slice();
+      }
+      function unpackRows(stored) {
+        var rows = [], oh = 0;
+        (stored || []).forEach(function (r) {
+          if (r && r.__meta) {
+            var v = parseFloat(r.oh);
+            if (isFinite(v) && v > 0) oh = v;
+          } else {
+            rows.push(r);
+          }
+        });
+        return { rows: rows, oh: oh };
+      }
+
       function cloudList() {
         return sb.from('fcc_dishes').select('*').order('updated_at', { ascending: false })
           .then(function (r) {
             if (r.error) throw r.error;
             return (r.data || []).map(function (d) {
+              var u = unpackRows(d.ingredients);
               return { id: d.id, dish: d.dish, n: d.portions, price: d.menu_price,
-                       plate: d.plate_cost, rows: d.ingredients || [] };
+                       plate: d.plate_cost, rows: u.rows, oh: u.oh };
             });
           });
       }
@@ -1657,7 +1785,8 @@
       function cloudSave(rec) {
         return sb.from('fcc_dishes').upsert({
           user_id: user.id, dish: rec.dish, portions: rec.n,
-          menu_price: rec.price, plate_cost: rec.plate, ingredients: rec.rows,
+          menu_price: rec.price, plate_cost: rec.plate,
+          ingredients: packRows(rec.rows, rec.oh),
           updated_at: new Date().toISOString()
         }, { onConflict: 'user_id,dish' })
           .then(function (r) { if (r.error) throw r.error; return true; });
@@ -1807,9 +1936,15 @@
         if (!plate) return null;
         return plate / d.price * 100;
       }
+      /* what is actually left on the plate, so overhead is charged here too */
+      function ohRsOf(d) {
+        var p = parseFloat(d.oh);
+        if (!isFinite(p) || p <= 0 || !d.price || !isFinite(d.price)) return 0;
+        return d.price * p / 100;
+      }
       function marginOf(d) {
         if (!d.price || !isFinite(d.price)) return null;
-        return d.price - ((d.plate != null) ? d.plate : 0);
+        return d.price - ((d.plate != null) ? d.plate : 0) - ohRsOf(d);
       }
       function bandOf(pct) {
         if (pct === null) return 'none';
@@ -1975,7 +2110,7 @@
           return { name: r.name, rate: rate, rUnit: r.rUnit, qty: r.qty, qUnit: r.qUnit, cost: cost };
         });
         var batch = plate * n;
-        paintBreakdown(el('dsRows'), el('dsTotals'), rows, batch, n, plate, d.price);
+        paintBreakdown(el('dsRows'), el('dsTotals'), rows, batch, n, plate, d.price, d.oh);
 
         el('dsConfirm').classList.remove('on');
         showSheet('sheetDish');
@@ -2056,6 +2191,7 @@
         el('dishName').value = '';
         el('portions').value = 4;
         el('sellPrice').value = '';
+        el('ohPct').value = '';
         el('targetPct').value = 30;
         el('errDish').textContent = ''; el('errRows').textContent = '';
         tab(true);
@@ -2070,6 +2206,7 @@
         el('dishName').value = asCopy ? ((d.dish || 'Dish') + ' (copy)') : (d.dish || '');
         el('portions').value = d.n || 1;
         el('sellPrice').value = (d.price != null ? d.price : '');
+        el('ohPct').value = (d.oh > 0 ? d.oh : '');
         el('errDish').textContent = ''; el('errRows').textContent = '';
         tab(true);
         loadRows(d.rows || []);
@@ -2100,7 +2237,7 @@
         }
       });
 
-      ['dishName', 'portions', 'sellPrice', 'targetPct'].forEach(function (id) {
+      ['dishName', 'portions', 'sellPrice', 'ohPct', 'targetPct'].forEach(function (id) {
         el(id).addEventListener('input', calc);
       });
 
@@ -2122,7 +2259,7 @@
 
         var s = calc();
         var rec = {
-          dish: dishName(), n: s.n, plate: s.plate,
+          dish: dishName(), n: s.n, plate: s.plate, oh: s.oh,
           price: isFinite(s.price) ? s.price : null,
           rows: s.list.filter(function (i) { return i.name || i.rate || i.qty; })
                       .map(function (i) { return { name: i.name, rate: i.rate, rUnit: i.rUnit, qty: i.qty, qUnit: i.qUnit }; })
@@ -2135,7 +2272,8 @@
           var lrec = {
             local: true,
             lid: editingLid || ('l' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7)),
-            dish: rec.dish, n: rec.n, price: rec.price, plate: rec.plate, rows: rec.rows
+            dish: rec.dish, n: rec.n, price: rec.price, plate: rec.plate,
+            oh: rec.oh, rows: rec.rows
           };
           var gat = -1;
           for (var gi = 0; gi < dishes.length; gi++) {
@@ -2158,7 +2296,8 @@
         var wasEditing = editingId, oldName = editingName;
 
         /* optimistic: show it straight away, reconcile with the server after */
-        var localRec = { id: wasEditing, dish: rec.dish, n: rec.n, price: rec.price, plate: rec.plate, rows: rec.rows };
+        var localRec = { id: wasEditing, dish: rec.dish, n: rec.n, price: rec.price,
+                         plate: rec.plate, oh: rec.oh, rows: rec.rows };
         var at = -1;
         for (var i = 0; i < dishes.length; i++) {
           if ((wasEditing && dishes[i].id === wasEditing) ||
@@ -2316,7 +2455,7 @@
 
       el('btnExport').addEventListener('click', function () {
         if (!dishes.length) { toast('Nothing to export yet.', 'bad'); return; }
-        var head = ['Dish', 'Plates per batch', 'Cost per portion', 'Menu price', 'Margin per plate', 'Food cost %', 'Ingredients'];
+        var head = ['Dish', 'Plates per batch', 'Cost per portion', 'Menu price', 'Overhead %', 'Margin per plate', 'Food cost %', 'Ingredients'];
         var lines = [head.map(csvCell).join(',')];
         dishes.forEach(function (d) {
           var pct = pctOf(d), mg = marginOf(d);
@@ -2328,6 +2467,7 @@
             d.n || 1,
             (d.plate != null ? Number(d.plate).toFixed(2) : ''),
             (d.price != null ? d.price : ''),
+            (d.oh > 0 ? pctText(d.oh) : ''),
             (mg === null ? '' : mg.toFixed(2)),
             (pct === null ? '' : pct.toFixed(1)),
             ing
@@ -2599,7 +2739,8 @@
         var chain = Promise.resolve();
         pending.forEach(function (d) {
           chain = chain.then(function () {
-            return cloudSave({ dish: d.dish, n: d.n, price: d.price, plate: d.plate, rows: d.rows });
+            return cloudSave({ dish: d.dish, n: d.n, price: d.price, plate: d.plate,
+                               oh: d.oh, rows: d.rows });
           });
         });
         return chain.then(function () {
@@ -2682,31 +2823,76 @@
         });
       }
 
-      /* ================= install prompt ================= */
+      /* ================= install prompt =================
+         This used to appear the moment the browser fired beforeinstallprompt
+         and then stay put for the whole session, so a banner covering the top
+         of the app was the normal state of the screen. It is a one-off offer,
+         so it now behaves like one:
+
+           - it waits SHOW_AFTER_MS, so the app is on screen first
+           - it shows for SHOW_MS and then fades itself out
+           - fading out snoozes it for a week (SNOOZE_KEY)
+           - the x, or an actual install, retires it for good (INSTALL_KEY)  */
       var deferredPrompt = null;
-      var INSTALL_KEY = 'hti_fcc_install_dismissed';
+      var INSTALL_KEY   = 'hti_fcc_install_dismissed';
+      var SNOOZE_KEY    = 'hti_fcc_install_snooze';
+      var SHOW_AFTER_MS = 6000;
+      var SHOW_MS       = 12000;
+      var SNOOZE_MS     = 7 * 24 * 60 * 60 * 1000;
+      var showTimer = null, hideTimer = null;
+
+      var standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 
       function installDismissed() {
         try { return localStorage.getItem(INSTALL_KEY) === '1'; } catch (e) { return false; }
       }
+      function installSnoozed() {
+        try {
+          var t = parseInt(localStorage.getItem(SNOOZE_KEY) || '0', 10);
+          return isFinite(t) && Date.now() < t;
+        } catch (e) { return false; }
+      }
+      function snoozeInstall() {
+        try { localStorage.setItem(SNOOZE_KEY, String(Date.now() + SNOOZE_MS)); } catch (e) {}
+      }
+
+      /* fade first, then drop it out of the layout */
+      function hideInstall() {
+        clearTimeout(showTimer); clearTimeout(hideTimer);
+        var bar = el('installBar');
+        if (!bar.classList.contains('on')) return;
+        bar.classList.add('fade');
+        setTimeout(function () { bar.classList.remove('on'); bar.classList.remove('fade'); }, 300);
+      }
+
+      /* the x and a completed install both mean never again */
       function dismissInstall() {
         try { localStorage.setItem(INSTALL_KEY, '1'); } catch (e) {}
-        el('installBar').classList.remove('on');
+        hideInstall();
       }
-      el('btnInstallX').addEventListener('click', dismissInstall);
 
-      var standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+      function offerInstall(text, withButton) {
+        if (standalone || installDismissed() || installSnoozed()) return;
+        clearTimeout(showTimer);
+        showTimer = setTimeout(function () {
+          el('installText').textContent = text;
+          el('btnInstall').hidden = !withButton;
+          el('installBar').classList.remove('fade');
+          el('installBar').classList.add('on');
+          hideTimer = setTimeout(function () { snoozeInstall(); hideInstall(); }, SHOW_MS);
+        }, SHOW_AFTER_MS);
+      }
+
+      el('btnInstallX').addEventListener('click', dismissInstall);
 
       window.addEventListener('beforeinstallprompt', function (e) {
         e.preventDefault();
         deferredPrompt = e;
-        if (installDismissed() || standalone) return;
-        el('installText').textContent = 'Add Food Cost to your home screen';
-        el('btnInstall').hidden = false;
-        el('installBar').classList.add('on');
+        offerInstall('Add the Food Cost Calculator to your home screen', true);
       });
 
       el('btnInstall').addEventListener('click', function () {
+        clearTimeout(hideTimer);
         if (!deferredPrompt) return;
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then(function () {
@@ -2720,10 +2906,8 @@
       /* iOS gets no beforeinstallprompt, so it gets a one-liner instead */
       (function () {
         var iOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-        if (!iOS || standalone || installDismissed()) return;
-        el('installText').textContent = 'Tap Share, then Add to Home Screen.';
-        el('btnInstall').hidden = true;
-        el('installBar').classList.add('on');
+        if (!iOS) return;
+        offerInstall('Tap Share, then Add to Home Screen.', false);
       })();
 
       /* ================= service worker ================= */

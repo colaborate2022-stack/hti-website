@@ -1,5 +1,5 @@
 /* ============================================================================
-   Service worker for the HTI Food Cost app (fcc-app.html) ONLY.
+   Service worker for the HTI Food Cost Calculator (fcc-app.html) ONLY.
 
    SCOPE GUARD — read this before changing anything below.
 
