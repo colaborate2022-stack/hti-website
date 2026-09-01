@@ -43,7 +43,7 @@
       "name": "What is food cost, in one line?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "It is the money you spend on ingredients, shown as a share of what you charge. If a plate costs you \u20B9120 to make and you sell it at \u20B9400, your food cost is 30%. The other 70% pays for staff, rent, gas, electricity and your profit."
+        "text": "It is the money you spend on ingredients, shown as a share of what you charge. If a portion costs you \u20B9120 to make and you sell it at \u20B9400, your food cost is 30%. The other 70% pays for staff, rent, gas, electricity and your profit."
       }
     },
     {
@@ -56,10 +56,10 @@
     },
     {
       "@type": "Question",
-      "name": "My recipe makes a batch, not one plate. What do I enter?",
+      "name": "My recipe makes a batch, not one portion. What do I enter?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Cost the whole batch \u2014 all the chicken, all the butter, everything that goes in the pot \u2014 then say how many plates it serves. The calculator divides it and shows the cost of one plate. This is how professional kitchens cost, and it is far more accurate than guessing a single portion."
+        "text": "Cost the whole batch \u2014 all the chicken, all the butter, everything that goes in the pot \u2014 then say how many portions it serves. The calculator divides it and shows the cost of one portion. This is how professional kitchens cost, and it is far more accurate than guessing a single portion."
       }
     },
     {
@@ -67,7 +67,7 @@
       "name": "Do I include gas, staff salary and rent?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Not in the food cost itself. Food cost is only the ingredients, and keeping salaries and rent out is what makes the number comparable from dish to dish. Gas and electricity are a little different, because they are spent cooking that particular plate, so the calculator has an optional Overhead % field for them. Enter them as a percentage of the menu price \u2014 most kitchens are around 4% to 8% \u2014 and it comes off your profit per plate while your food cost percentage stays ingredients only."
+        "text": "Not in the food cost itself. Food cost is only the ingredients, and keeping salaries and rent out is what makes the number comparable from dish to dish. Gas and electricity are a little different, because they are spent cooking that particular portion, so the calculator has an optional Overhead % field for them. Enter them as a percentage of the menu price \u2014 most kitchens are around 4% to 8% \u2014 and it comes off your profit per portion while your food cost percentage stays ingredients only."
       }
     },
     {
@@ -98,13 +98,13 @@
   "operatingSystem": "Any (web browser)",
   "url": "https://www.hti-india.com/food-cost-calculator.html",
   "installUrl": "https://www.hti-india.com/fcc-app.html",
-  "description": "A free online food cost calculator for restaurants, hotels and cafes. Enter what you buy your ingredients at and what you charge, and it works out the cost of one plate, your food cost percentage and the profit left on every dish.",
+  "description": "A free online food cost calculator for restaurants, hotels and cafes. Enter what you buy your ingredients at and what you charge, and it works out the cost of one portion, your food cost percentage and the profit left on every dish.",
   "inLanguage": "en-IN",
   "browserRequirements": "Requires JavaScript. Works in any modern browser.",
   "isAccessibleForFree": true,
   "featureList": [
     "Food cost percentage for any dish",
-    "Cost a whole recipe batch and get the cost of one plate",
+    "Cost a whole recipe batch and get the cost of one portion",
     "Mixed buying and usage units (kg with g, litre with ml)",
     "Optional overhead percentage for gas, electricity and packaging",
     "Suggested menu price from a target food cost %",
@@ -706,7 +706,9 @@
      Someone searching "food cost calculator" wants to calculate, not to read
      about calculating, and the full costing tool is a click away behind a
      noindex URL. This section answers the query where the visitor lands. */
-  .qcalc{padding-top:64px}
+  .qcalc{padding-top:34px}
+  .qc-head{margin-bottom:24px}
+  .qc-head p{margin-top:9px}
   .qc-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
   .qc-form{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
   .qc-fld{margin-bottom:16px}
@@ -715,6 +717,17 @@
     text-transform:uppercase;color:var(--muted);margin-bottom:7px}
   .qc-fld label em{font-style:normal;margin-left:6px;padding:2px 7px;border-radius:20px;
     background:#f1efeb;color:var(--muted);font-size:9.5px;letter-spacing:.04em}
+  /* the long definition lives behind this, so the field stays one short line */
+  .qc-hlp{width:18px;height:18px;margin-left:7px;vertical-align:-4px;
+    display:inline-grid;place-items:center;padding:0;
+    border:1px solid var(--line);background:var(--card);color:var(--muted);
+    border-radius:50%;font-family:inherit;font-size:11px;font-weight:800;line-height:1;
+    cursor:pointer;transition:border-color .15s ease,color .15s ease}
+  .qc-hlp:hover,.qc-hlp[aria-expanded="true"]{border-color:var(--red);color:var(--red)}
+  .qc-hlp:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+  .qc-note{background:#fbfaf8;border:1px solid var(--line);border-radius:10px;
+    padding:10px 12px;margin-top:8px;font-size:12.5px;line-height:1.55;
+    color:var(--muted);font-weight:500}
   .qc-affix{position:relative;display:block}
   .qc-affix input{width:100%;font-family:inherit;font-size:17px;font-weight:700;color:var(--ink);
     background:#fbfaf8;border:1px solid var(--line);border-radius:10px;padding:13px 14px;
@@ -753,16 +766,28 @@
     color:rgba(255,255,255,.72)}
   .qc-lines li b{font-weight:800;color:#fff}
   .qc-lines li.key{font-size:15px;color:#fff}
-  .qc-foot{margin-top:18px;font-size:14px;line-height:1.7;color:var(--muted);font-weight:500;
-    text-align:center}
-  .qc-foot a{color:var(--red);font-weight:800;white-space:nowrap}
-  .qc-foot a:hover{text-decoration:underline}
+  .qc-more{margin-top:24px;text-align:center}
+  .qc-more p{max-width:54ch;margin:0 auto;font-size:14.5px;line-height:1.65;
+    color:var(--muted);font-weight:500}
+  .qc-cta{display:inline-flex;align-items:center;gap:9px;margin-top:15px;
+    padding:15px 30px;border-radius:10px;
+    background:linear-gradient(135deg,var(--red),#ff4a51);color:#fff;
+    font-weight:800;font-size:15.5px;letter-spacing:-.01em;
+    box-shadow:0 14px 30px -12px rgba(227,33,41,.9);
+    transition:transform .15s ease,box-shadow .2s ease}
+  .qc-cta:hover{transform:translateY(-2px);box-shadow:0 20px 40px -14px rgba(227,33,41,1)}
+  .qc-cta:active{transform:translateY(0)}
+  .qc-more b{display:block;margin-top:11px;font-size:12.5px;font-weight:600;color:var(--muted)}
+  @media (prefers-reduced-motion:reduce){.qc-cta,.qc-cta:hover{transition:none;transform:none}}
 
   @media(max-width:820px){
-    .qcalc{padding-top:48px}
+    .qcalc{padding-top:26px}
     .qc-grid{grid-template-columns:1fr}
-    /* answer first: on a phone the form alone fills the fold */
-    .qc-out{position:static;order:-1}
+    /* Fields first, answer under them. This was the other way round while the
+       hero was tall enough to push the form off the fold; the hero is short
+       now, so the natural order reads better: you fill it in, you scroll a
+       little, you get the number. */
+    .qc-out{position:static;order:0}
     .qc-big{font-size:3.2rem}
   }
   @media (prefers-reduced-motion:reduce){.qc-bar i{transition:none}}
@@ -829,6 +854,13 @@
   .hero h1 em{font-style:normal;background:linear-gradient(120deg,#ff5a60,var(--red) 45%,#ff8a8f);
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--red)}
   .hero-lede{font-size:17.5px;line-height:1.7;color:rgba(255,255,255,.78);max-width:56ch;margin-top:16px}
+
+  /* This page carries no fixed WhatsApp / Call bar, so the room that
+     assets/enquiry.css reserves for one has to go with it, or every phone gets
+     72px of dead space under the footer. */
+  /* html body, not body: assets/enquiry.css is linked after this block, so a
+     bare body selector would lose the tie. */
+  @media (max-width:860px){ html body{padding-bottom:0} }
 
   /* the pull-plate: the formula the whole tool is built on */
   .hero-kicker{display:inline-block;margin-top:26px;padding:15px 24px;
@@ -903,8 +935,13 @@
     .btn-red:hover{transform:none}
   }
 
+  /* the slim hero: a title and a line, with the calculator directly under it */
+  .hero-slim{padding:44px 24px 40px;margin-bottom:0}
+  .hero-slim .hero-lede{font-size:16.5px;max-width:48ch;margin-top:12px}
+
   @media(max-width:820px){
     .hero{padding:52px 20px 62px;margin-bottom:28px}
+    .hero-slim{padding:34px 20px 32px;margin-bottom:0}
     .hero-inner{padding:0}
     .hero-kicker{padding:13px 18px}
   }
@@ -1034,17 +1071,15 @@
 
 <main>
 
-<section class="hero">
+<!-- Somebody who searched "food cost calculator" already knows what one is.
+     The hero used to be a headline, a three-line lede, a formula plate, a
+     button and a line of small print, which is a full screen of reading before
+     the tool. It is now a title and one line; the calculator starts directly
+     under it, and everything that explains it sits below the calculator. -->
+<section class="hero hero-slim">
   <div class="hero-inner">
     <span class="hero-tag">Free tool from HTI India</span>
     <h1>Food Cost <em>Calculator</em></h1>
-    <p class="hero-lede">Where your food cost percentage should land, and how to work it out for any dish on your menu. The free calculator does the arithmetic for anyone who opens it &mdash; log in only when you want your costings kept.</p>
-    <div class="hero-kicker">Ingredient cost &divide; Menu price &times; 100 <span>= your food cost %</span></div>
-    <div class="hero-app">
-      <a href="fcc-app.html">Open the calculator &rarr;</a>
-      <a href="#calculator" class="alt">or do a quick sum on this page</a>
-      <b>Free for everyone, no sign-up to cost a dish. Log in only to save them and open them on any device.</b>
-    </div>
   </div>
 </section>
 
@@ -1052,30 +1087,30 @@
 
   <!-- ============ THE CALCULATOR ITSELF ============
        Same formula, same bands and the same optional overhead as fcc-app.html,
-       for one plate. The card below is the upsell to the full tool, which does
+       for one portion. The card below is the upsell to the full tool, which does
        a whole recipe, many units and a batch yield. -->
   <section class="qcalc" id="calculator" aria-labelledby="qcalcH">
-    <div class="sec-head">
-      <span class="sec-tag">Free food cost calculator</span>
+    <div class="sec-head qc-head">
       <h2 id="qcalcH">Work out your <em>food cost percentage</em></h2>
-      <p>Enter what one plate costs you to make and what you charge for it. The answer updates as you type. Nothing to install, nothing to sign up for.</p>
+      <p>Free, no sign-up. Enter what a portion costs you and what you charge for it.</p>
     </div>
 
     <div class="qc-grid">
       <div class="qc-form">
         <div class="qc-fld">
-          <label for="qcCost">Ingredient cost of one plate</label>
+          <label for="qcCost">Ingredient cost of one portion</label>
           <span class="qc-affix"><span class="pre">&#8377;</span><input type="number" id="qcCost" min="0" step="any" inputmode="decimal" value="120" placeholder="120" /></span>
         </div>
         <div class="qc-fld">
-          <label for="qcPrice">Menu price for one plate</label>
+          <label for="qcPrice">Menu price for one portion</label>
           <span class="qc-affix"><span class="pre">&#8377;</span><input type="number" id="qcPrice" min="0" step="any" inputmode="decimal" value="400" placeholder="400" /></span>
           <p class="qc-hint">Use the price before GST. GST is not your money.</p>
         </div>
         <div class="qc-fld">
-          <label for="qcOh">Overhead <em>optional</em></label>
+          <label for="qcOh">Overhead <em>optional</em><button class="qc-hlp" type="button" id="qcOhHelp" aria-expanded="false" aria-controls="qcOhNote" aria-label="What counts as overhead?">?</button></label>
           <span class="qc-affix suf"><input type="number" id="qcOh" min="0" max="99" step="any" inputmode="decimal" placeholder="0" /><span class="post">%</span></span>
-          <p class="qc-hint">What it costs to <b>cook and serve</b> the dish on top of the ingredients &mdash; electricity, gas or LPG, water, packaging &mdash; as a <b>percentage of the menu price</b>, not a rupee amount. Most kitchens sit around <b>4% to 8%</b>. Leave it blank to ignore it; your food cost % stays ingredients only either way, and overhead comes off the profit.</p>
+          <p class="qc-hint">Gas, electricity and packaging, as a % of the menu price.</p>
+          <p class="qc-note" id="qcOhNote" hidden>What it costs to cook and serve the portion on top of the ingredients. Always a percentage, never a rupee amount, because a rupee figure is wrong the moment you change the price. Most kitchens sit around 4% to 8%. Your food cost % stays ingredients only; this comes off the profit.</p>
         </div>
       </div>
 
@@ -1090,33 +1125,10 @@
       </div>
     </div>
 
-    <p class="qc-foot">Costing a real recipe &mdash; ten ingredients, mixed units, a batch that makes twelve plates?
-      <a href="fcc-app.html">Open the full calculator &rarr;</a> It is free, it runs on your phone, and you log in only when you want the costings kept.</p>
-  </section>
-
-</div>
-
-<div class="fcc-wrap">
-
-  <!-- ============ CALCULATOR GATEWAY ============
-       The costing itself lives at fcc-app.html. This page keeps the teaching
-       and the schema; this card is the one thing it asks you to do. -->
-  <section class="app-gate" id="appGate">
-    <div class="ag-inner">
-      <span class="ag-tag">The tool</span>
-      <h2>Cost your dishes <em>in the calculator</em></h2>
-      <p class="ag-lede">Free for everyone and works on your phone. Cost a dish the moment it opens &mdash; an account is only how your dishes get saved.</p>
-
-      <a href="fcc-app.html" class="ag-cta">Open the Food Cost Calculator</a>
-
-      <ul class="ag-list">
-        <li class="why-item"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Cost as many dishes as you like without an account</li>
-        <li class="why-item"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>See your food cost % against industry benchmarks</li>
-        <li class="why-item"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Install it on your phone and use it in the kitchen</li>
-        <li class="why-item"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Log in with a code we email you &mdash; then every dish is saved</li>
-      </ul>
-
-      <p class="ag-fine">Free to use. No card, and no sign-up to get started.</p>
+    <div class="qc-more">
+      <p>Costing a real recipe &mdash; ten ingredients, mixed units, a batch that makes twelve portions?</p>
+      <a class="qc-cta" href="fcc-app.html">Open the full calculator &rarr;</a>
+      <b>Free, runs on your phone, and you log in only when you want the costings kept.</b>
     </div>
   </section>
 
@@ -1146,7 +1158,7 @@
       <p>Simple enough to do on the back of a docket, and worth doing before you print a menu.</p>
     </div>
     <div class="method-body why-item">
-      <p>Work from the whole batch, not from one plate. Take each ingredient at the rate you actually buy it,
+      <p>Work from the whole batch, not from one portion. Take each ingredient at the rate you actually buy it,
         divide by the pack size, then multiply by the quantity the recipe uses. Chicken bought at &#8377;280 a kilo,
         with 800 g going into the pot, costs you &#8377;280 &divide; 1000 &times; 800 = <b>&#8377;224</b> on that line.</p>
 
@@ -1158,25 +1170,51 @@
           <li><span>Curd, onion and tomato, 500 g at &#8377;70/kg</span><b>&#8377;35</b></li>
           <li><span>Ghee, whole spices and saffron</span><b>&#8377;49</b></li>
           <li class="sum"><span>Whole batch</span><b>&#8377;380</b></li>
-          <li><span>Cost of one plate (&#8377;380 &divide; 4)</span><b>&#8377;95</b></li>
-          <li><span>Menu price per plate, before GST</span><b>&#8377;320</b></li>
+          <li><span>Cost of one portion (&#8377;380 &divide; 4)</span><b>&#8377;95</b></li>
+          <li><span>Menu price per portion, before GST</span><b>&#8377;320</b></li>
           <li class="answer"><span>Food cost (&#8377;95 &divide; &#8377;320 &times; 100)</span><b>29.7%</b></li>
         </ul>
       </div>
 
-      <p>Add every line to get the batch cost, then divide by the number of plates the batch actually yields.
-        Divide that plate cost by the menu price, multiply by 100, and you have your percentage. Against the bands
-        above, 29.7% is healthy, and it leaves &#8377;225 a plate towards labour, rent, gas and profit.</p>
+      <p>Add every line to get the batch cost, then divide by the number of portions the batch actually yields.
+        Divide that portion cost by the menu price, multiply by 100, and you have your percentage. Against the bands
+        above, 29.7% is healthy, and it leaves &#8377;225 a portion towards labour, rent, gas and profit.</p>
 
       <p>Two things quietly ruin the number. Cost what you <b>buy</b>, not what reaches the plate &mdash; if 800 g of
         raw chicken trims down to 600 g cooked, the trim is still money you spent. And re-run the sum whenever a
         supplier rate moves: chicken going from &#8377;280 to &#8377;320 a kilo pushes this dish from 29.7% to 32.2%
-        on its own, and takes &#8377;8 a plate off what you keep.</p>
+        on its own, and takes &#8377;8 a portion off what you keep.</p>
 
       <p>The calculator does this arithmetic for every dish you enter, keeps the working, and updates the percentage the
         moment you change a rate or a price.</p>
     </div>
   </section>
+</div>
+
+<div class="fcc-wrap">
+
+  <!-- ============ CALCULATOR GATEWAY ============
+       The costing itself lives at fcc-app.html. This page keeps the teaching
+       and the schema; this card is the one thing it asks you to do. -->
+  <section class="app-gate" id="appGate">
+    <div class="ag-inner">
+      <span class="ag-tag">The tool</span>
+      <h2>Cost your dishes <em>in the calculator</em></h2>
+      <p class="ag-lede">Free for everyone and works on your phone. Cost a dish the moment it opens &mdash; an account is only how your dishes get saved.</p>
+
+      <a href="fcc-app.html" class="ag-cta">Open the Food Cost Calculator</a>
+
+      <ul class="ag-list">
+        <li class="why-item"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Cost as many dishes as you like without an account</li>
+        <li class="why-item"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>See your food cost % against industry benchmarks</li>
+        <li class="why-item"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Install it on your phone and use it in the kitchen</li>
+        <li class="why-item"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Log in with a code we email you &mdash; then every dish is saved</li>
+      </ul>
+
+      <p class="ag-fine">Free to use. No card, and no sign-up to get started.</p>
+    </div>
+  </section>
+
 </div>
 
 <section class="faq-band">
@@ -1188,19 +1226,19 @@
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q" type="button" aria-expanded="false">What is food cost, in one line?<span class="sign">&#8964;</span></button>
-        <div class="faq-answer"><div><p>It is the money you spend on ingredients, shown as a share of what you charge. If a plate costs you &#8377;120 to make and you sell it at &#8377;400, your food cost is 30%. The other 70% pays for staff, rent, gas, electricity and your profit.</p></div></div>
+        <div class="faq-answer"><div><p>It is the money you spend on ingredients, shown as a share of what you charge. If a portion costs you &#8377;120 to make and you sell it at &#8377;400, your food cost is 30%. The other 70% pays for staff, rent, gas, electricity and your profit.</p></div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" type="button" aria-expanded="false">How do I enter an ingredient I buy by the kilo?<span class="sign">&#8964;</span></button>
         <div class="faq-answer"><div><p>In the calculator, enter the rate you buy at &mdash; say &#8377;400 per kg &mdash; then how much you actually use, say 1 kg for the batch. It works out the cost of that line for you. You can mix units freely: buy per kg and use grams, buy per litre and use millilitres.</p></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" type="button" aria-expanded="false">My recipe makes a batch, not one plate. What do I enter?<span class="sign">&#8964;</span></button>
-        <div class="faq-answer"><div><p>Cost the whole batch &mdash; all the chicken, all the butter, everything that goes in the pot &mdash; then say how many plates it serves. The calculator divides it and shows the cost of one plate. This is how professional kitchens cost, and it is far more accurate than guessing a single portion.</p></div></div>
+        <button class="faq-q" type="button" aria-expanded="false">My recipe makes a batch, not one portion. What do I enter?<span class="sign">&#8964;</span></button>
+        <div class="faq-answer"><div><p>Cost the whole batch &mdash; all the chicken, all the butter, everything that goes in the pot &mdash; then say how many portions it serves. The calculator divides it and shows the cost of one portion. This is how professional kitchens cost, and it is far more accurate than guessing a single portion.</p></div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" type="button" aria-expanded="false">Do I include gas, staff salary and rent?<span class="sign">&#8964;</span></button>
-        <div class="faq-answer"><div><p>Not in the food cost itself. Food cost is only the ingredients, and keeping salaries and rent out is what makes the number comparable from dish to dish. Gas and electricity are a little different, because they are spent cooking that particular plate, so the calculator has an optional <b>Overhead %</b> field for them. Enter them as a percentage of the menu price &mdash; most kitchens are around 4% to 8% &mdash; and it comes off your profit per plate while your food cost percentage stays ingredients only.</p></div></div>
+        <div class="faq-answer"><div><p>Not in the food cost itself. Food cost is only the ingredients, and keeping salaries and rent out is what makes the number comparable from dish to dish. Gas and electricity are a little different, because they are spent cooking that particular portion, so the calculator has an optional <b>Overhead %</b> field for them. Enter them as a percentage of the menu price &mdash; most kitchens are around 4% to 8% &mdash; and it comes off your profit per portion while your food cost percentage stays ingredients only.</p></div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" type="button" aria-expanded="false">Should I use the price with GST or without?<span class="sign">&#8964;</span></button>
@@ -1244,16 +1282,6 @@
           <span class="fcc-blog-more" lang="hi">&#2348;&#2381;&#2354;&#2377;&#2327; &#2346;&#2338;&#2364;&#2375;&#2306; &rarr;</span>
         </div>
       </a>
-    </div>
-  </section>
-</div>
-
-<div class="fcc-wrap">
-  <section class="app-gate ag-slim">
-    <div class="ag-inner">
-      <h2>Ready to cost a dish?</h2>
-      <p class="ag-lede">Open the calculator and have your first costing in a couple of minutes. Nothing to sign up for.</p>
-      <a href="fcc-app.html" class="ag-cta ag-cta-sm">Open the calculator &rarr;</a>
     </div>
   </section>
 </div>
@@ -1416,7 +1444,7 @@
 
   <script>
     /* ---------- the on-page calculator ----------
-       One plate, so no batch and no units: cost in, price in, percentage out.
+       One portion, so no batch and no units: cost in, price in, percentage out.
        The bands and the overhead rule are the same ones fcc-app.html uses, so
        a visitor never sees two different verdicts for the same numbers. */
     (function () {
@@ -1488,10 +1516,20 @@
 
         lines.appendChild(row('Ingredients', rupees(c)));
         if (o > 0) lines.appendChild(row('Overhead at ' + (Math.round(o * 10) / 10) + '%', rupees(ohRs)));
-        lines.appendChild(row(o > 0 ? 'Profit per plate after overhead' : 'Profit per plate', rupees(profit), 'key'));
+        lines.appendChild(row(o > 0 ? 'Profit per portion after overhead' : 'Profit per portion', rupees(profit), 'key'));
       }
 
       [cost, price, oh].forEach(function (i) { i.addEventListener('input', run); });
+
+      var help = document.getElementById('qcOhHelp'), note = document.getElementById('qcOhNote');
+      if (help && note) {
+        help.addEventListener('click', function () {
+          var open = note.hidden;
+          note.hidden = !open;
+          help.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+
       run();
     })();
   </script>
@@ -1513,12 +1551,6 @@
       });
     })();
   </script>
-  <!-- sticky contact bar: below 860px the header Contact button is hidden
-       behind the hamburger, so this is the only always-visible way to reach us -->
-  <div class="pe-bar">
-    <a class="pe-bar-wa" href="https://wa.me/917738060902" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24a8.19 8.19 0 0 1 5.82 2.42 8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.23 8.23z"/></svg> WhatsApp</a>
-    <a class="pe-bar-tel" href="tel:+917738060902"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call us</a>
-  </div>
   <script src="assets/subscribe.js" defer></script>
 </body>
 

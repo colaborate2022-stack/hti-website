@@ -826,16 +826,36 @@
     .pct input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     .pct input { -moz-appearance: textfield; appearance: textfield; }
 
-    /* optional extras: present, but visibly not part of the required path */
-    .optfld {
+    /* Boxed extras that sit beside the required field rather than in front of
+       it. The price suggestion used to be behind a tab, which hid it from the
+       people who most needed it: the ones with no price yet. */
+    .subfld {
       background: var(--card); border: 1px solid var(--line);
-      border-radius: 14px; padding: 14px 15px; margin-top: 14px;
+      border-radius: 14px; padding: 15px; margin-top: 14px;
     }
-    .optfld .fld { margin-bottom: 0; }
-    .optfld label em {
+    .subfld .fld { margin-bottom: 13px; }
+    .subfld .fld:last-child { margin-bottom: 0; }
+    .fld label em {
       display: inline-block; margin-left: 6px; padding: 2px 7px; border-radius: 20px;
       background: var(--bg); color: var(--muted); font-size: 10px; font-weight: 700;
       letter-spacing: .04em; text-transform: uppercase;
+    }
+
+    /* The long definition lives behind this, so the field itself stays one
+       short line instead of a paragraph nobody reads. */
+    .hlp {
+      width: 18px; height: 18px; margin-left: 7px; vertical-align: -4px;
+      display: inline-grid; place-items: center; padding: 0;
+      border: 1px solid var(--line); background: var(--card); color: var(--muted);
+      border-radius: 50%; font-family: inherit; font-size: 11px; font-weight: 800;
+      line-height: 1; cursor: pointer;
+      transition: border-color .15s ease, color .15s ease;
+    }
+    .hlp:hover, .hlp[aria-expanded="true"] { border-color: var(--red); color: var(--red); }
+    .hlp:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+    .hint.note {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 10px; padding: 10px 12px; margin-top: 8px;
     }
 
     /* ingredient rows */
@@ -1223,9 +1243,9 @@
             <p class="err" id="errDish"></p>
           </div>
           <div class="fld">
-            <label for="portions">How many plates does this recipe make?</label>
+            <label for="portions">How many portions does this recipe make?</label>
             <input type="number" id="portions" value="4" min="1" step="1" class="narrow" />
-            <p class="hint">Add the whole batch in the next step. We work out the cost of one plate.</p>
+            <p class="hint">Add the whole batch in the next step. We work out the cost of one portion.</p>
           </div>
         </div>
 
@@ -1240,29 +1260,27 @@
           </div>
           <div class="runtot">
             <div><span>Whole batch</span><b id="batchCost">&#8377;0</b></div>
-            <div class="lead-fig"><span>One plate</span><b id="plateCost">&#8377;0</b></div>
+            <div class="lead-fig"><span>One portion</span><b id="plateCost">&#8377;0</b></div>
           </div>
         </div>
 
         <!-- STEP 3 -->
         <div class="step" data-step="3">
           <h2>What do you charge?</h2>
-          <p class="lead">Enter your menu price per plate, or ask us what to charge.</p>
-          <div class="tabs">
-            <button class="tab on" id="tabA" type="button" aria-pressed="true">I have a price</button>
-            <button class="tab" id="tabB" type="button" aria-pressed="false">Suggest a price</button>
+          <p class="lead">Enter your menu price per portion. No price yet? The suggestion below works one out for you.</p>
+
+          <div class="fld">
+            <label for="sellPrice">Menu price for one portion</label>
+            <div class="rupee"><span>&#8377;</span><input type="number" id="sellPrice" value="400" min="0" step="any" placeholder="0" class="narrow" /></div>
+            <p class="hint">Use the price before GST.</p>
           </div>
-          <div class="pane on" id="paneA">
-            <div class="fld">
-              <label for="sellPrice">Menu price for one plate</label>
-              <div class="rupee"><span>&#8377;</span><input type="number" id="sellPrice" value="400" min="0" step="any" placeholder="0" class="narrow" /></div>
-              <p class="hint">Use the price before GST.</p>
-            </div>
-          </div>
-          <div class="pane" id="paneB">
+
+          <!-- Always on screen, never behind a tab. Somebody with no price yet
+               should not have to find a switch before we can help them. -->
+          <div class="subfld">
             <div class="fld">
               <label for="targetPct">Food cost % you are aiming for</label>
-              <input type="number" id="targetPct" value="30" min="1" max="99" step="any" class="narrow" />
+              <div class="pct"><input type="number" id="targetPct" value="30" min="1" max="99" step="any" /><span>%</span></div>
               <p class="hint">Most restaurants aim for 28% to 35%.</p>
             </div>
             <div class="suggest">
@@ -1271,15 +1289,16 @@
               <button class="btn ghost sm" id="useSugg" type="button">Use this price</button>
             </div>
           </div>
-          <!-- Optional, and deliberately outside both panes: overhead applies
-               whether the price was typed in or suggested. It is a percentage
-               and never a rupee amount, because a fixed rupee figure would be
-               wrong the moment the menu price changes. -->
-          <div class="optfld">
+
+          <!-- Overhead is a percentage and never a rupee amount, because a
+               rupee figure is wrong the moment the menu price changes. The
+               long version of that is behind the ?, so the field is one line. -->
+          <div class="subfld">
             <div class="fld">
-              <label for="ohPct">Overhead <em>optional</em></label>
+              <label for="ohPct">Overhead <em>optional</em><button class="hlp" type="button" id="ohHelp" aria-expanded="false" aria-controls="ohNote" aria-label="What counts as overhead?">?</button></label>
               <div class="pct"><input type="number" id="ohPct" min="0" max="99" step="any" placeholder="0" /><span>%</span></div>
-              <p class="hint">Electricity, gas or LPG, water, packaging &mdash; what it costs to <b>cook and serve</b> the dish on top of the ingredients, as a <b>percentage of the menu price</b>, not a rupee amount. Most kitchens sit around <b>4% to 8%</b>. Leave it blank to ignore it; your food cost % stays ingredients only and this comes off the profit.</p>
+              <p class="hint">Gas, electricity and packaging, as a % of the menu price.</p>
+              <p class="hint note" id="ohNote" hidden>What it costs to cook and serve the portion on top of the ingredients. Most kitchens sit around 4% to 8%. Your food cost % stays ingredients only; this comes off the profit.</p>
             </div>
           </div>
 
@@ -1605,7 +1624,7 @@
 
           if (ohPct > 0 && gross >= 0 && profit >= 0) {
             note += ' Overhead at ' + pctText(ohPct) + '% takes ' + money2(oh) +
-                    ' a plate, leaving you ' + money2(profit) + '.';
+                    ' a portion, leaving you ' + money2(profit) + '.';
           }
 
           pctEl.innerHTML = pct.toFixed(1) + '<small>%</small>';
@@ -1655,19 +1674,19 @@
           });
         }
 
-        var list = [['Whole batch', money(batch)], ['Plates from this batch', String(n)],
-                    ['Cost of one plate', money(plate), 'head']];
+        var list = [['Whole batch', money(batch)], ['Portions from this batch', String(n)],
+                    ['Cost of one portion', money(plate), 'head']];
         if (isFinite(price) && price > 0 && batch > 0) {
-          list.push(['Menu price per plate', money(price)]);
+          list.push(['Menu price per portion', money(price)]);
           list.push(['Food cost', (plate / price * 100).toFixed(1) + '%']);
           var ohp = (isFinite(ohPct) && ohPct > 0) ? ohPct : 0;
           if (ohp > 0) {
             var ohRs = price * ohp / 100;
             list.push(['Overhead at ' + pctText(ohp) + '% of the price', money2(ohRs)]);
-            list.push(['Profit per plate after overhead', money(price - plate - ohRs)]);
+            list.push(['Profit per portion after overhead', money(price - plate - ohRs)]);
             list.push(['Profit on the batch after overhead', money((price - plate - ohRs) * n)]);
           } else {
-            list.push(['Profit per plate', money(price - plate)]);
+            list.push(['Profit per portion', money(price - plate)]);
             list.push(['Profit on the batch', money((price - plate) * n)]);
           }
         }
@@ -1683,14 +1702,14 @@
 
       function buildReport(list, batch, n, plate, price, ohPct) {
         el('repDish').textContent = dishName() || 'Untitled dish';
-        el('repYield').textContent = 'Makes ' + n + (n === 1 ? ' plate' : ' plates');
+        el('repYield').textContent = 'Makes ' + n + (n === 1 ? ' portion' : ' portions');
         paintBreakdown(el('repRows'), el('repTotals'), list, batch, n, plate, price, ohPct);
       }
 
       function reportText() {
         var s = calc();
         var L = [(dishName() || 'Untitled dish').toUpperCase(),
-                 'Makes ' + s.n + (s.n === 1 ? ' plate' : ' plates'), ''];
+                 'Makes ' + s.n + (s.n === 1 ? ' portion' : ' portions'), ''];
         s.list.forEach(function (it) {
           if (it.cost && it.cost > 0) {
             L.push('- ' + (it.name || 'Ingredient') + ': ' + it.qty + ' ' + it.qUnit +
@@ -1699,16 +1718,16 @@
         });
         L.push('');
         L.push('Whole batch: ' + money(s.batch));
-        L.push('Cost of one plate: ' + money(s.plate));
+        L.push('Cost of one portion: ' + money(s.plate));
         if (isFinite(s.price) && s.price > 0 && s.batch > 0) {
           L.push('Menu price: ' + money(s.price));
           L.push('Food cost: ' + (s.plate / s.price * 100).toFixed(1) + '%');
           if (s.oh > 0) {
             var ohRs = s.price * s.oh / 100;
             L.push('Overhead (' + pctText(s.oh) + '% of price): ' + money2(ohRs));
-            L.push('Profit per plate after overhead: ' + money(s.price - s.plate - ohRs));
+            L.push('Profit per portion after overhead: ' + money(s.price - s.plate - ohRs));
           } else {
-            L.push('Profit per plate: ' + money(s.price - s.plate));
+            L.push('Profit per portion: ' + money(s.price - s.plate));
           }
         }
         L.push('');
@@ -1996,7 +2015,7 @@
           var e0 = document.createElement('div');
           e0.className = 'empty';
           e0.innerHTML = '<h3>No dishes yet</h3><p>Cost your first dish and you will see its food cost %, ' +
-            'your margin per plate, and where it sits against the healthy range.' +
+            'your margin per portion, and where it sits against the healthy range.' +
             (user ? '' : ' It is free, and it does not need an account.') + '</p>';
           var b0 = document.createElement('button');
           b0.className = 'btn'; b0.type = 'button'; b0.textContent = 'Cost your first dish';
@@ -2033,7 +2052,7 @@
           var m = document.createElement('div'); m.className = 'meta';
           var n = d.n || 1;
           var ni = (d.rows && d.rows.length) || 0;
-          m.textContent = 'Makes ' + n + (n === 1 ? ' plate' : ' plates') +
+          m.textContent = 'Makes ' + n + (n === 1 ? ' portion' : ' portions') +
             (ni ? ' · ' + ni + (ni === 1 ? ' ingredient' : ' ingredients') : '');
           nm.appendChild(h); nm.appendChild(m);
           if (d.local) {
@@ -2097,7 +2116,7 @@
         sheetDish = d;
         el('dsName').textContent = d.dish || 'Untitled dish';
         var n = d.n || 1, plate = (d.plate != null) ? d.plate : 0;
-        el('dsSub').textContent = 'Makes ' + n + (n === 1 ? ' plate' : ' plates');
+        el('dsSub').textContent = 'Makes ' + n + (n === 1 ? ' portion' : ' portions');
 
         /* rebuild per-ingredient costs from the stored rows, same maths as the wizard */
         var rows = (d.rows || []).map(function (r) {
@@ -2194,7 +2213,6 @@
         el('ohPct').value = '';
         el('targetPct').value = 30;
         el('errDish').textContent = ''; el('errRows').textContent = '';
-        tab(true);
         loadRows([{}, {}, {}]);
         go(1);
       }
@@ -2208,7 +2226,6 @@
         el('sellPrice').value = (d.price != null ? d.price : '');
         el('ohPct').value = (d.oh > 0 ? d.oh : '');
         el('errDish').textContent = ''; el('errRows').textContent = '';
-        tab(true);
         loadRows(d.rows || []);
         go(1);
       }
@@ -2222,19 +2239,19 @@
         rowsEl.lastChild.querySelector('.i-name').focus();
       });
 
-      function tab(a) {
-        el('tabA').classList.toggle('on', a); el('tabA').setAttribute('aria-pressed', a);
-        el('tabB').classList.toggle('on', !a); el('tabB').setAttribute('aria-pressed', !a);
-        el('paneA').classList.toggle('on', a); el('paneB').classList.toggle('on', !a);
-      }
-      el('tabA').addEventListener('click', function () { tab(true); });
-      el('tabB').addEventListener('click', function () { tab(false); });
       el('useSugg').addEventListener('click', function () {
         var s = calc(), t = parseFloat(el('targetPct').value);
         if (s.batch > 0 && isFinite(t) && t > 0 && t < 100) {
           el('sellPrice').value = Math.round(s.plate / (t / 100));
-          tab(true); calc();
+          calc();
         }
+      });
+
+      /* the ? beside the overhead label */
+      el('ohHelp').addEventListener('click', function () {
+        var open = el('ohNote').hidden;
+        el('ohNote').hidden = !open;
+        this.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
 
       ['dishName', 'portions', 'sellPrice', 'ohPct', 'targetPct'].forEach(function (id) {
@@ -2397,7 +2414,7 @@
 
         if (best && worst) {
           var nb = document.createElement('div');
-          nb.innerHTML = '<div class="subhead">Margin per plate</div>';
+          nb.innerHTML = '<div class="subhead">Margin per portion</div>';
           var card = document.createElement('div');
           card.className = 'card';
           function named(label, d) {
@@ -2455,7 +2472,7 @@
 
       el('btnExport').addEventListener('click', function () {
         if (!dishes.length) { toast('Nothing to export yet.', 'bad'); return; }
-        var head = ['Dish', 'Plates per batch', 'Cost per portion', 'Menu price', 'Overhead %', 'Margin per plate', 'Food cost %', 'Ingredients'];
+        var head = ['Dish', 'Portions per batch', 'Cost per portion', 'Menu price', 'Overhead %', 'Margin per portion', 'Food cost %', 'Ingredients'];
         var lines = [head.map(csvCell).join(',')];
         dishes.forEach(function (d) {
           var pct = pctOf(d), mg = marginOf(d);
