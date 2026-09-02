@@ -457,6 +457,20 @@
       max-height: 180px;
       overflow: hidden;
     }
+    /* The global rule strips underline and colour off every anchor. On the
+       black chapter cards an inline link has to ask for the underline back;
+       the brand red is below 4.5:1 on black, so it stays white. */
+    .tl-body a {
+      color: #fff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+
+    .tl-body a:hover,
+    .tl-body a:focus-visible {
+      color: #ff8b8f;
+    }
 
     .tl-body.expanded {
       max-height: none;
@@ -1011,7 +1025,7 @@
           <div class="tl-card">
             <span class="tl-pill">Quick &amp; Effective Problem Resolution</span>
             <div class="tl-body">
-              <p>Issues and complaints are inevitable, but how you handle them makes a difference. Train your staff to
+              <p>Issues and complaints are inevitable, but <a href="employee-training-improve-guest-reviews-ratings.html">how you handle them makes a difference</a>. Train your staff to
                 address problems swiftly and effectively, while always remaining calm. Empower them with the authority to
                 make decisions that resolve guest issues on the spot.</p>
               <p><strong>Steps for Problem Resolution (LAST):</strong></p>
