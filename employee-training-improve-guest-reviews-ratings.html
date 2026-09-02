@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Employee Training Can Improve Guest Reviews & Ratings | HTI India</title>
+  <meta name="description" content="Discover how effective employee training can improve guest satisfaction, service quality, online reviews and ratings for hotels, restaurants and hospitality businesses." />
+  <meta name="keywords" content="employee training in hospitality, hospitality staff training, hotel staff training, restaurant staff training, guest-facing staff, front of house staff, guest experience, guest satisfaction, hotel reviews, restaurant reviews, hospitality training" />
+  <link rel="canonical" href="https://www.hti-india.com/employee-training-improve-guest-reviews-ratings.html" />
+  <link rel="icon"
+    href="images/brand/hti-favicon.png" />
+  <!-- the hero illustration is the largest paint on this page; the browser
+       should not have to wait for the stylesheet to discover it -->
+  <link rel="preload" as="image" fetchpriority="high"
+    href="images/blog/employee-training-guest-reviews/employee-training-hospitality-guest-reviews.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --hti-bg: #F3F2EF;
+      --hti-black: #000;
+      --hti-red: #e31e24;
+      --hti-red2: #e31e24;
+      --hti-text: #111;
+
+      --red: #E32129;
+      --cream: #F3F2EF;
+      --black: #000000;
+      --grey-800: #3D3D3D;
+      --grey-500: #8D8D8D;
+      --white: #FFFFFF;
+      --maxw: 1120px;
+      --gutter: 24px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      background: var(--hti-bg);
+      color: var(--hti-text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    /* ============ NAVBAR ============ */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--hti-bg);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #000, transparent);
+      transition: opacity .25s ease;
+    }
+
+    /* static line hides once the scroll progress line takes over */
+    .navbar.scrolled::after {
+      opacity: 0;
+    }
+
+    /* ---------- Scroll progress line (sits under the navbar) ---------- */
+    .scroll-progress {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, var(--hti-red, #e32129), var(--hti-red2, #ff0000));
+      transform: scaleX(0);
+      transform-origin: left center;
+      opacity: 0;
+      transition: opacity .25s ease;
+      will-change: transform;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .navbar.scrolled .scroll-progress {
+      opacity: 1;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 72px;
+    }
+
+    .nav-logo img {
+      width: 52px;
+      height: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-item {
+      position: relative;
+      font-weight: 600;
+      font-size: 15px;
+      color: #111;
+      cursor: pointer;
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-item .caret {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #333;
+      border-bottom: 2px solid #333;
+      transform: rotate(45deg);
+      margin-top: -3px;
+      transition: transform .2s;
+    }
+
+    .nav-item:hover .caret {
+      transform: rotate(-135deg);
+      margin-top: 3px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .14);
+      padding: 10px;
+      min-width: 230px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all .2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 120;
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      padding: 9px 12px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #222;
+    }
+
+    .dropdown a:hover {
+      background: var(--hti-bg);
+      color: var(--hti-red);
+    }
+
+    .dropdown a b {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .dropdown a span {
+      font-size: 12px;
+      color: #777;
+      font-weight: 400;
+    }
+
+    .nav-contact {
+      background: var(--hti-red2);
+      color: #fff;
+      border-radius: 8px;
+      padding: 11px 22px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .nav-contact:hover {
+      background: #d40f0f;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      width: 26px;
+      height: 2px;
+      background: #000;
+      display: block;
+      transition: transform .25s ease, opacity .2s ease;
+    }
+
+    /* while the menu is open the hamburger becomes a cross, so there is an
+       obvious way to close it - and it sits in the sticky header, so it stays
+       reachable even when the menu panel is scrolled */
+    .nav-toggle.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ============ SECTION 1 — HERO ============ */
+    .hero {
+      background: #F3F2EF;
+      padding: 60px 24px;
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero-left {
+      flex: 0 0 48%;
+    }
+
+    .hero-left h1 {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 44px;
+      color: #000;
+      margin-bottom: 16px;
+    }
+
+    .hero-left .hero-lead {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #444;
+      margin-bottom: 28px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 10px 16px;
+      min-width: 110px;
+      text-align: center;
+    }
+
+    .hero-card .hc-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #E32129;
+      display: block;
+    }
+
+    .hero-card .hc-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: #E32129;
+      display: block;
+    }
+
+    .hero-right {
+      flex: 1;
+    }
+
+    .hero-right img {
+      width: 100%;
+      border-radius: 12px;
+      display: block;
+    }
+
+    /* ============ SECTION 2 — TIMELINE ============ */
+    .timeline {
+      background: #000;
+      padding: 80px 0;
+    }
+
+    .tl-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .tl-spine-track {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #2a2a2a;
+      z-index: 0;
+    }
+
+    .tl-spine-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: #ffffff;
+      transition: height 0.3s ease;
+    }
+
+    .tl-chapter {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-height: 420px;
+      margin-bottom: 0;
+      padding: 60px 0;
+      flex-direction: row;
+    }
+
+    .tl-chapter.even {
+      flex-direction: row-reverse;
+    }
+
+    .tl-img-half {
+      width: calc(50% - 32px);
+      padding: 0 48px;
+    }
+
+    .tl-chapter.even .tl-img-half {
+      padding: 0 48px;
+    }
+
+    /* Each chapter's artwork is a 5:4 illustration with its own headline
+       drawn into it. Cropping it to a 340px photo band the way a photograph
+       can be cropped would cut the words off, so it is shown whole, on the
+       white it was drawn on. */
+    .tl-img-half img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: contain;
+      background: #fff;
+      display: block;
+    }
+
+    .tl-node {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border-radius: 50%;
+      border: 2px solid #E32129;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .tl-card-half {
+      width: calc(50% - 32px);
+      padding: 0 48px;
+    }
+
+    .tl-chapter.even .tl-card-half {
+      padding: 0 48px;
+    }
+
+    .tl-card {
+      border: 2px solid #444;
+      border-radius: 12px;
+      padding: 24px;
+      background: transparent;
+    }
+
+    .tl-chapter.active .tl-card {
+      border: 2px solid #e31e24;
+    }
+
+    .tl-chapter.active .tl-img-half img {
+      border: 2px solid #e31e24;
+    }
+
+    .tl-chapter.active .tl-pill {
+      background: #e31e24;
+    }
+
+    .tl-pill {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: #444;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      transition: background 0.3s ease;
+    }
+
+    .tl-body {
+      color: #fff;
+      font-size: 18px;
+      line-height: 1.6;
+      max-height: 180px;
+      overflow: hidden;
+    }
+
+    .tl-body.expanded {
+      max-height: none;
+      overflow: visible;
+    }
+
+    .tl-body p {
+      color: #fff;
+      margin-bottom: 14px;
+      font-size: 16px;
+    }
+
+    .tl-body strong {
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .tl-body ol,
+    .tl-body ul {
+      color: #fff;
+      margin-left: 20px;
+      margin-bottom: 14px;
+    }
+
+    .tl-body li {
+      color: #fff;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .tl-readmore {
+      display: block;
+      margin: 16px auto 0;
+      background: #444;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .tl-chapter.active .tl-readmore {
+      background: #e31e24;
+    }
+
+    /* ============ SECTION 3 — SHARE BAR ============ */
+    .share-section {
+      background: #F3F2EF;
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    .share-section .share-heading {
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 24px;
+    }
+
+    .share-row {
+      display: inline-flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .share-sq {
+      width: 50px;
+      height: 50px;
+      border-radius: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .share-sq svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
+    }
+
+    .share-fb {
+      background: #0B85EE;
+    }
+
+    .share-tw {
+      background: #1DA1F2;
+    }
+
+    .share-li {
+      background: #0A66C2;
+    }
+
+    .share-divider {
+      margin: 32px auto 0;
+      max-width: 480px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #E32129, transparent);
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+      background: #000;
+      color: #fff;
+      padding: 60px 30px 30px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .footer-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 17px;
+      color: #fff;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 14.5px;
+      color: #c7c7c7;
+      margin-bottom: 11px;
+      font-weight: 400;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-div {
+      height: 1px;
+      background: #2a2a2a;
+      margin: 40px 0 30px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 26px;
+      height: 26px;
+      color: #fff;
+      opacity: .85;
+    }
+
+    .footer-social a:hover {
+      opacity: 1;
+      color: var(--hti-red);
+    }
+
+    .footer-contact h3 {
+      font-size: 20px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .footer-contact span {
+      color: var(--hti-red);
+    }
+
+    .footer-brand img {
+      width: 70px;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: #8a8a8a;
+      font-size: 13px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media(max-width:960px) {
+      .nav-menu {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 16px 24px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+        display: none;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .nav-item {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: 4px 0 4px 14px;
+        min-width: auto;
+        width: 100%;
+        display: none;
+      }
+
+      .nav-item.open .dropdown {
+        display: flex;
+      }
+
+      /* a tap leaves :hover stuck on touch devices, which used to point the
+         caret up while the panel stayed shut - drive it from the real state */
+      .nav-item:hover .caret {
+        transform: rotate(45deg);
+        margin-top: -3px;
+      }
+
+      .nav-item.open .caret {
+        transform: rotate(-135deg);
+        margin-top: 3px;
+      }
+
+      /* touch targets: every dropdown link is at least 44px tall */
+      .dropdown a {
+        min-height: 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .footer-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:768px) {
+      .hero-inner {
+        flex-direction: column;
+      }
+
+      .hero-left {
+        flex: 1 1 auto;
+        width: 100%;
+        order: 1;
+      }
+
+      .hero-right {
+        width: 100%;
+        order: 2;
+      }
+
+      .hero-left h1 {
+        font-size: 22px;
+        line-height: 1.3;
+      }
+
+      .tl-spine-track {
+        display: none;
+      }
+
+      .tl-chapter,
+      .tl-chapter.even {
+        flex-direction: column;
+        min-height: auto;
+        padding: 30px 24px;
+      }
+
+      .tl-img-half,
+      .tl-chapter.even .tl-img-half,
+      .tl-card-half,
+      .tl-chapter.even .tl-card-half {
+        width: 100%;
+        padding: 0;
+      }
+
+      .tl-img-half {
+        margin-bottom: 20px;
+        order: 1;
+      }
+
+      .tl-card-half {
+        order: 2;
+      }
+
+      .tl-node {
+        display: none;
+      }
+    }
+
+    @media(max-width:600px) {
+      .footer-cols {
+        grid-template-columns: 1fr;
+      }
+    }
+  
+
+    /* ---- blog post extras: back link, language switch, tall infographic ---- */
+    .hero-back {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #E32129;
+      margin-bottom: 14px;
+    }
+
+    .hero-flags {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: #E32129;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .hero-lang {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid #E32129;
+      color: #E32129;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .hero-lang:hover {
+      background: #E32129;
+      color: #fff;
+    }
+
+    /* ---- intro: the two paragraphs that set the article up, before the
+         timeline takes over ---- */
+    .intro-note {
+      background: #F3F2EF;
+      padding: 56px 24px 8px;
+    }
+
+    .in-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 18px;
+      line-height: 1.75;
+      color: #333;
+    }
+
+    .in-inner p {
+      margin: 0 0 18px;
+    }
+
+    /* ---- closing note ---- */
+    .closing-note {
+      background: #F3F2EF;
+      padding: 56px 24px;
+    }
+
+    .cn-img {
+      width: 100%;
+      border-radius: 12px;
+      display: block;
+      margin: 0 0 28px;
+    }
+
+    .cn-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cn-inner p {
+      font-size: 19px;
+      line-height: 1.6;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 22px;
+    }
+
+    .cn-btn {
+      display: inline-block;
+      background: #E32129;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 13px 26px;
+      border-radius: 8px;
+    }
+
+    .cn-btn:hover {
+      background: #c41a1f;
+    }
+
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async fetchpriority="low" src="https://www.googletagmanager.com/gtag/js?id=G-SBKJQQRP0N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SBKJQQRP0N');
+  </script>
+  <!-- shared motion layer: progressive enhancement, see assets/motion.css -->
+  <script>document.documentElement.className += ' mo';</script>
+  <link rel="stylesheet" href="assets/motion.css" />
+  <link rel="stylesheet" href="assets/polish.css" />
+  <link rel="stylesheet" href="assets/enquiry.css" />
+  <script src="assets/motion.js" defer></script>
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="en_IN" />
+  <meta property="og:title" content="How Employee Training Can Improve Guest Reviews and Ratings" />
+  <meta property="og:description" content="Discover how effective employee training can improve guest satisfaction, service quality, online reviews and ratings for hotels, restaurants and hospitality businesses." />
+  <meta property="og:url" content="https://www.hti-india.com/employee-training-improve-guest-reviews-ratings.html" />
+  <meta property="og:site_name" content="HTI India" />
+  <meta property="og:image" content="https://www.hti-india.com/images/blog/employee-training-guest-reviews/employee-training-guest-reviews-og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="576" />
+  <meta property="article:published_time" content="2026-09-02" />
+  <meta property="article:author" content="Team HTI" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How Employee Training Can Improve Guest Reviews and Ratings" />
+  <meta name="twitter:description" content="Discover how effective employee training can improve guest satisfaction, service quality, online reviews and ratings for hotels, restaurants and hospitality businesses." />
+  <meta name="twitter:image" content="https://www.hti-india.com/images/blog/employee-training-guest-reviews/employee-training-guest-reviews-og.jpg" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How Employee Training Can Improve Guest Reviews and Ratings","description":"Discover how effective employee training can improve guest satisfaction, service quality, online reviews and ratings for hotels, restaurants and hospitality businesses.","image":"https://www.hti-india.com/images/blog/employee-training-guest-reviews/employee-training-guest-reviews-og.jpg","datePublished":"2026-09-02","dateModified":"2026-09-02","articleSection":"Staff Training","keywords":"employee training in hospitality, hospitality staff training, hotel staff training, restaurant staff training, guest-facing staff, front of house staff, guest experience, guest satisfaction, hotel reviews, restaurant reviews, hospitality training","inLanguage":"en","author":{"@type":"Organization","name":"HTI India"},"publisher":{"@type":"Organization","name":"HTI India","url":"https://www.hti-india.com","logo":{"@type":"ImageObject","url":"images/brand/hti-logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.hti-india.com/employee-training-improve-guest-reviews-ratings.html"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.hti-india.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.hti-india.com/blog.html"},{"@type":"ListItem","position":3,"name":"How Employee Training Can Improve Guest Reviews and Ratings","item":"https://www.hti-india.com/employee-training-improve-guest-reviews-ratings.html"}]}</script>
+</head>
+
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img fetchpriority="high" width="240" height="182"
+          src="images/brand/hti-logo-nav.webp"
+          alt="HTI Logo" /></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+      <nav class="nav-menu" id="navMenu">
+        <div class="nav-item">Restaurants &amp; QSRs<span class="caret"></span>
+          <div class="dropdown">
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Service Team</div>
+            <a href="super.html"><b>SUPER</b><span>Waiters, stewards, captains, hostess</span></a>
+            <a href="support.html"><b>SUPPORT</b><span>Same roles &mdash; pre-opening restaurant</span></a>
+            <a href="icedt.html"><b>ICEDT</b><span>Counter executives, sales boys, servers</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Guest Experience</div>
+            <a href="icare.html"><b>iCARE</b><span>Customer service execs, supervisors</span></a>
+            <a href="vow.html"><b>Vow to Wow</b><span>Frontline reps, team leaders</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Managers</div>
+            <a href="ramp.html"><b>RAMP</b><span>Restaurant managers &amp; supervisors</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
+            <a href="restaurants.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Hotels<span class="caret"></span>
+          <div class="dropdown">
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Rooms &amp; Front Desk</div>
+            <a href="fort.html"><b>FORT</b><span>Receptionists, FO executives, GRE, bell boys</span></a>
+            <a href="hotcar.html"><b>HOT-CAR</b><span>Housekeeping attendants &amp; supervisors</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Kitchen</div>
+            <a href="kmt.html"><b>KMT</b><span>Chefs, sous chefs, kitchen supervisors</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Whole Property</div>
+            <a href="hotel-shot.html"><b>Hotel SHOT</b><span>Every hotel role &mdash; F&amp;B to security</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Villas &amp; Homestays</div>
+            <a href="cup.html"><b>CUP</b><span>Caretakers of villas, homestays, guesthouses</span></a>
+            <div class="dd-head" style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9b9b9b;padding:9px 12px 3px;">Grooming &amp; Management</div>
+            <a href="class.html"><b>CLASS</b><span>Guest-facing &amp; corporate professionals</span></a>
+            <a href="mdp.html"><b>MDP</b><span>Newly promoted &amp; mid-level managers</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
+            <a href="hotels.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">Offices &amp; Retail<span class="caret"></span>
+          <div class="dropdown">
+            <a href="post.html"><b>POST</b><span>Corporate pantry staff &amp; attendants</span></a>
+            <a href="top.html"><b>TOP</b><span>Peons, office boys, support staff</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
+            <a href="offices.html" class="see-all" style="color:#e31e24;font-weight:700;text-align:left;">See All</a>
+          </div>
+        </div>
+        <div class="nav-item">More<span class="caret"></span>
+          <div class="dropdown">
+            <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8a857d;padding:4px 0 6px;">Free Tools</div>
+            <a href="food-cost-calculator.html"><b>Food Cost Calculator</b><span>Free tool &mdash; work out your food cost %</span></a>
+            <a href="restaurant-cost-calculator.html"><b>Restaurant Cost Calculator</b><span>Free tool &mdash; prime cost, profit &amp; break-even</span></a>
+            <div style="border-top:1px solid #eee;margin:8px 0 6px;"></div>
+            <a href="trainers.html"><b>Our Trainers</b><span>The people who run the sessions</span></a>
+            <a href="brands.html"><b>Our Brands</b><span>HTI, Woosh Biz, Star, Lead, Dox &amp; T3</span></a>
+            <a href="lead.html"><b>Lead by HTI</b><span>Train the trainer, presentation &amp; soft skills</span></a>
+            <a href="leadership-development.html"><b>Leadership Development</b><span>Senior managers &amp; future leaders</span></a>
+            <a href="professional-etiquette.html"><b>Professional Etiquette</b><span>Corporate &amp; client-facing professionals</span></a>
+            <a href="posh-training.html"><b>POSH Training</b><span>All employees, managers &amp; ICC members</span></a>
+            <a href="fssai-training.html"><b>FSSAI Training</b><span>Food handlers &amp; food safety supervisors</span></a>
+            <a href="https://wooshbiz.com/" target="_blank" rel="noopener"><b>Team Building</b><span>Group activities for any team</span></a>
+            <a href="dox.html"><b>Develop SOPs &amp; How-To Videos</b><span>Owners &amp; operations heads</span></a>
+            <a href="blog.html"><b>Blogs</b><span>Hospitality insights &amp; guides</span></a>
+            <a href="training-by-role.html" style="color:#e31e24;font-weight:700;text-align:left;border-top:1px solid #eee;margin-top:6px;padding-top:10px;">Find training by role &rarr;</a>
+          </div>
+        </div>
+        <a href="contact.html" class="nav-contact">Contact Us</a>
+      </nav>
+    </div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+  </header>
+
+  <!-- ============ SECTION 1 — HERO ============ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <a href="blog.html" class="hero-back">&#8592; Back to Blogs</a>
+        <div class="hero-flags">
+          <span class="hero-tag">Staff Training</span>
+        </div>
+        <h1>How Employee Training Can Improve Guest Reviews and Ratings</h1>
+        <p class="hero-lead">Guests may forget the colour of the lobby or the size of the room. But they rarely forget how your team made them feel.</p>
+        <div class="hero-meta">
+          <div class="hero-card">
+            <span class="hc-label">Words by</span>
+            <span class="hc-value">Team HTI</span>
+          </div>
+          <div class="hero-card">
+            <span class="hc-label">Date</span>
+            <span class="hc-value">02-09-2026</span>
+          </div>
+          <div class="hero-card">
+            <span class="hc-label">Reading Time</span>
+            <span class="hc-value">04 min read</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img fetchpriority="high" decoding="async" width="1160" height="928"
+          src="images/blog/employee-training-guest-reviews/employee-training-hospitality-guest-reviews.webp"
+          alt="Train your team, improve Net Promoter Score and reviews - an HTI trainer with front desk, restaurant and kitchen staff beside a five-star guest review" />
+      </div>
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Book Now <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- ============ INTRO ============ -->
+  <section class="intro-note">
+    <div class="in-inner">
+      <p>In hospitality, every interaction matters. From a warm welcome at the Front Desk to a thoughtful response to a guest request, or from a Server taking an order to a Manager handling a complaint, your Guest-Facing Staff have a significant impact on the overall guest experience.</p>
+      <p>And when that experience is exceptional, guests are more likely to share it through a positive review or rating.</p>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2 — TIMELINE ============ -->
+  <section class="timeline">
+    <div class="tl-container">
+      <div class="tl-spine-track">
+        <div class="tl-spine-fill" id="spineFill"></div>
+      </div>
+
+      <!-- Chapter 1 -->
+      <div class="tl-chapter">
+        <div class="tl-img-half">
+          <img loading="lazy" decoding="async" width="900" height="720"
+            src="images/blog/employee-training-guest-reviews/hospitality-staff-training-guest-experience.webp"
+            alt="Guest experience starts with great training - an HTI trainer briefing front office, service and kitchen staff on guest expectations" />
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <h2 class="tl-pill">Great Guest Experiences Start With Great Training</h2>
+            <div class="tl-body">
+              <p>Hospitality employees deal with different guests, expectations and situations every day. Whether they work in a hotel, restaurant, caf&eacute;, QSR or other hospitality environment, the right training gives them the confidence and skills to handle these moments professionally.</p>
+              <p>Your Guest-Facing Staff are often the first and last people a guest interacts with. From Front Desk Executives and Restaurant Servers to Hosts, Guest Relations Teams and Managers, these Front of House Staff represent your brand with every interaction.</p>
+              <p>Effective Hospitality Staff Training can help employees communicate better, understand guest expectations, anticipate needs and deliver service more consistently.</p>
+              <p>For a hotel, that could mean a Front Desk Executive handling a difficult check-in with confidence. For a restaurant, it could mean a Server understanding the menu, making the right recommendations and responding professionally to a guest's concern.</p>
+              <p>It's not just about knowing the SOPs.</p>
+              <p>It's about knowing what to do when things don't go according to plan.</p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 2 -->
+      <div class="tl-chapter even">
+        <div class="tl-img-half">
+          <img loading="lazy" decoding="async" width="900" height="720"
+            src="images/blog/employee-training-guest-reviews/hotel-staff-training-guest-complaint-handling.webp"
+            alt="Turning complaints into opportunities - a front desk executive listening to an upset guest, and the same guest leaving satisfied" />
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <h2 class="tl-pill">Turning Complaints Into Opportunities</h2>
+            <div class="tl-body">
+              <p>Even the best hotels and restaurants receive complaints.</p>
+              <p>A delayed check-in, an incorrect order, a room that isn't ready or a long wait for food can quickly turn into a negative review. But the way a Guest-Facing Employee responds can change the entire experience.</p>
+              <p>With the right Hotel and Restaurant Staff Training, Front of House Staff can learn to listen, empathize, take ownership and find appropriate solutions.</p>
+              <p>Employees who practise real-world situations through training are better prepared to respond when those situations actually happen. They can handle challenging moments with greater confidence instead of relying on guesswork.</p>
+              <p>A problem may be unavoidable.</p>
+              <p>A poor response doesn't have to be.</p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 3 -->
+      <div class="tl-chapter">
+        <div class="tl-img-half">
+          <img loading="lazy" decoding="async" width="900" height="720"
+            src="images/blog/employee-training-guest-reviews/front-of-house-staff-consistent-service-standards.webp"
+            alt="Consistency creates trust - front office, service and kitchen teams working to one set of service standards across every guest interaction" />
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <h2 class="tl-pill">Consistency Creates Trust</h2>
+            <div class="tl-body">
+              <p>One outstanding employee can create a memorable experience. But consistently great service requires the entire team to be aligned.</p>
+              <p>Training helps establish common service standards across departments and roles &mdash; from Front Office and Housekeeping in hotels to Servers, Captains, Hosts and Managers in restaurants.</p>
+              <p>Your Front of House Staff are constantly interacting with guests, making consistency particularly important. A warm welcome, clear communication, attentive service and confident handling of requests should not depend on which employee happens to be serving the guest that day.</p>
+              <p>Because a WOW Service Experience shouldn't depend on who happens to be serving the guest that day.</p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 4 -->
+      <div class="tl-chapter even">
+        <div class="tl-img-half">
+          <img loading="lazy" decoding="async" width="900" height="720"
+            src="images/blog/employee-training-guest-reviews/restaurant-staff-training-guest-satisfaction.webp"
+            alt="Training is an investment in guest experience - role plays and simulations in an HTI session leading to a five-star guest review" />
+        </div>
+        <div class="tl-node"></div>
+        <div class="tl-card-half">
+          <div class="tl-card">
+            <h2 class="tl-pill">Training Is An Investment In Guest Experience</h2>
+            <div class="tl-body">
+              <p>Positive reviews aren't created by asking guests for better ratings. They're created by delivering experiences worth rating highly.</p>
+              <p>That's why effective employee training in hospitality should focus on more than procedures. It should build confidence, communication skills, service mindset and the ability to handle real-world guest situations.</p>
+              <p>At HTI, our practical and role-specific Hospitality Training is designed around the realities of hotels, restaurants and other hospitality businesses. Through interactive sessions, role plays, simulations and hands-on learning, teams get an opportunity to practise the situations they are likely to face on the job.</p>
+            </div>
+            <button class="tl-readmore" aria-expanded="false">Read More</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Train My Team <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING NOTE ============ -->
+  <section class="closing-note">
+    <div class="cn-inner">
+      <img class="cn-img" loading="lazy" decoding="async" width="1200" height="960"
+        src="images/blog/employee-training-guest-reviews/hti-hospitality-training-session-wow-service.webp"
+        alt="An HTI hospitality training session in progress with a hotel and restaurant team" />
+      <p>Because every interaction between your Guest-Facing Staff and your guests is an opportunity to make an impression.</p>
+      <a href="contact.html" class="cn-btn">Train your team with HTI &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3 — SHARE BAR ============ -->
+  <section class="share-section">
+    <p class="share-heading">Share this blog to your favorite platform:</p>
+    <div class="share-row">
+      <a class="share-sq share-fb" target="_blank" rel="noopener" aria-label="Share on Facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.hti-india.com%2Femployee-training-improve-guest-reviews-ratings.html">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+        </svg>
+      </a>
+      <a class="share-sq share-tw" target="_blank" rel="noopener" aria-label="Share on Twitter"
+        href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.hti-india.com%2Femployee-training-improve-guest-reviews-ratings.html&text=How%20Employee%20Training%20Can%20Improve%20Guest%20Reviews%20and%20Ratings">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      </a>
+      <a class="share-sq share-li" target="_blank" rel="noopener" aria-label="Share on LinkedIn"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.hti-india.com%2Femployee-training-improve-guest-reviews-ratings.html&title=How%20Employee%20Training%20Can%20Improve%20Guest%20Reviews%20and%20Ratings">
+        <svg viewBox="0 0 32 32">
+          <path
+            d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+        </svg>
+      </a>
+    </div>
+    <div class="share-divider"></div>
+    <div class="sec-cta">
+      <a href="contact.html" class="sec-cta-btn">Book Now <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <!-- MORE FROM HTI -->
+<section class="mfh-section" data-current-id="66">
+  <div class="mfh-wrap">
+    <div class="mfh-header">
+      <h2 class="mfh-heading">More from HTI</h2>
+      <div class="mfh-underline"></div>
+    </div>
+    <div class="mfh-grid"></div>
+  </div>
+</section>
+<style>
+.mfh-section{background:#f7f7f7;padding:64px 24px;margin:0;}
+.mfh-wrap{max-width:1100px;margin:0 auto;}
+.mfh-header{text-align:center;margin-bottom:40px;}
+.mfh-heading{font-family:sans-serif;font-size:32px;font-weight:800;color:#e31e24;margin:0 0 12px 0;letter-spacing:-0.5px;}
+.mfh-underline{width:56px;height:4px;background:#e31e24;border-radius:2px;margin:0 auto;}
+.mfh-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+@media(max-width:900px){.mfh-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:580px){.mfh-grid{grid-template-columns:1fr;}}
+.mfh-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,0.07);transition:transform 0.22s ease,box-shadow 0.22s ease;text-decoration:none;display:flex;flex-direction:column;cursor:pointer;}
+.mfh-card:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,0.13);}
+.mfh-card-img{width:100%;height:auto;aspect-ratio:1200/577;object-fit:cover;background:#f2f2f2;display:block;}
+.mfh-card-body{padding:22px 20px 20px;flex:1;display:flex;flex-direction:column;}
+.mfh-cat{font-size:11px;font-weight:700;color:#e31e24;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:10px;}
+.mfh-title{font-family:sans-serif;font-size:17px;font-weight:700;color:#1a1a1a;line-height:1.45;margin:0 0 14px 0;flex:1;}
+.mfh-date{font-size:12px;color:#999;margin-bottom:16px;}
+.mfh-readmore{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#fff;background:#e31e24;padding:8px 16px;border-radius:6px;text-decoration:none;transition:background 0.2s ease;width:fit-content;}
+.mfh-readmore:hover{background:#c41a1f;}
+</style>
+<script>
+(function(){
+  var section=document.querySelector('.mfh-section');
+  var grid=section.querySelector('.mfh-grid');
+  var currentId=parseInt(section.getAttribute('data-current-id'))||0;
+  var SUPABASE_URL='https://ytthcgdsbfagvwcopoaj.supabase.co';
+  var ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0dGhjZ2RzYmZhZ3Z3Y29wb2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzMjk5MTMsImV4cCI6MjA5ODkwNTkxM30.JIDahcRTu3VbFpZ55Ti5hHg_JrHobk0zh8PSaj9lWLc';
+  fetch(SUPABASE_URL+'/rest/v1/blogs?select=id,title,cover_image,category,created_at&limit=20',{
+    headers:{'apikey':ANON_KEY,'Authorization':'Bearer '+ANON_KEY}
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    var filtered=data.filter(function(b){return b.id!==currentId&&b.cover_image&&b.title;});
+    filtered.sort(function(){return Math.random()-0.5;});
+    var picks=filtered.slice(0,3);
+    if(picks.length===0){section.style.display='none';return;}
+    picks.forEach(function(b){
+      var d=new Date(b.created_at);
+      var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var dateStr=d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear();
+      var card=document.createElement('a');
+      card.href='blog-post.html?id='+b.id;
+      card.className='mfh-card';
+      card.innerHTML='<img class="mfh-card-img" src="'+b.cover_image+'" alt="'+b.title+'" loading="lazy"><div class="mfh-card-body"><div class="mfh-cat">'+(b.category||'General')+'</div><div class="mfh-title">'+b.title+'</div><div class="mfh-date">'+dateStr+'</div><span class="mfh-readmore">Read More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>';
+      grid.appendChild(card);
+    });
+  })
+  .catch(function(){section.style.display='none';});
+})();
+</script>
+<!-- END MORE FROM HTI -->
+
+<div data-subscribe data-source="footer"></div>
+<footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>HTI</h4>
+          <a href="about.html">About Us</a>
+          <a href="trainers.html">Our Trainers</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <a href="restaurants.html">Restaurants &amp; QSRs</a>
+          <a href="hotels.html">Hotels</a>
+          <a href="offices.html">Offices</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="brands.html">Our Brands</a>
+          <a href="https://wooshbiz.com/" target="_blank" rel="noopener">Team Building</a>
+          <a href="lead.html">Lead by HTI</a>
+          <a href="leadership-development.html">Leadership Development</a>
+          <a href="professional-etiquette.html">Professional Etiquette</a>
+          <a href="posh-training.html">POSH Training</a>
+          <a href="fssai-training.html">FSSAI Training</a>
+          <a href="dox.html">Develop SOPs &amp; How-To Videos</a>
+          <a href="blog.html">Blogs</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="food-cost-calculator.html">Food Cost Calculator</a>
+          <a href="restaurant-cost-calculator.html">Restaurant Cost Calculator</a>
+        </div>
+      </div>
+      <div class="footer-div"></div>
+      <div class="footer-bottom">
+        <div class="footer-social">
+          <a href="https://www.facebook.com/hti.india/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg></a>
+          <a href="https://www.instagram.com/hti.india/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M12 2c-2.716 0-3.056.012-4.123.06c-1.064.049-1.791.218-2.427.465a4.901 4.901 0 0 0-1.772 1.153A4.902 4.902 0 0 0 2.525 5.45c-.247.636-.416 1.363-.465 2.427C2.011 8.944 2 9.284 2 12s.011 3.056.06 4.123c.049 1.064.218 1.791.465 2.427a4.903 4.903 0 0 0 1.153 1.772a4.903 4.903 0 0 0 1.772 1.153c.636.247 1.363.416 2.427.465c1.067.048 1.407.06 4.123.06s3.056-.012 4.123-.06c1.064-.049 1.791-.218 2.427-.465a4.902 4.902 0 0 0 1.772-1.153a4.902 4.902 0 0 0 1.153-1.772c.247-.636.416-1.363.465-2.427c.048-1.067.06-1.407.06-4.123s-.012-3.056-.06-4.123c-.049-1.064-.218-1.791-.465-2.427a4.902 4.902 0 0 0-1.153-1.772a4.901 4.901 0 0 0-1.772-1.153c-.636-.247-1.363-.416-2.427-.465C15.056 2.012 14.716 2 12 2m0 1.802c2.67 0 2.986.01 4.04.058c.976.045 1.505.207 1.858.344c.466.182.8.399 1.15.748c.35.35.566.684.748 1.15c.136.353.3.882.344 1.857c.048 1.055.058 1.37.058 4.041c0 2.67-.01 2.986-.058 4.04c-.045.976-.208 1.505-.344 1.858a3.1 3.1 0 0 1-.748 1.15c-.35.35-.684.566-1.15.748c-.353.136-.882.3-1.857.344c-1.054.048-1.37.058-4.041.058c-2.67 0-2.987-.01-4.04-.058c-.976-.045-1.505-.208-1.858-.344a3.098 3.098 0 0 1-1.15-.748a3.098 3.098 0 0 1-.748-1.15c-.137-.353-.3-.882-.344-1.857c-.048-1.055-.058-1.37-.058-4.041c0-2.67.01-2.986.058-4.04c.045-.976.207-1.505.344-1.858c.182-.466.399-.8.748-1.15c.35-.35.684-.566 1.15-.748c.353-.137.882-.3 1.857-.344c1.055-.048 1.37-.058 4.041-.058m0 11.531a3.333 3.333 0 1 1 0-6.666a3.333 3.333 0 0 1 0 6.666m0-8.468a5.135 5.135 0 1 0 0 10.27a5.135 5.135 0 0 0 0-10.27m6.538-.203a1.2 1.2 0 1 1-2.4 0a1.2 1.2 0 0 1 2.4 0" />
+            </svg></a>
+          <a href="https://www.linkedin.com/company/hospitality-training-institute-india-pvt-ltd" target="_blank"
+            aria-label="LinkedIn"><svg viewBox="0 0 32 32" fill="currentColor">
+              <path
+                d="M26.2 4H5.8C4.8 4 4 4.8 4 5.7v20.5c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V5.7c0-.9-.8-1.7-1.8-1.7zM11.1 24.4H7.6V13h3.5v11.4zm-1.7-13c-1.1 0-2.1-.9-2.1-2.1c0-1.2.9-2.1 2.1-2.1c1.1 0 2.1.9 2.1 2.1s-1 2.1-2.1 2.1zm15.1 12.9H21v-5.6c0-1.3 0-3.1-1.9-3.1S17 17.1 17 18.5v5.7h-3.5V13h3.3v1.5h.1c.5-.9 1.7-1.9 3.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.2z" />
+            </svg></a>
+          <a href="https://www.youtube.com/c/Hti-india" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg></a>
+        </div>
+        <div class="footer-contact"><a href="contact.html">
+            <h3>Contact Us: <span>+91 77380 60902</span></h3>
+          </a></div>
+        <a href="index.html" class="footer-brand"><img loading="lazy" decoding="async" width="240" height="182"
+            src="images/brand/hti-logo-nav.webp"
+            alt="HTI" /></a>
+      </div>
+      <div class="footer-copy">&#169;&#65039; HOSPITALITY TRAINING INSTITUTE INDIA PRIVATE. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    /* ---------- Read More toggle ---------- */
+    document.querySelectorAll('.tl-readmore').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const body = btn.parentElement.querySelector('.tl-body');
+        const expanded = body.classList.toggle('expanded');
+        btn.textContent = expanded ? 'Read Less' : 'Read More';
+        btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      });
+    });
+
+    /* ---------- Timeline scroll observer ---------- */
+    const spineFill = document.querySelector('.tl-spine-fill');
+    const track = document.querySelector('.tl-spine-track');
+
+    // Spine fill on scroll
+    window.addEventListener('scroll', () => {
+      if (!track || !spineFill) return;
+      const trackTop = track.getBoundingClientRect().top + window.scrollY;
+      const viewMiddle = window.scrollY + window.innerHeight * 0.5;
+      const pct = ((viewMiddle - trackTop) / track.offsetHeight) * 100;
+      spineFill.style.height = Math.min(Math.max(pct, 0), 100) + '%';
+    }, { passive: true });
+
+    function setActiveChapter() {
+      const chapters = document.querySelectorAll('.tl-chapter');
+      chapters.forEach(ch => ch.classList.remove('active', 'visited'));
+      let activeSet = false;
+      chapters.forEach(ch => {
+        const rect = ch.getBoundingClientRect();
+        const inView = rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.4;
+        if (inView && !activeSet) {
+          ch.classList.add('active');
+          activeSet = true;
+        }
+      });
+      if (!activeSet) {
+        chapters.forEach(ch => {
+          const rect = ch.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0 && !activeSet) {
+            ch.classList.add('active');
+            activeSet = true;
+          }
+        });
+      }
+    }
+    window.addEventListener('scroll', setActiveChapter);
+    window.addEventListener('load', setActiveChapter);
+
+    /* ---------- Mobile nav ---------- */
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const menu = document.getElementById('navMenu');
+
+      /* one source of truth for the open state, so the panel, the
+         hamburger-to-cross animation and the ARIA state always agree */
+      function setNav(open) {
+        menu.classList.toggle('open', open);
+        toggle.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        if (!open) {
+          menu.querySelectorAll('.nav-item.open').forEach(i => i.classList.remove('open'));
+        }
+      }
+
+      toggle.addEventListener('click', () => setNav(!menu.classList.contains('open')));
+
+      /* Escape, or a tap outside the panel, also closes it */
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu.classList.contains('open')) setNav(false);
+      });
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 960 && menu.classList.contains('open') &&
+          !menu.contains(e.target) && !toggle.contains(e.target)) setNav(false);
+      });
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          if (window.innerWidth <= 960 && (e.target === item || e.target.classList.contains('caret'))) {
+            item.classList.toggle('open');
+          }
+        });
+      });
+      /* tapping any nav link closes the menu - matters for links that open
+         in a new tab and so never navigate this page away */
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          setNav(false);
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    /* ---------- Scroll progress line under the navbar ---------- */
+    (function () {
+      const bar = document.getElementById('scrollProgress');
+      const navbar = document.querySelector('.navbar');
+      if (!bar || !navbar) return;
+      let ticking = false;
+
+      function update() {
+        ticking = false;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const y = window.scrollY || window.pageYOffset;
+        const ratio = max > 0 ? Math.min(Math.max(y / max, 0), 1) : 0;
+        bar.style.transform = `scaleX(${ratio})`;
+        navbar.classList.toggle('scrolled', y > 4);
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      }, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      window.addEventListener('orientationchange', update);
+      /* mobile browsers resize the viewport when the URL bar hides/shows */
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', update);
+      }
+      window.addEventListener('load', update);
+      update();
+    })();
+  </script>
+  <!-- sticky contact bar: below 860px the header Contact button is hidden
+       behind the hamburger, so this is the only always-visible way to reach us -->
+  <div class="pe-bar">
+    <a class="pe-bar-wa" href="https://wa.me/917738060902" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24a8.19 8.19 0 0 1 5.82 2.42 8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.23 8.23z"/></svg> WhatsApp</a>
+    <a class="pe-bar-tel" href="tel:+917738060902"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call us</a>
+  </div>
+  <script src="assets/subscribe.js" defer></script>
+</body>
+
+</html>
