@@ -1,3 +1,22 @@
 User-agent: *
 Allow: /
+
+# The site is static, so the homepage answers 200 with its full 88KB for ANY
+# query string appended to the root. Search Console has been collecting the
+# results since April:
+#
+#   /?metamerous=74576372&nxqUz=966404
+#   /?camphoronic/lipomyxoma1805984.html
+#   /?iFdvmQ/citywards381694/1vwEZtfNbr
+#   /?feasibly=196989996&6Lhj5K=460635
+#
+# Each one is a crawl of the largest page on the site, spent to rediscover the
+# homepage. The canonical means none of them get indexed, so the only cost is
+# crawl budget - which is exactly what this domain is short of.
+#
+# This blocks a query string on the ROOT only. It does not touch "/" itself,
+# and it does not touch any real page: the blog articles live at
+# /magazine-blog.html?id=61, whose path does not begin with "/?".
+Disallow: /?
+
 Sitemap: https://www.hti-india.com/sitemap.xml
