@@ -1491,7 +1491,28 @@
     </div>
   </section>
 
-  <!-- ============ FOOTER ============ -->
+    <!-- ============ WHERE WE TRAIN ============
+       Doors to the city landing pages. See tools/wire-city-links.js. -->
+  <section data-city-strip style="background:#ede9e3;padding:44px 0 48px;">
+    <div style="max-width:1160px;margin:0 auto;padding:0 24px;">
+      <h2 style="font-size:clamp(21px,2.6vw,28px);font-weight:700;letter-spacing:-.015em;margin:0 0 10px;">Hospitality training, city by city</h2>
+      <p style="font-size:15.5px;line-height:1.6;color:#55504a;max-width:66ch;margin:0 0 22px;">HTI trainers travel from the Navi Mumbai head office and run sessions at your own property. Sessions have gone out to over 410 cities across India &mdash; these are the ones with a page of their own.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:9px;">
+        <a href="hospitality-training-mumbai.html" style="background:#fff;border:1px solid #ddd7cf;border-radius:999px;padding:9px 18px;font-weight:600;font-size:14.5px;color:#111;text-decoration:none;white-space:nowrap;">Mumbai</a>
+        <a href="hospitality-training-delhi-ncr.html" style="background:#fff;border:1px solid #ddd7cf;border-radius:999px;padding:9px 18px;font-weight:600;font-size:14.5px;color:#111;text-decoration:none;white-space:nowrap;">Delhi NCR</a>
+        <a href="hospitality-training-pune.html" style="background:#fff;border:1px solid #ddd7cf;border-radius:999px;padding:9px 18px;font-weight:600;font-size:14.5px;color:#111;text-decoration:none;white-space:nowrap;">Pune</a>
+        <a href="hospitality-training-bengaluru.html" style="background:#fff;border:1px solid #ddd7cf;border-radius:999px;padding:9px 18px;font-weight:600;font-size:14.5px;color:#111;text-decoration:none;white-space:nowrap;">Bengaluru</a>
+        <a href="hospitality-training-hyderabad.html" style="background:#fff;border:1px solid #ddd7cf;border-radius:999px;padding:9px 18px;font-weight:600;font-size:14.5px;color:#111;text-decoration:none;white-space:nowrap;">Hyderabad</a>
+        <a href="hospitality-training-chennai.html" style="background:#fff;border:1px solid #ddd7cf;border-radius:999px;padding:9px 18px;font-weight:600;font-size:14.5px;color:#111;text-decoration:none;white-space:nowrap;">Chennai</a>
+        <a href="hospitality-training-kolkata.html" style="background:#fff;border:1px solid #ddd7cf;border-radius:999px;padding:9px 18px;font-weight:600;font-size:14.5px;color:#111;text-decoration:none;white-space:nowrap;">Kolkata</a>
+        <a href="hospitality-training-goa.html" style="background:#fff;border:1px solid #ddd7cf;border-radius:999px;padding:9px 18px;font-weight:600;font-size:14.5px;color:#111;text-decoration:none;white-space:nowrap;">Goa</a>
+        <a href="hospitality-training-jaipur.html" style="background:#fff;border:1px solid #ddd7cf;border-radius:999px;padding:9px 18px;font-weight:600;font-size:14.5px;color:#111;text-decoration:none;white-space:nowrap;">Jaipur</a>
+        <a href="hospitality-training-ahmedabad.html" style="background:#fff;border:1px solid #ddd7cf;border-radius:999px;padding:9px 18px;font-weight:600;font-size:14.5px;color:#111;text-decoration:none;white-space:nowrap;">Ahmedabad</a>
+      </div>
+    </div>
+  </section>
+
+<!-- ============ FOOTER ============ -->
   <div data-subscribe data-source="footer"></div>
   <footer class="footer">
     <div class="footer-inner">
@@ -1743,7 +1764,8 @@
       };
 
       /* ---------- which programme sent them here ----------
-         The 15 programme pages hand over with ?programme=<slug>. The slug is
+         The 15 programme pages and the 10 city pages hand over with
+         ?programme=<slug> - cities are prefixed city-. The slug is
          looked up in this table rather than printed as it arrives: a query
          string is a stranger's text, and it would otherwise land in the page
          and in the sales inbox verbatim. An unknown slug simply does nothing.
@@ -1766,7 +1788,22 @@
         'super': ['SUPER', 'Skill Upgradation Program for Employees of Restaurants'],
         'support': ['SUPPORT', 'Skill Upgradation Program for Pre-Opening Restaurant Teams'],
         'top': ['TOP', 'Training & Operations for Peons'],
-        'vow': ['Vow to Wow', 'Customer Experience Training']
+        'vow': ['Vow to Wow', 'Customer Experience Training'],
+
+        /* The ten city landing pages hand over the same way, prefixed so a
+           city can never collide with a programme acronym. The label is what
+           reaches the sales inbox, so it is written to read as a line in an
+           enquiry rather than as a slug: "Training in Goa", not "goa". */
+        'city-mumbai': ['Training in Mumbai', 'on-site staff training across Mumbai, Navi Mumbai and Thane'],
+        'city-delhi-ncr': ['Training in Delhi NCR', 'on-site staff training across Delhi, Gurugram, Noida and Faridabad'],
+        'city-pune': ['Training in Pune', 'on-site staff training across Pune'],
+        'city-bengaluru': ['Training in Bengaluru', 'on-site staff training across Bengaluru'],
+        'city-hyderabad': ['Training in Hyderabad', 'on-site staff training across Hyderabad'],
+        'city-chennai': ['Training in Chennai', 'on-site staff training across Chennai'],
+        'city-kolkata': ['Training in Kolkata', 'on-site staff training across Kolkata'],
+        'city-goa': ['Training in Goa', 'on-site staff training across North and South Goa'],
+        'city-jaipur': ['Training in Jaipur', 'on-site staff training across Jaipur'],
+        'city-ahmedabad': ['Training in Ahmedabad', 'on-site staff training across Ahmedabad and Gandhinagar']
       };
 
       const programme = (function () {

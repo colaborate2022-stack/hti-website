@@ -300,6 +300,81 @@ const CARDS = [
     head: 'Privacy Policy',
     sub: 'What HTI India collects, why it is collected, and how to have it removed',
     alt: 'HTI India privacy policy'
+  },
+
+  // ---- city landing pages -------------------------------------------------
+  /* The headline is the query, not the <title>: these cards get pasted into
+     a WhatsApp group by somebody saying "these are the people who trained
+     us", and the city is the only word that has to survive the thumbnail. */
+  {
+    slug: 'hospitality-training-mumbai',
+    bg: 'images/blog/hti-training-programs/02-hti-training-session-hospitality-team.jpg',
+    head: 'Hospitality Training in Mumbai',
+    sub: 'Headquartered in Vashi &mdash; trainers on your floor across MMR',
+    alt: 'Hospitality training in Mumbai by HTI India, delivered on your own property'
+  },
+  {
+    slug: 'hospitality-training-delhi-ncr',
+    bg: 'images/blog/hti-training-programs/04-hti-hotel-operations-training.jpg',
+    head: 'Hospitality Training in Delhi NCR',
+    sub: 'Delhi &middot; Gurugram &middot; Noida &middot; Faridabad &mdash; on your own floor',
+    alt: 'Hospitality training in Delhi NCR by HTI India, delivered on your own property'
+  },
+  {
+    slug: 'hospitality-training-pune',
+    bg: 'images/blog/hti-training-programs/08-hti-classroom-training-session.jpg',
+    head: 'Hospitality Training in Pune',
+    sub: 'Cafes, business hotels and IT campus teams &mdash; taught on site',
+    alt: 'Hospitality training in Pune by HTI India, delivered on your own property'
+  },
+  {
+    slug: 'hospitality-training-bengaluru',
+    bg: 'images/blog/hti-training-programs/03-hti-restaurant-team-training.jpg',
+    head: 'Hospitality Training in Bengaluru',
+    sub: 'Restaurants, cloud kitchens and campus cafeterias',
+    alt: 'Hospitality training in Bengaluru by HTI India, delivered on your own property'
+  },
+  {
+    slug: 'hospitality-training-hyderabad',
+    bg: 'images/blog/hti-training-programs/03-hti-restaurant-team-training.jpg',
+    head: 'Hospitality Training in Hyderabad',
+    sub: 'Restaurants, banquets and campus teams &mdash; on your own floor',
+    alt: 'Hospitality training in Hyderabad by HTI India, delivered on your own property'
+  },
+  {
+    slug: 'hospitality-training-chennai',
+    bg: 'images/blog/hti-training-programs/05-hti-guest-experience-training.jpg',
+    head: 'Hospitality Training in Chennai',
+    sub: 'Hotels, restaurants and the OMR corridor',
+    alt: 'Hospitality training in Chennai by HTI India, delivered on your own property'
+  },
+  {
+    slug: 'hospitality-training-kolkata',
+    bg: 'images/blog/hti-training-programs/04-hti-hotel-operations-training.jpg',
+    head: 'Hospitality Training in Kolkata',
+    sub: 'Heritage hotels, clubs and Park Street restaurants',
+    alt: 'Hospitality training in Kolkata by HTI India, delivered on your own property'
+  },
+  {
+    slug: 'hospitality-training-goa',
+    bg: 'images/blog/hti-training-programs/07-hti-apht-all-purpose-hospitality-training.jpg',
+    head: 'Hospitality Training in Goa',
+    sub: 'Resorts, villas and homestays &mdash; trained before the season',
+    alt: 'Hospitality training in Goa by HTI India, delivered on your own property'
+  },
+  {
+    slug: 'hospitality-training-jaipur',
+    bg: 'images/blog/hti-training-programs/01-hti-hospitality-training-workshop.jpg',
+    head: 'Hospitality Training in Jaipur',
+    sub: 'Heritage hotels, resorts and the wedding trade',
+    alt: 'Hospitality training in Jaipur by HTI India, delivered on your own property'
+  },
+  {
+    slug: 'hospitality-training-ahmedabad',
+    bg: 'images/blog/hti-training-programs/06-hti-leadership-development-program.jpg',
+    head: 'Hospitality Training in Ahmedabad',
+    sub: 'Business hotels, banquets and corporate floors',
+    alt: 'Hospitality training in Ahmedabad by HTI India, delivered on your own property'
   }
 ];
 

@@ -287,76 +287,121 @@ h1:has(.pe-h1-lead) {
    against HTI red, both shouting, is tiring over a long page. So one button
    leads and the other recedes, the bar sits on a soft near-white rather than
    pure white, and the whole thing is slimmer than it was. */
+/* ---------------------------------------------------------------- contact bar --
+   This used to be a full-width two-button dock pinned across the bottom of
+   every page on mobile. It worked, but it ate about 72px of every screen for
+   its whole life, and the page underneath had to be padded to clear it - so
+   the cost was paid on every scroll of every page whether or not anybody was
+   thinking about getting in touch.
+
+   It is now a pair of floating round buttons in the bottom-right corner.
+   Same two links, same order of importance, roughly a quarter of the screen
+   area, and no body padding: the footer ends where the footer ends.
+
+   WhatsApp keeps the lead and the brand green, because it is the channel
+   people in this market actually open. Calling stays as its own button
+   rather than folding into a menu - track.js counts phone_click as a key
+   event precisely because the call is very often the whole enquiry, and
+   burying it one tap deeper would cost real leads.
+
+   The labels are still in the markup. font-size:0 hides them from the eye
+   while leaving the text where a screen reader can still find it, which is
+   what gives each button its accessible name - there is no aria-label in the
+   markup on the seventy-odd pages that carry this. */
 .pe-bar { display: none; }
 
 @media (max-width: 860px) {
   .pe-bar {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 9px;
+    display: flex;
+    /* column-reverse so the first link in the markup - WhatsApp - sits
+       nearest the thumb, which is the bottom */
+    flex-direction: column-reverse;
+    gap: 11px;
     position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    right: 14px;
+    left: auto;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     z-index: 999;
-    padding: 9px 12px calc(9px + env(safe-area-inset-bottom, 0px));
-    background: rgba(252, 251, 250, .92);
-    -webkit-backdrop-filter: saturate(1.4) blur(14px);
-    backdrop-filter: saturate(1.4) blur(14px);
-    border-top: 1px solid rgba(27, 21, 18, .09);
-    box-shadow: 0 -1px 0 rgba(255, 255, 255, .7) inset,
-                0 -10px 26px -18px rgba(27, 21, 18, .5);
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   .pe-bar a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 9px;
-    padding: 0 12px;
-    border-radius: 11px;
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: .005em;
-    line-height: 1;
+    /* anchors the WhatsApp button's ping ring */
+    position: relative;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    /* hides the label without removing it from the accessibility tree */
+    font-size: 0;
+    line-height: 0;
     text-decoration: none;
-    min-height: 46px;
     cursor: pointer;
-    border: 1.5px solid transparent;
+    border: 2px solid rgba(255, 255, 255, .92);
     -webkit-tap-highlight-color: transparent;
-    transition: transform .14s ease, background-color .14s ease, border-color .14s ease;
+    transition: transform .16s ease, box-shadow .16s ease, background-color .16s ease;
   }
 
-  .pe-bar a:active { transform: scale(.975); }
+  .pe-bar a:active { transform: scale(.93); }
 
   .pe-bar a:focus-visible {
     outline: 3px solid var(--hti-red, #e32129);
-    outline-offset: 2px;
+    outline-offset: 3px;
   }
 
-  .pe-bar svg { width: 17px; height: 17px; flex: none; }
+  .pe-bar svg { width: 25px; height: 25px; flex: none; }
 
-  /* WhatsApp is the one people actually use, so it is the one that leads. */
+  /* WhatsApp leads: full size, its own green, and the softest shadow that
+     still lifts it off a photograph. */
   .pe-bar .pe-bar-wa {
     background: #21bf5b;
     color: #fff;
-    box-shadow: 0 1px 2px rgba(14, 70, 38, .2), 0 5px 14px -9px rgba(14, 70, 38, .6);
+    box-shadow: 0 4px 10px rgba(14, 70, 38, .28), 0 12px 30px -12px rgba(14, 70, 38, .55);
   }
 
   .pe-bar .pe-bar-wa:active { background: #179546; }
 
-  /* Calling is the alternative, so it looks like the alternative. */
+  /* Calling is the alternative, so it sits a size smaller and in the site's
+     own ink rather than competing for the same attention. */
   .pe-bar .pe-bar-tel {
-    background: #fff;
-    color: #1b1512;
-    border-color: rgba(27, 21, 18, .2);
-    box-shadow: 0 1px 2px rgba(22, 18, 15, .05);
+    width: 46px;
+    height: 46px;
+    /* keeps the smaller button centred under the larger one */
+    align-self: center;
+    background: #1b1512;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(22, 18, 15, .26), 0 12px 28px -14px rgba(22, 18, 15, .6);
   }
 
-  .pe-bar .pe-bar-tel:active { background: #f2ede9; }
+  .pe-bar .pe-bar-tel:active { background: #000; }
+  .pe-bar .pe-bar-tel svg { width: 21px; height: 21px; }
 
-  /* keep the footer clear of the bar */
-  body { padding-bottom: 72px; }
+  /* One slow breath on the WhatsApp button, about every six seconds. Enough
+     to catch the eye once on a long page, quiet enough not to nag - and gone
+     entirely for anyone who has asked for less motion. */
+  .pe-bar .pe-bar-wa::after {
+    content: "";
+    position: absolute;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 2px solid rgba(33, 191, 91, .55);
+    animation: pe-bar-ping 6s cubic-bezier(.2, .7, .3, 1) infinite;
+    pointer-events: none;
+  }
+
+  @keyframes pe-bar-ping {
+    0%, 72% { transform: scale(1); opacity: 0; }
+    76% { opacity: .85; }
+    100% { transform: scale(1.75); opacity: 0; }
+  }
 
   .pe-inner { grid-template-columns: 1fr; gap: 30px; }
   .pe { padding: 48px 20px; }
@@ -369,6 +414,10 @@ h1:has(.pe-h1-lead) {
 
   .pe-direct a:hover,
   .pe-cta-btn:hover { transform: none; }
+
+  /* the contact buttons stay, the breath does not */
+  .pe-bar a { transition: none; }
+  .pe-bar .pe-bar-wa::after { animation: none; display: none; }
 }
 
 /* ---------------------------------------------------- email capture (subscribe.js) -- */
